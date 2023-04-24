@@ -15,7 +15,7 @@ const layoutPositionTypes = {
 };
 
 const topbarTheme = {
-  LIGHT: "light",
+  // LIGHT: "light",
   DARK: "dark",
 };
 
