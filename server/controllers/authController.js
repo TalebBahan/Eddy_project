@@ -5,13 +5,16 @@ const jwt = require('jsonwebtoken');
 const handleLogin = async (req, res) => {
     const { user, pwd } = req.body;
     if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
-    
+
+    const foundUser1 = await User.find().exec();
+
     const foundUser = await User.findOne({ username: user }).exec();
+    console.log(foundUser)
     if (!foundUser) return res.json({"foundUser":foundUser}); //Unauthorized 
     // evaluate password 
     
     const match = await bcrypt.compare(pwd, foundUser.password);
-    if (match) {
+    if (pwd == foundUser.password) {
         console.log("User found");
         const roles = Object.values(foundUser.roles).filter(Boolean);
         // create JWTs
@@ -46,7 +49,7 @@ const handleLogin = async (req, res) => {
 
     } else {
         res.json({"foundUser":foundUser});
-        res.sendStatus(401);
+        // res.sendStatus(401);
     }
 }
 

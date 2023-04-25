@@ -1,20 +1,22 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
-import "./i18n";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
 
-import store from "./store";
+import { store } from './app/store'
+import { Provider } from 'react-redux'
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
 );
-
-serviceWorker.unregister();
