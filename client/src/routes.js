@@ -8,7 +8,6 @@ import DataTables from "views/admin/tables";
 import Post from "views/admin/Post/Post";
 import Content from "views/admin/content/Content";
 // Auth Imports
-import SignIn from "views/auth/SignIn";
 import Links from "views/admin/Link/Links";
 import Users from "views/admin/users/Users";
 
@@ -83,13 +82,6 @@ const routes = [
     path: "profile",
     icon: <MdPerson className="h-6 w-6" />,
     component: <Profile />,
-  },
-  {
-    name: "Sign In",
-    layout: "/auth",
-    path: "sign-in",
-    icon: <MdLock className="h-6 w-6" />,
-    component: <SignIn />,
   },
 
 ];
