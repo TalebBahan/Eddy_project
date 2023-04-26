@@ -22,7 +22,6 @@ export default function AddEditModal(props) {
                 text: props?.text,
                 link: props?.link,
                 platform: props?.platform,
-                is_active: props?.is_active,
                 id: props?._id,
             }
         ),[props]
@@ -39,7 +38,6 @@ export default function AddEditModal(props) {
             text: '',
             link: '',
             platform: '',
-            is_active: false,
         });
         props.handleOpen();
     };

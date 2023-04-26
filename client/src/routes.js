@@ -11,6 +11,7 @@ import Content from "views/admin/content/Content";
 import SignIn from "views/auth/SignIn";
 import Links from "views/admin/Link/Links";
 import Users from "views/admin/users/Users";
+
 // Icon Imports
 import {
   MdHome,
@@ -19,34 +20,39 @@ import {
   MdPerson,
   MdLock,
 } from "react-icons/md";
+import {FiUsers} from "react-icons/fi";
+import {BiLinkAlt} from "react-icons/bi";
+import {BiBookContent} from "react-icons/bi";
+import {BsFileEarmarkPostFill} from "react-icons/bs";
+
 
 const routes = [
   {
     name: "Posts",
     layout: "/admin",
     path: "default",
-    icon: <MdHome className="h-6 w-6" />,
+    icon: <BsFileEarmarkPostFill className="h-6 w-6" />,
     component: <Post />,
   },
   {
     name: "Links",
     layout: "/admin",
     path: "links",
-    icon: <MdHome className="h-6 w-6" />,
+    icon: <BiLinkAlt className="h-6 w-6" />,
     component: <Links />,
   },
   {
     name: "Users",
     layout: "/admin",
     path: "users",
-    icon: <MdHome className="h-6 w-6" />,
+    icon: <FiUsers className="h-6 w-6" />,
     component: <Users />,
   },
   {
     name: "Content",
     layout: "/admin",
     path: "content",
-    icon: <MdHome className="h-6 w-6" />,
+    icon: <BiBookContent className="h-6 w-6" />,
     component: <Content />,
   },
   {

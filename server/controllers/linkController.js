@@ -40,7 +40,6 @@ const createLink = async (req, res) => {
             text: req.body.text,
             link: req.body.link,
             platform: req.body.platform,
-            is_active: false,
         });
         const link = await newLink.save();
         res.status(201).json(link);
@@ -59,7 +58,6 @@ const updateLink = async (req, res) => {
                 text: req.body.text,
                 link: req.body.link,
                 platform: req.body.platform,
-                is_active:  req.body.is_active,
             },
             { new: true }
         );

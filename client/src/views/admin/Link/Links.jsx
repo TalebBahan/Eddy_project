@@ -15,10 +15,6 @@ const COLUMNS = [
         Header: "Platform",
         accessor: "platform",
     },
-    {
-        Header: "Is Active",
-        accessor: "is_active",
-    },
 ]
 
 export default function Links() {
