@@ -6,30 +6,51 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-
+import Upload from "./Upload";
+import { useAddContentMutation,useEditContentMutation } from "../apiContent";
 export default function AddEditCarousel(props) {
 
+  const [add] = useAddContentMutation()
+  const [edit] = useEditContentMutation()
   const [formData, setFormData] = useState({
     h_text: props?.h_text,
     s_text: props?.s_text,
     link: props?.link,
+    file: null,
+    id:props?.id
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const handleImageChange = (file) => {
+    setFormData({ ...formData, file: file });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Do something with the form data (e.g. send it to an API)
     console.log(formData);
-    // Clear the form
-    setFormData({
-      h_text: '',
-      s_text: '',
-      link: '',
-    });
-    // Close the modal
+    const form = new FormData();
+    form.append("file",formData.file);
+    form.append("h_text",formData.h_text);
+    form.append("s_text",formData.s_text);
+    form.append("link", formData.link);
+    form.append("type", 'carousel');
+    if(props.isAdd){
+      add(form)
+      setFormData({
+        h_text: '',
+        s_text: '',
+        link:'',
+        file: null,
+      });
+    }
+    else
+      {
+        if(window.confirm('are you sure you want to save the edit ?'))
+          edit(formData)
+      }
+
+    
     props.handleOpen();
   };
   return (
@@ -88,6 +109,8 @@ export default function AddEditCarousel(props) {
                 autocomplete="off"
               />
             </div>
+           { props.isAdd && <Upload selectedFiles={formData.file}
+            setselectedFiles={handleImageChange} />}
           </DialogBody>
           <DialogFooter>
             <Button

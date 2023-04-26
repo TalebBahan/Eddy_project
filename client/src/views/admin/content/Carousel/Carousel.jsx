@@ -1,7 +1,5 @@
 import React from 'react'
-import Upload from './Upload copy'
 import CardCarasoul from './CardCarasoul';
-import NFt3 from "assets/img/nfts/Nft3.png";
 import Card from "components/card";
 import { AiOutlinePlus } from 'react-icons/ai'
 import AddEditCarousel from './AddEditCarousel';
@@ -27,7 +25,7 @@ export default function Carousel({ data }) {
         </div>
         <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6">
           {data.map(item =>
-            <CardCarasoul image={item.image} h_text={item.h_text} s_text={item.s_text} link={item.link} key={item.link} />
+            <CardCarasoul image={item.image} h_text={item.h_text} s_text={item.s_text} link={item.link} id={item._id} key={item.link} />
           )
           }
         </div>

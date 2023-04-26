@@ -3,11 +3,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var contentSchema = new Schema({
 
-    title: { type: String, required: true },
-    content: { type: String, required: true },
-    platform: { type: String, required: true },
-    date: { type: Date, default: Date.now },
-    user: { type: Schema.Types.ObjectId, ref: 'users' }
+    h_text: { type: String, required: true },
+    s_text: { type: String, required: true },
+    link: { type: String, required: true },
+    image: { type: String, required:false },
+    data: { type: Date, default: Date.now },
+    type: { type: String, required: true }
 
 });
 

@@ -2,23 +2,27 @@ import React from 'react'
 import Card from 'components/card'
 import { AiFillDelete } from 'react-icons/ai'
 import AddEditMedia from './AddEditMedia'
-export default function CardMedia({ h_text, s_text, image, link }) {
+import { useDeleteContentMutation } from '../apiContent'
+export default function CardMedia({ h_text, s_text, image, link,id }) {
+  const [deleteM]=useDeleteContentMutation()
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(!open);
   return (
     <Card
       extra={`flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white`}
     >
-    <AddEditMedia open={open} handleOpen={handleOpen}  h_text={h_text} s_text={s_text} link={link}  />
+    <AddEditMedia open={open} handleOpen={handleOpen}  h_text={h_text} s_text={s_text} link={link} id={id} />
       <div className="h-full w-full">
         <div className="relative w-full">
           <img
-            src={image}
+            src={`http://localhost:3500/images/${image}`}
             className="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full"
             alt=""
           />
           <button
-            
+                      onClick={()=>{
+              return window.confirm('are you sure you want to delete this ?')?deleteM(id):null
+            }}
             className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-none  text-brand-200 hover:cursor-pointer"
           >
             <AiFillDelete color='rgb(234, 62, 42)' />

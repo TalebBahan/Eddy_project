@@ -9,7 +9,8 @@ import Post from "views/admin/Post/Post";
 import Content from "views/admin/content/Content";
 // Auth Imports
 import SignIn from "views/auth/SignIn";
-
+import Links from "views/admin/Link/Links";
+import Users from "views/admin/users/Users";
 // Icon Imports
 import {
   MdHome,
@@ -26,6 +27,20 @@ const routes = [
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
     component: <Post />,
+  },
+  {
+    name: "Links",
+    layout: "/admin",
+    path: "links",
+    icon: <MdHome className="h-6 w-6" />,
+    component: <Links />,
+  },
+  {
+    name: "Users",
+    layout: "/admin",
+    path: "users",
+    icon: <MdHome className="h-6 w-6" />,
+    component: <Users />,
   },
   {
     name: "Content",

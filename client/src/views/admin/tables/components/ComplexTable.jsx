@@ -6,12 +6,11 @@ import {
   useSortBy,
   useTable,
 } from "react-table";
-import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
+import { MdCheckCircle, MdCancel } from "react-icons/md";
 import { useMemo } from "react";
-import Progress from "components/progress";
 const ComplexTable = (props) => {
   const { columnsData, tableData } = props;
-
+  console.log(0)
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
 
@@ -63,45 +62,48 @@ const ComplexTable = (props) => {
               </tr>
             ))}
           </thead>
+          {/* {console.log(page)} */}
           <tbody {...getTableBodyProps()}>
-            {page.map((row, index) => {
+            { 
+              page.map((row, index) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()} key={index}>
                   {row.cells.map((cell, index) => {
                     let data = "";
-                    if (cell.column.Header === "NAME") {
+                    console.log(cell.column)
+                    if (['Link Text', 'Link @', 'Platform'].includes(cell.column.Header)) {
+                      
                       data = (
                         <p className="text-sm font-bold text-navy-700 dark:text-white">
                           {cell.value}
                         </p>
                       );
-                    } else if (cell.column.Header === "STATUS") {
+                    } else if (cell.column.Header === "Is Active") {
                       data = (
                         <div className="flex items-center gap-2">
                           <div className={`rounded-full text-xl`}>
-                            {cell.value === "Approved" ? (
+                            {cell.value ? (<>
                               <MdCheckCircle className="text-green-500" />
-                            ) : cell.value === "Disable" ? (
+                              <p className="text-sm font-bold text-navy-700 dark:text-white">
+                                active
+                              </p></>
+                            ) : (<>
                               <MdCancel className="text-red-500" />
-                            ) : cell.value === "Error" ? (
-                              <MdOutlineError className="text-orange-500" />
-                            ) : null}
+                              <p className="text-sm font-bold text-navy-700 dark:text-white">
+                                not active
+                              </p></>
+
+                            )}
                           </div>
-                          <p className="text-sm font-bold text-navy-700 dark:text-white">
-                            {cell.value}
-                          </p>
+
                         </div>
                       );
-                    } else if (cell.column.Header === "DATE") {
-                      data = (
-                        <p className="text-sm font-bold text-navy-700 dark:text-white">
-                          {cell.value}
-                        </p>
-                      );
-                    } else if (cell.column.Header === "PROGRESS") {
-                      data = <Progress width="w-[68px]" value={cell.value} />;
+                    }else if(cell.column.Header === 'Action'){
+                      data = cell.value
+                    
                     }
+                    {/* console.log(data) */}
                     return (
                       <td
                         className="pt-[14px] pb-[18px] sm:text-[14px]"

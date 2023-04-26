@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Welcome from './features/auth/Welcome'
 import RequireAuth from './features/auth/RequireAuth'
 import UsersList from './features/users/UsersList'
-import Public from "components/Public";
+// import Public from "components/Public";
 import Layout from "components/Layout";
 import Login from "features/auth/Login";
 // import RtlLayout from "layouts/rtl";
@@ -17,8 +17,8 @@ const App = () => {
       
       <Route path="/" element={<Layout />}>
         {/* public routes */}
-        <Route index element={<Public />} />
-        <Route path="login" element={<Login />} />
+        {/* <Route index element={<Public />} /> */}
+        <Route index element={<Login />} />
 
         {/* protected routes */}
         <Route element={<RequireAuth />}>

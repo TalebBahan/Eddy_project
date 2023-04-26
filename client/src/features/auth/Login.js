@@ -34,7 +34,7 @@ const Login = () => {
             dispatch(setCredentials({ ...userData, user }))
             setUser('')
             setPwd('')
-            navigate('/welcome')
+            navigate('/admin')
         } catch (err) {
             if (!err?.originalStatus) {
                 // isLoading: true until timeout occurs

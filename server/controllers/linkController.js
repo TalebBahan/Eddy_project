@@ -11,7 +11,7 @@ const getAllLinks = async (req, res) => {
         console.error(error.message);
         res.status(500).send('Server Error');
     }
-    };
+};
 
 // Get single link by ID
 const getLinkById = async (req, res) => {
@@ -28,14 +28,19 @@ const getLinkById = async (req, res) => {
         }
         res.status(500).send('Server Error');
     }
-    }
+}
 
 // Create a new link
 const createLink = async (req, res) => {
+    console.log('====================================');
+    console.log(9);
+    console.log('====================================');
     try {
         const newLink = new Link({
-            title: req.body.title,
-            url: req.body.url,
+            text: req.body.text,
+            link: req.body.link,
+            platform: req.body.platform,
+            is_active: false,
         });
         const link = await newLink.save();
         res.status(201).json(link);
@@ -43,7 +48,7 @@ const createLink = async (req, res) => {
         console.error(error.message);
         res.status(500).send('Server Error');
     }
-    }
+}
 
 // Update an existing link
 const updateLink = async (req, res) => {
@@ -51,8 +56,10 @@ const updateLink = async (req, res) => {
         const link = await Link.findByIdAndUpdate(
             req.params.id,
             {
-                title: req.body.title,
-                url: req.body.url,
+                text: req.body.text,
+                link: req.body.link,
+                platform: req.body.platform,
+                is_active:  req.body.is_active,
             },
             { new: true }
         );
@@ -67,7 +74,7 @@ const updateLink = async (req, res) => {
         }
         res.status(500).send('Server Error');
     }
-    };
+};
 
 // Delete a link
 const deleteLink = async (req, res) => {
@@ -84,10 +91,10 @@ const deleteLink = async (req, res) => {
         }
         res.status(500).send('Server Error');
     }
-    };
+};
 
 module.exports = {
-    getAllLinks,   
+    getAllLinks,
     getLinkById,
     createLink,
     updateLink,

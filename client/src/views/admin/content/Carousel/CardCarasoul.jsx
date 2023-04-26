@@ -2,22 +2,28 @@ import React from 'react'
 import Card from 'components/card'
 import { AiFillDelete } from 'react-icons/ai'
 import AddEditCarousel from './AddEditCarousel'
-export default function CardCarasoul({ h_text, s_text, image, link }) {
+import { useDeleteContentMutation } from '../apiContent'
+export default function CardCarasoul({ h_text, s_text, image, link, id }) {
     const [open, setOpen] = React.useState(false)
+    const [deleteM] = useDeleteContentMutation()
     const handleOpen = () => setOpen(!open);
     return (
         <Card
             extra={`flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white`}
         >
-            <AddEditCarousel open={open} handleOpen={handleOpen} h_text={h_text} s_text={s_text} link={link} />
+            <AddEditCarousel open={open} handleOpen={handleOpen} h_text={h_text} s_text={s_text} link={link} id={id} />
             <div className="h-full w-full">
                 <div className="relative w-full">
                     <img
-                        src={image}
+                        src={`http://localhost:3500/images/${image}`}
                         className="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full"
                         alt=""
                     />
                     <button
+                        onClick={() => {
+                            return window.confirm('are you sure you want to delete this ?') ? deleteM(id) : null
+                        }
+                        }
 
                         className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-none  text-brand-200 hover:cursor-pointer"
                     >
