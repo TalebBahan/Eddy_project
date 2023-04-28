@@ -1,12 +1,35 @@
 const User = require('../model/user');
 
 const getAllUsers = async (req, res) => {
-    const users = await User.find();
-    if (!users) return res.status(204).json({ 'message': 'No users found' });
-    res.json(users);
+    try {
+      const users = await User.find().lean();
+      const filteredUsers = users.filter((user) => user._id.toString() !== req.user._id.toString());
+      if (!filteredUsers.length) return res.status(204).json({ message: 'No users found' });
+      res.json(filteredUsers);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+    }
+  }
+  
+
+const createUser = async (req, res) => {
+    try {
+        const newUser = new User({
+            email: req.body.email,
+            username: req.body.username,
+            password: req.body.password,
+        });
+        const user = await newUser.save();
+        res.status(201).json(user);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
 }
 
 const deleteUser = async (req, res) => {
+    console.log('good')
     if (!req?.body?.id) return res.status(400).json({ "message": 'User ID required' });
     const user = await User.findOne({ _id: req.body.id }).exec();
     if (!user) {
@@ -24,12 +47,33 @@ const getUser = async (req, res) => {
     }
     res.json(user);
 }
-// create a new user 
+const getConnectedUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
 
-
+const updateUserRoles = async (req, res) => {
+    if (!req?.params?.id) return res.status(400).json({ "message": 'User ID required' });
+    if (!req?.body?.roles) return res.status(400).json({ "message": 'Roles array required' });
+    const user = await User.findOne({ _id: req.params.id }).exec();
+    if (!user) {
+        return res.status(204).json({ 'message': `User ID ${req.params.id} not found` });
+    }
+    user.roles = req.body.roles;
+    const updatedUser = await user.save();
+    res.json(updatedUser);
+};
 
 module.exports = {
     getAllUsers,
     deleteUser,
-    getUser
+    getUser,
+    createUser,
+    getConnectedUser,
+    updateUserRoles
 }

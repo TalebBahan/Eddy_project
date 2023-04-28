@@ -6,17 +6,17 @@ import {
     useTable,
 } from "react-table";
 import React from "react";
-import AddEditModal from "./AddEditModal";
 import { MdCheckCircle, MdCancel } from "react-icons/md";
 import { useMemo } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useDeleteLinkMutation } from "./apiLink";
-
+import AddEditModal from "./AddEditModal";
+import { useDeleteUsersMutation } from "./apiUsers";
+import RolesList from './RolesList';
 const Table = (props) => {
     const { columnsData, tableData } = props;
     const columns = useMemo(() => columnsData, [columnsData]);
     const data = useMemo(() => tableData, [tableData]);
-    const [deleteLink] = useDeleteLinkMutation()
+    const [deleteLink] = useDeleteUsersMutation()
 
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => setOpen(!open);
@@ -50,11 +50,11 @@ const Table = (props) => {
     return (
         <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
             <AddEditModal open={open} handleOpen={handleOpen} isAdd={true} />
-            <AddEditModal open={eopen} handleOpen={handleEopen} isAdd={false}  {...editData} />
+           {eopen && <RolesList open={eopen} handleOpen={handleEopen}  {...editData} />}
             <div class="relative flex items-center justify-between">
                 <div class="text-xl font-bold text-navy-700 dark:text-white">
 
-                    ALl Links
+                    ALl Users
                 </div>
                 <button
                     onClick={handleOpen}
@@ -103,7 +103,7 @@ const Table = (props) => {
                                     <tr {...row.getRowProps()} key={index}>
                                         {row.cells.map((cell, index) => {
                                             let data = "";
-                                            if (['Link Text', 'Link @', 'Platform'].includes(cell.column.Header)) {
+                                            if (['Email', 'User name'].includes(cell.column.Header)) {
 
                                                 data = (
                                                     <p className="text-sm font-bold text-navy-700 dark:text-white">
@@ -151,14 +151,10 @@ const Table = (props) => {
                                                     onClick={()=>handleEdit(row.original)}
                                                     className="text-sm font-bold text-yellow-500 dark:text-white"
                                                 >
-                                                    Edit
-                                                </button><button
-                                                    onClick={handleOpen}
-                                                    className="text-sm font-bold text-green-500 dark:text-white"
-                                                >
-                                                    Enable
-                                                </button><button
-                                                    onClick={() => window.confirm("are you sure you want to delete this link ?") ?deleteLink(row.original._id) : null}
+                                                    Roles
+                                                </button>
+                                                <button
+                                                    onClick={() => window.confirm("are you sure you want to delete this link ?") ? deleteLink(row.original._id) : null }
                                                     className="text-sm font-bold text-red-500 dark:text-white"
                                                 >
                                                     delete
@@ -176,3 +172,4 @@ const Table = (props) => {
 };
 
 export default Table;
+

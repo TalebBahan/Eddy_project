@@ -32,9 +32,6 @@ const getLinkById = async (req, res) => {
 
 // Create a new link
 const createLink = async (req, res) => {
-    console.log('====================================');
-    console.log(9);
-    console.log('====================================');
     try {
         const newLink = new Link({
             text: req.body.text,

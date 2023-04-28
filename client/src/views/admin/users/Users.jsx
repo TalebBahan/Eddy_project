@@ -1,32 +1,28 @@
 import React from 'react'
 import Table from './Table'
-import { useGetLinkQuery } from './apiLink';
-import RolesList from './RolesList';
+import { useGetUsersQuery, useGetConnectedUserQuery } from './apiUsers';
 const COLUMNS = [
     {
-        Header: "Link Text",
-        accessor: "text",
+        Header: "Email",
+        accessor: "email",
     },
     {
-        Header: "Link @",
-        accessor: "link",
-    },
-    {
-        Header: "Platform",
-        accessor: "platform",
+        Header: "User name",
+        accessor: "username",
     },
 ]
 
 export default function Users() {
-    const { data, isLoading } = useGetLinkQuery()
+    console.log(useGetConnectedUserQuery())
+    const { data, isLoading } = useGetUsersQuery()
+    const [a,sa]=React.useState('644ac60865ae9b5aca5059f7')
     return (
         <div className='mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid '>
             {!isLoading &&
                 <Table
                     columnsData={COLUMNS}
-                    tableData={data}
+                    tableData={data ? data : []}
                 />}
-                <RolesList />
         </div>
     )
 }

@@ -175,13 +175,12 @@ const Navbar = (props) => {
             <RiMoonFill className="h-4 w-4 text-gray-600 dark:text-white" />
           )}
         </div>
-        {/* Profile & Dropdown */}
-        <Dropdown
+        {/* <Dropdown
           button={
             <img
               className="h-10 w-10 rounded-full"
               src={avatar}
-              alt="Elon Musk"
+              alt="Eddy"
             />
           }
           children={
@@ -189,7 +188,7 @@ const Navbar = (props) => {
               <div className="mt-3 ml-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, Adela
+                    👋 Hey, Eddy
                   </p>{" "}
                 </div>
               </div>
@@ -218,7 +217,7 @@ const Navbar = (props) => {
             </div>
           }
           classNames={"py-2 top-8 -left-[180px] w-max"}
-        />
+        /> */}
       </div>
     </nav>
   );

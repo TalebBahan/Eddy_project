@@ -6,19 +6,19 @@ import Media from './media/Media'
 import About from './about/About'
 import { useGetContentQuery } from './apiContent'
 export default function Content() {
-    const {data,isLoading,}= useGetContentQuery()
-    const filterbytype =(type)=>data.filter(item => item.type === type);
+    const { data, isLoading, } = useGetContentQuery()
+    const filterbytype = (type) => data.filter(item => item.type === type);
     return (
         <div className="mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid ">
-        {
-            isLoading ? 'loading ...' :
-            <>
-            <Carousel data={filterbytype('carousel')}/>
-            <About data={filterbytype('about')}/>
-            <Media data={filterbytype('media')}/>
-            </>
-        }
-            
+            {
+                isLoading ? 'loading ...' :
+                    <>
+                        <Carousel data={filterbytype('carousel')} />
+                        <About data={filterbytype('about')} />
+                        <Media data={filterbytype('media')} />
+                    </>
+            }
+
         </div>
     )
 }

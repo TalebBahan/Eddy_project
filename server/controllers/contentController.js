@@ -15,16 +15,12 @@ const getAllContent = async (req, res) => {
     try {
         const content = await Content.find();
         res.status(200).json(content);
-        console.log(8)
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Server Error');
     }
 }
 const getAllAboutImages = async (req, res) => {
-    console.log('====================================');
-    console.log(8);
-    console.log('====================================');
 
     try {
         const images = await AboutImages.find();
@@ -63,11 +59,6 @@ const createContent = async (req, res) => {
             filename = file?.filename
 
         }
-
-        console.log(filename)
-
-
-
         const newContent = new Content({
             h_text: req.body.h_text,
             s_text: req.body.s_text,
@@ -125,12 +116,10 @@ const updateContent = async (req, res) => {
 
 // Delete an existing content
 const deleteContent = async (req, res) => {
-    console.log('in')
     try {
         const content = await Content.deleteOne({ '_id': { $eq: req.params.id } });
 
         if (!content) {
-            console.log(req.params.id)
             return res.status(404).json({ msg: 'Content not found' });
         }
         res.status(200).json({ msg: 'Content deleted' });
@@ -141,11 +130,8 @@ const deleteContent = async (req, res) => {
 }
 const deleteAboutImage = async (req, res) => {
     try {
-        console.log('\n', req.params.id)
         const image = await AboutImages.deleteOne({ '_id': { $eq: req.params.id } });
-
         if (!image) {
-            console.log(req.params.id)
             return res.status(404).json({ msg: 'Image not found' });
         }
         res.status(200).json({ msg: 'Image deleted' });

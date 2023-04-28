@@ -29,8 +29,6 @@ const userSchema = new Schema({
         contentUser: Number,
         contentEditor: Number,
         contentAdmin: Number,
-        
-
     },
     team : {
         type: Schema.Types.ObjectId,
