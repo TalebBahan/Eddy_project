@@ -16,10 +16,9 @@ export default function AddEditModal(props) {
   useEffect(
     () =>
       setFormData({
-        username: props?.username,
-        password: props?.password,
-        email: props?.email,
-        id: props?._id,
+        username: '',
+        password: '',
+        email: '',
       }),
     [props]
   );
