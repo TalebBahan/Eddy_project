@@ -15,7 +15,7 @@ export default function CardMedia({ h_text, s_text, image, link,id }) {
       <div className="h-full w-full">
         <div className="relative w-full">
           <img
-            src={`https://diffs-values-motel-rolled.trycloudflare.com/images/${image}`}
+            src={`${process.env.REACT_APP_API}/images/${image}`}
             className="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full"
             alt=""
           />

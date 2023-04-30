@@ -16,7 +16,7 @@ export default function Images() {
       {!isError && !isLoading ? data.map(item =>
         <div className="relative w-full" key={item._id}>
           <img
-            src={`http://localhost:3500/images/${item.image}`}
+            src={`${process.env.REACT_APP_API}/images/${item.image}`}
             className="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full"
             alt=""
           />
