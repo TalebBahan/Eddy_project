@@ -58,7 +58,7 @@ export default function AddEditMedia(props) {
       <Dialog open={props.open} handler={props.handleOpen} size='xxl'>
         {/* <form> */}
 
-        <DialogHeader>{props.isAdd ? 'Add New Carousel ' : 'Edit Carousel'}</DialogHeader>
+        <DialogHeader>{props.isAdd ? 'Add New Media coverage or artical ' : 'Edit this'}</DialogHeader>
         <DialogBody divider>
           <div class="flex flex-col">
             <label
@@ -74,6 +74,8 @@ export default function AddEditMedia(props) {
               onChange={handleChange}
               class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded"
               autocomplete="off"
+
+              required
             />
           </div>
           <div class="flex flex-col">
@@ -90,6 +92,7 @@ export default function AddEditMedia(props) {
               onChange={handleChange}
               class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
               autocomplete="off"
+              required
             />
           </div>
           <div class="flex flex-col">
