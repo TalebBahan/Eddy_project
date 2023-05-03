@@ -6629,3 +6629,17 @@
 20230430	07:24:45	1e066fd5-1400-4617-866e-a2c1f81e7c1f	GET	http://localhost:3000	/api/content
 20230430	07:24:46	e41c7021-c1a5-4efc-928e-dcf1f6b264cd	OPTIONS	http://localhost:3000	/api/content/imageAbout
 20230430	07:24:46	5fee6abd-8dad-4c3e-b8e8-ea5e8d073af6	GET	http://localhost:3000	/api/content/imageAbout
+20230501	00:59:38	4ecca3d8-74a8-4acd-85a7-bb5e26a7abb3	OPTIONS	http://localhost:3000	/auth
+20230501	00:59:38	9d22acde-2b20-4ead-a331-b148b3013003	POST	http://localhost:3000	/auth
+20230501	01:00:06	3ceb7aa3-1dfd-4681-9351-92b3834da85e	OPTIONS	http://localhost:3000	/api/link
+20230501	01:00:06	0759c1f9-ca4d-47b1-9e4a-c1ac3646c04e	GET	http://localhost:3000	/api/link
+20230501	01:00:07	c5c3354a-040e-4672-b80d-2abebf531550	OPTIONS	http://localhost:3000	/api/users/connectedUser
+20230501	01:00:07	e0182369-2609-4b49-9db5-b0cef344976d	OPTIONS	http://localhost:3000	/api/users
+20230501	01:00:07	3de46e45-aff4-4d41-8430-55a13c2034d9	GET	http://localhost:3000	/api/users/connectedUser
+20230501	01:00:07	0fa1cbeb-ab08-43bb-b659-7ad808a8f36e	GET	http://localhost:3000	/api/users
+20230501	01:00:12	954f2db2-6c64-4afd-99a8-0414b1e250b4	OPTIONS	http://localhost:3000	/api/content
+20230501	01:00:12	1720c0a7-51a2-4dd8-8ec2-47706e890ab8	GET	http://localhost:3000	/api/content
+20230501	01:00:14	0b3b08e7-949e-45bc-8e23-13a9c0a2baa2	OPTIONS	http://localhost:3000	/api/content/imageAbout
+20230501	01:00:14	c09c1cde-f206-4ea7-adf9-eba89a13d40c	GET	http://localhost:3000	/api/content/imageAbout
+20230501	01:01:21	7427b9a8-d1f6-45e7-97d3-79b70221b905	OPTIONS	http://localhost:3000	/auth
+20230501	01:01:21	f2ef6f45-19e9-43cf-af44-be595a4d8b17	POST	http://localhost:3000	/auth
