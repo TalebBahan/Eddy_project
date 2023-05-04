@@ -51,6 +51,7 @@ app.use('/api/team', require('./routes/api/team'));
 app.use('/api/link', require('./routes/api/link'));
 app.use('/api/post', require('./routes/api/post'));
 app.use('/api/content', require('./routes/api/content'));
+app.use('/api/subscribers', require('./routes/api/subscriber'));
 
 
 

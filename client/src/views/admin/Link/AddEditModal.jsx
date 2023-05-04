@@ -9,9 +9,7 @@ import {
 import { useAddLinkMutation, useEditLinkMutation } from "./apiLink";
 
 export default function AddEditModal(props) {
-    console.log('====================================');
-    console.log(props);
-    console.log('====================================');
+
     const [add] = useAddLinkMutation()
     const [editLink] = useEditLinkMutation()
 
