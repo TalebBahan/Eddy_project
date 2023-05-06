@@ -38,8 +38,51 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    refreshToken: String
+    refreshToken: String,
+    state:  String,
+    googleRefreshToken: String,
+    googleState: String,
+    googleId: String,
+    googleEmail: String,
+    googleName: String,
+    googlePicture: String,
+    linkedinRefreshToken: String,
+    linkedinAccessToken: String,
+    linkedinState: String,
+    linkedinId: String,
+    linkedinEmail: String,
+    linkedinName: String,
+    linkedinPicture: String,
+
 });
 
-module.exports = mongoose.model('User', userSchema);
-// if type is admin then he will have access to all the posts, links and contents as hes owen if its a team member can it be stored in the same table or should i create a new table for team members and then link it to the user table?
+user = mongoose.model('User', userSchema);
+module.exports = user;
+// user sample  
+// {
+//     "email": "user@gmail",
+//     "username": "user",
+//     "roles": {
+//         "User": 1,
+//         "Editor": 0,
+//         "Admin": 0,
+//         "postUser": 1,
+//         "postEditor": 0,
+//         "postAdmin": 0,
+//         "linkUser": 1,
+//         "linkEditor": 0,
+//         "linkAdmin": 0,
+//         "contentUser": 1,
+//         "contentEditor": 0,
+//         "contentAdmin": 0
+//     },
+//     "password": "user",
+//     "googleRefereshToken": "",
+//     "googleState": "",
+//     "googleId": "",
+//     "googleEmail": "",
+//     "googleName": "",
+//     "googlePicture": ""
+
+// }
+// })

@@ -12,7 +12,6 @@ const credentials = require('./middleware/credentials');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
 const PORT = process.env.PORT || 3500;
-
 // Connect to MongoDB
 connectDB();
 app.use(express.static("public"));
@@ -44,6 +43,8 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
+app.use('/api/google', require('./routes/api/google'));
+app.use('/api/linkedin', require('./routes/api/linkedin'));
 
 app.use(verifyJWT);
 app.use('/api/users', require('./routes/api/user'));
