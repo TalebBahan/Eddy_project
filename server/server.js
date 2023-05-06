@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
+
 const PORT = process.env.PORT || 3500;
 
 // Connect to MongoDB
@@ -52,6 +53,7 @@ app.use('/api/link', require('./routes/api/link'));
 app.use('/api/post', require('./routes/api/post'));
 app.use('/api/content', require('./routes/api/content'));
 app.use('/api/subscribers', require('./routes/api/subscriber'));
+app.use('/api/newsletter', require('./routes/api/newsletter'));
 
 
 

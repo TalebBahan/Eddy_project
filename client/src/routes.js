@@ -11,6 +11,7 @@ import Content from "views/admin/content/Content";
 import Links from "views/admin/Link/Links";
 import Users from "views/admin/users/Users";
 import Subscriber from "views/admin/newsletter/subscriber/Subscriber";
+import NewsLetter from "views/admin/newsletter/newsletter/NewsLetter";
 // Icon Imports
 import {
   MdHome,
@@ -60,6 +61,13 @@ const routes = [
     path: "subscriber",
     icon: <BiBookContent className="h-6 w-6" />,
     component: <Subscriber />,
+  },
+  {
+    name: "NewsLetter",
+    layout: "/admin",
+    path: "newsletter",
+    icon: <BiBookContent className="h-6 w-6" />,
+    component: <NewsLetter />,
   },
   {
     name: "Main Dashboard",
