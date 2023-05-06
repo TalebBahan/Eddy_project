@@ -72,23 +72,8 @@ export default function AddArticle(props) {
           </div>
           <div class="flex flex-col">
             <label
-              for="body"
-              class="self-start mb-2 font-medium text-gray-800"
-            >Body</label>
-            <Textarea 
-              id="body"
-              name="body"
-              value={formData.body}
-              onChange={handleChange}
-              className="peer h-full min-h-[100px] w-full resize-none rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
-              autocomplete="off"
-            ></Textarea>
-          </div>
-          <div class="flex flex-col">
-            <label
-              for="title"
-              class="self-start mb-2 font-medium text-gray-800"
-            >Read More Link</label>
+              for="readMoreLink"
+              class="self-start mb-2 font-medium text-gray-800">Read More Link</label>
             <input
               type="text"
               placeholder="readMoreLink"
@@ -100,6 +85,21 @@ export default function AddArticle(props) {
               autocomplete="off"
             />
           </div>
+          <div class="flex flex-col">
+            <label
+              for="body"
+              class="self-start mb-2 font-medium text-gray-800"
+            >Body</label>
+            <Textarea 
+              id="body"
+              name="body"
+              value={formData.body}
+              onChange={handleChange}
+              className="peer h-full min-h-[100px] w-full resize-none rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 "
+              autocomplete="off"
+            ></Textarea>
+          </div>
+
           <div class="flex flex-col">
             <label
               for="coverImage"

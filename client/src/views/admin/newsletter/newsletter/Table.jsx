@@ -154,7 +154,7 @@ const Table = (props) => {
                                                     onClick={() => handleAddArticle(row.original._id)}
                                                     className="text-sm font-bold text-green-500 dark:text-white"
                                                 >
-                                                    Send
+                                                    Mails
                                                 </button>
                                             </div>
                                         </td>

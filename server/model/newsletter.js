@@ -16,6 +16,8 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+
 });
 
 const newsletterSchema = new mongoose.Schema({
@@ -30,6 +32,10 @@ const newsletterSchema = new mongoose.Schema({
   articles: [articleSchema],
   scheduledTime: {
     type: Date,
+    required: true,
+  },
+  intersts: {
+    type: [String],
     required: true,
   },
 });

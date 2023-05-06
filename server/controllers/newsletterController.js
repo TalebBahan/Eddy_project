@@ -30,6 +30,7 @@ exports.createNewsletter = async (req, res) => {
       coverImageUrl: req.file.filename,
       articles: req.body.articles,
       layout: req.body.layout,
+      intersts: req.body.intersts.split(','),
       scheduledTime: req.body.scheduledTime,
     });
     const savedNewsletter = await newsletter.save();

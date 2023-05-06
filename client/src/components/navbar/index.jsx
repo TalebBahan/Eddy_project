@@ -6,15 +6,19 @@ import navbarimage from "assets/img/layout/Navbar.png";
 import { BsArrowBarUp } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
-import {
-  IoMdNotificationsOutline,
-  IoMdInformationCircleOutline,
-} from "react-icons/io";
-import avatar from "assets/img/avatars/avatar4.png";
+import { useGetConnectedUserQuery } from "views/admin/users/apiUsers";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
+  const { data, isLoading, isError } = useGetConnectedUserQuery()
+  if (isLoading) {
+      return <div>Loading...</div>;
+  }
+
+  if (isError) {
+      return <div>Error: {isError.message}</div>;
+  }
 
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
@@ -134,27 +138,21 @@ const Navbar = (props) => {
             <RiMoonFill className="h-4 w-4 text-gray-600 dark:text-white" />
           )}
         </div>
-        {/* <Dropdown
-          button={
-            <img
-              className="h-10 w-10 rounded-full"
-              src={avatar}
-              alt="Eddy"
-            />
-          }
+        <Dropdown
+          button={data.username}
           children={
             <div className="flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
               <div className="mt-3 ml-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, Eddy
+                    👋 Hey, {data.email}
                   </p>{" "}
                 </div>
               </div>
               <div className="mt-3 h-px w-full bg-gray-200 dark:bg-white/20 " />
 
               <div className="mt-3 ml-4 flex flex-col">
-                <a
+                {/* <a
                   href=" "
                   className="text-sm text-gray-800 dark:text-white hover:dark:text-white"
                 >
@@ -165,7 +163,7 @@ const Navbar = (props) => {
                   className="mt-3 text-sm text-gray-800 dark:text-white hover:dark:text-white"
                 >
                   Newsletter Settings
-                </a>
+                </a> */}
                 <a
                   href=" "
                   className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
@@ -176,7 +174,7 @@ const Navbar = (props) => {
             </div>
           }
           classNames={"py-2 top-8 -left-[180px] w-max"}
-        /> */}
+        />
       </div>
     </nav>
   );

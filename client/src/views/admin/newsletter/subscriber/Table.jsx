@@ -10,13 +10,15 @@ import AddEditModal from "./AddEditModal";
 import { MdCheckCircle, MdCancel } from "react-icons/md";
 import { useMemo } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useDeleteSubscriberMutation } from "./subscriberApi";
+import { useDeleteSubscriberMutation, useSendMutation } from "./subscriberApi";
+
 import Checkbox from "components/checkbox";
 const Table = (props) => {
     const { columnsData, tableData } = props;
     const columns = useMemo(() => columnsData, [columnsData]);
     const data = useMemo(() => tableData, [tableData]);
     const [deleteSubscriber] = useDeleteSubscriberMutation()
+    const [send] = useSendMutation()
 
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => setOpen(!open);
@@ -34,7 +36,9 @@ const Table = (props) => {
             setCheckedIds(checkedIds.filter((checkedId) => checkedId !== id));
         }
     };
-
+    function handleSend(){
+        send({newsLetterId:"6456367a15ee1e583af62985",emailList:[...checkedIds]})
+    }
     function handleEdit(data) {
         setEditData(() => data);
         setEopen(true)
@@ -69,12 +73,13 @@ const Table = (props) => {
                     All Subscribers
                 </div>
                 <button
-                    onClick={handleOpen}
+                    onClick={()=>handleSend}
                     className={`flex items-center text-xl hover:cursor-pointer 
               bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
                 >
-                    <AiOutlinePlus className="h-6 w-6" />
+                    {checkedIds.length > 1 ? 'Send News' : <AiOutlinePlus className="h-6 w-6" />}
                 </button>
+
             </div>
 
             <div class="mt-8 h-full overflow-x-scroll xl:overflow-hidden">
@@ -118,8 +123,8 @@ const Table = (props) => {
                                             if (cell.column.Header === "Email") {
                                                 data = (
                                                     <div className="flex items-center gap-2">
-                                                        <Checkbox checked={checkedIds.includes(row.original._id)}
-                                                            onChange={(event) => handleChange(event, row.original._id)} />
+                                                        <Checkbox checked={checkedIds.includes(row.original.email)}
+                                                            onChange={(event) => handleChange(event, row.original.email)} />
 
                                                         <p className="text-sm font-bold text-navy-700 dark:text-white">
                                                             {cell.value}

@@ -1,7 +1,7 @@
 import React from 'react'
 import Table from './Table'
 import { useGetnewslettersQuery } from './newsletterApi'
-
+import SubscriberModel from './SuscribersModel'
 const COLUMNS = [
     {
         Header: "Title",
@@ -24,6 +24,7 @@ export default function NewsLetter() {
     }
     return (
         <div className='mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid '>
+        <SubscriberModel />
             <Table
                 columnsData={COLUMNS}
                 tableData={data}

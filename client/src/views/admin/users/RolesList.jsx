@@ -8,9 +8,6 @@ import {
   Dialog,
 } from "@material-tailwind/react";
 export default function RolesList({ _id,username,roles:rolesL, open, handleOpen }) {
-  console.log('====================================');
-  console.log(rolesL);
-  console.log('====================================');
   const [roles, setRoles] = useState({...rolesL});
 
   const [updateUserRoles] = useUpdateUserRolesMutation();

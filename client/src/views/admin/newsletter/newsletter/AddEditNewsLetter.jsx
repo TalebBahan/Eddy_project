@@ -15,9 +15,11 @@ export default function AddEditNewsletter(props) {
   const [formData, setFormData] = useState({
     title: '',
     coverImage: null,
-    scheduledTime: ''
-  });
+    scheduledTime: '',
+    interests: [],
 
+  });
+  const interests = ['swimming', 'hiking', 'photography']
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -26,23 +28,31 @@ export default function AddEditNewsletter(props) {
   const handleCoverImageChange = (file) => {
     setFormData({ ...formData, coverImage: file });
   };
-
+  const handleInterestChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((formData) => ({
+      ...formData,
+      interests: [...formData.interests, value],
+    }));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData();
     form.append("title", formData.title);
     form.append("image", formData.coverImage);
     form.append("scheduledTime", formData.scheduledTime);
-console.log('====================================');
-console.log(form);
-console.log('====================================');
+    form.append("intersts", formData.interests);
+    console.log('====================================');
+    console.log(form);
+    console.log('====================================');
     add(form)
     setFormData({
       title: '',
       coverImage: null,
-      scheduledTime: ''
+      scheduledTime: '',
+      interests: [],
     });
-    
+
     props.handleOpen();
   };
 
@@ -92,6 +102,30 @@ console.log('====================================');
               class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
               autocomplete="off"
             />
+            <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="interests">
+              Interests
+            </label>
+            <div className="flex items-center">
+              {interests.map((interest) => (
+                <label
+                  className="mr-2 text-gray-700"
+                  htmlFor={interest}
+                  key={interest}
+
+                >
+                  <input
+                    className="mr-1"
+                    type="checkbox"
+                    id={interest}
+                    name="interests"
+                    value={interest}
+                    checked={formData.interests.includes(interest)}
+                    onChange={handleInterestChange}
+                  />
+                  {interest}
+                </label>
+              ))}
+            </div>
           </div>
         </DialogBody>
 
