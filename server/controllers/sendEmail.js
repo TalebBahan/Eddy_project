@@ -1,8 +1,11 @@
-const path = require('path')
-var nodemailer = require('nodemailer');
-var hbs = require('nodemailer-express-handlebars');
+const { log } = require('console');
+const Newsletter = require('../model/newsletter');
+const Subscriber = require('../model/subscriber');
+const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
+const path = require('path');
 
-var transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
   secure: true,
@@ -14,32 +17,58 @@ var transporter = nodemailer.createTransport({
 
 const handlebarOptions = {
   viewEngine: {
-    extName: ".handlebars",
+    extName: '.handlebars',
     partialsDir: path.resolve('./views'),
     defaultLayout: false,
   },
-  viewPath: path.resolve('../views'),
-  extName: ".handlebars",
-}
+  viewPath: path.resolve('./views'),
+  extName: '.handlebars',
+};
 
 transporter.use('compile', hbs(handlebarOptions));
 
-var mailOptions = {
-  from: 'talebahan@gmail.com',
-  to: "21014@supnum.mr",
-  subject: 'Sending Email using Node.js',
-  template: 'email',
-  context: {
-    title: 'Title Here',
-    text: "Lorem ipsum dolor sit amet, consectetur..."
-  }
+exports.sendNewsletter = (req, res) => {
+  const { emailList, newsletterId } = req.body;
+  console.log('====================================');
+  console.log(emailList.join(', '),newsletterId);
+  console.log('====================================');
+  Newsletter.findById(newsletterId)
+    .then(newsletter => {
+      if (!newsletter) {
+        throw new Error('Newsletter not found');
+      }
+      console.log('====================================');
+      console.log(newsletter);
+      console.log('====================================');
+      const mailOptions = {
+        from: 'talebahan@gmail.com',
+        subject: newsletter.title,
+        template: 'email',
+        context:{
+          'title': newsletter.title
+        }
+        
+      };
 
+      if (emailList && emailList.length > 0) {
+        mailOptions.to = emailList
+        return transporter.sendMail(mailOptions);
+      } else {
+        return Subscriber.find({ interests: newsletter.interests })
+          .then(subscribers => {
+            const emailList = subscribers.map(subscriber => subscriber.email);
+            console.log(emailList.join(', '));
+            mailOptions.to = emailList;
+            return transporter.sendMail(mailOptions);
+          });
+      }
+    })
+    .then(info => {
+      console.log('Email sent: ' + info.response);
+      res.send('Email sent successfully!');
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send('Error sending email!');
+    });
 };
-
-transporter.sendMail(mailOptions, function (error, info) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
