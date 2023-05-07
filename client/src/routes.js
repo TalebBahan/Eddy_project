@@ -10,7 +10,8 @@ import Content from "views/admin/content/Content";
 // Auth Imports
 import Links from "views/admin/Link/Links";
 import Users from "views/admin/users/Users";
-
+import Subscriber from "views/admin/newsletter/subscriber/Subscriber";
+import NewsLetter from "views/admin/newsletter/newsletter/NewsLetter";
 // Icon Imports
 import {
   MdHome,
@@ -21,8 +22,9 @@ import {
 } from "react-icons/md";
 import {FiUsers} from "react-icons/fi";
 import {BiLinkAlt} from "react-icons/bi";
-import {BiBookContent} from "react-icons/bi";
+import {BiBookContent,BiNews} from "react-icons/bi";
 import {BsFileEarmarkPostFill} from "react-icons/bs";
+import {BsPersonCheck} from "react-icons/bs";
 
 
 const routes = [
@@ -53,6 +55,20 @@ const routes = [
     path: "content",
     icon: <BiBookContent className="h-6 w-6" />,
     component: <Content />,
+  },
+  {
+    name: "Subscribers",
+    layout: "/admin",
+    path: "subscriber",
+    icon: <BsPersonCheck className="h-6 w-6" />,
+    component: <Subscriber />,
+  },
+  {
+    name: "News Letters",
+    layout: "/admin",
+    path: "newsletter",
+    icon: <BiNews className="h-6 w-6" />,
+    component: <NewsLetter />,
   },
   // {
   //   name: "Main Dashboard",

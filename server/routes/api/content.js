@@ -4,7 +4,7 @@ var router = express.Router();
 var contentController = require('../../controllers/contentController');
 const multer = require('multer');
 const path = require('path');
-2
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "public/images");

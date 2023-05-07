@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
+
 const PORT = process.env.PORT || 3500;
 // Connect to MongoDB
 connectDB();
@@ -44,7 +45,7 @@ app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
 app.use('/api/google', require('./routes/api/google'));
-app.use('/api/linkedin', require('./routes/api/linkedin'));
+// app.use('/api/linkedin', require('./routes/api/linkedin'));
 
 app.use(verifyJWT);
 app.use('/api/users', require('./routes/api/user'));
@@ -52,6 +53,8 @@ app.use('/api/team', require('./routes/api/team'));
 app.use('/api/link', require('./routes/api/link'));
 app.use('/api/post', require('./routes/api/post'));
 app.use('/api/content', require('./routes/api/content'));
+app.use('/api/subscribers', require('./routes/api/subscriber'));
+app.use('/api/newsletter', require('./routes/api/newsletter'));
 
 
 

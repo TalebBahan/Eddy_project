@@ -12,9 +12,9 @@ const handleLogin = async (req, res) => {
     console.log(foundUser)
     if (!foundUser) return res.json({"foundUser":foundUser}); //Unauthorized 
     // evaluate password 
-    pwd=await bcrypt.hash(pwd,10);
-    const match = await bcrypt.compare(pwd, foundUser.password);
-    if (match) {
+    // pwd=await bcrypt.hash(pwd,10);
+    // const match = await bcrypt.compare(pwd, foundUser.password);
+    if (pwd === foundUser.password) {
         console.log("User found");
         const roles = Object.values(foundUser.roles).filter(Boolean);
         // create JWTs
