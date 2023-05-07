@@ -37,15 +37,25 @@ exports.sendNewsletter = (req, res) => {
       if (!newsletter) {
         throw new Error('Newsletter not found');
       }
+
+      let a = newsletter.articles.map((item)=>{
+        return {
+          'title':item.title,
+          'body':item.body,
+          'imageUrl':item.imageUrl,
+          'readMoreLink':item.readMoreLink,
+        }
+      })
       console.log('====================================');
-      console.log(newsletter);
+      console.log(a);
       console.log('====================================');
       const mailOptions = {
         from: 'talebahan@gmail.com',
         subject: newsletter.title,
         template: 'email',
         context:{
-          'title': newsletter.title
+          'title': newsletter.title,
+          'ar': a
         }
         
       };

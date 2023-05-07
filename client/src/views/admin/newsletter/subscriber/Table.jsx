@@ -11,7 +11,7 @@ import { MdCheckCircle, MdCancel } from "react-icons/md";
 import { useMemo } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useDeleteSubscriberMutation, useSendMutation } from "./subscriberApi";
-
+import Send from "./Send";
 import Checkbox from "components/checkbox";
 const Table = (props) => {
     const { columnsData, tableData } = props;
@@ -25,7 +25,7 @@ const Table = (props) => {
     const [eopen, setEopen] = React.useState(false)
     const handleEopen = () => setEopen(!eopen);
     const [editData, setEditData] = React.useState('')
-
+    const [sendModel,setSendModel] = React.useState(false)
     const [checkedIds, setCheckedIds] = React.useState([]);
 
     const handleChange = (event, id) => {
@@ -66,6 +66,7 @@ const Table = (props) => {
     return (
         <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
             <AddEditModal open={open} handleOpen={handleOpen} />
+            <Send open={sendModel} handleOpen={()=>setSendModel(!sendModel)} emails={checkedIds} />
             <AddEditModal open={eopen} handleOpen={handleEopen} isEdit={true} {...editData} />
             <div class="relative flex items-center justify-between">
                 <div class="text-xl font-bold text-navy-700 dark:text-white">
@@ -73,7 +74,7 @@ const Table = (props) => {
                     All Subscribers
                 </div>
                 <button
-                    onClick={()=>handleSend()}
+                    onClick={ checkedIds.length > 1 ? ()=>setSendModel(!sendModel) : ()=>handleOpen() }
                     className={`flex items-center text-xl hover:cursor-pointer 
               bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
                 >

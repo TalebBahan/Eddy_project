@@ -23,7 +23,19 @@ export default function AddEditModal(props) {
         location: props?.location,
         
     });
-    const interests = ['swimming','hiking','photography']
+    const interests = [
+        "Leadership development",
+        "Organizational transformation",
+        "Corporate governance",
+        "Business strategy",
+        "Sales and operations management",
+        "Board of director leadership",
+        "Professional development",
+        "Entrepreneurship",
+        "Executive coaching",
+        "Business analytics"
+      ];
+      
 
     useEffect(() => {
 

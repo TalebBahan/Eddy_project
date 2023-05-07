@@ -19,7 +19,18 @@ export default function AddEditNewsletter(props) {
     interests: [],
 
   });
-  const interests = ['swimming', 'hiking', 'photography']
+  const interests =[
+    "Leadership development",
+    "Organizational transformation",
+    "Corporate governance",
+    "Business strategy",
+    "Sales and operations management",
+    "Board of director leadership",
+    "Professional development",
+    "Entrepreneurship",
+    "Executive coaching",
+    "Business analytics"
+  ];
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });

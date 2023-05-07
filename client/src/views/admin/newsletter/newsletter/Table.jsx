@@ -10,6 +10,7 @@ import AddEditNewsletter from "./AddEditNewsLetter";
 import { useMemo } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useDeletenewsletterMutation } from "./newsletterApi";
+import Preview from "./Preview";
 import AddArticle from "./AddArticle";
 const Table = (props) => {
     const { columnsData, tableData } = props;
@@ -18,14 +19,18 @@ const Table = (props) => {
     const [deleteSubscriber] = useDeletenewsletterMutation()
 
     const [newsId,setNewsId]=React.useState('')
+    const [news,setNews]=React.useState('')
+    const [preview,setPreview]=React.useState('')
     const [open, setOpen] = React.useState(false)
-    const handleOpen = () => setOpen(!open);
     const [Articleopen, setArticleOpen] = React.useState(false)
-    const handleArticleOpen = () => setArticleOpen(!Articleopen);
     
     function handleAddArticle(id){
         setNewsId(()=>id);
         setArticleOpen(true)
+    }
+    function handlePreview(data){
+        setNews(()=>data);
+        setPreview(true)
     }
 
     const tableInstance = useTable(
@@ -50,14 +55,15 @@ const Table = (props) => {
 
     return (
         <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
-            <AddEditNewsletter open={open} handleOpen={handleOpen} />
-            <AddArticle open={Articleopen} handleOpen={handleArticleOpen} id={newsId} />
+            <AddEditNewsletter open={open} handleOpen={() => setOpen(!open)} />
+            <AddArticle open={Articleopen} handleOpen={() => setArticleOpen(!Articleopen)} id={newsId} />
+            <Preview open={preview} handleOpen={() => setPreview(!preview)} news={news} />
             <div class="relative flex items-center justify-between">
                 <div class="text-xl font-bold text-navy-700 dark:text-white">
                     All NewsLetters
                 </div>
                 <button
-                    onClick={handleOpen}
+                    onClick={() => setOpen(!open)}
                     className={`flex items-center text-xl hover:cursor-pointer 
               bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
                 >
@@ -145,16 +151,11 @@ const Table = (props) => {
                                                     Add Article
                                                 </button>
                                                 <button
-                                                    onClick={() => handleAddArticle(row.original._id)}
-                                                    className="text-sm font-bold text-orange-500 dark:text-white"
+                                                    onClick={() => handlePreview(row.original)}
+                                                    className="text-sm font-bold text-gray-500 dark:text-white"
+                                                    disabled
                                                 >
                                                     Preview
-                                                </button>
-                                                <button
-                                                    onClick={() => handleAddArticle(row.original._id)}
-                                                    className="text-sm font-bold text-green-500 dark:text-white"
-                                                >
-                                                    Mails
                                                 </button>
                                             </div>
                                         </td>

@@ -24,7 +24,7 @@ export default function NewsLetter() {
     }
     return (
         <div className='mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid '>
-        <SubscriberModel />
+        {/* <SubscriberModel /> */}
             <Table
                 columnsData={COLUMNS}
                 tableData={data}

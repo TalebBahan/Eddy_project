@@ -22,8 +22,9 @@ import {
 } from "react-icons/md";
 import {FiUsers} from "react-icons/fi";
 import {BiLinkAlt} from "react-icons/bi";
-import {BiBookContent} from "react-icons/bi";
+import {BiBookContent,BiNews} from "react-icons/bi";
 import {BsFileEarmarkPostFill} from "react-icons/bs";
+import {BsPersonCheck} from "react-icons/bs";
 
 
 const routes = [
@@ -59,45 +60,45 @@ const routes = [
     name: "Subscribers",
     layout: "/admin",
     path: "subscriber",
-    icon: <BiBookContent className="h-6 w-6" />,
+    icon: <BsPersonCheck className="h-6 w-6" />,
     component: <Subscriber />,
   },
   {
-    name: "NewsLetter",
+    name: "News Letters",
     layout: "/admin",
     path: "newsletter",
-    icon: <BiBookContent className="h-6 w-6" />,
+    icon: <BiNews className="h-6 w-6" />,
     component: <NewsLetter />,
   },
-  {
-    name: "Main Dashboard",
-    layout: "/admin",
-    path: "main",
-    icon: <MdHome className="h-6 w-6" />,
-    component: <MainDashboard />,
-  },
-  {
-    name: "NFT Marketplace",
-    layout: "/admin",
-    path: "nft-marketplace",
-    icon: <MdOutlineShoppingCart className="h-6 w-6" />,
-    component: <NFTMarketplace />,
-    secondary: true,
-  },
-  {
-    name: "Data Tables",
-    layout: "/admin",
-    icon: <MdBarChart className="h-6 w-6" />,
-    path: "data-tables",
-    component: <DataTables />,
-  },
-  {
-    name: "Profile",
-    layout: "/admin",
-    path: "profile",
-    icon: <MdPerson className="h-6 w-6" />,
-    component: <Profile />,
-  },
+  // {
+  //   name: "Main Dashboard",
+  //   layout: "/admin",
+  //   path: "main",
+  //   icon: <MdHome className="h-6 w-6" />,
+  //   component: <MainDashboard />,
+  // },
+  // {
+  //   name: "NFT Marketplace",
+  //   layout: "/admin",
+  //   path: "nft-marketplace",
+  //   icon: <MdOutlineShoppingCart className="h-6 w-6" />,
+  //   component: <NFTMarketplace />,
+  //   secondary: true,
+  // },
+  // {
+  //   name: "Data Tables",
+  //   layout: "/admin",
+  //   icon: <MdBarChart className="h-6 w-6" />,
+  //   path: "data-tables",
+  //   component: <DataTables />,
+  // },
+  // {
+  //   name: "Profile",
+  //   layout: "/admin",
+  //   path: "profile",
+  //   icon: <MdPerson className="h-6 w-6" />,
+  //   component: <Profile />,
+  // },
 
 ];
 export default routes;
