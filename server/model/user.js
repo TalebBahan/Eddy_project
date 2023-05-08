@@ -39,8 +39,9 @@ const userSchema = new Schema({
         required: true
     },
     refreshToken: String,
-    state:  String,
+    state: String,
     googleRefreshToken: String,
+    googleAccessToken: String,
     googleState: String,
     googleId: String,
     googleEmail: String,
