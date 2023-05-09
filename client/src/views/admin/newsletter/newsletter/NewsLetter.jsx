@@ -1,7 +1,9 @@
 import React from 'react'
 import Table from './Table'
 import { useGetnewslettersQuery } from './newsletterApi'
-import SubscriberModel from './SuscribersModel'
+import search from 'features/serch'
+import Navbar from "components/navbar";
+import { useState } from 'react';
 const COLUMNS = [
     {
         Header: "Title",
@@ -15,6 +17,9 @@ const COLUMNS = [
 
 export default function NewsLetter() {
     const { data, isLoading, isError } = useGetnewslettersQuery()
+
+    const [searchTerm, setSearchTerm] = useState('');
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -22,12 +27,21 @@ export default function NewsLetter() {
     if (isError) {
         return <div>Error: {isError.message}</div>;
     }
+
+    const filteredData = search(data, COLUMNS, searchTerm);
+
+    function handleSearch(event) {
+        setSearchTerm(event.target.value);
+    }
     return (
         <div className='mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid '>
-        {/* <SubscriberModel /> */}
+            {/* <SubscriberModel /> */}
+            <Navbar
+                searchTerm={searchTerm} handleSearch={handleSearch}
+            />
             <Table
                 columnsData={COLUMNS}
-                tableData={data}
+                tableData={filteredData}
             />
         </div>
     )

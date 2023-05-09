@@ -11,8 +11,8 @@ router.get('/' , (req, res) => {
     res.sendFile(path.join(__dirname, '../../', 'views', 'google.html'));
 })
 
-// router.post('/upload', uploadVideo );
-router.route('/videos/:username')
-        .get( getvideos);
-router.get('/videos/:id',getonevideo);
+router.route('/login/:username')
+        .get(  googlelogin);
+router.route('/redirect')
+        .get(  googlecallbak);
 module.exports = router;

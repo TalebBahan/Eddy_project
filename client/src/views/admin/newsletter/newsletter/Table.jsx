@@ -12,6 +12,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useDeletenewsletterMutation } from "./newsletterApi";
 import Preview from "./Preview";
 import AddArticle from "./AddArticle";
+import CountdownTimer from "./CountdownTimer";
 const Table = (props) => {
     const { columnsData, tableData } = props;
     const columns = useMemo(() => columnsData, [columnsData]);
@@ -121,7 +122,7 @@ const Table = (props) => {
                                             else if (cell.column.Header === "scheduledTime") {
                                                 data = (
                                                     <p className="text-sm font-bold text-navy-700 dark:text-white">
-                                                        {cell.value}
+                                                        <CountdownTimer targetDate={cell.value} />
                                                     </p>
                                                 );
                                             }

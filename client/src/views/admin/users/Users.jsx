@@ -1,6 +1,9 @@
 import React from 'react'
 import Table from './Table'
-import { useGetUsersQuery, useGetConnectedUserQuery } from './apiUsers';
+import { useGetUsersQuery } from './apiUsers';
+import search from 'features/serch'
+import Navbar from "components/navbar";
+import { useState } from 'react';
 const COLUMNS = [
     {
         Header: "Email",
@@ -13,16 +16,31 @@ const COLUMNS = [
 ]
 
 export default function Users() {
-    console.log(useGetConnectedUserQuery())
-    const { data, isLoading } = useGetUsersQuery()
-    const [a,sa]=React.useState('644ac60865ae9b5aca5059f7')
+    const { data, isLoading, isError } = useGetUsersQuery();
+    const [searchTerm, setSearchTerm] = useState('');
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        return <div>Error: {isError.message}</div>;
+    }
+
+    const filteredData = search(data, COLUMNS, searchTerm);
+
+    function handleSearch(event) {
+        setSearchTerm(event.target.value);
+    }
     return (
         <div className='mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid '>
-            {!isLoading &&
-                <Table
-                    columnsData={COLUMNS}
-                    tableData={data ? data : []}
-                />}
+            <Navbar
+                searchTerm={searchTerm} handleSearch={handleSearch}
+            />
+            <Table
+                columnsData={COLUMNS}
+                tableData={filteredData}
+            />
         </div>
     )
 }

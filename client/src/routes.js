@@ -5,13 +5,13 @@ import MainDashboard from "views/admin/default";
 import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/tables";
-import Post from "views/admin/Post/Post";
 import Content from "views/admin/content/Content";
 // Auth Imports
 import Links from "views/admin/Link/Links";
 import Users from "views/admin/users/Users";
 import Subscriber from "views/admin/newsletter/subscriber/Subscriber";
 import NewsLetter from "views/admin/newsletter/newsletter/NewsLetter";
+import Youtube from "views/admin/youtube/Youtube";
 // Icon Imports
 import {
   MdHome,
@@ -28,13 +28,6 @@ import {BsPersonCheck} from "react-icons/bs";
 
 
 const routes = [
-  {
-    name: "Posts",
-    layout: "/admin",
-    path: "default",
-    icon: <BsFileEarmarkPostFill className="h-6 w-6" />,
-    component: <Post />,
-  },
   {
     name: "Links",
     layout: "/admin",
@@ -69,6 +62,13 @@ const routes = [
     path: "newsletter",
     icon: <BiNews className="h-6 w-6" />,
     component: <NewsLetter />,
+  },
+    {
+      name: "Youtube",
+      layout: "/admin",
+      path: "youtube",
+      icon: <BiNews className="h-6 w-6" />,
+      component: <Youtube />,
   },
   // {
   //   name: "Main Dashboard",

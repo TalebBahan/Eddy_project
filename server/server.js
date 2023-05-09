@@ -44,10 +44,11 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
-app.use('/api/google', require('./routes/api/google'));
+app.use('/google', require('./routes/api/googlelogin'))
 // app.use('/api/linkedin', require('./routes/api/linkedin'));
 
 app.use(verifyJWT);
+app.use('/api/google', require('./routes/api/google'));
 app.use('/api/users', require('./routes/api/user'));
 app.use('/api/team', require('./routes/api/team'));
 app.use('/api/link', require('./routes/api/link'));

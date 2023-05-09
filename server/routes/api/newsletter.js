@@ -16,9 +16,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-console.log('====================================');
-console.log('j');
-console.log('====================================');
 router.post('/', upload.single('image'), newsletterController.createNewsletter);
 router.post('/send', sendEmail.sendNewsletter);
 router.post("/:id", upload.single('image'), newsletterController.createArticle);
