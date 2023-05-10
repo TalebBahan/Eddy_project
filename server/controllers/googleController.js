@@ -1,11 +1,12 @@
 // google controller
 const { OAuth2Client } = require("google-auth-library");
 const fs = require("fs");
-const user = require("../model/user");
+const token = require("../model/Token");
 const fetch = require("node-fetch");
 const { google } = require("googleapis");
 const { kill } = require("process");
 const { log } = require("console");
+const { json } = require("express");
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -19,6 +20,11 @@ const client = new OAuth2Client(
   GOOGLE_REDIRECT_URI
 );
 
+token.findOne({_id:'645a3319b8725a02ee25de2c'}).then((token)=>{
+  if(token.json){
+    client.setCredentials(JSON.parse(token.json))
+  }
+})
 // create a login route that redirects the user to Google sign-in page
 async function googlelogin(req, res) {
   console.log("got in")
@@ -26,15 +32,15 @@ async function googlelogin(req, res) {
   state =
     Math.random().toString(36).substring(2, 15) +
     Math.random().toString(36).substring(2, 15);
-  user.findOne({ username: req.params.username }).then((user) => {
-    if (user) {
-      console.log("user already exists");
-      user.googleState = state;
-      user.save();
-      console.log("hi: ", user)
+    token.findOne({_id:'645a3319b8725a02ee25de2c'}).then((token) => {
+    if (token) {
+      console.log(token);
+      token.googleState = state;
+      token.save();
+      console.log("hi: ", token)
     } else {
-      console.log("user does not exist");
-      res.status(400).send("unauthorized");
+      console.log("token does not exist");
+      // res.status(400).send("unauthorized");
     }
   });
   // console.log(user.find());
@@ -66,12 +72,14 @@ async function googlecallbak(req, res) {
 
   try {
     var data = await client.getToken(code);
+    
     client.setCredentials(data.tokens);
-    user.findOne({ googleState: state }).then((user) => {
-      if (user) {
-        user.googleRefreshToken = data.tokens.refresh_token;
-        user.googleAccessToken = data.tokens.access_token;
-        user.save();
+    token.findOne({ googleState: state }).then((token) => {
+      if (token) {
+        token.googleRefreshToken = data.tokens.refresh_token;
+        token.googleAccessToken = data.tokens.access_token;
+        token.json=JSON.stringify(data.tokens)
+        token.save();
         return res.redirect("http://localhost:3000/admin/youtube");
       } else {
         console.log("user does not exist");
@@ -84,7 +92,7 @@ async function googlecallbak(req, res) {
     res.status(500).send("Failed to log in");
   }
 }
-
+const VIDEO_FILE_PATH="C:\Users\hp\Pictures\Camera Roll\20210825_170249.mp4";
 const uploadVideo = (req, res) => {
   const service = google.youtube({
     version: "v3",
@@ -97,12 +105,12 @@ const uploadVideo = (req, res) => {
       resource: {
         // Video title and description
         snippet: {
-          title: "My title",
-          description: "My description",
+          title: "My 2nd",
+          description: "My 2nd description",
         },
         // I set to private for tests
         status: {
-          privacyStatus: "private",
+          privacyStatus: "public",
         },
       },
 
@@ -126,7 +134,7 @@ const getvideos = async (req, res) => {
 
   let access_token;
   let refresh_token;
-  const i = await user.findOne({ username: req.params.username }); // assuming you're using ObjectId for user lookup
+  const i = await token.findOne({_id:'645a3319b8725a02ee25de2c'}); // assuming you're using ObjectId for user lookup
   if (!i.googleAccessToken) {
     res.status(403).send("login to your google account first");
   }
@@ -148,6 +156,7 @@ const getvideos = async (req, res) => {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log('dddd',data);
         return fetch(
           `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${data.items[0].contentDetails.relatedPlaylists.uploads}&key=${GOOGLE_API_KEY}`
         );
@@ -177,6 +186,53 @@ async function getonevideo(req, res) {
     res.status(500).send("Failed to get video");
   }
 }
+const updateVideo = async (req, res) => {
+  const videoId = req.params.id;
+  const newTitle = req.body.title;
+  const newDescription = req.body.description;
+
+  const service = google.youtube({
+    version: "v3",
+    auth: client,
+  });
+
+  try {
+    const response = await service.videos.update({
+      part: "snippet",
+      resource: {
+        id: videoId,
+        snippet: {
+          title: newTitle,
+          description: newDescription,
+        },
+      },
+    });
+    res.status(200).send(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to update video");
+  }
+};
+const deleteVideo = async (req, res) => {
+  const videoId = req.params.id;
+  console.log("id : ",videoId);
+
+  const service = google.youtube({
+    version: "v3",
+    auth: client,
+  });
+
+  try {
+    const response = await service.videos.delete({
+      id: videoId,
+    });
+    res.status(200).send("Video deleted");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to delete video");
+  }
+};
+
 
 module.exports = {
   googlelogin,
@@ -184,4 +240,6 @@ module.exports = {
   uploadVideo,
   getvideos,
   getonevideo,
+  deleteVideo,
+  updateVideo
 };
