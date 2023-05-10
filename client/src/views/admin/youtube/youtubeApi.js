@@ -24,7 +24,7 @@ export const googleApiSlice = apiSlice.injectEndpoints({
     }),
     updateVideo: builder.mutation({
       query: (data) => ({
-        url: `/api/google/videos/${data.id}`,
+        url: `/api/google/videos/${data.videoId}`,
         method: "PUT",
         body: data,
       }),

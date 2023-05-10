@@ -1,0 +1,94 @@
+.social-area {
+  background: url("../../assets/social/Web.png"),
+    url("../../assets/hero/HeaderBG.jpg");
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain, cover;
+}
+
+.ltnewsheader-child {
+  background: #fff;
+  border-top: 5px solid #fff;
+}
+
+.social-btn {
+  display: flex;
+  font-size: 35px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40px;
+  border-radius: 5px;
+  outline: none;
+  background: none;
+  color: #fff;
+  width: 55px;
+  height: 55px;
+  padding: 0px;
+  border: 1px solid #fff;
+}
+
+.social-btn:hover {
+  background: #fff;
+}
+
+#insta-btn:hover {
+  color: #9426ba;
+}
+
+#fb-btn:hover {
+  color: #3b5998;
+}
+
+#linkedin-btn:hover {
+  color: #0072b1;
+}
+
+#twitter-btn:hover {
+  color: #1da1f2;
+}
+
+.ltnewscontainer .slick-dots {
+  bottom: -30px !important;
+}
+
+.social-slider-wrapper .slick-slider {
+  max-height: 700px;
+}
+
+.social-slider-wrapper {
+  display: "block";
+  max-width: 1000px;
+  height: 600px;
+  width: "95%";
+}
+@media screen and (max-width: 760px) {
+  .catButton {
+    width: 80%;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    /* justify-content: space-between; */
+    justify-content: center;
+  }
+
+  .social-btn {
+    padding: 0;
+    margin: 0px !important;
+    font-size: 25px;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+  }
+  .latest-news {
+    padding: 5px;
+    padding-bottom: 100px;
+  }
+
+  .social-slider-wrapper {
+    width: 300px;
+    height: 450px;
+  }
+
+  .social-slider-wrapper .slick-slider .slick-dots {
+    bottom: -25px !important;
+  }
+}

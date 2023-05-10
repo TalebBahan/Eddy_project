@@ -1,0 +1,80 @@
+:root {
+  /* fonts */
+  --font-roboto: "Roboto Condensed", sans-serif;
+  --font-gilroy: Gilroy;
+  --font-sitara: Sitara;
+
+  /* font sizes */
+  --font-size-2xs: 0.75rem;
+  --font-size-xs: 0.81rem;
+  --font-size-sm: 0.88rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.13rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.31rem;
+  --font-size-3xl: 1.5rem;
+  --font-size-4xl: 3rem;
+  --font-size-5xl: 3.63rem;
+  --font-size-6xl: 4.5rem;
+
+  /* Colors */
+  --instagram-light-white: #fff;
+  --color-silver: #b6b6b6;
+  --instagram-light-black: #000;
+  --color-indigo: #2e208e;
+  --color-darkorchid: #9426ba;
+  --color-slateblue: rgba(77, 53, 163, 0.6);
+  --color-goldenrod: #e6c34b;
+  --color-dimgray: #5e5e5e;
+  --color-purple: #8b399f;
+  --color-gainsboro: #dbdbdb;
+  --instagram-light-blue: #1ea1f7;
+  --color-gray-100: #fbfbfb;
+  --color-gray-200: #282828;
+  --color-gray-300: rgba(255, 255, 255, 0.8);
+  --color-midnightblue: #2e208b;
+
+  /* Gaps */
+  --gap-7xs: 0.13rem;
+  --gap-6xs: 0.63rem;
+  --gap-5xs: 0.75rem;
+  --gap-4xs: 0.81rem;
+  --gap-3xs: 0.94rem;
+  --gap-2xs: 1rem;
+  --gap-xs: 1.19rem;
+  --gap-sm: 1.44rem;
+  --gap-md: 1.56rem;
+  --gap-lg: 1.69rem;
+  --gap-xl: 1.88rem;
+  --gap-2xl: 2.19rem;
+  --gap-3xl: 3rem;
+  --gap-4xl: 3.13rem;
+  --gap-5xl: 3.38rem;
+  --gap-6xl: 8.56rem;
+
+  /* Paddings */
+  --padding-8xs: 0.06rem;
+  --padding-7xs: 0.63rem;
+  --padding-6xs: 0.75rem;
+  --padding-5xs: 1rem;
+  --padding-4xs: 1.25rem;
+  --padding-3xs: 1.5rem;
+  --padding-2xs: 1.56rem;
+  --padding-xs: 1.88rem;
+  --padding-sm: 1.94rem;
+  --padding-md: 2.5rem;
+  --padding-lg: 2.75rem;
+  --padding-xl: 2.94rem;
+  --padding-2xl: 3.31rem;
+  --padding-3xl: 3.75rem;
+  --padding-4xl: 3.81rem;
+  --padding-5xl: 5.31rem;
+  --padding-6xl: 6.06rem;
+  --padding-7xl: 6.25rem;
+  --padding-8xl: 7.5rem;
+
+  /* border radiuses */
+  --br-sm: 6px;
+  --br-md: 10px;
+  --br-lg: 25px;
+}

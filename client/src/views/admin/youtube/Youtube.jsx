@@ -81,10 +81,10 @@ const extractVideoData = (data) => {
 
 const Youtube = () => {
   const user = useSelector(selectCurrentUser);
-  const { data, status } = useGetVideosQuery(user);
+  const { data, status,isLoading } = useGetVideosQuery(user);
   const [searchTerm, setSearchTerm] = useState('');
 
-  if (status === 'loading') {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -95,6 +95,7 @@ const Youtube = () => {
       </div>
     )
   };
+  console.log(data);
   const filteredData = search(extractVideoData(data), COLUMNS, searchTerm);
   function handleSearch(event) {
     setSearchTerm(event.target.value);
