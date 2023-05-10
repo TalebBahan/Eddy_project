@@ -1,6 +1,6 @@
 import Navbar from "../Components/Navbar/index";
 import Hero from "../Components/Banner/index";
-import Vision from "../Components/Vision/Vision";
+import About from "../Components/Vision/About";
 import Achievements from "../Components/Achievements";
 import Lectures from "../Components/Lecture/Lectures";
 import SocialMedia from "../Components/Social/SocialMedia";
@@ -13,7 +13,7 @@ const Home = () => {
     <>
       <Navbar />
       <Hero />
-      <Vision />
+      <About />
       <Achievements />
       <Lectures />
       <SocialMedia />

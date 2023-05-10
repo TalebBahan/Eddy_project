@@ -5,29 +5,19 @@ import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
 
 const News = () => {
-  const latestNewsObj = [
-    {
-      img: "Images/Ltnews1@2x.jpg",
-      title: "Networking",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsumprinting atypesetting industry.",
-      buttontext: "Read More",
-    },
-    {
-      img: "Images/LTnews2@2x.jpg",
-      title: "Security",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsumprinting atypesetting industry.",
-      buttontext: "Read More",
-    },
-    {
-      img: "Images/LTnews3@2x.jpg",
-      title: "Robotics",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsumprinting atypesetting industry.",
-      buttontext: "Read More",
-    },
-  ];
+  const [latestNewsObj,setLatestNewsObj] = React.useState([])
+  
+  React.useEffect(() => {
+    fetch("http://localhost:3500/api/content")
+      .then((response) => response.json())
+      .then((data) => setLatestNewsObj(data))
+      .catch((error) => console.error(error));
+  }, []);
+  if (!latestNewsObj) {
+    return <div>Loading...</div>;
+  }
+  const filterbytype = () => latestNewsObj.filter(item => item.type === 'media');
+
   return (
     <>
       <motion.div
@@ -59,18 +49,18 @@ const News = () => {
           >
             <SplideSlide> */}
           <div className="ltnewscontainer">
-            {latestNewsObj.map((item, index) => {
+            {filterbytype().map((item, index) => {
               return (
                 <>
                   <div className="ltnews1" key={index}>
-                    <img className="ltnews1-child" alt="" src={item.img} />
+                    <img className="ltnews1-child" alt="" src={`http://localhost:3500/images/${item.image}`} />
                     <div className="frame-group">
                       <div className="title-parent">
-                        <b className="title">{item.title}</b>
-                        <div className="text3">{item.description}</div>
+                        <b className="title">{item.h_text}</b>
+                        <div className="text3">{item.s_text}</div>
                       </div>
                       <button className="read-more-wrapper">
-                        <b className="read-more">{item.buttontext}</b>
+                        <a className="read-more" href={item.link}>Read More</a>
                       </button>
                     </div>
                   </div>
