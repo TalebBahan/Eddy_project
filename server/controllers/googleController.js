@@ -190,6 +190,7 @@ const updateVideo = async (req, res) => {
   const videoId = req.params.id;
   const newTitle = req.body.title;
   const newDescription = req.body.description;
+  const newCategoryId = req.body.categoryId;
 
   const service = google.youtube({
     version: "v3",
@@ -204,6 +205,7 @@ const updateVideo = async (req, res) => {
         snippet: {
           title: newTitle,
           description: newDescription,
+          categoryId: newCategoryId
         },
       },
     });
