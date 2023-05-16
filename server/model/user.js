@@ -38,22 +38,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    refreshToken: String,
-    state: String,
-    googleRefreshToken: String,
-    googleAccessToken: String,
-    googleState: String,
-    googleId: String,
-    googleEmail: String,
-    googleName: String,
-    googlePicture: String,
-    linkedinRefreshToken: String,
-    linkedinAccessToken: String,
-    linkedinState: String,
-    linkedinId: String,
-    linkedinEmail: String,
-    linkedinName: String,
-    linkedinPicture: String,
 
 });
 

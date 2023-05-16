@@ -1,11 +1,12 @@
 const User = require('../model/user');
+const ROLES_LIST = require('../config/roles_list')
 
 const getAllUsers = async (req, res) => {
     try {
       const users = await User.find().lean();
-      const filteredUsers = users.filter((user) => user._id.toString() !== req.user._id.toString());
-      if (!filteredUsers.length) return res.status(204).json({ message: 'No users found' });
-      res.json(filteredUsers);
+    //   const filteredUsers = users.filter((user) => user._id.toString() !== req.user._id.toString());
+      if (!users.length) return res.status(204).json({ message: 'No users found' });
+      res.json(users);
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Server Error');
@@ -60,11 +61,19 @@ const getConnectedUser = async (req, res) => {
 const updateUserRoles = async (req, res) => {
     if (!req?.params?.id) return res.status(400).json({ "message": 'User ID required' });
     if (!req?.body?.roles) return res.status(400).json({ "message": 'Roles array required' });
+    console.log(req.params.id);
     const user = await User.findOne({ _id: req.params.id }).exec();
     if (!user) {
         return res.status(204).json({ 'message': `User ID ${req.params.id} not found` });
     }
-    user.roles = req.body.roles;
+
+    console.log( req.body.roles);
+    Object.keys(req.body.roles).forEach( (key)=>{
+        console.log(ROLES_LIST[key])
+        user.roles[key] = ROLES_LIST[key] 
+    })
+    console.log(user.roles)
+
     const updatedUser = await user.save();
     res.json(updatedUser);
 };

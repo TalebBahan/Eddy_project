@@ -5,11 +5,15 @@ import React, { useState } from "react";
 import { useGetUserByIdQuery, useUpdateUserRolesMutation } from "./apiUsers";
 import { Fragment } from "react";
 import {
+  Button,
   Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
 } from "@material-tailwind/react";
-export default function RolesList({ _id,username,roles:rolesL, open, handleOpen }) {
-  const [roles, setRoles] = useState({...rolesL});
-
+export default function RolesList({ _id, username, roles: rolesL, open, handleOpen }) {
+  const [roles, setRoles] = useState({ ...rolesL });
+  console.log(_id);
   const [updateUserRoles] = useUpdateUserRolesMutation();
 
   const handleRoleChange = (roleName) => {
@@ -28,10 +32,18 @@ export default function RolesList({ _id,username,roles:rolesL, open, handleOpen 
     handleOpen();
   };
   const roleNames = [
-    { key: "admin", label: "Admin" },
-    { key: "postUser", label: "Post User" },
-    { key: "postEditor", label: "Post Editor" },
-    { key: "contentEditor", label: "Content Editor" },
+    { key: "Admin", label: "Admin" },
+    { key: "Editor", label: "Editor" },
+    { key: "User", label: "User" },
+    { key: "postAdmin", label: "postAdmin" },
+    { key: "postEditor", label: "postEditor" },
+    { key: "postUser", label: "postUser" },
+    { key: "linkAdmin", label: "linkAdmin" },
+    { key: "linkEditor", label: "linkEditor" },
+    { key: "linkUser", label: "linkUser" },
+    { key: "contentAdmin", label: "contentAdmin" },
+    { key: "contentEditor", label: "contentEditor" },
+    { key: "contentUser", label: "contentUser" },
   ];
 
 
@@ -43,7 +55,6 @@ export default function RolesList({ _id,username,roles:rolesL, open, handleOpen 
             <h4 className="text-xl font-bold text-navy-700 dark:text-white">
               {username} {' '}Permissions
             </h4>
-            <CardMenu />
           </div>
           <div className="flex flex-col">
             {roleNames.map((role) => (
@@ -63,8 +74,19 @@ export default function RolesList({ _id,username,roles:rolesL, open, handleOpen 
             ))}
 
             {/* other switches here... */}
-
-            <button className="mt-4 bg-navy-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-navy-600 transition duration-300 ease-in-out" onClick={handleSave}>Save Roles</button>
+            <DialogFooter>
+              <Button
+                variant="text"
+                color="red"
+                onClick={handleOpen}
+                class="mr-1"
+              >
+                <span>Cancel</span>
+              </Button>
+              <Button variant="text" color="green" onClick={handleSave}>
+                <span>Confirm</span>
+              </Button>
+            </DialogFooter>
           </div>
         </Card>
       </Dialog>

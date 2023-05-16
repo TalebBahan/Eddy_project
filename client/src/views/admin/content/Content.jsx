@@ -6,6 +6,8 @@ import { useGetContentQuery } from './apiContent'
 import search from 'features/serch'
 import Navbar from "components/navbar";
 import { useState } from 'react';
+import Loading from 'components/Loading';
+import Unauthorized from 'components/Unauthorized'
 const COLUMNS = [
     {
         Header: "Header Text",
@@ -21,16 +23,16 @@ const COLUMNS = [
     },
 ]
 export default function Content() {
-    const { data, isLoading, isError } = useGetContentQuery()
+    const { data, isLoading, isError,status } = useGetContentQuery()
 
     const [searchTerm, setSearchTerm] = useState('');
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     if (isError) {
-        return <div>Error: {isError.message}</div>;
+        return <Unauthorized />;
     }
 
     const filteredData = search(data, COLUMNS, searchTerm);

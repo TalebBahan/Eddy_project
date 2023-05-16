@@ -45,8 +45,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: ['Users']
         }),
         updateUserRoles: builder.mutation({
-            query: ({ id, roles }) => ({
-                url: `/api/users/${id}`,
+            query: ({ _id, roles }) => ({
+                url: `/api/users/${_id}`,
                 method: 'PUT',
                 body: { roles }
             }),

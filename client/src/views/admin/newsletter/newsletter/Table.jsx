@@ -10,7 +10,7 @@ import AddEditNewsletter from "./AddEditNewsLetter";
 import { useMemo } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useDeletenewsletterMutation } from "./newsletterApi";
-import Preview from "./Preview";
+import Articles from "./Articles";
 import AddArticle from "./AddArticle";
 import CountdownTimer from "./CountdownTimer";
 const Table = (props) => {
@@ -21,7 +21,7 @@ const Table = (props) => {
 
     const [newsId,setNewsId]=React.useState('')
     const [news,setNews]=React.useState('')
-    const [preview,setPreview]=React.useState('')
+    const [Ar,setAr]=React.useState('')
     const [open, setOpen] = React.useState(false)
     const [Articleopen, setArticleOpen] = React.useState(false)
     
@@ -29,9 +29,9 @@ const Table = (props) => {
         setNewsId(()=>id);
         setArticleOpen(true)
     }
-    function handlePreview(data){
+    function handleAr(data){
         setNews(()=>data);
-        setPreview(true)
+        setAr(true)
     }
 
     const tableInstance = useTable(
@@ -58,7 +58,7 @@ const Table = (props) => {
         <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
             <AddEditNewsletter open={open} handleOpen={() => setOpen(!open)} />
             <AddArticle open={Articleopen} handleOpen={() => setArticleOpen(!Articleopen)} id={newsId} />
-            <Preview open={preview} handleOpen={() => setPreview(!preview)} news={news} />
+            <Articles open={Ar} handleOpen={() => setAr(!Ar)} news={news} />
             <div class="relative flex items-center justify-between">
                 <div class="text-xl font-bold text-navy-700 dark:text-white">
                     All NewsLetters
@@ -152,11 +152,10 @@ const Table = (props) => {
                                                     Add Article
                                                 </button>
                                                 <button
-                                                    onClick={() => handlePreview(row.original)}
+                                                    onClick={() => handleAr(row.original)}
                                                     className="text-sm font-bold text-gray-500 dark:text-white"
-                                                    disabled
                                                 >
-                                                    Preview
+                                                    Articles
                                                 </button>
                                             </div>
                                         </td>

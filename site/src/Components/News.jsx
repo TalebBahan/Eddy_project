@@ -4,18 +4,9 @@ import { motion } from "framer-motion";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
 
-const News = () => {
-  const [latestNewsObj,setLatestNewsObj] = React.useState([])
-  
-  React.useEffect(() => {
-    fetch("http://localhost:3500/api/content")
-      .then((response) => response.json())
-      .then((data) => setLatestNewsObj(data))
-      .catch((error) => console.error(error));
-  }, []);
-  if (!latestNewsObj) {
-    return <div>Loading...</div>;
-  }
+const News = ({latestNewsObj}) => {
+
+
   const filterbytype = () => latestNewsObj.filter(item => item.type === 'media');
 
   return (

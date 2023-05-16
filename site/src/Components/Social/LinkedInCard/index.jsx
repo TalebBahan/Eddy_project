@@ -36,14 +36,14 @@ import CommentGroup from "assets/social/linkedin/Comment group.png";
 import ShareGroup from "assets/social/linkedin/Share group.png";
 import SendGroup from "assets/social/linkedin/Send group.png";
 
-const LinkedInCard = () => {
+const LinkedInCard = ({ title, description, publishedAt, videoId }) => {
   return (
     <Wrapper>
       <TopSection>
         <TopLeftArea>
           <Profile src={ProfileImg} />
           <AuthorArea>
-            <Name>Eddy Abbound</Name>
+            <Name>{title}</Name>
             <TimeWrapper>
               <Time>20h</Time>
               <Earth src={EarthImg} />
@@ -56,19 +56,20 @@ const LinkedInCard = () => {
       </TopSection>
       <TextArea>
         <Text>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout.
+          {description.substring(0, 100)}
         </Text>
-        <HashTag>#hastag #hastag #hashtag</HashTag>
+        <HashTag>{publishedAt}</HashTag>
       </TextArea>
-      <PostImg width="100%" src={PostImage} />
+             <iframe
+style={{
+  height: 'auto',
+  weight: '100%'
+}}
+            title='Youtube player'
+            sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
+            src={`https://youtube.com/embed/${videoId}?autoplay=0`}
+          />
       <IconArea>
-        <Icon src={LikeImg} />
-        <Icon src={Celebrate} />
-        <Icon src={Support} />
-        <Icon src={Love} />
-        <Icon src={Insightfull} />
-        <Icon src={Curious} />
         <div
           style={{
             height: "100%",
@@ -77,7 +78,7 @@ const LinkedInCard = () => {
             alignItems: "center",
           }}
         >
-          <SmallText>8</SmallText>
+          {/* <SmallText>8</SmallText> */}
         </div>
         <div
           style={{
@@ -87,23 +88,10 @@ const LinkedInCard = () => {
             alignItems: "center",
           }}
         >
-          <SmallText>4 comments</SmallText>
+          {/* <SmallText>4 comments</SmallText> */}
         </div>
       </IconArea>
-      <ButtonArea>
-        <Button>
-          <ButtonIcon src={LikeGroup} />
-        </Button>
-        <Button>
-          <ButtonIcon src={CommentGroup} />
-        </Button>
-        <Button>
-          <ButtonIcon src={ShareGroup} />
-        </Button>
-        <Button>
-          <ButtonIcon src={SendGroup} />
-        </Button>
-      </ButtonArea>
+
     </Wrapper>
   );
 };

@@ -15,8 +15,11 @@ import Post1 from "../../assets/social/post1.jpg";
 import Post2 from "../../assets/social/post2.jpg";
 import Post3 from "../../assets/social/post3.jpg";
 import Slider from "react-slick";
-
-const SocialMedia = () => {
+import YoutubeCard from "./YoutubeCard";
+const SocialMedia = ({ youtube }) => {
+console.log('====================================');
+console.log(youtube);
+console.log('====================================');
   const socialmediaObj = [
     {
       img: Post1,
@@ -116,14 +119,28 @@ const SocialMedia = () => {
           </div>
           <div className="social-slider-wrapper" style={{}}>
             <Slider {...settings}>
-              <LinkedInCard />
-              <LinkedInCard />
-              <LinkedInCard />
-              <LinkedInCard />
-              <LinkedInCard />
-              <LinkedInCard />
+              {youtube?.map((card, index) => (
+                <LinkedInCard
+                  key={index}
+                  title={card.title}
+                  description={card.description}
+                  publishedAt={card.publishedAt}
+                  videoId={card.videoId}
+                />
+              ))}
+              {youtube?.map((card, index) => (
+                <LinkedInCard
+                  key={index}
+                  title={card.title}
+                  description={card.description}
+                  publishedAt={card.publishedAt}
+                  videoId={card.videoId}
+                />
+              ))}
             </Slider>
+            
           </div>
+
         </section>
       </motion.div>
     </>

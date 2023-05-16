@@ -4,6 +4,8 @@ import { useGetUsersQuery } from './apiUsers';
 import search from 'features/serch'
 import Navbar from "components/navbar";
 import { useState } from 'react';
+import Loading from 'components/Loading';
+import Unauthorized from 'components/Unauthorized'
 const COLUMNS = [
     {
         Header: "Email",
@@ -20,11 +22,11 @@ export default function Users() {
     const [searchTerm, setSearchTerm] = useState('');
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     if (isError) {
-        return <div>Error: {isError.message}</div>;
+        return <Unauthorized />;
     }
 
     const filteredData = search(data, COLUMNS, searchTerm);

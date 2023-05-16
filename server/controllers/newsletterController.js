@@ -1,13 +1,7 @@
 const Newsletter = require('../model/newsletter');
 
-// Create a new newsletter
-
-
-
-
 
 exports.createArticle = async (req, res) => {
-  
   try {
     const { id } = req.params;
     const  { title, body, readMoreLink } = req.body;
@@ -22,7 +16,30 @@ exports.createArticle = async (req, res) => {
   }
 };
 
+exports.deleteArticle = async (req, res) => {
+  const { newsletterId, articleId } = req.params;
 
+  try {
+    const newsletter = await Newsletter.findById(newsletterId);
+    if (!newsletter) {
+      return res.status(404).json({ message: 'Newsletter not found' });
+    }
+    const articleIndex = newsletter.articles.findIndex(article => article._id === articleId);
+
+    if (articleIndex === -1) {
+      return res.status(404).json({ message: 'Article not found' });
+    }
+
+    newsletter.articles.splice(articleIndex, 1);
+
+    await newsletter.save();
+
+    return res.json({ message: 'Article deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'An error occurred while deleting the article' });
+  }
+}
 exports.createNewsletter = async (req, res) => {
   try {
     const newsletter = new Newsletter({
@@ -90,9 +107,7 @@ exports.updateNewsletterById = async (req, res) => {
 exports.deleteNewsletterById = async (req, res) => {
   try {
     const newsletter = await Newsletter.findById(req.params.id);
-    console.log('====================================');
-    console.log(00);
-    console.log('====================================');
+
     if (!newsletter) {
       return res.status(404).json({ error: 'Newsletter not found' });
     }

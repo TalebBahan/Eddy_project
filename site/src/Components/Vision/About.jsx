@@ -7,23 +7,7 @@ import LeftShadow from "assets/vision/layout/left-shadow.png";
 import RigthtShadow from "assets/vision/layout/right shadow.png";
 import RigthCircle from "assets/vision/layout/right-circle.png";
 
-const About = () => {
-  const [visionData, setVisionData] = useState(null);
-  const [images, setImages] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:3500/api/content")
-      .then((response) => response.json())
-      .then((data) => setVisionData(data))
-      .catch((error) => console.error(error));
-  }, []);
-  useEffect(() => {
-    fetch("http://localhost:3500/api/content/imageAbout")
-      .then((response) => response.json())
-      .then((data) => setImages(data))
-      .catch((error) => console.error(error));
-  }, []);
-
+const About = ({visionData,images}) => {
   const settings = {
     dots: true,
     infinite: true,

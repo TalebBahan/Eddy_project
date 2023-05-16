@@ -8,18 +8,33 @@ import search from 'features/serch'
 import { useState } from 'react';
 import Navbar from 'components/navbar';
 import Edit from './Edit';
+import Loading from 'components/Loading';
+import { useAddVideoMutation, useGetReVideosQuery,useRemoveVideoMutation } from './youtubeApi';
 const COLUMNS = [{ Header: "Title", accessor: "title", }, { Header: "Description", accessor: "description", }, { Header: "Published At", accessor: "publishedAt", }, { Header: "Video ID", accessor: "videoId", },];
-
-const VideoCard = ({ video }) => {
+const VideoCard = ({ video,re }) => {
   const [deleteVideo] = useDeleteVideoMutation();
+  const [remove] = useRemoveVideoMutation();
+  console.log('====================================');
+  console.log("data",re);
+  console.log('====================================');
+  const [add] = useAddVideoMutation();
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this video?')) {
       deleteVideo(id);
     }
   };
+  
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(!open);
   const { title, description, publishedAt, videoId } = video;
+
+    const foundObject = re.find((object) => object.videoId === videoId);
+    const s =  foundObject ? foundObject._id : false;
+
+  
+  console.log('====================================');
+  console.log(s);
+  console.log('====================================');
   return (
     <Card extra='flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white'>
       <Edit open={open} handleOpen={handleOpen} {...video} />
@@ -34,6 +49,14 @@ const VideoCard = ({ video }) => {
           <button onClick={() => handleDelete(videoId)} className=''>
             <AiFillDelete color='rgb(234, 62, 42)' />
           </button>
+          {!s?
+          <button onClick={() => add(video)} className='rounded-[10px] px-1 bg-green-900 text-white transition'>
+            Add To Website
+          </button>:
+          <button onClick={() => remove(s)} className='rounded-[10px] px-1 bg-green-900 text-white transition'>
+            Remove From Website
+          </button>
+          }
         </div>
 
         <div className=''>
@@ -58,11 +81,11 @@ const VideoCard = ({ video }) => {
   );
 };
 
-const VideoList = ({ data }) => {
+const VideoList = ({ data,re }) => {
   return (
     <div className='mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6'>
       {data.map((video) => (
-        <VideoCard key={video.videoId} video={video} />
+        <VideoCard key={video.videoId} video={video} re={re} />
       ))}
     </div>
   );
@@ -81,11 +104,12 @@ const extractVideoData = (data) => {
 
 const Youtube = () => {
   const user = useSelector(selectCurrentUser);
-  const { data, status,isLoading } = useGetVideosQuery(user);
+  const { data, status, isLoading } = useGetVideosQuery(user);
+  const { data:re, status:reStatus, isLoading:reisLoading } = useGetReVideosQuery(user);
   const [searchTerm, setSearchTerm] = useState('');
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (isLoading || reisLoading) {
+    return <Loading />
   }
 
   if (status === 'rejected') {
@@ -95,7 +119,6 @@ const Youtube = () => {
       </div>
     )
   };
-  console.log(data);
   const filteredData = search(extractVideoData(data), COLUMNS, searchTerm);
   function handleSearch(event) {
     setSearchTerm(event.target.value);
@@ -103,7 +126,7 @@ const Youtube = () => {
   return <div className="mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid ">
 
     <Navbar searchTerm={searchTerm} handleSearch={handleSearch} />
-    <VideoList data={filteredData} />
+    <VideoList data={filteredData} re={re} />
   </div>
 }
 

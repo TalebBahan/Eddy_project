@@ -41,6 +41,13 @@ export const newsletterApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['newsletter']
         }),
+        deleteArticle: builder.mutation({
+            query: ({newsletterId,articleId}) => ({
+                url: `/api/newsletter/newsletters/${newsletterId}/articles/${articleId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['newsletter']
+        }),
     }),
 });
 
@@ -50,4 +57,5 @@ export const {
     useAddArticleMutation,
     useUpdatenewsletterMutation,
     useDeletenewsletterMutation,
+    useDeleteArticleMutation,
 } = newsletterApi;
