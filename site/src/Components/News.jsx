@@ -44,7 +44,7 @@ const News = ({latestNewsObj}) => {
               return (
                 <>
                   <div className="ltnews1" key={index}>
-                    <img className="ltnews1-child" alt="" src={`http://localhost:3500/images/${item.image}`} />
+                    <img className="ltnews1-child" alt="" src={`${process.env.REACT_APP_API}/images/${item.image}`} />
                     <div className="frame-group">
                       <div className="title-parent">
                         <b className="title">{item.h_text}</b>

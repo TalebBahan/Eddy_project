@@ -52,7 +52,7 @@ const About = ({visionData,images}) => {
             <div className="slider-wrapper-visition">
               <Slider style={{ width: "100%" }} {...settings}>
 
-                {images.map(image => <img className="visionimgcontainer-icon" alt="" src={`http://localhost:3500/images/${image.image}`} />)}
+                {images.map(image => <img className="visionimgcontainer-icon" alt="" src={`${process.env.REACT_APP_API}/images/${image.image}`} />)}
               </Slider>
             </div>
           </div>

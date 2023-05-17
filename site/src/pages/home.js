@@ -14,7 +14,7 @@ const Home = () => {
   const [data, setData] = useState(null);
 
   React.useEffect(() => {
-    fetch("http://localhost:3500/api/data/")
+    fetch(`${process.env.REACT_APP_API}/api/data/`)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.error(error));

@@ -8,20 +8,16 @@ const subscriberSchema = new Schema({
   },
   firstName: {
     type: String,
-    required: true
   },
   lastName: {
     type: String,
-    required: true
   },
   age: {
     type: Number,
-    required: true
   },
   interests: [String],
   location: {
     type: String,
-    required: true
   },
   createdAt: {
     type: Date,
