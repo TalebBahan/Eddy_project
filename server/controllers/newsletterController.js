@@ -17,16 +17,26 @@ exports.createArticle = async (req, res) => {
 };
 
 exports.deleteArticle = async (req, res) => {
-  const { newsletterId, articleId } = req.params;
+
+  const { newsletterId, articleId } = req.body;
+  console.log('====================================');
+  console.log('hjk',{ newsletterId, articleId });
+  console.log('====================================');
 
   try {
     const newsletter = await Newsletter.findById(newsletterId);
     if (!newsletter) {
+      console.log('====================================');
+      console.log('n');
+      console.log('====================================');
       return res.status(404).json({ message: 'Newsletter not found' });
     }
-    const articleIndex = newsletter.articles.findIndex(article => article._id === articleId);
+    const articleIndex = newsletter.articles.findIndex(article => article.id === articleId);
 
     if (articleIndex === -1) {
+      console.log('====================================');
+      console.log('a');
+      console.log('====================================');
       return res.status(404).json({ message: 'Article not found' });
     }
 

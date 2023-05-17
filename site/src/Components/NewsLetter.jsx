@@ -13,11 +13,11 @@ const Head = () => {
   >
     <section className="newsletter">
       <div className="newletterleft">
-        {/* <img
+        <img
         className="zka-6935-1-icon"
         alt=""
         src="Images/newsletter@2x.jpg"
-      /> */}
+      />
       </div>
       <div className="newsletterright">
         <div className="newslettercontainer">

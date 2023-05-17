@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 router.post('/', [verifyRoles(ROLES_LIST.Admin), upload.single('image')], newsletterController.createNewsletter);
 router.post('/send',verifyRoles(ROLES_LIST.Admin), sendEmail.sendNewsletter);
-router.delete('/newsletters/:newsletterId/articles/:articleId',verifyRoles(ROLES_LIST.Admin), newsletterController.deleteArticle);
+router.delete('/deleteA',verifyRoles(ROLES_LIST.Admin), newsletterController.deleteArticle);
 router.post("/:id",[verifyRoles(ROLES_LIST.Admin), upload.single('image')], newsletterController.createArticle);
 router.get('/:id',verifyRoles(ROLES_LIST.Admin), newsletterController.getNewsletterById);
 router.get('/',verifyRoles(ROLES_LIST.Admin), newsletterController.getNewsletters);

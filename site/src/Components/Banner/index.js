@@ -5,7 +5,8 @@ import Slide2 from "./Slides/Slide2/Slide2";
 import Slide3 from "./Slides/Slide3/Slide3";
 import Slide4 from "./Slides/Slide4/Slide4";
 
-const Hero = () => {
+const Hero = ({data}) => {
+  const filterbytype = () => data?.filter(item => item.type === 'carousel');
   const settings = {
     dots: true,
     infinite: true,

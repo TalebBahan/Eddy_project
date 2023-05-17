@@ -25,7 +25,7 @@ const Home = () => {
       <Navbar />
       {data && (
         <>
-          <Hero />
+          <Hero data={data.content} />
           <About visionData={data.content} images={data.aboutImages} />
           <Achievements />
           <Lectures />

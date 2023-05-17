@@ -43,8 +43,9 @@ export const newsletterApi = apiSlice.injectEndpoints({
         }),
         deleteArticle: builder.mutation({
             query: ({newsletterId,articleId}) => ({
-                url: `/api/newsletter/newsletters/${newsletterId}/articles/${articleId}`,
+                url: `/api/newsletter/deleteA`,
                 method: 'DELETE',
+                body:{newsletterId,articleId}
             }),
             invalidatesTags: ['newsletter']
         }),
