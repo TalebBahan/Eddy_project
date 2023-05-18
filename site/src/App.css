@@ -1506,10 +1506,11 @@ body::-webkit-scrollbar {
   display: inline-block;
 }
 .title {
-  letter-spacing: 0.03em;
-  width: 9.94rem;
-  height: 2.31rem;
+  /* letter-spacing: 0.03em; */
+  width: 15.94rem;
+  height: 7.31rem;
   flex-shrink: 0;
+  overflow: hidden;
 }
 .text3 {
   font-size: var(--font-size-base);
@@ -1524,6 +1525,7 @@ body::-webkit-scrollbar {
   align-items: flex-start;
   justify-content: flex-start;
   gap: var(--gap-6xs);
+  height: 15rem;
 }
 .read-more,
 .read-more-wrapper {
