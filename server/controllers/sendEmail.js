@@ -55,7 +55,9 @@ exports.sendNewsletter = (req, res) => {
         template: 'email',
         context:{
           'title': newsletter.title,
-          'ar': a
+          'ar': a,
+          'cover': newsletter.coverImageUrl,
+          'back': process.env.BACKEND_URI
         }
         
       };
