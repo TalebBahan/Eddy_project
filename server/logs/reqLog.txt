@@ -10386,3 +10386,9 @@
 20230518	04:58:44	4062b98b-be3b-42c4-b253-748d0e5198a7	POST	http://localhost:3000	/api/newsletter/send
 20230518	04:58:46	ae45d4b3-ad65-4d96-a3d3-364c52522bf7	OPTIONS	http://localhost:3000	/api/subscribers
 20230518	04:58:46	63f7ccff-54e0-4e22-9864-0276c0a05c50	GET	http://localhost:3000	/api/subscribers
+20230518	05:17:26	6df4263b-46cf-47f1-9e44-7b4a217d8008	OPTIONS	http://localhost:3000	/api/newsletter/send
+20230518	05:17:26	9ba71e5e-349c-460e-9635-786a18e88ebf	POST	http://localhost:3000	/api/newsletter/send
+20230518	05:17:29	214125f5-ae1d-48ab-8a60-2b7619dfd873	OPTIONS	http://localhost:3000	/api/subscribers
+20230518	05:17:29	5b0d8835-0b0b-42ae-9c05-98675b692136	GET	http://localhost:3000	/api/subscribers
+20230518	05:34:01	10dcdb0e-2a1f-405f-bc94-1067d88e4f7e	GET	undefined	/
+20230518	05:34:02	47aa9c9d-9d19-4274-b234-e1e17c35f6e9	GET	undefined	/favicon.ico

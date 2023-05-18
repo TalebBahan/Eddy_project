@@ -72,3 +72,11 @@ mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
+//app-client-build
+const appClient = express();
+appClient.use('/', express.static(path.join(__dirname, '../client/build')));
+appClient.listen(7474, () => console.log(`Client build serve ${7474}`));
+//app-client-build
+const appSite = express();
+appSite.use('/', express.static(path.join(__dirname, '../site/build')));
+appSite.listen(7475, () => console.log(`Site build serve ${7475}`));
