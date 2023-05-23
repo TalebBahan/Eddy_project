@@ -23,7 +23,7 @@ const verifyToken = async (req, res, next) => {
         const token = await Token.findOne({}); // Assuming you have only one token in your Token collection
         const newAccessToken = await refreshgoogleAccessToken(token.googleRefreshToken); // Function to refresh the Google access token
   
-        if (token.googleAccessToken !== newAccessToken) {
+        if (token.googleAccessToken !== newAccessToken && newAccessToken !== undefined) {
           // Update the token in the database
           token.googleAccessToken = newAccessToken;
           await token.save();
