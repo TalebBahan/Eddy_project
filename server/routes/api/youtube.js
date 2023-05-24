@@ -6,17 +6,18 @@ const {
   updateVideo,
   deleteVideo
 } = require('../../controllers/youtubeController');
+const verifyToken = require('../../middleware/verifyToken');
 
-// Create a new Youtube video
-router.post('/', createVideo);
+// Create a new YouTube video
+router.post('/', verifyToken, createVideo);
 
-// Get all Youtube videos
-router.get('/', getAllVideos);
+// Get all YouTube videos
+router.get('/', verifyToken, getAllVideos);
 
-// Update a Youtube video by ID
-router.put('/:id', updateVideo);
+// Update a YouTube video by ID
+router.put('/:id', verifyToken, updateVideo);
 
-// Delete a Youtube video by ID
-router.delete('/:id', deleteVideo);
+// Delete a YouTube video by ID
+router.delete('/:id', verifyToken, deleteVideo);
 
 module.exports = router;

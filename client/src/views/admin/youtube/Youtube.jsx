@@ -28,7 +28,7 @@ const VideoCard = ({ video,re }) => {
   const handleOpen = () => setOpen(!open);
   const { title, description, publishedAt, videoId } = video;
 
-    const foundObject = re.find((object) => object.videoId === videoId);
+    const foundObject = re?.find((object) => object.videoId === videoId);
     const s =  foundObject ? foundObject._id : false;
 
   
