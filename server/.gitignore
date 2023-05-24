@@ -24,4 +24,4 @@ dist-ssr
 .env
 *.sw?
 *.txt
-logs/*
+logs/*.txt
