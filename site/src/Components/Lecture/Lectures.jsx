@@ -47,7 +47,6 @@ const Lectures = () => {
               </div>
               <Link
                 style={{ textDecoration: "none" }}
-                target="_blank"
                 to="/book"
               >
                 <YellowButton text="Reach Out" />
