@@ -8,12 +8,10 @@ import Home from "./pages/home";
 import Booking from "pages/booking";
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="" element={<Home />} />
-        <Route path="/book" element={<Booking />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="" element={<Home />} />
+      <Route path="/book" element={<Booking />} />
+    </Routes>
   );
 };
 
