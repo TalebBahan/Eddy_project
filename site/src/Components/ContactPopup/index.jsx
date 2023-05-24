@@ -8,14 +8,45 @@ import {
   Title,
   Wrapper,
   Close,
+  TextArea
 } from "./ContactPopup";
 import { FaTimes } from "react-icons/fa";
-
+import { useState } from "react";
+import { useContactMutation } from "apiSlice";
 const ContactPopup = () => {
+  const [sendMessage,{isLoading,isError,isSuccess}] = useContactMutation()
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [sent,setSent] = useState(null)
   const hideContact = () => {
-    let element = document.getElementById("contact-form");
+    let element = document.getElementById('contact-form');
     if (element) {
-      element.style.display = "none";
+      element.style.display = 'none';
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await sendMessage(formData);
+      if (!isError) {
+        setSent('Your message was sent successfully.');
+      } else {
+        setSent('An error occurred while sending your message.');
+      }
+    } catch (error) {
+      setSent('An error occurred while sending your message.');
     }
   };
   return (
@@ -37,29 +68,52 @@ const ContactPopup = () => {
         <FaTimes />
       </Close>
       <Container>
-        <Title>Contact</Title>
-        <InputArea>
-          <Label>Name</Label>
-          <Input />
-        </InputArea>
-        <InputArea>
-          <Label>Email</Label>
-          <Input />
-        </InputArea>
-        <InputArea>
-          <Label>Phone</Label>
-          <Input />
-        </InputArea>
-        <InputArea>
-          <Label>Message</Label>
-          <Input />
-        </InputArea>
-        <ButtonWrapper>
-          <Button>Submit</Button>
-          <Button onClick={hideContact} outline>
-            Close
-          </Button>
-        </ButtonWrapper>
+      {sent !== null ? <Title>{sent}</Title> :
+        
+        <form onSubmit={handleSubmit}><Title>Contact</Title>
+          <InputArea>
+            <Label>Name</Label>
+            <Input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+          </InputArea>
+          <InputArea>
+            <Label>Email</Label>
+            <Input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </InputArea>
+          <InputArea>
+            <Label>Phone</Label>
+            <Input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+            />
+          </InputArea>
+          <InputArea>
+            <Label>Message</Label>
+            <TextArea
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+            />
+          </InputArea>
+          <ButtonWrapper>
+            <Button type="submit">Submit</Button>
+            <Button onClick={hideContact} outline>
+              Close
+            </Button>
+          </ButtonWrapper>
+        </form>
+      }
       </Container>
       <img className="latest-news-item" alt="" src="Images/LTnewsdesign3.svg" />
       <img

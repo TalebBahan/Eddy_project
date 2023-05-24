@@ -1,13 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-// import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
 
-const News = ({latestNewsObj}) => {
-
-
-  const filterbytype = () => latestNewsObj.filter(item => item.type === 'media');
+const News = ({ latestNewsObj }) => {
+  const filterByType = () => latestNewsObj.filter(item => item.type === 'media');
 
   return (
     <>
@@ -30,40 +28,42 @@ const News = ({latestNewsObj}) => {
             <div className="ltnewsheader-child"></div>
           </div>
 
-          {/* <Splide
+          <Splide
             options={{
-              rewind: true,
-              gap: "1rem",
-              perPage: 1,
+              rewind: false,
+              gap: "10px",
+              perPage: 3,
             }}
             aria-label="My Favorite Images"
           >
-            <SplideSlide> */}
-          <div className="ltnewscontainer">
-            {filterbytype().map((item, index) => {
-              return (
-                <>
-                  <div className="ltnews1" key={index}>
-                    <img className="ltnews1-child" alt="" src={`${process.env.REACT_APP_API}/images/${item.image}`} />
+            {filterByType().map((item, index) => (
+              <SplideSlide key={index}>
+                <div className="ltnewscontainer">
+                  <div className="ltnews1">
+                    <img
+                      className="ltnews1-child"
+                      alt=""
+                      src={`${process.env.REACT_APP_API}/images/${item.image}`}
+                    />
                     <div className="frame-group">
                       <div className="title-parent">
                         <b className="title">{item.h_text}</b>
                         <div className="text3">{item.s_text}</div>
                       </div>
                       <button className="read-more-wrapper">
-                        <a className="read-more" href={item.link}>Read More</a>
+                        <a className="read-more" href={item.link}>
+                          Read More
+                        </a>
                       </button>
                     </div>
                   </div>
-                </>
-              );
-            })}
-          </div>
-          {/* </SplideSlide>
-          </Splide> */}
+                </div>
+              </SplideSlide>
+            ))}
+          </Splide>
 
           <div className="ltswipers">
-            <img
+            {/* <img
               className="ltleftswiper-icon"
               alt=""
               src="Images/ltleftswiper.svg"
@@ -72,7 +72,7 @@ const News = ({latestNewsObj}) => {
               className="ltleftswiper-icon"
               alt=""
               src="Images/ltrightswiper.svg"
-            />
+            /> */}
           </div>
           <img
             className="latest-news-item"

@@ -65,13 +65,20 @@ export const Input = styled.input`
   border-radius: 10px;
   border: none;
   border: 1px solid gray;
+  padding:5px;
 `;
-
+export const TextArea = styled.textarea`
+  border-radius: 10px;
+  border: none;
+  border: 1px solid gray;
+  padding:5px;
+`;
 export const ButtonWrapper = styled.div`
   display: flex;
 `;
 export const Button = styled.button`
   margin: 30px auto;
+  cursor:pointer;
   font-weight: bold;
   font-family: "Gilroy";
   background: ${(props) => (props.outline ? "none" : "#e6c34b")};

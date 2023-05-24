@@ -64,7 +64,7 @@ export const SubHeading = styled.p`
   font-size: 1.4rem;
   font-weight: 400;
   color: #fff;
-  margin-top: 20px;
+  margin-top: 10px;
   width: 80%;
   line-height: 2rem;
   font-family: "Roboto Condensed", sans-serif;
@@ -84,7 +84,7 @@ export const ImageSection = styled.div`
   display: grid;
   gap: 20px;
   width: max-content;
-  margin: 20px auto;
+  margin: 10px auto;
   grid-template-columns: repeat(4, 1fr);
   @media screen and (max-width: 760px) {
     grid-template-columns: repeat(2, 1fr);
@@ -110,5 +110,5 @@ export const Image = styled.img`
 `;
 
 export const BadgeWrapper = styled.div`
-  margin: 40px auto;
+  margin: 10px auto;
 `;

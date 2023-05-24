@@ -54,11 +54,10 @@ exports.createNewsletter = async (req, res) => {
   try {
     const newsletter = new Newsletter({
       title: req.body.title,
+      subject: req.body.subject,
       coverImageUrl: req.file.filename,
       articles: req.body.articles,
-      layout: req.body.layout,
-      intersts: req.body.intersts.split(','),
-      scheduledTime: req.body.scheduledTime,
+      body: req.body.body,
     });
     const savedNewsletter = await newsletter.save();
     res.status(201).json(savedNewsletter);

@@ -23,6 +23,14 @@ export const subscriberApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['subscriber']
         }),
+        sendIA: builder.mutation({
+            query: (body) => ({
+                url: '/api/newsletter/sendIA',
+                method: 'POST',
+                body: body,
+            }),
+            invalidatesTags: ['subscriber']
+        }),
         updateSubscriber: builder.mutation({
             query: (subscriber) => ({
                 url: `/api/subscribers/${subscriber.id}`,
@@ -47,5 +55,6 @@ export const {
     useCreateSubscriberMutation,
     useUpdateSubscriberMutation,
     useSendMutation,
+    useSendIAMutation,
     useDeleteSubscriberMutation,
 } = subscriberApi;

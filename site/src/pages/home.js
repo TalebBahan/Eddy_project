@@ -8,30 +8,25 @@ import News from "../Components/News";
 import NewsLetter from "../Components/NewsLetter";
 import Footer from "../Components/Fotter/Fotter";
 import ContactPopup from "../Components/ContactPopup";
-import React, { useState } from "react";
-
+import React from "react";
+import { useGetDataQuery } from "apiSlice";
 const Home = () => {
-  const [data, setData] = useState(null);
-
-  React.useEffect(() => {
-    fetch(`${process.env.REACT_APP_API}/api/data/`)
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error(error));
-  }, []);
-
+  const { data, isLoading } = useGetDataQuery()
+  if (isLoading) {
+    return <div></div>
+  }
   return (
     <>
       <Navbar />
       {data && (
         <>
-          <Hero data={data.content} />
+          <Hero data={data.heroLinks} />
           <About visionData={data.content} images={data.aboutImages} />
           <Achievements />
           <Lectures />
-          <SocialMedia youtube={data.youtube}/>
-          <News latestNewsObj={data.content}/>
-          <NewsLetter  />
+          <SocialMedia youtube={data.youtube} />
+          <News latestNewsObj={data.content} />
+          <NewsLetter />
           <Footer />
           <ContactPopup />
         </>

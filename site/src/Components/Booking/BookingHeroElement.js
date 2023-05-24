@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Bg from "../../assets/hero/HeaderBG.jpg";
 export const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  ${'' /* height: 100vh; */}
   background: url(${Bg}), linear-gradient(242.34deg, #9b56a6 1%, #2e208ecf 100%);
   /* background-color: linear-gradient(242.34deg, #9b56a6 1%, #2e208e 100%); */
   background-size: cover;

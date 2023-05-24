@@ -14,23 +14,10 @@ export default function AddEditNewsletter(props) {
   const [add] = useCreatenewsletterMutation();
   const [formData, setFormData] = useState({
     title: '',
+    subject: '',
     coverImage: null,
-    scheduledTime: '',
-    interests: [],
-
+    body: '',
   });
-  const interests =[
-    "Leadership development",
-    "Organizational transformation",
-    "Corporate governance",
-    "Business strategy",
-    "Sales and operations management",
-    "Board of director leadership",
-    "Professional development",
-    "Entrepreneurship",
-    "Executive coaching",
-    "Business analytics"
-  ];
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -50,18 +37,15 @@ export default function AddEditNewsletter(props) {
     e.preventDefault();
     const form = new FormData();
     form.append("title", formData.title);
+    form.append("subject", formData.subject);
     form.append("image", formData.coverImage);
-    form.append("scheduledTime", formData.scheduledTime);
-    form.append("intersts", formData.interests);
-    console.log('====================================');
-    console.log(form);
-    console.log('====================================');
+    form.append("body", formData.body);
     add(form)
     setFormData({
       title: '',
+      subject: '',
       coverImage: null,
-      scheduledTime: '',
-      interests: [],
+      body: '',
     });
 
     props.handleOpen();
@@ -72,7 +56,7 @@ export default function AddEditNewsletter(props) {
 
       <Dialog open={props.open} handler={props.handleOpen} size='xxl'>
 
-        <DialogHeader>{props.isAdd ? 'Create New Newsletter' : 'Edit Newsletter'}</DialogHeader>
+        <DialogHeader>Add News Letter</DialogHeader>
 
         <DialogBody divider>
           <div class="flex flex-col">
@@ -93,51 +77,46 @@ export default function AddEditNewsletter(props) {
           </div>
           <div class="flex flex-col">
             <label
+              for="subject"
+              class="self-start mb-2 font-medium text-gray-800"
+            >Subject</label>
+            <input
+              type="text"
+              placeholder="Enter subject"
+              id="subject"
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
+              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded"
+              autocomplete="off"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="body"
+              class="self-start mb-2 font-medium text-gray-800"
+            >Body</label>
+            <input
+              type="text"
+              id="body"
+              name="body"
+              value={formData.body}
+              onChange={handleChange}
+              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              autocomplete="off"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label
               for="coverImage"
               class="self-start mb-2 font-medium text-gray-800"
             >Cover Image</label>
             <Upload selectedFiles={formData.coverImage}
               setselectedFiles={handleCoverImageChange} />
           </div>
-          <div class="flex flex-col">
-            <label
-              for="scheduledTime"
-              class="self-start mb-2 font-medium text-gray-800"
-            >Scheduled Time</label>
-            <input
-              type="datetime-local"
-              id="scheduledTime"
-              name="scheduledTime"
-              value={formData.scheduledTime}
-              onChange={handleChange}
-              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
-              autocomplete="off"
-            />
-            <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="interests">
-              Interests
-            </label>
-            <div className="flex items-center">
-              {interests.map((interest) => (
-                <label
-                  className="mr-2 text-gray-700"
-                  htmlFor={interest}
-                  key={interest}
 
-                >
-                  <input
-                    className="mr-1"
-                    type="checkbox"
-                    id={interest}
-                    name="interests"
-                    value={interest}
-                    checked={formData.interests.includes(interest)}
-                    onChange={handleInterestChange}
-                  />
-                  {interest}
-                </label>
-              ))}
-            </div>
-          </div>
+
+
         </DialogBody>
 
         <DialogFooter>
