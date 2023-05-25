@@ -9,15 +9,15 @@ const {
 const verifyToken = require('../../middleware/verifyToken');
 
 // Create a new YouTube video
-router.post('/', verifyToken, createVideo);
+router.post('/', createVideo);
 
 // Get all YouTube videos
-router.get('/', verifyToken, getAllVideos);
+router.get('/', getAllVideos);
 
 // Update a YouTube video by ID
 router.put('/:id', verifyToken, updateVideo);
 
 // Delete a YouTube video by ID
-router.delete('/:id', verifyToken, deleteVideo);
+router.delete('/:id', deleteVideo);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BoxBg from "assets/hero/vision-bg@2x.png";
+import BoxBg from "assets/hero/ZKA_6888.jpg";
 import Bg from "assets/hero/HeaderBG.jpg";
 export const SlideWrapper = styled.div`
   width: 100vw;
@@ -87,7 +87,7 @@ export const ImageBox = styled.div`
   width: 80%;
   background-color: linear-gradient(242.34deg, #9b56a6 0.72%, #2e208e 100%);
   background-image: url(${BoxBg});
-  mix-blend-mode: hard-light;
+  mix-blend-mode: soft-light;
   background-size: cover;
   background-repeat: no-repeat;
   height: 50%;

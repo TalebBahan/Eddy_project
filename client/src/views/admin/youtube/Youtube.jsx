@@ -30,11 +30,6 @@ const VideoCard = ({ video,re }) => {
 
     const foundObject = re?.find((object) => object.videoId === videoId);
     const s =  foundObject ? foundObject._id : false;
-
-  
-  console.log('====================================');
-  console.log(s);
-  console.log('====================================');
   return (
     <Card extra='flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white'>
       <Edit open={open} handleOpen={handleOpen} {...video} />
