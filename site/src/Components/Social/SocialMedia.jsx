@@ -109,9 +109,12 @@ const SocialMedia = ({ youtube }) => {
 
           <div className="catButton">
             {socialLink.map(({ icon, link, id }) => (
+              <a href={link}>
               <button id={id} className="social-btn">
                 {icon}
               </button>
+              </a>
+              
             ))}
           </div>
           <div className="social-slider-wrapper" style={{}}>

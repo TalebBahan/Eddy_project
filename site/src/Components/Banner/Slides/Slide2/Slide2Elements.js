@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BoxBg from "../../../../assets/hero/slide2-box-bg.jpg";
+import BoxBg from "assets/hero/vision-bg@2x.png";
 import Bg from "assets/hero/HeaderBG.jpg";
 export const SlideWrapper = styled.div`
   width: 100vw;

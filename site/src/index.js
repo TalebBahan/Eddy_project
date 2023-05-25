@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { apiSlice } from "./apiSlice";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -15,9 +15,9 @@ root.render(
       }
     >
       <ApiProvider api={apiSlice}>
-        <BrowserRouter>
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </ApiProvider>
     </Suspense>
   </React.StrictMode>
