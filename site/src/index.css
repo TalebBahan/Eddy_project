@@ -78,3 +78,10 @@
   --br-md: 10px;
   --br-lg: 25px;
 }
+
+.splide__pagination {
+  display: none;
+}
+.splide__arrow svg {
+  fill: var(--color-indigo) !important;
+}

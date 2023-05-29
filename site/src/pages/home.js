@@ -10,6 +10,7 @@ import Footer from "../Components/Fotter/Fotter";
 import ContactPopup from "../Components/ContactPopup";
 import React from "react";
 import { useGetDataQuery } from "apiSlice";
+import SearchPopup from "Components/SearchPoppup";
 const Home = () => {
   const { data, isLoading } = useGetDataQuery()
   if (isLoading) {
@@ -17,9 +18,10 @@ const Home = () => {
   }
   return (
     <>
-      <Navbar />
+      
       {data && (
         <>
+          <Navbar />
           <Hero data={data.heroLinks} />
           <About visionData={data.content} images={data.aboutImages} />
           <Achievements />
@@ -29,6 +31,7 @@ const Home = () => {
           <NewsLetter />
           <Footer />
           <ContactPopup />
+          <SearchPopup data={data}/>
         </>
       )}
     </>

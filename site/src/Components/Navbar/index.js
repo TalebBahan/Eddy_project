@@ -13,6 +13,7 @@ import SignatureWhite from "../../assets/Nav/signature-white.svg";
 import SignatureBlack from "../../assets/Nav/signature-black.svg";
 import { HashLink } from "react-router-hash-link";
 import LinkedinImg from "assets/hero/linkedin.png";
+
 const WINDOW_HEIGHT = window.screen.height - 100;
 const Navbar = () => {
   const [active, setActive] = useState(false);
@@ -39,6 +40,12 @@ const Navbar = () => {
 
   const showContact = () => {
     let element = document.getElementById("contact-form");
+    if (element) {
+      element.style.display = "flex";
+    }
+  };
+  const showSearch = () => {
+    let element = document.getElementById("search-form");
     if (element) {
       element.style.display = "flex";
     }
@@ -96,7 +103,12 @@ const Navbar = () => {
               Contact
             </HashLink>
           </NavItem>
-          <NavItem onClick={showContact} active={active}>
+          <NavItem active={active} onClick={showSearch}>
+            
+              <img src="Images/search.svg" alt="linkedin" />
+            
+          </NavItem>
+          <NavItem active={active}>
             <HashLink
               style={{ textDecoration: "none", color: "inherit" }}
               activeClass="active"
@@ -107,6 +119,7 @@ const Navbar = () => {
               <img src={LinkedinImg} alt="linkedin" />
             </HashLink>
           </NavItem>
+
         </Menu>
       </Container>
     </NavBar>

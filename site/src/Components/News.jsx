@@ -1,12 +1,39 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
 
 const News = ({ latestNewsObj }) => {
+  const splideRef = useRef(null);
+
   const filterByType = () => latestNewsObj.filter(item => item.type === 'media');
 
+  const handleSwipeLeft = () => {
+    if (splideRef.current) {
+      splideRef.current.go('-1');
+    }
+  };
+
+  const handleSwipeRight = () => {
+    if (splideRef.current) {
+      splideRef.current.go('+1');
+      console.log('====================================');
+      console.log(splideRef.current);
+      console.log('====================================');
+    }
+  };
+  const breakpoints = {
+    768: {
+      perPage: 1,
+    },
+    992: {
+      perPage: 2,
+    },
+    1200: {
+      perPage: 3,
+    },
+  };
   return (
     <>
       <motion.div
@@ -22,7 +49,7 @@ const News = ({ latestNewsObj }) => {
             src="Images/LTnewsdesign1@2x.png"
           />
           <div className="ltnewsheader">
-            <div className="book-a-lecture-container">
+            <div className="booking-meeting-text">
               Media Coverage and Articles
             </div>
             <div className="ltnewsheader-child"></div>
@@ -31,10 +58,15 @@ const News = ({ latestNewsObj }) => {
           <Splide
             options={{
               rewind: false,
-              gap: "10px",
+              arrows:false,
+              gap: "2px",
               perPage: 3,
+              loop:true,
+              breakpoints: breakpoints,
+              pagination: false, // Remove dots navigation
             }}
             aria-label="My Favorite Images"
+            ref={splideRef}
           >
             {filterByType().map((item, index) => (
               <SplideSlide key={index}>
@@ -63,16 +95,18 @@ const News = ({ latestNewsObj }) => {
           </Splide>
 
           <div className="ltswipers">
-            {/* <img
+            <img
               className="ltleftswiper-icon"
               alt=""
               src="Images/ltleftswiper.svg"
+              onClick={handleSwipeLeft}
             />
             <img
               className="ltleftswiper-icon"
               alt=""
               src="Images/ltrightswiper.svg"
-            /> */}
+              onClick={handleSwipeRight}
+            />
           </div>
           <img
             className="latest-news-item"
@@ -84,6 +118,7 @@ const News = ({ latestNewsObj }) => {
             alt=""
             src="Images/LTnewsdesign2@2x.png"
           />
+        
         </section>
       </motion.div>
     </>
