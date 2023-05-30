@@ -66,6 +66,9 @@ export const Input = styled.input`
   border: none;
   border: 1px solid gray;
   padding:5px;
+  font-size: 2.2rem;
+  color: #2e208e;
+  font-family: "Gilroy";
 `;
 export const TextArea = styled.textarea`
   border-radius: 10px;

@@ -54,10 +54,11 @@ export const InputArea = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: 16px;
+  font-size: 1.4rem;
   color: #2e208e;
   font-family: "Gilroy";
   padding-bottom: 5px;
+  margin-bottom:5px
 `;
 
 export const Input = styled.input`
@@ -77,12 +78,26 @@ export const ButtonWrapper = styled.div`
   display: flex;
 `;
 export const Li = styled.li`
-  font-size: 13px;
   color: #000;
   font-family: "Gilroy";
   padding-bottom: 2px;
-  padding-left: 20px;
+  padding-left: 10px;
   list-style-type: none;
+  margin-bottom: 5px
+`;
+export const Htext = styled.p`
+  color: #000;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.2rem;
+  
+  margin: 0px;
+  font-weight: 500; 
+`;
+export const Stext = styled.p`
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: #5e5e5e;
 `;
 export const Button = styled.button`
   margin: 30px auto;
@@ -98,6 +113,8 @@ export const Button = styled.button`
     opacity: 0.6;
   }
 `;
+
+
 
 
 
