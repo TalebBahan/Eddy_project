@@ -3,10 +3,10 @@
 const express = require('express');
 const router = express.Router();
 
-const { linkedinlogin, linkedinCallback } = require('../../controllers/linkedincontroller');
+const { linkedinLogin, linkedinCallback } = require('../../controllers/linkedinController');
 
 
-router.get('/login', linkedinlogin);
+router.get('/login', linkedinLogin);
 router.get('/callback', linkedinCallback);
 
 module.exports = router;
