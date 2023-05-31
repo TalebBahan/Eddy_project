@@ -49,6 +49,8 @@ app.use('/google', require('./routes/api/googlelogin'))
 app.use('/api/data', require('./routes/api/data'));
 app.use('/api/subscribers', require('./routes/api/subscriber'));
 
+app.use('/api/linkedin', require('./routes/api/linkedin'));
+
 
 app.use(verifyJWT);
 app.use('/api/google', require('./routes/api/google'));

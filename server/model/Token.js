@@ -15,6 +15,8 @@ const TokenSchema = new Schema({
     googlePicture: String,
     linkedinRefreshToken: String,
     linkedinAccessToken: String,
+    linkedinExpiresIn: String,
+    linkedinRefreshTokenExpiresIn: String,
     linkedinState: String,
     linkedinId: String,
     linkedinEmail: String,
