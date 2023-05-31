@@ -25,17 +25,17 @@ const newsletterSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  subject: {
+    type: String,
+    required: true,
+  },
   coverImageUrl: {
     type: String,
     required: true,
   },
   articles: [articleSchema],
-  scheduledTime: {
-    type: Date,
-    required: true,
-  },
-  intersts: {
-    type: [String],
+  body: {
+    type: String,
     required: true,
   },
 });

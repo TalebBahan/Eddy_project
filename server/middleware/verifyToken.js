@@ -2,7 +2,7 @@
 const { OAuth2Client } = require('google-auth-library');
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, process.env.GOOGLE_REDIRECT_URL);
-const tokens = require('../models/tokens');
+const Token = require('../model/Token');
 
 const refreshgoogleAccessToken = async (refreshToken) => {
     const { data } = await axios({

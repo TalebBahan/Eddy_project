@@ -8,6 +8,19 @@ export const contentApiSlice = apiSlice.injectEndpoints({
             keepUnusedDataFor: 5,
             providesTags: ['Product']
         }),
+        getHeroLinks: builder.query({
+            query: () => '/api/heroLinks',
+            keepUnusedDataFor: 5,
+            providesTags: ['Product']
+        }),
+        editHeroLinks: builder.mutation({
+            query: (hero) => ({
+                url: `/api/heroLinks/${hero.id}`,
+                method: 'PUT',
+                body: hero
+            }),
+            invalidatesTags: ['Product']
+        }),
         getAboutImages: builder.query({
             query: () => '/api/content/imageAbout',
             keepUnusedDataFor: 5,
@@ -59,11 +72,13 @@ export const contentApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetContentQuery,
+    useGetHeroLinksQuery,
     useGetAboutImagesQuery,
     useAddContentMutation,
     useAddAboutImageMutation,
     useDeleteContentMutation,
     useDeleteAboutImageMutation,
     useEditContentMutation,
+    useEditHeroLinksMutation,
     
 } = contentApiSlice 

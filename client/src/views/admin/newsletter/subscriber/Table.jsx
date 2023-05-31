@@ -133,7 +133,7 @@ const Table = (props) => {
                                                     </div>
                                                 );
                                             }
-                                            else if (['First Name', 'Last Name', 'Age', 'Location'].includes(cell.column.Header)) {
+                                            else if (['First Name', 'Last Name', 'Age'].includes(cell.column.Header)) {
 
                                                 data = (
                                                     <p className="text-sm font-bold text-navy-700 dark:text-white">

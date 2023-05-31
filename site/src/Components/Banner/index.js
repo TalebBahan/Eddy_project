@@ -6,7 +6,6 @@ import Slide3 from "./Slides/Slide3/Slide3";
 import Slide4 from "./Slides/Slide4/Slide4";
 
 const Hero = ({data}) => {
-  const filterbytype = () => data?.filter(item => item.type === 'carousel');
   const settings = {
     dots: true,
     infinite: true,
@@ -18,10 +17,10 @@ const Hero = ({data}) => {
   return (
     <Wrapper id="home" className="hero-section">
       <Slider {...settings}>
-        <Slide1 />
-        <Slide2 />
-        <Slide3 />
-        <Slide4 />
+        <Slide1 link={data[0].link}/>
+        <Slide2 link={data[1].link}/>
+        <Slide3 link={data[2].link}/>
+        <Slide4 link={data[3].link}/>
       </Slider>
     </Wrapper>
   );

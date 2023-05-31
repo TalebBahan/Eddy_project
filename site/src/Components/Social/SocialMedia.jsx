@@ -4,7 +4,7 @@ import {
   FaInstagram,
   FaLinkedin,
   FaTwitter,
-  FaFacebookF,
+  FaYoutube,
 } from "react-icons/fa";
 import InstaCard from "./InstaCard";
 import LinkedInCard from "./LinkedInCard";
@@ -15,11 +15,8 @@ import Post1 from "../../assets/social/post1.jpg";
 import Post2 from "../../assets/social/post2.jpg";
 import Post3 from "../../assets/social/post3.jpg";
 import Slider from "react-slick";
-import YoutubeCard from "./YoutubeCard";
+
 const SocialMedia = ({ youtube }) => {
-console.log('====================================');
-console.log(youtube);
-console.log('====================================');
   const socialmediaObj = [
     {
       img: Post1,
@@ -50,19 +47,19 @@ console.log('====================================');
   const socialLink = [
     // {
     //   icon: <FaInstagram />,
-    //   link: "",
+    //   link: "https://www.instagram.com/eddyabboud/",
     //   id: "insta-btn",
     // },
     {
       icon: <FaLinkedin />,
-      link: "",
+      link: "https://www.linkedin.com/in/eddyabboud/",
       id: "linkedin-btn",
     },
-    // {
-    //   icon: <FaTwitter />,
-    //   link: "",
-    //   id: "twitter-btn",
-    // },
+    {
+      icon: <FaYoutube />,
+      link: "https://www.youtube.com/@eddymabboud",
+      id: "youtube-btn",
+    },
   ];
 
   const [socialmediaObjList] = useState(socialmediaObj);
@@ -112,9 +109,12 @@ console.log('====================================');
 
           <div className="catButton">
             {socialLink.map(({ icon, link, id }) => (
+              <a href={link}>
               <button id={id} className="social-btn">
                 {icon}
               </button>
+              </a>
+              
             ))}
           </div>
           <div className="social-slider-wrapper" style={{}}>

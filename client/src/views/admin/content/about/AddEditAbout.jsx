@@ -14,7 +14,7 @@ export default function AddEditAbout(props) {
   const [formData, setFormData] = useState({
     h_text: props?.h_text,
     s_text: props?.s_text,
-    link: props?.link,
+    link: 'exemple.com',
     type: 'about',
   });
   const handleChange = (e) => {
@@ -78,7 +78,7 @@ export default function AddEditAbout(props) {
               autocomplete="off"
             />
           </div>
-          <div class="flex flex-col">
+          {/* <div class="flex flex-col">
             <label
               for="pass"
               class="self-start mb-2 font-medium text-gray-800"
@@ -93,7 +93,7 @@ export default function AddEditAbout(props) {
               class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
               autocomplete="off"
             />
-          </div>
+          </div> */}
         </DialogBody>
         <DialogFooter>
           <Button

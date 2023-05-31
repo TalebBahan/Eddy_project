@@ -61,7 +61,7 @@ export default function RolesList({ _id, username, roles: rolesL, open, handleOp
               <div className="mt-3 flex items-center gap-3" key={role.key}>
                 <Switch
                   id={`switch-${role.key}`}
-                  checked={roles[role.key]}
+                  checked={roles[role.key] > 0}
                   onChange={() => handleRoleChange(role.key)}
                 />
                 <label

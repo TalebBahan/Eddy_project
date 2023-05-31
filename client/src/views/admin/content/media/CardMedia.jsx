@@ -36,12 +36,12 @@ export default function CardMedia({ h_text, s_text, image, link,id }) {
               {h_text}{" "}
             </p>
             <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
-              By {s_text}{" "}
+              {s_text}{" "}
             </p>
-            <p className="mt-1 text-sm font-medium text-gray-500 md:mt-2">
+            <a className="mt-1 text-sm font-medium text-gray-900 md:mt-2" target='_blank' href={link}>
               {"Learn more @ "}
               {link}{" "}
-            </p>
+            </a>
           </div>
         </div>
 

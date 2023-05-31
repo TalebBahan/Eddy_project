@@ -11,14 +11,14 @@ import { useAddUsersMutation, useEditUsersMutation } from "./apiUsers";
 export default function AddEditModal(props) {
   const [add] = useAddUsersMutation();
   const [editUser] = useEditUsersMutation();
-
   const [formData, setFormData] = useState("");
   useEffect(
     () =>
       setFormData({
-        username: '',
+        username: props.username,
         password: '',
-        email: '',
+        email: props.email,
+        id:props._id
       }),
     [props]
   );
@@ -62,7 +62,7 @@ export default function AddEditModal(props) {
               autocomplete="off"
             />
           </div>
-          <div class="flex flex-col">
+          {props.isAdd && <div class="flex flex-col">
             <label
               for="password"
               class="self-start mb-2 font-medium text-gray-800"
@@ -71,7 +71,6 @@ export default function AddEditModal(props) {
             </label>
             <input
               type="password"
-              placeholder="Password"
               id="password"
               name="password"
               value={formData.password}
@@ -79,7 +78,7 @@ export default function AddEditModal(props) {
               class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
               autocomplete="off"
             />
-          </div>
+          </div>}
           <div class="flex flex-col">
             <label
               for="email"

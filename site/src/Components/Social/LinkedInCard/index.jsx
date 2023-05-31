@@ -39,58 +39,18 @@ import SendGroup from "assets/social/linkedin/Send group.png";
 const LinkedInCard = ({ title, description, publishedAt, videoId }) => {
   return (
     <Wrapper>
-      <TopSection>
-        <TopLeftArea>
-          <Profile src={ProfileImg} />
-          <AuthorArea>
-            <Name>{title}</Name>
-            <TimeWrapper>
-              <Time>20h</Time>
-              <Earth src={EarthImg} />
-            </TimeWrapper>
-          </AuthorArea>
-        </TopLeftArea>
-        <TopRightArea>
-          <MoreImg src={More} />
-        </TopRightArea>
-      </TopSection>
-      <TextArea>
-        <Text>
-          {description.substring(0, 100)}
-        </Text>
-        <HashTag>{publishedAt}</HashTag>
-      </TextArea>
-             <iframe
-style={{
-  height: 'auto',
-  weight: '100%'
-}}
-            title='Youtube player'
-            sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
-            src={`https://youtube.com/embed/${videoId}?autoplay=0`}
-          />
-      <IconArea>
-        <div
-          style={{
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {/* <SmallText>8</SmallText> */}
-        </div>
-        <div
-          style={{
-            height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {/* <SmallText>4 comments</SmallText> */}
-        </div>
-      </IconArea>
+
+      <iframe
+        style={{
+          minHeight: '200px',
+      height:'400px',
+
+        }}
+      title='Youtube player'
+      sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
+      src={`https://youtube.com/embed/${videoId}?autoplay=0`}
+      />
+
 
     </Wrapper>
   );

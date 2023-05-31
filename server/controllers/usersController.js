@@ -29,6 +29,32 @@ const createUser = async (req, res) => {
     }
 }
 
+const updateUser = async (req, res) => {
+    try {
+      const userId = req.params.id; // Assuming the user ID is passed as a parameter
+  
+      // Find the user by ID
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Update only the specified fields
+      if (req.body.email) {
+        user.email = req.body.email;
+      }
+      if (req.body.username) {
+        user.username = req.body.username;
+      }
+      const updatedUser = await user.save();
+  
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+    }
+  };
 const deleteUser = async (req, res) => {
     console.log('good')
     if (!req?.body?.id) return res.status(400).json({ "message": 'User ID required' });
@@ -84,5 +110,6 @@ module.exports = {
     getUser,
     createUser,
     getConnectedUser,
-    updateUserRoles
+    updateUserRoles,
+    updateUser
 }

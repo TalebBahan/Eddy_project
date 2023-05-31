@@ -4,6 +4,9 @@
   margin: 0px;
   box-sizing: border-box;
 }
+a{
+  cursor: pointer !important;
+}
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 @font-face {
   font-family: "Gilroy";
@@ -1478,11 +1481,12 @@ body::-webkit-scrollbar {
 }
 .ltnewsheader-child {
   position: relative;
-  border-top: 5px solid var(--color-purple);
+  border-top: 5px solid var(--color-purple) !important;
   box-sizing: border-box;
   width: 16.06rem;
   height: 0.31rem;
   flex-shrink: 0;
+  margin-bottom: 1em;
 }
 .ltnewsheader {
   align-self: stretch;
@@ -1538,11 +1542,12 @@ body::-webkit-scrollbar {
   font-size: var(--font-size-lg);
   line-height: 1.75rem;
   text-transform: capitalize;
-  font-family: var(--font-gilroy);
-  color: var(--instagram-light-black);
+  font-family:'Gilroy-Medium';
+  color: var(--color-purple);
   text-align: center;
   width: 6.13rem;
   flex-shrink: 0;
+  text-decoration: none;
 }
 .read-more-wrapper {
   cursor: pointer;
@@ -1553,6 +1558,7 @@ body::-webkit-scrollbar {
   overflow: hidden;
   flex-direction: row;
 }
+
 .frame-group,
 .ltnews1 {
   display: flex;
@@ -1661,6 +1667,9 @@ body::-webkit-scrollbar {
   max-width: 1100px;
   margin: auto;
 }
+.splide{
+  padding: 1em;
+}
 .ltnews3 {
   border-radius: var(--br-md);
   background-color: var(--instagram-light-white);
@@ -1676,7 +1685,7 @@ body::-webkit-scrollbar {
   flex-direction: row;
   justify-content: center;
   gap: var(--gap-2xl);
-  z-index: 2;
+  z-index: 4;
   font-size: var(--font-size-3xl);
   font-family: var(--font-sitara);
 }
@@ -1694,6 +1703,11 @@ body::-webkit-scrollbar {
   justify-content: center;
   gap: var(--gap-4xl);
   z-index: 3;
+  fill: var(--color-purple) !important;
+
+}
+.ltswipers:hover{
+  cursor: pointer;
 }
 .latest-news-inner,
 .latest-news-item {
@@ -1721,13 +1735,16 @@ body::-webkit-scrollbar {
   position: relative;
   overflow: hidden;
 }
+.splide {
+  padding: 0em !important;
+}
 .latest-news {
   display: flex;
   flex-direction: column;
   padding: 50px;
   align-items: center;
   justify-content: flex-start;
-  gap: 2rem;
+  gap: 1rem;
   text-align: left;
   font-size: 3.5rem;
   color: var(--color-indigo);
@@ -2505,4 +2522,57 @@ background-size: 100%; */
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
+}
+
+
+
+
+.post {
+  width: 220px;
+  height: 80px;
+}
+.post .avatar {
+  float: left;
+  width: 52px;
+  height: 52px;
+  background-color: #ccc;
+  border-radius: 25%;
+  margin: 8px;
+  background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px);
+  background-size: 600px;
+  animation: shine-avatar 1.6s infinite linear;
+}
+.post .line {
+  float: left;
+  width: 140px;
+  height: 16px;
+  margin-top: 12px;
+  border-radius: 7px;
+  background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px);
+  background-size: 600px;
+  animation: shine-lines 1.6s infinite linear;
+}
+.post .avatar + .line {
+  margin-top: 11px;
+  width: 100px;
+}
+.post .line ~ .line {
+  background-color: #ddd;
+}
+
+@keyframes shine-lines {
+  0% {
+    background-position: -100px;
+  }
+  40%, 100% {
+    background-position: 140px;
+  }
+}
+@keyframes shine-avatar {
+  0% {
+    background-position: -32px;
+  }
+  40%, 100% {
+    background-position: 208px;
+  }
 }

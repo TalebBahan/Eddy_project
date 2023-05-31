@@ -23,7 +23,7 @@ const Upload = (props) => {
                 Upload Files
               </div>
               <p className="mt-2 text-sm font-medium text-gray-600">
-                PNG, JPG and GIF files are allowed
+                PNG, JPG and GIF files are allowed (753 × 579 px)
               </p>
             </div>
           )}

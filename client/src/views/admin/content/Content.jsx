@@ -2,12 +2,14 @@ import React from 'react'
 import Carousel from './Carousel/Carousel'
 import Media from './media/Media'
 import About from './about/About'
-import { useGetContentQuery } from './apiContent'
+import { useGetContentQuery,useGetHeroLinksQuery } from './apiContent'
 import search from 'features/serch'
 import Navbar from "components/navbar";
 import { useState } from 'react';
 import Loading from 'components/Loading';
 import Unauthorized from 'components/Unauthorized'
+import HeroLinks from './HeroLinks'
+
 const COLUMNS = [
     {
         Header: "Header Text",
@@ -24,14 +26,15 @@ const COLUMNS = [
 ]
 export default function Content() {
     const { data, isLoading, isError,status } = useGetContentQuery()
+    const { data:hero, isLoading:heroLoading, isError:heroError,status:heroStatus } = useGetHeroLinksQuery()
 
     const [searchTerm, setSearchTerm] = useState('');
 
-    if (isLoading) {
+    if (isLoading || heroLoading) {
         return <Loading />;
     }
 
-    if (isError) {
+    if (isError || heroError) {
         return <Unauthorized />;
     }
 
@@ -47,7 +50,7 @@ export default function Content() {
             <Navbar
                 searchTerm={searchTerm} handleSearch={handleSearch}
             />
-            {filterbytype('carousel').length>0 && <Carousel data={filterbytype('carousel')} />}
+            { hero && <HeroLinks data={hero} />}
             {filterbytype('about').length>0 && <About data={filterbytype('about')} />}
             {filterbytype('media').length>0 && <Media data={filterbytype('media')} />}
         </div>

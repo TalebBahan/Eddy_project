@@ -10,6 +10,7 @@ import Navbar from 'components/navbar';
 import Edit from './Edit';
 import Loading from 'components/Loading';
 import { useAddVideoMutation, useGetReVideosQuery,useRemoveVideoMutation } from './youtubeApi';
+import GoogleButton from './GoogleButton';
 const COLUMNS = [{ Header: "Title", accessor: "title", }, { Header: "Description", accessor: "description", }, { Header: "Published At", accessor: "publishedAt", }, { Header: "Video ID", accessor: "videoId", },];
 const VideoCard = ({ video,re }) => {
   const [deleteVideo] = useDeleteVideoMutation();
@@ -28,13 +29,8 @@ const VideoCard = ({ video,re }) => {
   const handleOpen = () => setOpen(!open);
   const { title, description, publishedAt, videoId } = video;
 
-    const foundObject = re.find((object) => object.videoId === videoId);
+    const foundObject = re?.find((object) => object.videoId === videoId);
     const s =  foundObject ? foundObject._id : false;
-
-  
-  console.log('====================================');
-  console.log(s);
-  console.log('====================================');
   return (
     <Card extra='flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white'>
       <Edit open={open} handleOpen={handleOpen} {...video} />
@@ -114,8 +110,9 @@ const Youtube = () => {
 
   if (status === 'rejected') {
     return (
-      <div>
-        <a href={`${process.env.REACT_APP_API}/google/login/${user}`}>Login To your google account</a>
+      <div className={`flex justify-center items-center flex-col h-screen`}>
+         <p className='text-lg font-bold text-navy-700 dark:text-white'>You Must Sign In WIth Your Google_ Account</p>
+        <a href={`${process.env.REACT_APP_API}/google/login/${user}`}><GoogleButton /></a>
       </div>
     )
   };

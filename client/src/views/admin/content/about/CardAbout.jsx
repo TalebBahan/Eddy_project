@@ -29,9 +29,9 @@ const CardAbout = ({ h_text, s_text, link, id }) => {
         <p className="mt-2 px-2 text-base text-gray-600">
           {s_text}
         </p>
-        <p className="mt-2 px-2 text-base text-gray-900">
+        {/* <p className="mt-2 px-2 text-base text-gray-900">
           Read More @ {link}
-        </p>
+        </p> */}
       </div>
       {/* Cards */}
       <button

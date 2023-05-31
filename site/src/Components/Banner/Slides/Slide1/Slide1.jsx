@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { FaLinkedin, FaLinkedinIn } from "react-icons/fa";
 import YellowButton from "Components/common/button/yellow-button";
 
-const Slide1 = () => (
+const Slide1 = ({ link }) => (
   <SlideWrapper>
     <Container>
       <LeftArea>
@@ -30,7 +30,7 @@ const Slide1 = () => (
           career success.
         </SubTitle>
         <ButtonArea>
-          <YellowButton text="Learn More" />
+          <a target="_blank" href={link}><YellowButton text="Learn More" /></a>
         </ButtonArea>
       </LeftArea>
       <RightArea>

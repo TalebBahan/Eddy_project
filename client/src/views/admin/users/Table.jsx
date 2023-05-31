@@ -21,9 +21,14 @@ const Table = (props) => {
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => setOpen(!open);
     const [eopen, setEopen] = React.useState(false)
+    const [edit,setEdit] =  React.useState(false)
     const handleEopen = () => setEopen(!eopen);
-    const [editData,setEditData]= React.useState('')
+    const [editData,setEditData]= React.useState(null)
     function handleEdit(data){
+        setEditData(()=>data);
+        setEdit(true)
+    }
+    function handleEditRoles(data){
         setEditData(()=>data);
         setEopen(true)
     }
@@ -50,11 +55,12 @@ const Table = (props) => {
     return (
         <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
             <AddEditModal open={open} handleOpen={handleOpen} isAdd={true} />
-           {eopen && <RolesList open={eopen} handleOpen={handleEopen}  {...editData} />}
+           {editData && <RolesList open={eopen} handleOpen={handleEopen}  {...editData} />}
+           {editData && <AddEditModal open={edit} handleOpen={()=>setEdit(!edit)}  {...editData} />}
             <div class="relative flex items-center justify-between">
                 <div class="text-xl font-bold text-navy-700 dark:text-white">
 
-                    ALl Users
+                    All Users
                 </div>
                 <button
                     onClick={handleOpen}
@@ -148,10 +154,16 @@ const Table = (props) => {
                                         <td>
                                             <div className='flex items-center gap-2'>
                                                 <button
+                                                    onClick={()=>handleEditRoles(row.original)}
+                                                    className="text-sm font-bold text-green-500 dark:text-white"
+                                                >
+                                                    Roles
+                                                </button>
+                                                <button
                                                     onClick={()=>handleEdit(row.original)}
                                                     className="text-sm font-bold text-yellow-500 dark:text-white"
                                                 >
-                                                    Roles
+                                                    Edit
                                                 </button>
                                                 <button
                                                     onClick={() => window.confirm("are you sure you want to delete this link ?") ? deleteLink(row.original._id) : null }

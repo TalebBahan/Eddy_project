@@ -61,6 +61,7 @@ const About = ({visionData,images}) => {
         <img className="left-circle" src={LeftCircle} />
         <img className="right-shadow" src={RigthtShadow} />
         <img className="right-circle" src={RigthCircle} />
+        <img className="triangle2" src='Images/z.svg'/>
       </motion.div>
     </>
   );

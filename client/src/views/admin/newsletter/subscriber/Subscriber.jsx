@@ -27,10 +27,10 @@ const COLUMNS = [
         Header: "Age",
         accessor: "age",
     },
-    {
-        Header: "Location",
-        accessor: "location",
-    },
+    // {
+    //     Header: "Location",
+    //     accessor: "location",
+    // },
 ]
 
 export default function Subscriber() {

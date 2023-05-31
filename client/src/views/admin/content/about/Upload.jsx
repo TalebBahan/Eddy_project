@@ -49,7 +49,7 @@ const Upload = (props) => {
             <p className="mt-2 text-sm font-medium text-gray-600">
               {selectedFile
                 ? selectedFile.name
-                : "PNG, JPG and GIF files are allowed"}
+                : "PNG, JPG and GIF files are allowed (1233 × 502 px)"}
             </p>
             <button
               className="items-center justify-center rounded-full bg-none text-brand-500 dark:text-white"

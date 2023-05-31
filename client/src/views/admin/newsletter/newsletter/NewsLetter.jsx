@@ -8,12 +8,16 @@ import Loading from 'components/Loading';
 import Unauthorized from 'components/Unauthorized'
 const COLUMNS = [
     {
+        Header: "Subject",
+        accessor: "subject",
+    },
+    {
         Header: "Title",
         accessor: "title",
     },
     {
-        Header: "scheduledTime",
-        accessor: "scheduledTime",
+        Header: "Body",
+        accessor: "body",
     },
 ]
 

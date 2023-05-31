@@ -29,10 +29,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: ['Users']
         }),
         editUsers: builder.mutation({
-            query: ({ id, roles }) => ({
-                url: `/api/users/${id}/roles`,
+            query: (data) => ({
+                url: `/api/users/${data.id}`,
                 method: 'PUT',
-                body: { roles }
+                body: data
             }),
             invalidatesTags: ['Users']
         }),
@@ -46,7 +46,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         updateUserRoles: builder.mutation({
             query: ({ _id, roles }) => ({
-                url: `/api/users/${_id}`,
+                url: `/api/users/${_id}/roles`,
                 method: 'PUT',
                 body: { roles }
             }),
