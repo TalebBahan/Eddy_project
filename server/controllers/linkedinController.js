@@ -133,35 +133,68 @@ async function refreshAccessToken(refreshToken, clientId, clientSecret) {
   }
   
 
-// linkedinPosts = async (req, res) => {
-//     const url = 'https://api.linkedin.com/v2/shares';
-//     // get the token from the database
-//     Token.findOne({_id : '645a3319b8725a02ee25de2c'}).then((token) => {
-//         if (token) {
-//             const accessToken = token.linkedinAccessToken;
-//             const refreshToken = token.linkedinRefreshToken;
-//             const Id = token.linkedinId;
-//         }
-//     }); 
-//     try {
-//         const response = await fetch(url, {
-//             method: 'POST',
-//             headers: {
-//                 'Authorization': `Bearer ${accessToken}`,
-//                 'cache-control': 'no-cache',
-//                 'X-Restli-Protocol-Version': '2.0.0',
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 "owner": `urn:li:person:${Id}`,
-//                 "subject": "This is a test post",
-//                 "text": {
+
+
+async function getPostsByAuthor(accessToken, id, count = 10, sortBy = 'LAST_MODIFIED') {
+  authorUrn = `urn:li:person:${id}`;
+  const encodedAuthorUrn = encodeURIComponent(authorUrn);
+  const url = `https://api.linkedin.com/rest/posts?author=${encodedAuthorUrn}&q=author&count=${count}&sortBy=(value:${sortBy})`;
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'cache-control': 'no-cache',
+        'X-Restli-Protocol-Version': '2.0.0',
+        'LinkedIn-Version': 202301.04
+      },
+    });
+   console.log(await response.json());
+    if (!response.ok) {
+      throw new Error('Failed to get posts' );
+    }
+
+    const data = await response.json();
+    return data.elements;
+  } catch (error) {
+    console.error('Failed to get posts:', error);
+    throw error;
+  }
+};
+
+linkedinPosts = async (req, res) => {
+    const url = 'https://api.linkedin.com/v2/shares';
+    // get the token from the database
+    var accessToken;
+    var refreshToken;
+    var Id;
+    Token.findOne({_id : '645a3319b8725a02ee25de2c'}).then((token) => {
+        if (token) {
+             accessToken = token.linkedinAccessToken;
+             refreshToken = token.linkedinRefreshToken;
+             Id = token.linkedinId;
+            console.log("token: ", token);
+
+        }
+    }); 
+    try {
+        posts = await getPostsByAuthor(accessToken, Id);
+        res.send(posts);
+
+    } catch (error) {
+        console.error('Failed to get posts:', error.message);
+        res.status(500).send(error.message);
+    }
+};
+
+
 
     
+
 
 module.exports = {
     linkedinLogin,
     linkedinCallback,
-  
+    linkedinPosts,
 };
 

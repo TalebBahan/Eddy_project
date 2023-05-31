@@ -1,80 +1,66 @@
 import { apiSlice } from "app/api/apiSlice"
 
-export const googleApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['Youtube'],
+export const linkedinApiSlice = apiSlice.injectEndpoints({
+  tagTypes: ['linkdin'],
   endpoints: builder => ({
-    googleLogin: builder.query({
-      query: (user) => `/api/google/login${user}`,
-      method: "GET",
-      
-    }),
     uploadVideo: builder.mutation({
       query: (video) => ({
-        url: `/api/google/upload`,
+        url: `/api/linkedin/upload`,
         method: "POST",
         body: video,
 
       }),
     }),
-    getVideos: builder.query({
-      query: (id) => `/api/google/videos/${id}`,
+    getPosts: builder.query({
+      query: () => `/api/linkedin/Posts`,
       method: "GET",
-      providesTags: ['Youtube']
+      providesTags: ['linkdin']
     }),
     getOneVideo: builder.query({
-      query: (id) => `/google/videos/?id=${id}`,
+      query: (id) => `/linkedin/videos/?id=${id}`,
       method: "GET",
     }),
     updateVideo: builder.mutation({
       query: (data) => ({
-        url: `/api/google/videos/${data.videoId}`,
+        url: `/api/linkedin/videos/${data.videoId}`,
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ['Youtube']
+      invalidatesTags: ['linkdin']
     }),
     deleteVideo: builder.mutation({
       query: (id) => ({
-        url: `/api/google/videos/${id}`,
+        url: `/api/linkedin/videos/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['Youtube']
+      invalidatesTags: ['linkdin']
     }),
 
 
 
     getReVideos: builder.query({
-      query: () => '/api/youtube',
-      providesTags: ['Youtube']   
+      query: () => '/api/linkdin',
+      providesTags: ['linkdin']   
     }),
     addVideo: builder.mutation({
       query: (videoData) => ({
-        url: '/api/youtube',
+        url: '/api/linkdin',
         method: 'POST',
         body: videoData,
       }),
-      invalidatesTags: ['Youtube']
+      invalidatesTags: ['linkdin']
     }),
     removeVideo: builder.mutation({
       query: (id) => ({
-        url: `/api/youtube/${id}`,
+        url: `/api/linkdin/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Youtube']
+      invalidatesTags: ['linkdin']
     }),
   }),
 });
 
 export const {
-  useGoogleLoginQuery,
-  useGoogleCallbackQuery,
-  useUploadVideoMutation,
-  useGetVideosQuery,
-  useGetOneVideoQuery,
-  useUpdateVideoMutation,
-  useDeleteVideoMutation,
-  useRemoveVideoMutation,
-  useAddVideoMutation,
-  useGetReVideosQuery,
+  useGetPostsQuery,
   
-} = googleApiSlice;
+} = linkedinApiSlice;

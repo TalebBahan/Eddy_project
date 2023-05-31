@@ -10,7 +10,7 @@ import Navbar from 'components/navbar';
 import Edit from './Edit';
 import Loading from 'components/Loading';
 import LinkedInButton from './LinkedInButton';
-
+import { useGetPostsQuery } from './linkdubApi';
 
 const LinkedIn = () => {
   // const user = useSelector(selectCurrentUser);
@@ -18,15 +18,21 @@ const LinkedIn = () => {
   // const { data:re, status:reStatus, isLoading:reisLoading } = useGetReVideosQuery(user);
   // const [searchTerm, setSearchTerm] = useState('');
 
-
-
-  // if (status === 'rejected') {
-  return (
+  const { data, status, isLoading } = useGetPostsQuery();
+  console.log(status);
+  if (isLoading) return <Loading />;
+  if (status === 'rejected')   return (
     <div className={`flex justify-center items-center flex-col h-screen`}>
       <p className='text-lg font-bold text-navy-700 dark:text-white'>You Must Sign In WIth Your Linkdin Account</p>
-      <a href={`${process.env.REACT_APP_API}/linkdin/login/`}><LinkedInButton /></a>
+      <a href={`${process.env.REACT_APP_API}/api/linkedin/login`}><LinkedInButton /></a>
     </div>
   )
+  console.log(data);
+
+  return (
+    <>good</>
+    );
+
 };
 
 export default LinkedIn;
