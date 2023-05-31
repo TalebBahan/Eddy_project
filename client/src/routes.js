@@ -44,7 +44,7 @@ const routes = [
     component: <Youtube />,
   },
   {
-    name: "Youtube",
+    name: "Linkdin",
     layout: "/admin",
     path: "linkdin",
     icon: <AiOutlineYoutube className="h-6 w-6" />,
