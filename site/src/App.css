@@ -1577,7 +1577,7 @@ body::-webkit-scrollbar {
   overflow: hidden;
   padding: 0 0 1.44rem;
   justify-content: center;
-  max-width: 400px;
+  max-width: 380px;
   margin: auto;
 }
 .cyber-security,

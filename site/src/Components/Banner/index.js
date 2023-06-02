@@ -12,7 +12,7 @@ const Hero = ({data}) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
   };
   return (
     <Wrapper id="home" className="hero-section">

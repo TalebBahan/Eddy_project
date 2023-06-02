@@ -18,9 +18,6 @@ const News = ({ latestNewsObj }) => {
   const handleSwipeRight = () => {
     if (splideRef.current) {
       splideRef.current.go('+1');
-      console.log('====================================');
-      console.log(splideRef.current);
-      console.log('====================================');
     }
   };
   const breakpoints = {
@@ -64,6 +61,7 @@ const News = ({ latestNewsObj }) => {
               loop:true,
               breakpoints: breakpoints,
               pagination: false, // Remove dots navigation
+              autoplay: true,
             }}
             aria-label="My Favorite Images"
             ref={splideRef}
