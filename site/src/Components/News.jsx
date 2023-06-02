@@ -58,7 +58,7 @@ const News = ({ latestNewsObj }) => {
               arrows:false,
               gap: "2px",
               perPage: 3,
-              loop:true,
+              infinite: true,
               breakpoints: breakpoints,
               pagination: false, // Remove dots navigation
               autoplay: true,
