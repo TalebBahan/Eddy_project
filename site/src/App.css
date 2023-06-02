@@ -489,6 +489,11 @@ body::-webkit-scrollbar {
   width: 26.57rem;
   font-family: "Gilroy";
 }
+@media (max-width: 768px) {
+  .award-winning-disruptive-ceo {
+    font-size: 0.8rem; /* Adjust the font size as per your needs */
+  }
+}
 .badge-item,
 .image-removebg-preview-1-parent {
   position: absolute;

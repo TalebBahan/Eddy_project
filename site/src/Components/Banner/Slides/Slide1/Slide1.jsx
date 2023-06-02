@@ -11,7 +11,9 @@ import {
   TagArea,
   SlideWrapper,
   SocialArea,
+  BadgeArea
 } from "./Slide1Elements";
+import Badge from "Components/common/Badge";
 import Eaddy from "../../../../assets/hero/Eddy.png";
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaLinkedinIn } from "react-icons/fa";
@@ -37,21 +39,22 @@ const Slide1 = ({ link }) => (
         <Img src={Eaddy} />
       </RightArea>
       <BottomArea>
-        <TagArea className="badge">
+        {/* <TagArea className="badge">
           <div className="badge-child"></div>
           <div className="image-removebg-preview-1-parent">
             <img
               className="image-removebg-preview-1-icon"
               alt=""
               src="Images/imageremovebgpreview-1@2x.png"
-            />
-            <b className="award-winning-disruptive-ceo">
-              Award-winning Disruptive CEO & Technology Person of the Year (2019
-              & 2021)
-            </b>
-          </div>
+            /> */}
+            <BadgeArea >
+              <Badge 
+                text={'Award-winning Disruptive CEO & Technology Person of the Year (2019& 2021)'} 
+               />
+            </BadgeArea>
+          {/* </div>
           <div className="badge-item"></div>
-        </TagArea>
+        </TagArea> */}
       </BottomArea>
     </Container>
   </SlideWrapper>

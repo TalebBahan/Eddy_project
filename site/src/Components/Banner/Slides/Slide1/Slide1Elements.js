@@ -146,3 +146,21 @@ export const SocialArea = styled(Link)`
     left: 40%;
   }
 `;
+
+export const BadgeArea = styled.div`
+  position: absolute;
+  z-index: 1;
+  bottom: 0px;
+  left: 0px;
+  width: 80%;
+  max-width: 900px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  @media screen and (max-width: 760px) {
+    width: 100%;
+    bottom: -5px;
+    overflow: hidden;
+  }
+`
