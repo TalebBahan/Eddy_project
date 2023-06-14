@@ -12,6 +12,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useDeletenewsletterMutation } from "./newsletterApi";
 import Articles from "./Articles";
 import AddArticle from "./AddArticle";
+import View from "./View";
 import Send from "./Send";
 const Table = (props) => {
     const { columnsData, tableData } = props;
@@ -24,7 +25,13 @@ const Table = (props) => {
     const [Ar, setAr] = React.useState('')
     const [open, setOpen] = React.useState(false)
     const [Articleopen, setArticleOpen] = React.useState(false)
-    const [sendModel,setSendModel] = React.useState(false)
+    const [sendModel, setSendModel] = React.useState(false)
+    const [view, setView] = React.useState(false)
+    const [viewData, setViewData] = React.useState('')
+    function handleView(newsletter) {
+        setViewData(() => newsletter);
+        setView(true)
+    }
 
     function handleAddArticle(id) {
         setNewsId(() => id);
@@ -77,7 +84,8 @@ const Table = (props) => {
         <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
             <AddEditNewsletter open={open} handleOpen={() => setOpen(!open)} />
             <AddArticle open={Articleopen} handleOpen={() => setArticleOpen(!Articleopen)} id={newsId} />
-            {newsId && <Send open={sendModel} handleOpen={()=>setSendModel(!sendModel)} id={newsId} />}
+            {newsId && <Send open={sendModel} handleOpen={() => setSendModel(!sendModel)} id={newsId} />}
+            {view && <View open={view} handleOpen={() => setView(!view)} newsletter={viewData} />}
             <Articles open={Ar} handleOpen={() => setAr(!Ar)} news={news} />
             <div class="relative flex items-center justify-between">
                 <div class="text-xl font-bold text-navy-700 dark:text-white">
@@ -191,7 +199,7 @@ const Table = (props) => {
                                                     Add
                                                 </button>
                                                 <button
-                                                    onClick={() => handleAr(row.original)}
+                                                    onClick={() => handleView(row.original)}
                                                     className="text-sm font-bold text-orange-500 dark:text-white"
                                                 >
                                                     View
@@ -207,7 +215,7 @@ const Table = (props) => {
                                                     delete
                                                 </button>
                                                 <button
-                                                    onClick={()=>handleSend(row.original._id)}
+                                                    onClick={() => handleSend(row.original._id)}
                                                     className="text-sm font-bold text-green-500 dark:text-white"
                                                 >
                                                     Send
