@@ -27,19 +27,19 @@ token.findOne({_id:'645a3319b8725a02ee25de2c'}).then((token)=>{
 })
 // create a login route that redirects the user to Google sign-in page
 async function googlelogin(req, res) {
-  console.log("got in")
+
   // state is random string
   state =
     Math.random().toString(36).substring(2, 15) +
     Math.random().toString(36).substring(2, 15);
     token.findOne({_id:'645a3319b8725a02ee25de2c'}).then((token) => {
     if (token) {
-      console.log(token);
+
       token.googleState = state;
       token.save();
-      console.log("hi: ", token)
+
     } else {
-      console.log("token does not exist");
+
       // res.status(400).send("unauthorized");
     }
   });
@@ -68,7 +68,7 @@ async function googlelogin(req, res) {
 async function googlecallbak(req, res) {
   const code = req.query.code;
   const state = req.query.state;
-  console.log(state);
+
 
   try {
     var data = await client.getToken(code);
@@ -82,7 +82,7 @@ async function googlecallbak(req, res) {
         token.save();
         return res.redirect("http://localhost:3000/admin/youtube");
       } else {
-        console.log("user does not exist");
+        
         res.status(400);
       }
     });
@@ -124,7 +124,7 @@ const uploadVideo = (req, res) => {
         console.log(error);
         return res.status(error.status).send(error);
       }
-      console.log("https://www.youtube.com/watch?v=" + data.data.id);
+     
       return res.status(200).send(data);
     }
   );
@@ -141,9 +141,9 @@ const getvideos = async (req, res) => {
   access_token = i.googleAccessToken;
   refresh_token = i.googleRefreshToken;
   let videoid;
-  console.log(access_token);
+  
   if (access_token) {
-    console.log("dfa", access_token);
+    
     fetch(
       "https://www.googleapis.com/youtube/v3/channels?part=contentDetails&mine=true",
       {
@@ -156,14 +156,14 @@ const getvideos = async (req, res) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log('dddd',data);
+        
         return fetch(
           `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${data.items[0].contentDetails.relatedPlaylists.uploads}&key=${GOOGLE_API_KEY}`
         );
       })
       .then((response) => response.json())
       .then((videoData) => {
-        console.log(videoData);
+        
       
         res.status(200).json(videoData);
       })
@@ -190,6 +190,14 @@ const updateVideo = async (req, res) => {
   const videoId = req.params.id;
   const newTitle = req.body.title;
   const newDescription = req.body.description;
+  const i = await token.findOne({_id:'645a3319b8725a02ee25de2c'}); // assuming you're using ObjectId for user lookup
+  if (!i.googleAccessToken) {
+    res.status(403).send("login to your google account first");
+  }
+  access_token = i.googleAccessToken;
+  refresh_token = i.googleRefreshToken;
+  //no refresh token is set
+  
   const service = google.youtube({
     version: "v3",
     auth: client,
@@ -198,6 +206,7 @@ const updateVideo = async (req, res) => {
   try {
     const response = await service.videos.update({
       part: "snippet",
+      refresh_token: refresh_token,
       resource: {
         id: videoId,
         snippet: {
@@ -215,7 +224,7 @@ const updateVideo = async (req, res) => {
 };
 const deleteVideo = async (req, res) => {
   const videoId = req.params.id;
-  console.log("id : ",videoId);
+  
 
   const service = google.youtube({
     version: "v3",
