@@ -194,15 +194,9 @@ const Table = (props) => {
                                             <div className='flex items-center gap-2'>
                                                 <button
                                                     onClick={() => handleAddArticle(row.original._id)}
-                                                    className="text-sm font-bold text-yellow-500 dark:text-white"
+                                                    className="text-sm font-bold text-green-500 dark:text-white"
                                                 >
                                                     Add
-                                                </button>
-                                                <button
-                                                    onClick={() => handleView(row.original)}
-                                                    className="text-sm font-bold text-orange-500 dark:text-white"
-                                                >
-                                                    View
                                                 </button>
                                             </div>
                                         </td>
@@ -213,6 +207,12 @@ const Table = (props) => {
                                                     className="text-sm font-bold text-red-500 dark:text-white"
                                                 >
                                                     delete
+                                                </button>
+                                                <button
+                                                    onClick={() => handleView(row.original)}
+                                                    className="text-sm font-bold text-orange-500 dark:text-white"
+                                                >
+                                                    Preview 
                                                 </button>
                                                 <button
                                                     onClick={() => handleSend(row.original._id)}
