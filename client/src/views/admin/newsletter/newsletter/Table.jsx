@@ -192,6 +192,12 @@ const Table = (props) => {
                                         })}
                                         <td>
                                             <div className='flex items-center gap-2'>
+                                            <button
+                                                    onClick={() => handleAr(row.original)}
+                                                    className="text-sm font-bold text-orange-500 dark:text-white"
+                                                >
+                                                    View 
+                                                </button>
                                                 <button
                                                     onClick={() => handleAddArticle(row.original._id)}
                                                     className="text-sm font-bold text-green-500 dark:text-white"
