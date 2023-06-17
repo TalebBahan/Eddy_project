@@ -5,12 +5,10 @@ export const Wrapper = styled.div`
   margin: 0px 20px;
   width: 300px;
   min-height: 200px;
-  height:400px;
   background: #ffffff;
   box-shadow: 0px 0px 2px 1px rgba(112, 112, 112, 0.2);
   border-radius: 10px;
   padding-bottom: 5px;
-  overflow:hidden;
   @media screen and (max-width: 750px) {
     width: 280px;
     margin: 10px;
@@ -119,7 +117,7 @@ export const SmallText = styled.p`
 `;
 
 export const ButtonArea = styled.div`
-  margin-top: 15px;
+  margin-top: 5px;
   padding: 0px 10px;
 `;
 

@@ -1,66 +1,46 @@
 import { apiSlice } from "app/api/apiSlice"
 
 export const linkedinApiSlice = apiSlice.injectEndpoints({
-  tagTypes: ['linkdin'],
+  tagTypes: ['linkedin'],
   endpoints: builder => ({
-    uploadVideo: builder.mutation({
-      query: (video) => ({
-        url: `/api/linkedin/upload`,
-        method: "POST",
-        body: video,
-
-      }),
-    }),
     getPosts: builder.query({
-      query: () => `/api/linkedin/Posts`,
-      method: "GET",
-      providesTags: ['linkdin']
+      query: () => `/api/linkedin`,
+      providesTags: ['linkedin']
     }),
-    getOneVideo: builder.query({
-      query: (id) => `/linkedin/videos/?id=${id}`,
-      method: "GET",
+    getPostById: builder.query({
+      query: (id) => `/api/linkedin/${id}`,
     }),
-    updateVideo: builder.mutation({
-      query: (data) => ({
-        url: `/api/linkedin/videos/${data.videoId}`,
-        method: "PUT",
-        body: data,
+    createPost: builder.mutation({
+      query: (body) => ({
+        url: `/api/linkedin`,
+        method: "POST",
+        body,
       }),
-      invalidatesTags: ['linkdin']
+      invalidatesTags: ['linkedin']
     }),
-    deleteVideo: builder.mutation({
+    updatePost: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/api/linkedin/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ['linkedin']
+    }),
+    deletePost: builder.mutation({
       query: (id) => ({
-        url: `/api/linkedin/videos/${id}`,
+        url: `/api/linkedin/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['linkdin']
-    }),
-
-
-
-    getReVideos: builder.query({
-      query: () => '/api/linkdin',
-      providesTags: ['linkdin']   
-    }),
-    addVideo: builder.mutation({
-      query: (videoData) => ({
-        url: '/api/linkdin',
-        method: 'POST',
-        body: videoData,
-      }),
-      invalidatesTags: ['linkdin']
-    }),
-    removeVideo: builder.mutation({
-      query: (id) => ({
-        url: `/api/linkdin/${id}`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: ['linkdin']
+      invalidatesTags: ['linkedin']
     }),
   }),
-});
+})
 
 export const {
   useGetPostsQuery,
-  
-} = linkedinApiSlice;
+  useGetPostByIdQuery,
+  useCreatePostMutation,
+  useUpdatePostMutation,
+  useDeletePostMutation,
+} = linkedinApiSlice
+

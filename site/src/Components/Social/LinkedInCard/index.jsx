@@ -5,16 +5,12 @@ import {
   ButtonIcon,
   Earth,
   HashTag,
-  Icon,
-  IconArea,
   MoreImg,
   Name,
   PostImg,
   Profile,
-  SmallText,
   Text,
   TextArea,
-  Time,
   TimeWrapper,
   TopLeftArea,
   TopRightArea,
@@ -24,35 +20,57 @@ import {
 import ProfileImg from "assets/social/linkedin/Profile.png";
 import EarthImg from "assets/social/linkedin/Globe.png";
 import More from "assets/social/linkedin/More.png";
-import PostImage from "assets/social/linkedin/PostImage.png";
-import LikeImg from "assets/social/linkedin/Like.png";
-import Celebrate from "assets/social/linkedin/Celebrate.png";
-import Support from "assets/social/linkedin/Support.png";
-import Love from "assets/social/linkedin/Love.png";
-import Insightfull from "assets/social/linkedin/Insightfull.png";
-import Curious from "assets/social/linkedin/Curious.png";
 import LikeGroup from "assets/social/linkedin/Like group.png";
 import CommentGroup from "assets/social/linkedin/Comment group.png";
-import ShareGroup from "assets/social/linkedin/Share group.png";
-import SendGroup from "assets/social/linkedin/Send group.png";
-
-const LinkedInCard = ({ title, description, publishedAt, videoId }) => {
+import { Link } from "react-router-dom";
+const LinkedInCard = ({link,postImage,tags,title}) => {
+  console.log(link);
   return (
+    <Link to={link} style={{
+      textDecoration: 'none',
+    }}
+    target="_blank"
+    >
     <Wrapper>
-
-      <iframe
-        style={{
-          minHeight: '200px',
-      height:'400px',
-
-        }}
-      title='Youtube player'
-      sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
-      src={`https://youtube.com/embed/${videoId}?autoplay=0`}
-      />
-
-
+      <TopSection>
+        <TopLeftArea>
+          <Profile src={ProfileImg} />
+          <AuthorArea>
+            <Name>Eddy Abboud</Name>
+            <TimeWrapper>
+              {/* <Time>20h</Time> */}
+              <Earth src={EarthImg} />
+            </TimeWrapper>
+          </AuthorArea>
+        </TopLeftArea>
+        <TopRightArea>
+          <MoreImg src={More} />
+        </TopRightArea>
+      </TopSection>
+      <TextArea>
+        <Text>
+          {title?.length > 100 ? title?.substring(0, 144) + "..." : title}
+        </Text>
+        <HashTag style={{
+          height: '50px',
+        }}>{tags?.length > 100 ? tags?.substring(0, 100) + "..." : tags}</HashTag>
+      </TextArea>
+      <PostImg style={{
+        height: '300px',
+        maxWidth: '300px',
+        objectFit: 'cover',
+      
+      }} src={`${process.env.REACT_APP_API}/images/${postImage}`}/>
+      <ButtonArea>
+        <Button>
+          <ButtonIcon src={LikeGroup} />
+        </Button>
+        <Button>
+          <ButtonIcon src={CommentGroup} />
+        </Button>
+      </ButtonArea>
     </Wrapper>
+    </Link>
   );
 };
 

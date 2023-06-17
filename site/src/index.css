@@ -92,3 +92,15 @@
 .t{
   stroke: #000;
 }
+
+.linkedin-embed {
+  height: 700px; /* Set the desired fixed height */
+  overflow: hidden; /* Hide any overflow beyond the fixed height */
+}
+
+.attributed-text-segment-list__content .text-color-text .whitespace-pre-wrap .break-words {
+  white-space: nowrap!important; /* Prevent the text from wrapping */
+  overflow: hidden!important; /* Hide any overflowing text */
+  text-overflow: ellipsis!important; /* Add an ellipsis (...) at the end of the text */
+  height: 50px!important;
+}

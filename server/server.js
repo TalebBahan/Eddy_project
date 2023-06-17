@@ -62,6 +62,7 @@ app.use('/api/newsletter', require('./routes/api/newsletter'));
 app.use('/api/youtube', require('./routes/api/youtube'));
 app.use('/api/content', require('./routes/api/content'));
 app.use('/api/heroLinks', require('./routes/api/heroLinks'));
+app.use('/api/linkedin', require('./routes/api/linkedinPosts'));
 
 
 

@@ -28,7 +28,7 @@ const Home = () => {
           <About visionData={data.content} images={data.aboutImages} />
           <Achievements />
           <Lectures />
-          <SocialMedia youtube={data.youtube} />
+          <SocialMedia youtube={data.youtube} linkedin={data.linkedin} />
           <News latestNewsObj={data.content} />
           <NewsLetter />
           <Footer />

@@ -1,48 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
-  FaInstagram,
   FaLinkedin,
-  FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
-import InstaCard from "./InstaCard";
-import LinkedInCard from "./LinkedInCard";
+import YoutubeCard from "./YoutubeCard";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
 import "./Social.css";
-import Post1 from "../../assets/social/post1.jpg";
-import Post2 from "../../assets/social/post2.jpg";
-import Post3 from "../../assets/social/post3.jpg";
+import LinkedInCard from "./LinkedInCard";
 import Slider from "react-slick";
 
-const SocialMedia = ({ youtube }) => {
-  const socialmediaObj = [
-    {
-      img: Post1,
-      name: "Ravi Dubey",
-      userName: "Ravi@123",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      socialMedia: "Instagram",
-    },
-    {
-      img: Post2,
-      name: "Suraj Yadav",
-      userName: "Suraj@123",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      socialMedia: "Youtube",
-    },
-    {
-      img: Post3,
-      name: "Neeraj Yadav",
-      userName: "Neeraj@123",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-      socialMedia: "LinkedIn",
-    },
-  ];
+const SocialMedia = ({ youtube,linkedin }) => {
+
 
   const socialLink = [
     // {
@@ -62,14 +32,13 @@ const SocialMedia = ({ youtube }) => {
     },
   ];
 
-  const [socialmediaObjList] = useState(socialmediaObj);
 
   var settings = {
     dots: true,
     arrows: false,
     arrow: false,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     variableWidth: true,
     swipeToSlide: true,
@@ -119,17 +88,23 @@ const SocialMedia = ({ youtube }) => {
           </div>
           <div className="social-slider-wrapper" style={{}}>
             <Slider {...settings}>
-              {youtube?.map((card, index) => (
+              {linkedin?.map((card, index) => (
                 <LinkedInCard
                   key={index}
                   title={card.title}
-                  description={card.description}
-                  publishedAt={card.publishedAt}
-                  videoId={card.videoId}
+                  tags={card.tags}
+                  link={card.link}
+                  postImage={card.postImage}
                 />
               ))}
+            </Slider>
+          </div>
+          {
+            youtube?.length > 0 &&
+            <div className="social-slider-wrapper" style={{}}>
+            <Slider {...settings}>
               {youtube?.map((card, index) => (
-                <LinkedInCard
+                <YoutubeCard
                   key={index}
                   title={card.title}
                   description={card.description}
@@ -138,8 +113,11 @@ const SocialMedia = ({ youtube }) => {
                 />
               ))}
             </Slider>
-            
           </div>
+
+          }
+          
+          
 
         </section>
       </motion.div>
