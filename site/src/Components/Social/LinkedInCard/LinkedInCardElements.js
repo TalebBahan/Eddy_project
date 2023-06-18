@@ -87,8 +87,14 @@ export const HashTag = styled.p`
 `;
 
 export const PostImg = styled.img`
-  height: auto;
-  weight: 100%;
+  height: 300px;
+  max-width: 300px;
+  object-fit: cover;
+
+  @media (max-width: 768px) {
+    height: auto;
+    width: 100%;
+  }
 `;
 
 export const IconArea = styled.div`

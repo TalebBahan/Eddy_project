@@ -35,17 +35,19 @@ export default function LinkedIn() {
     setSearchTerm(event.target.value);
   }
   return (
-    <div className='mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid'>
+    <div className="mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid ">
+    <div>
       <br></br>
       <Navbar
         searchTerm={searchTerm} handleSearch={handleSearch}
       />
       {/* <Upload /> */}
+      {/* <Upload /> */}
       <Card extra={"w-full h-full p-3"}>
         <AddEditMedia open={open} handleOpen={handleOpen} isAdd={true} />
         <div className="relative mb-3 flex items-center justify-between pt-1">
           <h4 className="text-3xl font-bold text-navy-900 dark:text-white">
-            Posts
+            Media Coverage and Articles
           </h4>
           <button
             onClick={handleOpen}
@@ -62,6 +64,7 @@ export default function LinkedIn() {
           }
         </div>
       </Card>
+    </div>
     </div>
   )
 }

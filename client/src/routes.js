@@ -10,7 +10,7 @@ import LinkedIn from "views/admin/linkdin/LinkedIn";
 import { FiUsers } from "react-icons/fi";
 import { BiBookContent, BiNews } from "react-icons/bi";
 import { BsPersonCheck } from "react-icons/bs";
-import { AiOutlineYoutube } from "react-icons/ai";
+import { AiOutlineYoutube,AiOutlineLinkedin } from "react-icons/ai";
 
 
 
@@ -47,7 +47,7 @@ const routes = [
     name: "Linkedin",
     layout: "/admin",
     path: "linkedin",
-    icon: <AiOutlineYoutube className="h-6 w-6" />,
+    icon: <AiOutlineLinkedin className="h-6 w-6" />,
     component: <LinkedIn />,
   },
   {

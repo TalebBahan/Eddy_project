@@ -12,6 +12,10 @@
     letter-spacing: -0.5px;
   }
 }
+.b{
+  word-break:break-all;
+
+}
 
 input.defaultCheckbox::before {
   content: url(../src/assets/svg/checked.svg);
@@ -71,3 +75,5 @@ input:checked.defaultCheckbox::before {
 	background: #3B6EFD;
   }
   
+.ms{
+}

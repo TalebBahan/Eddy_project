@@ -56,9 +56,7 @@ const LinkedInCard = ({link,postImage,tags,title}) => {
         }}>{tags?.length > 100 ? tags?.substring(0, 100) + "..." : tags}</HashTag>
       </TextArea>
       <PostImg style={{
-        height: '300px',
-        maxWidth: '300px',
-        objectFit: 'cover',
+
       
       }} src={`${process.env.REACT_APP_API}/images/${postImage}`}/>
       <ButtonArea>
