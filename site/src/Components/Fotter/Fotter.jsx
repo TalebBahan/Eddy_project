@@ -57,7 +57,7 @@ const Fotter = () => {
               Book an Appointment
             </FotterLink>
             <FotterLink to="/#news-and-article">News</FotterLink>
-            <FotterLink>Book to Read</FotterLink>
+            <FotterLink>Books to Read</FotterLink>
             <FotterLink>Articles</FotterLink>
           </LinkWrapper>
           <LinkWrapper>
