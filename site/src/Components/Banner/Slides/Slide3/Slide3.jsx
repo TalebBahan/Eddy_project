@@ -15,7 +15,7 @@ import Image3 from "../../../../assets/hero/slide3/3.jpg";
 import Image4 from "../../../../assets/hero/slide3/4.jpg";
 import Badge from "Components/common/Badge";
 
-const Slide3 = ({link}) => {
+const Slide3 = ({ link }) => {
   return (
     <SlideWrapper>
       <Container>
@@ -27,7 +27,9 @@ const Slide3 = ({link}) => {
         <BadgeWrapper>
           <Badge />
         </BadgeWrapper>
-        <a target="_blank" href={link}><YellowButton text="Learn More" /></a>
+        {/* <a target="_blank" href={link}> */}
+        <YellowButton text="Learn More" />
+        {/* </a> */}
         <ImageSection>
           <ImageContainer>
             <Image src={Image1} />

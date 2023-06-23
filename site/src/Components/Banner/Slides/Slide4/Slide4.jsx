@@ -11,7 +11,7 @@ import {
 import Slide4Image from "../../../../assets/hero/slide4.png";
 import YellowButton from "../../../common/button/yellow-button";
 import Badge from "Components/common/Badge";
-const Slide4 = ({link}) => {
+const Slide4 = ({ link }) => {
   return (
     <SlideWrapper>
       <Container>
@@ -26,7 +26,9 @@ const Slide4 = ({link}) => {
             Unlock your full potential as a leader by embracing your authentic
             self and inspiring others.
           </SubHeading>
-          <a target="_blank" href={link}><YellowButton text="Learn More" /></a>
+          {/* <a target="_blank" href={link}> */}
+          <YellowButton text="Learn More" />
+          {/* </a> */}
         </RightArea>
         <BadgeWrapper>
           <Badge />

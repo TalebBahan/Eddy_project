@@ -78,7 +78,7 @@ const SocialMedia = ({ youtube,linkedin }) => {
 
           <div className="catButton">
             {socialLink.map(({ icon, link, id }) => (
-              <a href={link}>
+              <a href={link} target="_blank">
               <button id={id} className="social-btn">
                 {icon}
               </button>

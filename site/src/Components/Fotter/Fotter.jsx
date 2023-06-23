@@ -85,6 +85,7 @@ const Fotter = () => {
             textAlign: "center",
           }}
           to="https://www.linkedin.com/in/eddyabboud/"
+          target="_blank"
         >
           <img
             height={35}

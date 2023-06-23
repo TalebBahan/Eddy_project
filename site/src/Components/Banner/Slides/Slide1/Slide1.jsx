@@ -32,7 +32,9 @@ const Slide1 = ({ link }) => (
           career success.
         </SubTitle>
         <ButtonArea>
-          <a target="_blank" href={link}><YellowButton text="Learn More" /></a>
+          {/* <a target="_blank" href={link}> */}
+          <YellowButton text="Learn More" />
+          {/* </a> */}
         </ButtonArea>
       </LeftArea>
       <RightArea>

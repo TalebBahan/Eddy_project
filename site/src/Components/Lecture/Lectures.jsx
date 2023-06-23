@@ -48,6 +48,10 @@ const Lectures = () => {
               <Link
                 style={{ textDecoration: "none" }}
                 to="/book"
+                //scroll to top
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
               >
                 <YellowButton text="Reach Out" />
               </Link>

@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+const showContact = () => {
+  let element = document.getElementById("contact-form");
+  if (element) {
+    element.style.display = "flex";
+  }
+};
 const Button = styled.button`
   background: #e6c34b;
   border-radius: 6px;
@@ -17,5 +23,5 @@ const Button = styled.button`
   }
 `;
 
-const YellowButton = ({ text, onClick }) => <Button>{text}</Button>;
+const YellowButton = ({ text }) => <Button onClick={showContact}>{text}</Button>;
 export default YellowButton;

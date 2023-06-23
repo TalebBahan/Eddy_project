@@ -9,6 +9,7 @@ import {
 import Badge from "Components/common/Badge";
 import YellowButton from "../../../common/button/yellow-button";
 const Slide2 = ({link}) => {
+  
   return (
     <SlideWrapper>
       <Container>
@@ -17,7 +18,9 @@ const Slide2 = ({link}) => {
           Combining innovation with bold leadership to achieve tangible results
           and drive sustainable growth.
         </SubHeading>
-        <a target="_blank" href={link}><YellowButton text="Learn More" /></a>
+        {/* <a target="_blank" href={link}> */}
+        <YellowButton text="Learn More"/>
+        {/* </a> */}
         <ImageBox></ImageBox>
         <BadgeArea>
           <Badge />
