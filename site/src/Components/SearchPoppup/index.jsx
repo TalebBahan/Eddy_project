@@ -15,7 +15,7 @@ import {
 } from "./SearchPopup";
 import { FaTimes } from "react-icons/fa";
 
-const SearchPopup = ({ articles, youtube }) => {
+const SearchPopup = ({ articles, youtube, linkedin }) => {
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState([...articles, ...youtube]);
 
@@ -39,7 +39,15 @@ const SearchPopup = ({ articles, youtube }) => {
       item.description.toLowerCase().includes(searchInput.toLowerCase())
     );
 
-    setSuggestions([...matchedContentSuggestions, ...matchedYouTubeSuggestions]);
+    console.log('====================================');
+    console.log('matchedLinkedInSuggestions', linkedin);
+    console.log('====================================');
+    const matchedLinkedInSuggestions = linkedin.filter((item) =>
+      item.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+      item.tags.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
+    setSuggestions([...matchedContentSuggestions, ...matchedYouTubeSuggestions, ...matchedLinkedInSuggestions]);
   };
 
   return (
@@ -66,11 +74,31 @@ const SearchPopup = ({ articles, youtube }) => {
               .map((item) => (
                 <Li key={item.link}>
                   <Htext><a href={item.link}>{item.h_text}</a></Htext>
-                  <Stext>{item.s_text}</Stext>
+                  <Stext>{
+                    item.s_text.length > 200 ?
+                      item.s_text.substring(0, 200) + '...' : item.s_text
+                  }</Stext>
                 </Li>
               ))
           }
 
+        </ul>
+        <Label>LinkedIn</Label>
+        <ul>
+          {suggestions.length > 0 &&
+            suggestions
+              .filter((item) => item.hasOwnProperty("tags"))
+              .slice(0, 2) // Take only the first two items
+              .map((item) => (
+                <Li key={item.link}>
+                  <Htext><a href={item.link}>{item.tags.split(' ').slice(0, 3).join(', ')}</a></Htext>
+                  <Stext>{
+                     item.title.length > 200 ? 
+                     item.title.substring(0, 200) + '...' : item.title
+                  }</Stext>
+                </Li>
+              ))
+          }
         </ul>
         <Label>YouTube</Label>
         <ul>

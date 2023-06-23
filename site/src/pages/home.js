@@ -33,7 +33,7 @@ const Home = () => {
           <NewsLetter />
           <Footer />
           <ContactPopup />
-          <SearchPopup articles={articles} youtube={data.youtube}/>
+          <SearchPopup articles={articles} youtube={data.youtube} linkedin={data.linkedin}/>
         </>
       )}
     </>
