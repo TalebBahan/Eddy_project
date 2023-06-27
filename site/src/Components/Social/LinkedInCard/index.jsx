@@ -49,11 +49,9 @@ const LinkedInCard = ({link,postImage,tags,title}) => {
       </TopSection>
       <TextArea>
         <Text>
-          {title?.length > 100 ? title?.substring(0, 144) + "..." : title}
+          {title?.length > 130 ? title?.substring(0, 130) + "..." : title}
         </Text>
-        <HashTag style={{
-          height: '50px',
-        }}>{tags?.length > 100 ? tags?.substring(0, 100) + "..." : tags}</HashTag>
+        <HashTag>{tags?.length > 100 ? tags?.substring(0, 100) + "..." : tags}</HashTag>
       </TextArea>
       <PostImg style={{
 
