@@ -65,7 +65,7 @@ const SocialMedia = ({ youtube,linkedin }) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.1, duration: 0.9 }}
+        transition={{ delay: 0.2, duration: 0.4 }}
         className="social-area"
       >
         <section className="latest-news">
