@@ -99,7 +99,7 @@ exports.sendNewsletterByIA = (req, res) => {
       });
 
       const mailOptions = {
-        from: 'talebahan@gmail.com',
+        from: 'eddy@@eddyabboud.com',
         subject: newsletter.subject,
         template: 'email',
         context: {
