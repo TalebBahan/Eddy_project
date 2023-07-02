@@ -103,7 +103,7 @@ const ContactPopup = () => {
             </InputArea>
             <InputArea>
               <ReCAPTCHA
-                sitekey="6LfwcOsmAAAAABeuMKNPTv4m8WB2VAIlGND4Sm-8"
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
                 onChange={handleCaptchaChange}
               />
             </InputArea>
