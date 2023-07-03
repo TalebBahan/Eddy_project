@@ -31,6 +31,9 @@ const ContactPopup = () => {
 
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
+    console.log('====================================');
+    console.log(value);
+    console.log('====================================');
   };
 
   const handleSubmit = async (e) => {
@@ -103,12 +106,20 @@ const ContactPopup = () => {
             </InputArea>
             <InputArea>
               <ReCAPTCHA
-                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                sitekey={process.env.REACT_APP_reCAPTCHA_SITE_KEY}
                 onChange={handleCaptchaChange}
               />
             </InputArea>
             <ButtonWrapper>
-              <Button type="submit">Submit</Button>
+              <Button type="submit" disabled={!captchaValue} style={
+                {
+                  backgroundColor: !captchaValue ? '#ccc' : '',
+                  color: !captchaValue ? '#000' : '#fff',
+                  cursor: !captchaValue ? 'not-allowed' : 'pointer'
+                }
+              } >
+                Submit
+              </Button>
               <Button onClick={hideContact} outline>
                 Close
               </Button>

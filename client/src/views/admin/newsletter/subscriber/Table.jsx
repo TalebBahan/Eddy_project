@@ -7,10 +7,9 @@ import {
 } from "react-table";
 import React from "react";
 import AddEditModal from "./AddEditModal";
-import { MdCheckCircle, MdCancel } from "react-icons/md";
 import { useMemo } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useDeleteSubscriberMutation, useSendMutation } from "./subscriberApi";
+import { useDeleteSubscriberMutation } from "./subscriberApi";
 import Send from "./Send";
 import Checkbox from "components/checkbox";
 const Table = (props) => {
@@ -18,8 +17,6 @@ const Table = (props) => {
     const columns = useMemo(() => columnsData, [columnsData]);
     const data = useMemo(() => tableData, [tableData]);
     const [deleteSubscriber] = useDeleteSubscriberMutation()
-    const [send] = useSendMutation()
-
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => setOpen(!open);
     const [eopen, setEopen] = React.useState(false)
@@ -36,9 +33,6 @@ const Table = (props) => {
             setCheckedIds(checkedIds.filter((checkedId) => checkedId !== id));
         }
     };
-    function handleSend(){
-        send({newsletterId:"6456367a15ee1e583af62985",emailList:[...checkedIds]})
-    }
     function handleEdit(data) {
         setEditData(() => data);
         setEopen(true)
@@ -143,7 +137,7 @@ const Table = (props) => {
                                             } else if (cell.column.Header === "Interests") {
                                                 data = (
                                                     <p className="text-sm font-bold text-navy-700 dark:text-white">
-                                                        {cell.value.join(',')}
+                                                        {cell.value?.join(',')}
                                                     </p>
                                                 );
                                             }

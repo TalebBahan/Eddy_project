@@ -26,15 +26,14 @@ const COLUMNS = [
 ]
 export default function Content() {
     const { data, isLoading, isError,status } = useGetContentQuery()
-    const { data:hero, isLoading:heroLoading, isError:heroError,status:heroStatus } = useGetHeroLinksQuery()
 
     const [searchTerm, setSearchTerm] = useState('');
 
-    if (isLoading || heroLoading) {
+    if (isLoading) {
         return <Loading />;
     }
 
-    if (isError || heroError) {
+    if (isError) {
         return <Unauthorized />;
     }
 
@@ -50,7 +49,6 @@ export default function Content() {
             <Navbar
                 searchTerm={searchTerm} handleSearch={handleSearch}
             />
-            { hero && <HeroLinks data={hero} />}
             {filterbytype('about').length>0 && <About data={filterbytype('about')} />}
             {filterbytype('media').length>0 && <Media data={filterbytype('media')} />}
         </div>

@@ -4,6 +4,8 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
 
+
+
 const News = ({ latestNewsObj }) => {
   const splideRef = useRef(null);
 
@@ -24,13 +26,14 @@ const News = ({ latestNewsObj }) => {
     768: {
       perPage: 1,
     },
-    992: {
+    1000: {
       perPage: 2,
     },
-    1200: {
+    1600: {
       perPage: 3,
     },
   };
+
   return (
     <>
       <motion.div
@@ -55,13 +58,12 @@ const News = ({ latestNewsObj }) => {
           <Splide
             options={{
               rewind: false,
-              arrows:false,
-              gap: "2px",
+              arrows: true,
               perPage: 3,
-              infinite: true,
               breakpoints: breakpoints,
               pagination: false, // Remove dots navigation
-              autoplay: true,
+              autoplay: false,
+              gap: "1rem",
             }}
             aria-label="My Favorite Images"
             ref={splideRef}
@@ -80,11 +82,18 @@ const News = ({ latestNewsObj }) => {
                         <b className="title">{item.h_text}</b>
                         <div className="text3">{item.s_text}</div>
                       </div>
-                      <button className="read-more-wrapper">
-                        <a className="read-more" href={item.link}>
-                          Read More
-                        </a>
-                      </button>
+                      <div className="read-more-wrapper">
+                        <button className="read-more-button">
+                          <a className="read-more" href={item.link}>
+                            Read More
+                          </a>
+                         
+                        </button>
+                        <div>
+                           {new Date(item.date).toLocaleDateString()}
+                          </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -93,7 +102,7 @@ const News = ({ latestNewsObj }) => {
           </Splide>
 
           <div className="ltswipers">
-            <img
+            {/* <img
               className="ltleftswiper-icon"
               alt=""
               src="Images/ltleftswiper.svg"
@@ -104,7 +113,7 @@ const News = ({ latestNewsObj }) => {
               alt=""
               src="Images/ltrightswiper.svg"
               onClick={handleSwipeRight}
-            />
+            /> */}
           </div>
           <img
             className="latest-news-item"
@@ -116,7 +125,7 @@ const News = ({ latestNewsObj }) => {
             alt=""
             src="Images/LTnewsdesign2@2x.png"
           />
-        
+
         </section>
       </motion.div>
     </>

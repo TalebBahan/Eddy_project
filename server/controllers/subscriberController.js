@@ -1,8 +1,10 @@
 const Subscriber = require('../model/subscriber');
+const Interest = require('../model/interest');
 
 exports.getSubscribers = async (req, res) => {
   try {
     const subscribers = await Subscriber.find();
+    console.log(subscribers);
     res.json(subscribers);
   } catch (error) {
     console.error(error);
@@ -60,5 +62,81 @@ exports.deleteSubscriber = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
+
+
+
+
+
+
+
+exports.createInterest = async (req, res) => {
+ 
+  try {
+    const { interest } = req.body;
+    const newInterest = await Interest.create({ interest });
+    res.status(201).json(newInterest);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// Get all interests
+exports.getAllInterests = async (req, res) => {
+  try {
+    const interests = await Interest.find();
+    res.status(200).json(interests);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// Get a specific interest by ID
+exports.getInterestById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const interest = await Interest.findById(id);
+    if (!interest) {
+      return res.status(404).json({ error: 'Interest not found' });
+    }
+    res.status(200).json(interest);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// Update a specific interest by ID
+exports.updateInterestById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { interest } = req.body;
+    const updatedInterest = await Interest.findByIdAndUpdate(
+      id,
+      { interest },
+      { new: true }
+    );
+    if (!updatedInterest) {
+      return res.status(404).json({ error: 'Interest not found' });
+    }
+    res.status(200).json(updatedInterest);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// Delete a specific interest by ID
+exports.deleteInterestById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedInterest = await Interest.findByIdAndDelete(id);
+    if (!deletedInterest) {
+      return res.status(404).json({ error: 'Interest not found' });
+    }
+    res.sendStatus(204);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };

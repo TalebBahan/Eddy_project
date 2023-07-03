@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: 'talebbahan@gmail.com',
-    pass: 'ymhrwmgbeecfbquf'
+    user: '21014@supnum.mr',
+    pass: 'uoesabbvnepdxmjg'
   }
 });
 
@@ -99,7 +99,7 @@ exports.sendNewsletterByIA = (req, res) => {
       });
 
       const mailOptions = {
-        from: 'eddy@@eddyabboud.com',
+        from: 'eddy@eddyabboud.com',
         subject: newsletter.subject,
         template: 'email',
         context: {

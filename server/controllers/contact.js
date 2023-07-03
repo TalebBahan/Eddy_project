@@ -7,9 +7,9 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'talebbahan@gmail.com',
-        pass: 'ymhrwmgbeecfbquf'
-    }
+        user: '21014@supnum.mr',
+        pass: 'uoesabbvnepdxmjg'
+      }
 });
 
 const handlebarOptions = {
@@ -29,10 +29,10 @@ exports.sendMessage = (req, res) => {
     const { email, name, phone, message } = req.body;
 
     const mailOptions = {
-        from: email,
+        from: "talebbahan@gmail.com",
         subject: 'Message from the contact on the website',
         template: 'message',
-        to:'21014@supnum.mr',
+        to:'talebbahan@gmail.com',
         context: {
             email,
             name,

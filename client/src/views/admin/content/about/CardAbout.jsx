@@ -5,13 +5,13 @@ import { useState } from "react";
 import AddEditAbout from "./AddEditAbout";
 
 import { useDeleteContentMutation } from '../apiContent'
-const CardAbout = ({ h_text, s_text, link, id }) => {
+const CardAbout = ({ h_text, s_text, link, id ,date}) => {
   const [open, setOpen] = useState(false)
   const [deleteM] = useDeleteContentMutation()
   const handleOpen = () => setOpen(!open);
   return (
     <Card extra={"w-full h-full p-3"}>
-      <AddEditAbout open={open} handleOpen={handleOpen} h_text={h_text} s_text={s_text} link={link} />
+      <AddEditAbout open={open} handleOpen={handleOpen} h_text={h_text} s_text={s_text} link={link} date={date} />
       {/* Header */}
       <div className="mt-2 mb-8 w-full">
         <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">

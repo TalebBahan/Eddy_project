@@ -3,15 +3,17 @@ import Card from 'components/card'
 import { AiFillDelete } from 'react-icons/ai'
 import AddEditMedia from './AddEditMedia'
 import { useDeleteContentMutation } from '../apiContent'
-export default function CardMedia({ h_text, s_text, image, link,id }) {
+export default function CardMedia({ h_text, s_text, image, link,id, date }) {
   const [deleteM]=useDeleteContentMutation()
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(!open);
+  console.log('====================================');
+  console.log(date);
   return (
     <Card
       extra={`flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white`}
     >
-    <AddEditMedia open={open} handleOpen={handleOpen}  h_text={h_text} s_text={s_text} link={link} id={id} />
+    <AddEditMedia open={open} handleOpen={handleOpen}  h_text={h_text} s_text={s_text} link={link} id={id} date={date} />
       <div className="h-full w-full">
         <div className="relative w-full">
           <img

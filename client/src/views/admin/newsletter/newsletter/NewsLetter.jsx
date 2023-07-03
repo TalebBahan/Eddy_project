@@ -6,6 +6,7 @@ import Navbar from "components/navbar";
 import { useState } from 'react';
 import Loading from 'components/Loading';
 import Unauthorized from 'components/Unauthorized'
+import Interests from '../interests/Interests';
 const COLUMNS = [
     {
         Header: "Subject",
@@ -52,6 +53,7 @@ export default function NewsLetter() {
                 columnsData={COLUMNS}
                 tableData={filteredData}
             />
+            <Interests />
         </div>
     )
 }

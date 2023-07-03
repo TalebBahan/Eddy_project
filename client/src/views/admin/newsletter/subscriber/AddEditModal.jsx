@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Button,
     Dialog,
@@ -10,46 +10,27 @@ import {
     useCreateSubscriberMutation,
     useUpdateSubscriberMutation,
 } from "./subscriberApi";
+import { useGetInterestssQuery } from "../interests/api";
+import Loading from "components/Loading";
 
 export default function AddEditModal(props) {
-    const [add] = useCreateSubscriberMutation()
-    const [edit] = useUpdateSubscriberMutation()
+    const [add] = useCreateSubscriberMutation();
+    const [edit] = useUpdateSubscriberMutation();
+    const { data: interestsData, isLoading, isError } = useGetInterestssQuery();
     const [formData, setFormData] = useState({
-        email: props?.email,
-        firstName: props?.firstName,
-        lastName: props?.lastName,
-        age: props?.age,
+        email: props?.email || "",
+        firstName: props?.firstName || "",
+        lastName: props?.lastName || "",
+        age: props?.age || "",
         interests: props?.interests || [],
-        location: props?.location,
-        
+        location: props?.location || "",
     });
-    const interests = [
-        "Leadership development",
-        "Organizational transformation",
-        "Corporate governance",
-        "Business strategy",
-        "Sales and operations management",
-        "Board of director leadership",
-        "Professional development",
-        "Entrepreneurship",
-        "Executive coaching",
-        "Business analytics"
-      ];
-      
 
-    useEffect(() => {
+    if (isLoading || isError) {
+        return <Loading />;
+    }
 
-            setFormData({
-                email: props?.email,
-                firstName: props?.firstName,
-                lastName: props?.lastName,
-                age: props?.age,
-                interests: props?.interests || [],
-                location: props?.location,
-                id: props?._id,
-            });
-
-    }, [props]);
+    const interests = interestsData?.map((interest) => interest?.interest);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -60,12 +41,19 @@ export default function AddEditModal(props) {
     };
 
     const handleInterestChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((formData) => ({
+        const { value, checked } = e.target;
+        if (checked) {
+          setFormData((formData) => ({
             ...formData,
             interests: [...formData.interests, value],
-        }));
-    };
+          }));
+        } else {
+          setFormData((formData) => ({
+            ...formData,
+            interests: formData.interests.filter((interest) => interest !== value),
+          }));
+        }
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -93,76 +81,37 @@ export default function AddEditModal(props) {
             <form onSubmit={handleSubmit}>
                 <DialogBody>
                     <div className="mb-4">
-                        <label
-                            className="block text-gray-700 font-bold mb-2"
-                            htmlFor="email"
-                        >
-                            Email
-                        </label>
-                        <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="email"
-                            type="email"
-                            placeholder="Email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-
-                        <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="firstName">
-                            First Name
-                        </label>
-                        <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="firstName"
-                            type="text"
-                            placeholder="First Name"
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                            required
-                        />
-
-                        <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="lastName">
-                            Last Name
-                        </label>
-                        <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="lastName"
-                            type="text"
-                            placeholder="Last Name"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            required
-                        />
-
-                        <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="age">
-                            Age
-                        </label>
-                        <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="age"
-                            type="number"
-                            placeholder="Age"
-                            name="age"
-                            value={formData.age}
-                            onChange={handleChange}
-                            required
-                        />
-
+                        {[
+                            { label: "Email", name: "email", type: "email" },
+                            { label: "First Name", name: "firstName", type: "text" },
+                            { label: "Last Name", name: "lastName", type: "text" },
+                            { label: "Age", name: "age", type: "number" },
+                        ].map((field) => (
+                            <div key={field.name}>
+                                <label
+                                    className="block text-gray-700 font-bold mb-2"
+                                    htmlFor={field.name}
+                                >
+                                    {field.label}
+                                </label>
+                                <input
+                                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id={field.name}
+                                    type={field.type}
+                                    placeholder={field.label}
+                                    name={field.name}
+                                    value={formData[field.name]}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        ))}
                         <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="interests">
                             Interests
                         </label>
                         <div className="flex items-center">
                             {interests.map((interest) => (
-                                <label
-                                    className="mr-2 text-gray-700"
-                                    htmlFor={interest}
-                                    key={interest}
-
-                                >
+                                <label className="mr-2 text-gray-700" htmlFor={interest} key={interest}>
                                     <input
                                         className="mr-1"
                                         type="checkbox"
@@ -176,29 +125,13 @@ export default function AddEditModal(props) {
                                 </label>
                             ))}
                         </div>
-
-                        <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="location">
-                            Location
-                        </label>
-                        <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="location"
-                            type="text"
-                            placeholder="Location"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleChange}
-                            required
-                        />
-
-
                     </div>
                     <DialogFooter>
                         <Button
                             variant="text"
                             color="red"
                             onClick={props.handleOpen}
-                            class="mr-1"
+                            className="mr-1"
                         >
                             <span>Cancel</span>
                         </Button>
@@ -209,5 +142,5 @@ export default function AddEditModal(props) {
                 </DialogBody>
             </form>
         </Dialog>
-    )
+    );
 }

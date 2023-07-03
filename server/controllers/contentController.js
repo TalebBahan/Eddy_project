@@ -56,8 +56,10 @@ const createContent = async (req, res) => {
         var filename;
         if (req.body.type !== 'about') {
             file = req.file
-            filename = file?.filename
-
+            filename = file?.filename;
+            if (!req.body.date){
+                req.body.date = new Date()
+            }
         }
         const newContent = new Content({
             h_text: req.body.h_text,
@@ -65,6 +67,7 @@ const createContent = async (req, res) => {
             link: req.body.link,
             image: filename,
             type: req.body.type,
+            date: req.body.date
         });
 
         const content = await newContent.save();
@@ -93,6 +96,7 @@ const createAboutImage = async (req, res) => {
 
 // Update an existing content
 const updateContent = async (req, res) => {
+    console.log(req.body.date)
     try {
         const content = await Content.findByIdAndUpdate(
             req.params.id,
@@ -100,6 +104,7 @@ const updateContent = async (req, res) => {
                 h_text: req.body.h_text,
                 s_text: req.body.s_text,
                 link: req.body.link,
+                date: req.body.date
             },
             { new: true }
         );

@@ -57,14 +57,7 @@ const LinkedInCard = ({link,postImage,tags,title}) => {
 
       
       }} src={`${process.env.REACT_APP_API}/images/${postImage}`}/>
-      <ButtonArea>
-        <Button>
-          <ButtonIcon src={LikeGroup} />
-        </Button>
-        <Button>
-          <ButtonIcon src={CommentGroup} />
-        </Button>
-      </ButtonArea>
+      
     </Wrapper>
     </Link>
   );

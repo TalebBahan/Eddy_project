@@ -10,7 +10,7 @@ import "@splidejs/react-splide/css/skyblue";
 import "./Social.css";
 import LinkedInCard from "./LinkedInCard";
 import Slider from "react-slick";
-
+import {Splide , SplideSlide}  from '@splidejs/react-splide';
 const SocialMedia = ({ youtube,linkedin }) => {
 
 
@@ -34,9 +34,8 @@ const SocialMedia = ({ youtube,linkedin }) => {
 
 
   var settings = {
-    dots: true,
-    arrows: false,
-    arrow: false,
+    arrows: true,
+    arrow: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -87,18 +86,43 @@ const SocialMedia = ({ youtube,linkedin }) => {
             ))}
           </div>
           <div className="social-slider-wrapper" style={{}}>
-            <Slider {...settings}>
+           
+           <Splide
+            options={{
+              rewind: false,
+              arrows:true,
+              pagination:false,
+              perPage: 1,
+              perMove: 1,
+              gap: '1rem',
+              breakpoints: {
+                768: {
+                  perPage: 1,
+                },
+                1000: {
+                  perPage: 2,
+                },
+                1600: {
+                  perPage: 3,
+                },
+              },
+            }}
+            >
               {linkedin?.map((card, index) => (
+                <SplideSlide>
                 <LinkedInCard
                   key={index}
                   title={card.title}
-                  tags={card.tags}
+                  description={card.description}
+                  publishedAt={card.publishedAt}
                   link={card.link}
                   postImage={card.postImage}
                 />
+                </SplideSlide>
               ))}
-            </Slider>
+            </Splide>
           </div>
+
           {
             youtube?.length > 0 &&
             <div className="social-slider-wrapper" style={{}}>

@@ -26,3 +26,5 @@ const subscriberSchema = new Schema({
 });
 
 module.exports = mongoose.model('Subscriber', subscriberSchema);
+
+

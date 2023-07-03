@@ -9,7 +9,7 @@ import {
 import Upload from "./Upload";
 import { useAddContentMutation, useEditContentMutation } from "../apiContent";
 export default function AddEditMedia(props) {
-
+  console.log(props.date);
   const [add] = useAddContentMutation()
   const [edit] = useEditContentMutation()
   const [formData, setFormData] = useState({
@@ -17,7 +17,8 @@ export default function AddEditMedia(props) {
     s_text: props?.s_text,
     link: props?.link,
     file: null,
-    id: props?.id
+    id: props?.id,
+    date: props?.date
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +35,8 @@ export default function AddEditMedia(props) {
     form.append("h_text", formData.h_text);
     form.append("s_text", formData.s_text);
     form.append("link", formData.link);
+    form.append("id", formData.id);
+    form.append("date", formData.date);
     form.append("type", 'media');
     if (props.isAdd) {
       add(form)
@@ -42,12 +45,15 @@ export default function AddEditMedia(props) {
         s_text: '',
         link: '',
         file: null,
+        date: ''
       });
     }
     else {
       if (window.confirm('are you sure you want to save the edit ?'))
         edit(formData)
     }
+
+
 
 
     props.handleOpen();
@@ -111,6 +117,23 @@ export default function AddEditMedia(props) {
               autocomplete="off"
             />
           </div>
+          <div class="flex flex-col">
+            <label
+              for="pass"
+              class="self-start mb-2 font-medium text-gray-800"
+            >Date</label>
+            <input
+              type="date"
+              placeholder="Date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              autocomplete="off"
+            />
+          </div>
+
           {props.isAdd && <Upload selectedFiles={formData.file}
             setselectedFiles={handleImageChange} />}
         </DialogBody>
