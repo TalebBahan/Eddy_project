@@ -67,7 +67,7 @@ const ContactPopup = () => {
       </Close>
       <Container>
         {sent !== null ? <Title>{sent}</Title> :
-          <form onSubmit={handleSubmit}>
+          <form>
             <Title>Contact</Title>
             <InputArea>
               <Label>Name</Label>
@@ -111,7 +111,7 @@ const ContactPopup = () => {
               />
             </InputArea>
             <ButtonWrapper>
-              <Button type="submit" disabled={!captchaValue} style={
+              <Button onClick={handleSubmit} disabled={!captchaValue} style={
                 {
                   backgroundColor: !captchaValue ? '#ccc' : '',
                   color: !captchaValue ? '#000' : '#fff',

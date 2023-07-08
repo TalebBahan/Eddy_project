@@ -104,15 +104,15 @@ const SubscribePopup = ({ email, setEmail }) => {
 
                 <Title>Just fiew Details :) </Title>
                 <InputArea>
-                  <Label>Name</Label>
+                  <Label for="name">Name</Label>
                   <Input
-                    name="user_name" value={name} onChange={(e) => setName(e.target.value)}
+                    name="name" value={name} onChange={(e) => setName(e.target.value)}
                   />
                 </InputArea>
                 <InputArea>
-                  <Label>Age</Label>
+                  <Label for="age">Age</Label>
                   <Input
-                    type="number" name="user_name" value={age} onChange={(e) => setAge(e.target.value)}
+                    type="number" name="age" value={age} onChange={(e) => setAge(e.target.value)}
                   />
                 </InputArea>
                 <InputArea>

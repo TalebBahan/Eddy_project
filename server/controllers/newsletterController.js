@@ -1,5 +1,4 @@
-const Newsletter = require('../model/newsletter');
-
+const Newsletter = require('../model/newsletter'); 
 
 exports.createArticle = async (req, res) => {
   try {
@@ -70,7 +69,7 @@ exports.createNewsletter = async (req, res) => {
 // Get all newsletters
 exports.getNewsletters = async (req, res) => {
   try {
-    const newsletters = await Newsletter.find();
+    const newsletters = await Newsletter.find().sort({ createdAt: -1 });
     res.status(200).json(newsletters);
   } catch (err) {
     console.error(err);
@@ -78,7 +77,8 @@ exports.getNewsletters = async (req, res) => {
   }
 };
 
-// Get a newsletter by ID
+
+// Get a newsletter by ID 
 exports.getNewsletterById = async (req, res) => {
   try {
     const newsletter = await Newsletter.findById(req.params.id);

@@ -13,7 +13,7 @@ const { log } = require('console');
 // Get all content
 const getAllContent = async (req, res) => {
     try {
-        const content = await Content.find();
+        const content = await Content.find().sort({ createdAt: -1 });
         res.status(200).json(content);
     } catch (error) {
         console.error(error.message);

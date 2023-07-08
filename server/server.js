@@ -64,6 +64,8 @@ app.use('/api/content', require('./routes/api/content'));
 app.use('/api/heroLinks', require('./routes/api/heroLinks'));
 app.use('/api/linkedin', require('./routes/api/linkedinPosts'));
 app.use('/api/interests', require('./routes/api/interests'));
+app.use('/api/articles', require('./routes/api/article'));
+app.use('/api/books', require('./routes/api/book'));
 
 
 

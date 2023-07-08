@@ -12,7 +12,6 @@ import {
 import SignatureWhite from "../../assets/Nav/signature-white.svg";
 import SignatureBlack from "../../assets/Nav/signature-black.svg";
 import { HashLink } from "react-router-hash-link";
-import LinkedinImg from "assets/hero/linkedin.png";
 
 const WINDOW_HEIGHT = window.screen.height - 100;
 const Navbar = () => {

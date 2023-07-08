@@ -8,9 +8,11 @@ import News from "../Components/News";
 import NewsLetter from "../Components/NewsLetter";
 import Footer from "../Components/Fotter/Fotter";
 import ContactPopup from "../Components/ContactPopup";
+import Articles from "Components/articles/Articles";
 import React from "react";
 import { useGetDataQuery } from "apiSlice";
 import SearchPopup from "Components/SearchPoppup";
+import Books from "Components/books/Books";
 const Home = () => {
   const { data, isLoading } = useGetDataQuery()
   if (isLoading) {
@@ -30,6 +32,8 @@ const Home = () => {
           <Lectures />
           <SocialMedia youtube={data.youtube} linkedin={data.linkedin} />
           <News latestNewsObj={data.content} />
+          <Books books={data.books}/>
+          <Articles articles={data.articles} />
           <NewsLetter />
           <Footer />
           <ContactPopup />
