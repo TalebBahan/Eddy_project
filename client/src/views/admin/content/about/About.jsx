@@ -6,17 +6,13 @@ import Images from './Images';
 import { useState } from "react";
 import AddEditAbout from "./AddEditAbout";
 import Upload from './Upload';
-export default function About({data}) {
+export default function About({ data }) {
     const [open, setOpen] = useState(false)
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
     const handleOpen = () => setOpen(!open);
     return (
         <div >
             <br></br>
             <AddEditAbout open={open} handleOpen={handleOpen} isAdd={true} />
-            {/* <Upload /> */}
             <Card extra={"w-full h-full p-3"}>
                 <div className="relative mb-3 flex items-center justify-between pt-1">
                     <h4 className="text-3xl font-bold text-navy-700 dark:text-white">
@@ -24,8 +20,7 @@ export default function About({data}) {
                     </h4>
                     <button
                         onClick={handleOpen}
-                        className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-none  text-brand-200 hover:cursor-pointer"
-                    >
+                        className={`flex items-center text-xl hover:cursor-pointer bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}>
                         <AiOutlinePlus />
                     </button>
 
@@ -35,8 +30,8 @@ export default function About({data}) {
                         <CardAbout h_text={item.h_text} s_text={item.s_text} link={item.link} id={item._id} key={item.link} date={item.date} />
                     )
                     }
-                   
-                    
+
+
                 </div>
                 <div>
                     <Images />

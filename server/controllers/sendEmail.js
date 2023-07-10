@@ -36,26 +36,26 @@ exports.sendNewsletter = (req, res) => {
         throw new Error('Newsletter not found');
       }
 
-      let a = newsletter.articles.map((item)=>{
+      let a = newsletter.articles.map((item) => {
         return {
-          'title':item.title,
-          'body':item.body,
-          'imageUrl':item.imageUrl,
-          'readMoreLink':item.readMoreLink,
+          'title': item.title,
+          'body': item.body,
+          'imageUrl': item.imageUrl,
+          'readMoreLink': item.readMoreLink,
         }
       })
       const mailOptions = {
         from: 'talebahan@gmail.com',
         subject: newsletter.subject,
         template: 'email',
-        context:{
+        context: {
           'title': newsletter.title,
-          'body' : newsletter.body,
+          'body': newsletter.body,
           'ar': a,
           'cover': newsletter.coverImageUrl,
           'BACKEND_URI': 'https://eddy-api.bles-software.com/images'
         }
-        
+
       };
 
       if (emailList && emailList.length > 0) {
@@ -80,61 +80,42 @@ exports.sendNewsletter = (req, res) => {
       res.status(500).send('Error sending email!');
     });
 };
-
-exports.sendNewsletterByIA = (req, res) => {
-  const { interests, age, id } = req.body;
-  Newsletter.findById(id)
-    .then(newsletter => {
-      if (!newsletter) {
-        throw new Error('Newsletter not found');
+exports.sendNewsLetter = async (req, res) => {
+  const { interests, age, newsletter } = req.body;
+  try {
+    const mailOptions = {
+      from: 'eddy@eddyabboud.com',
+      subject: newsletter.subject,
+      template: 'email',
+      context: {
+        'title': newsletter.title,
+        'body': newsletter.body,
+        'book': newsletter.books,
+        'media': newsletter.medias,
+        'articleImage': newsletter.articlesWithImages,
+        'articleNoImage': newsletter.articlesWithoutImages,
       }
+    };
 
-      let a = newsletter.articles.map(item => {
-        return {
-          'title': item.title,
-          'body': item.body,
-          'imageUrl': item.imageUrl,
-          'readMoreLink': item.readMoreLink,
-        }
-      });
+    const subscribers = await Subscriber.find({
+      $or: [
+        { interests: { $in: interests } },
+        { age: { $gt: age } }
+      ]
+    }).select('email');
 
-      const mailOptions = {
-        from: 'eddy@eddyabboud.com',
-        subject: newsletter.subject,
-        template: 'email',
-        context: {
-          'title': newsletter.title,
-          'body': newsletter.body,
-          'ar': a,
-          'cover': newsletter.coverImageUrl,
-          'BACKEND_URI': 'https://eddy-api.bles-software.com/images'
-        }
-      };
+    const emailList = subscribers.map(subscriber => subscriber.email);
+    console.log('====================================');
+    console.log('emails', emailList);
+    console.log('====================================');
+    console.log(emailList.join(', '));
 
+    mailOptions.to = emailList;
+    await transporter.sendMail(mailOptions);
 
-        return Subscriber.find({
-          $or: [
-            { interests: { $in: interests } },
-            { age: { $gt: age } }
-          ]
-        }).select('email')
-          .then(objects => {
-            const emailList = objects.map(object => object.email);
-            console.log('====================================');
-            console.log('emails',emailList);
-            console.log('====================================');
-            console.log(emailList.join(', '));
-            mailOptions.to = emailList;
-            return transporter.sendMail(mailOptions);
-          });
-      }
-    )
-    .then(info => {
-      console.log('Email sent: ' + info.response);
-      res.send('Email sent successfully!');
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).send('Error sending email!');
-    });
+    return res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send('Error sending email!');
+  }
 };

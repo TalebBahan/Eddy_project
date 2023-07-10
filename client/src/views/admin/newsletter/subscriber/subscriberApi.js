@@ -25,7 +25,7 @@ export const subscriberApi = apiSlice.injectEndpoints({
         }),
         sendIA: builder.mutation({
             query: (body) => ({
-                url: '/api/newsletter/sendIA',
+                url: '/api/newsletter/sendNewsLetter',
                 method: 'POST',
                 body: body,
             }),

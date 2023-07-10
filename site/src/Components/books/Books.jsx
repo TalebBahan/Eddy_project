@@ -15,11 +15,12 @@ const Books = ({ books }) => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.4 }}
         className="social-area"
+        id="books-to-read"
       >
         <section className="latest-news">
           <div className="ltnewsheader">
             <div style={{ color: "#fff" }} className="book-a-lecture-container">
-              Books
+              Books To Read
             </div>
             <div className="ltnewsheader-child"></div>
           </div>

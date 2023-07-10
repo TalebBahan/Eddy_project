@@ -1,58 +1,87 @@
-import {
-  AuthorArea,
-  Button,
-  ButtonArea,
-  ButtonIcon,
-  Earth,
-  HashTag,
-  Icon,
-  IconArea,
-  MoreImg,
-  Name,
-  PostImg,
-  Profile,
-  SmallText,
-  Text,
-  TextArea,
-  Time,
-  TimeWrapper,
-  TopLeftArea,
-  TopRightArea,
-  TopSection,
-  Wrapper,
-} from "./LinkedInCardElements";
-import ProfileImg from "assets/social/linkedin/Profile.png";
-import EarthImg from "assets/social/linkedin/Globe.png";
-import More from "assets/social/linkedin/More.png";
-import PostImage from "assets/social/linkedin/PostImage.png";
-import LikeImg from "assets/social/linkedin/Like.png";
-import Celebrate from "assets/social/linkedin/Celebrate.png";
-import Support from "assets/social/linkedin/Support.png";
-import Love from "assets/social/linkedin/Love.png";
-import Insightfull from "assets/social/linkedin/Insightfull.png";
-import Curious from "assets/social/linkedin/Curious.png";
-import LikeGroup from "assets/social/linkedin/Like group.png";
-import CommentGroup from "assets/social/linkedin/Comment group.png";
-import ShareGroup from "assets/social/linkedin/Share group.png";
-import SendGroup from "assets/social/linkedin/Send group.png";
+import React from 'react';
+import styled from 'styled-components';
+
+const CardContainer = styled.div`
+  margin-bottom: 20px;
+`;
+
+const CardWrapper = styled.div`
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)!important;
+  transition: 0.3s!important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  margin: 20px 0px !important;
+`;
+
+const CardImage = styled.div`
+  position: relative  !important;
+`;
+
+const ResponsiveContainer = styled.div`
+  position: relative !important;
+  padding-bottom: 56.25%    !important;
+  height: 0 !important;
+`;
+
+const CardIframe = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+const Content = styled.div`
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5) !important;
+  color: #fff !important  ;
+  width: 100%   !important  ;
+  padding: 10px  !important  ;
+`;
+
+const CardContent = styled.div`
+  padding: 20px;
+  font-family: Gilroy;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 16px;
+  color: #707070;
+  background: #ffffff;
+  height: 200px;
+`;
+
+const CardHeading = styled.span`
+  font-family: Gilroy;
+  font-size: 14px;
+  font-style: normal;
+  color: #191919;
+`;
 
 const YoutubeCard = ({ title, description, publishedAt, videoId }) => {
   return (
-    <Wrapper>
-
-      <iframe
-        style={{
-          minHeight: '200px',
-      height:'400px',
-
-        }}
-      title='Youtube player'
-      sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
-      src={`https://youtube.com/embed/${videoId}?autoplay=0`}
-      />
-
-
-    </Wrapper>
+    <CardContainer>
+      <CardWrapper>
+        <CardImage>
+          <ResponsiveContainer>
+            <CardIframe
+              width="560"
+              height="315"
+              src={`https://youtube.com/embed/${videoId}?autoplay=0`}
+              frameBorder="0"
+              allowFullScreen
+            ></CardIframe>
+            <Content>
+              <h1>{title}</h1>
+            </Content>
+          </ResponsiveContainer>
+        </CardImage>
+        <CardContent>
+          <CardHeading>{title}</CardHeading>
+          <p>{description}</p>
+        </CardContent>
+      </CardWrapper>
+    </CardContainer>
   );
 };
 

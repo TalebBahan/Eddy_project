@@ -1,19 +1,37 @@
-import React from 'react'
-import Card from 'components/card'
-import { AiFillDelete } from 'react-icons/ai'
-import AddEditMedia from './AddEditMedia'
-import { useDeleteContentMutation } from '../apiContent'
-export default function CardMedia({ h_text, s_text, image, link,id, date }) {
-  const [deleteM]=useDeleteContentMutation()
-  const [open, setOpen] = React.useState(false)
+import React from 'react';
+import Card from 'components/card';
+import { AiFillDelete } from 'react-icons/ai';
+import AddEditMedia from './AddEditMedia';
+import Success from 'components/Success';
+import Error from 'components/Error';
+import { useDeleteContentMutation } from '../apiContent';
+
+export default function CardMedia({ h_text, s_text, image, link, id, date }) {
+  const [deleteM] = useDeleteContentMutation();
+  const [open, setOpen] = React.useState(false);
+  const [successMessage, setSuccessMessage] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
+
   const handleOpen = () => setOpen(!open);
-  console.log('====================================');
-  console.log(date);
+
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this?')) {
+      deleteM(id)
+        .then(() => {
+          setSuccessMessage('Successfully deleted.');
+        })
+        .catch(() => {
+          setErrorMessage('Error deleting the item.');
+        });
+    }
+  };
+
   return (
-    <Card
-      extra={`flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white`}
-    >
-    <AddEditMedia open={open} handleOpen={handleOpen}  h_text={h_text} s_text={s_text} link={link} id={id} date={date} />
+    <Card extra={`flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white`}>
+      {successMessage && <Success message={successMessage} />}
+      {errorMessage && <Error message={errorMessage} />}
+
+      <AddEditMedia open={open} handleOpen={handleOpen} h_text={h_text} s_text={s_text} link={link} id={id} date={date} />
       <div className="h-full w-full">
         <div className="relative w-full">
           <img
@@ -22,12 +40,10 @@ export default function CardMedia({ h_text, s_text, image, link,id, date }) {
             alt=""
           />
           <button
-                      onClick={()=>{
-              return window.confirm('are you sure you want to delete this ?')?deleteM(id):null
-            }}
+            onClick={handleDelete}
             className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-none  text-brand-200 hover:cursor-pointer"
           >
-            <AiFillDelete color='rgb(234, 62, 42)' />
+            <AiFillDelete color="rgb(234, 62, 42)" />
           </button>
         </div>
 

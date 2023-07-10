@@ -4,7 +4,7 @@ var linkedin = require('../model/linkedin');
 // Get all posts
 const getAllPosts = async (req, res) => {
     try {
-        const posts = await linkedin.find().sort(desc);
+        const posts = await linkedin.find();
         res.status(200).json(posts);
     } catch (error) {
         console.error(error.message);

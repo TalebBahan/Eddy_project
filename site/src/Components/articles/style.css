@@ -1,14 +1,12 @@
 .searchresult {
   font-family: "Arial", sans-serif;
-}
-
-.bodyArticule
-{
   display: flex;
+  margin: 20px;
 }
 
-.searchresult h2 {
-  font-size: 19px;
+
+.bodyArticule h2 {
+  font-size: 1rem;
   line-height: 18px;
   font-weight: normal;
   color: rgb(29, 1, 189);
@@ -16,13 +14,13 @@
 }
 .bodyArticule p {
 
-  font-size: 14px;
+  font-size: 0.8rem;
   line-height: 14px;
   color: black;
   margin-bottom: 0;
 }
 
-.bodyArticule img {
+.searchresult img {
   width: 80px; /* Adjust the width as desired */
   height: auto;
   max-height: 80px;
@@ -32,11 +30,12 @@
 /* Responsive styles */
 @media (max-width: 768px) {
   .searchresult {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
+    margin: 10px;
   }
 
-  .bodyArticule img {
+  .searchresult img {
     width: 70px;
     max-height: 70px;
     margin-left: 0;

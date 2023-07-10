@@ -1,57 +1,57 @@
 import React, { useState, useEffect } from "react";
 import {
-    Button,
-    Dialog,
-    DialogHeader,
-    DialogBody,
-    DialogFooter,
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
 } from "@material-tailwind/react";
 import { useSendIAMutation } from "../subscriber/subscriberApi";
-export default function Send(props) {
-    const [send] = useSendIAMutation();
-    const interests = [
-      "Leadership development",
-      "Organizational transformation",
-      "Corporate governance",
-      "Business strategy",
-      "Sales and operations management",
-      "Board of director leadership",
-      "Professional development",
-      "Entrepreneurship",
-      "Executive coaching",
-      "Business analytics"
-    ];
-    const [selectedInterests, setSelectedInterests] = useState([]);
-    const [age, setAge] = useState('');
-  
-    const handleInterestChange = (event) => {
-      const { value } = event.target;
-      setSelectedInterests((prevInterests) => {
-        if (prevInterests.includes(value)) {
-          return prevInterests.filter((interest) => interest !== value);
-        } else {
-          return [...prevInterests, value];
-        }
-      });
-    };
-  
-    const handleAgeChange = (event) => {
-      setAge(event.target.value);
-    };
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      send({ interests: selectedInterests, age ,id:props.id});
-      setSelectedInterests([]);
-      setAge('');
-      props.handleOpen();
-    };
-  
-    return (
+import { useGetInterestssQuery } from "../interests/api";
+import Success from "components/Success";
+import Error from "components/Error";
+
+export default function Send({ newsletter, ...props }) {
+  const [send] = useSendIAMutation();
+  const { data: interestsData, isLoading, isError } = useGetInterestssQuery();
+  const interests = interestsData?.map((interest) => interest?.interest);
+  const [selectedInterests, setSelectedInterests] = useState([]);
+  const [age, setAge] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleInterestChange = (event) => {
+    const { value } = event.target;
+    setSelectedInterests((prevInterests) => {
+      if (prevInterests.includes(value)) {
+        return prevInterests.filter((interest) => interest !== value);
+      } else {
+        return [...prevInterests, value];
+      }
+    });
+  };
+
+  const handleAgeChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await send({ interests: selectedInterests, age, newsletter });
+      setSuccessMessage("Newsletter sent successfully.");
+    } catch (error) {
+      setErrorMessage("Error sending the newsletter.");
+    }
+    setSelectedInterests([]);
+    setAge("");
+    props.handleOpen();
+  };
+
+  return (
+    <div>
       <Dialog open={props.open} onClose={props.handleOpen} size="xxl">
-        <DialogHeader>
-          Send to subscribers with:
-        </DialogHeader>
+        <DialogHeader>Send to subscribers with:</DialogHeader>
         <form onSubmit={handleSubmit}>
           <DialogBody>
             <div className="grid grid-cols-2 gap-4">
@@ -59,7 +59,10 @@ export default function Send(props) {
               <div>
                 <label className="block font-medium">Interests In</label>
                 {interests.map((interest) => (
-                  <label key={interest} className="flex items-center space-x-2">
+                  <label
+                    key={interest}
+                    className="flex items-center space-x-2"
+                  >
                     <input
                       type="checkbox"
                       value={interest}
@@ -97,5 +100,8 @@ export default function Send(props) {
           </DialogFooter>
         </form>
       </Dialog>
-    );
-  }
+      {successMessage && <Success message={successMessage} />}
+      {errorMessage && <Error message={errorMessage} />}
+    </div>
+  );
+}

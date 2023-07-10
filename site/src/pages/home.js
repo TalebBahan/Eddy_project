@@ -18,7 +18,7 @@ const Home = () => {
   if (isLoading) {
     return <div></div>
   }
-  const articles = data?.content.filter((item) => item.type === "media")
+  const media = data?.content.filter((item) => item.type === "media")
   
   return (
     <>
@@ -34,10 +34,10 @@ const Home = () => {
           <News latestNewsObj={data.content} />
           <Books books={data.books}/>
           <Articles articles={data.articles} />
-          <NewsLetter />
+          <NewsLetter interestsData={data.interests}/>
           <Footer />
           <ContactPopup />
-          <SearchPopup articles={articles} youtube={data.youtube} linkedin={data.linkedin}/>
+          <SearchPopup media={media} books={data.books} articles={data.articles} youtube={data.youtube}  linkedin={data.linkedin}/>
         </>
       )}
     </>

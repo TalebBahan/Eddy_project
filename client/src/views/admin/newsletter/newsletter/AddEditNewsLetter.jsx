@@ -6,64 +6,49 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import Upload from "./Upload";
-import { useCreatenewsletterMutation } from "./newsletterApi";
+import { useUpdatenewsletterMutation } from "./newsletterApi";
+import Success from "components/Success";
+import Error from "components/Error";
 
 export default function AddEditNewsletter(props) {
-
-  const [add] = useCreatenewsletterMutation();
+  const [edit] = useUpdatenewsletterMutation();
   const [formData, setFormData] = useState({
-    title: '',
-    subject: '',
-    coverImage: null,
-    body: '',
+    title: props.title || "",
+    subject: props.subject || "",
+    body: props.body || "",
+    id: props._id || "",
   });
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleCoverImageChange = (file) => {
-    setFormData({ ...formData, coverImage: file });
-  };
-  const handleInterestChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((formData) => ({
-      ...formData,
-      interests: [...formData.interests, value],
-    }));
-  };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = new FormData();
-    form.append("title", formData.title);
-    form.append("subject", formData.subject);
-    form.append("image", formData.coverImage);
-    form.append("body", formData.body);
-    add(form)
-    setFormData({
-      title: '',
-      subject: '',
-      coverImage: null,
-      body: '',
-    });
-
-    props.handleOpen();
+    try {
+      await edit(formData);
+      setSuccessMessage("Newsletter successfully edited.");
+    } catch (error) {
+      setErrorMessage("Error editing the newsletter.");
+    }
+    props.handleClose();
   };
 
   return (
     <Fragment>
-
-      <Dialog open={props.open} handler={props.handleOpen} size='xxl'>
-
+      <Dialog open={props.open} handler={props.handleClose} size="xxl">
         <DialogHeader>Add News Letter</DialogHeader>
-
         <DialogBody divider>
           <div class="flex flex-col">
             <label
               for="title"
               class="self-start mb-2 font-medium text-gray-800"
-            >Title</label>
+            >
+              Title
+            </label>
             <input
               type="text"
               placeholder="Enter title"
@@ -72,14 +57,16 @@ export default function AddEditNewsletter(props) {
               value={formData.title}
               onChange={handleChange}
               class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded"
-              autocomplete="off"
+              autoComplete="off"
             />
           </div>
           <div class="flex flex-col">
             <label
               for="subject"
               class="self-start mb-2 font-medium text-gray-800"
-            >Subject</label>
+            >
+              Subject
+            </label>
             <input
               type="text"
               placeholder="Enter subject"
@@ -88,42 +75,32 @@ export default function AddEditNewsletter(props) {
               value={formData.subject}
               onChange={handleChange}
               class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded"
-              autocomplete="off"
+              autoComplete="off"
             />
           </div>
           <div class="flex flex-col">
             <label
               for="body"
               class="self-start mb-2 font-medium text-gray-800"
-            >Body</label>
+            >
+              Body
+            </label>
             <input
               type="text"
               id="body"
               name="body"
               value={formData.body}
               onChange={handleChange}
-              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
-              autocomplete="off"
+              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded"
+              autoComplete="off"
             />
           </div>
-          <div class="flex flex-col">
-            <label
-              for="coverImage"
-              class="self-start mb-2 font-medium text-gray-800"
-            >Cover Image</label>
-            <Upload selectedFiles={formData.coverImage}
-              setselectedFiles={handleCoverImageChange} />
-          </div>
-
-
-
         </DialogBody>
-
         <DialogFooter>
           <Button
             variant="text"
             color="red"
-            onClick={props.handleOpen}
+            onClick={props.handleClose}
             class="mr-1"
           >
             <span>Cancel</span>
@@ -132,9 +109,9 @@ export default function AddEditNewsletter(props) {
             <span>Confirm</span>
           </Button>
         </DialogFooter>
-
       </Dialog>
-
-    </Fragment >
+      {successMessage && <Success message={successMessage} />}
+      {errorMessage && <Error message={errorMessage} />}
+    </Fragment>
   );
 }

@@ -6,51 +6,54 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import { useAddContentMutation } from "../apiContent";
+import { useAddContentMutation,useEditContentMutation } from "../apiContent";
 import Upload from "./Upload";
+import Success from "components/Success";
+import Error from "components/Error";
+
 export default function AddEditAbout(props) {
-  
-  const [add] = useAddContentMutation()
+  const [add] = useAddContentMutation();
+  const [edit] = useEditContentMutation();
   const [formData, setFormData] = useState({
-    h_text: props?.h_text,
-    s_text: props?.s_text,
-    link: 'exemple.com',
-    type: 'about',
+    h_text: props?.h_text || "",
+    s_text: props?.s_text || "",
+    link: "example.com",
+    type: "about",
+    id: props?.id || "",
   });
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleImageChange = (file) => {
-    setFormData({ ...formData, selectedImage: file });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    add(formData)
-    setFormData({
-      h_text: '',
-      s_text: '',
-      type: 'about',
-      link:'',
-    });
-    props.handleOpen();
-  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // add or edit
+    try {
+      if (props.isAdd) await add(formData);
+      else await edit({...formData})
+      setSuccessMessage("Successfully added/edited !");
+      props.handleOpen();
+    } catch (error) {
+      setErrorMessage("Error occurred while adding/editing content.");
+      console.error(error);
+    }
+  };
 
   return (
     <Fragment>
-
-      <Dialog open={props.open} handler={props.handleOpen} size='xxl'>
-        {/* <form> */}
-
-        <DialogHeader>{props.isAdd ? 'Add New Thing About You ' : 'Edit About'}</DialogHeader>
+      <Dialog open={props.open} handler={props.handleOpen} size="xxl">
+        <DialogHeader>
+          {props.isAdd ? "Add New Thing About You" : "Edit About"}
+        </DialogHeader>
         <DialogBody divider>
-          <div class="flex flex-col">
-            <label
-              for="email"
-              class="self-start mb-2 font-medium text-gray-800"
-            >Heading</label>
+          <div className="flex flex-col">
+            <label htmlFor="h_text" className="self-start mb-2 font-medium text-gray-800">
+              Heading
+            </label>
             <input
               type="text"
               placeholder="Title"
@@ -58,15 +61,14 @@ export default function AddEditAbout(props) {
               name="h_text"
               value={formData.h_text}
               onChange={handleChange}
-              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
-              autocomplete="off"
+              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              autoComplete="off"
             />
           </div>
-          <div class="flex flex-col">
-            <label
-              for="pass"
-              class="self-start mb-2 font-medium text-gray-800"
-            >Sub Text</label>
+          <div className="flex flex-col">
+            <label htmlFor="s_text" className="self-start mb-2 font-medium text-gray-800">
+              Sub Text
+            </label>
             <input
               type="text"
               placeholder="Sub text"
@@ -74,15 +76,15 @@ export default function AddEditAbout(props) {
               name="s_text"
               value={formData.s_text}
               onChange={handleChange}
-              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
-              autocomplete="off"
+              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              autoComplete="off"
             />
           </div>
-          {/* <div class="flex flex-col">
-            <label
-              for="pass"
-              class="self-start mb-2 font-medium text-gray-800"
-            >Read More Link</label>
+          {/* Uncomment this section if needed */}
+          {/* <div className="flex flex-col">
+            <label htmlFor="link" className="self-start mb-2 font-medium text-gray-800">
+              Read More Link
+            </label>
             <input
               type="text"
               placeholder="Sub text"
@@ -90,27 +92,23 @@ export default function AddEditAbout(props) {
               name="link"
               value={formData.link}
               onChange={handleChange}
-              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
-              autocomplete="off"
+              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              autoComplete="off"
             />
           </div> */}
         </DialogBody>
         <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={props.handleOpen}
-            class="mr-1"
-          >
+          <Button variant="text" color="red" onClick={props.handleOpen} className="mr-1">
             <span>Cancel</span>
           </Button>
           <Button variant="text" color="green" onClick={handleSubmit}>
             <span>Confirm</span>
           </Button>
         </DialogFooter>
-        {/* </form> */}
       </Dialog>
 
-    </Fragment >
+      {successMessage && <Success message={successMessage} />}
+      {errorMessage && <Error message={errorMessage} />}
+    </Fragment>
   );
 }

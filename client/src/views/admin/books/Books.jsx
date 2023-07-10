@@ -9,6 +9,7 @@ import './style.css'
 import Card from 'components/card';
 import Navbar from "components/navbar";
 import search from 'features/serch'
+import { AiOutlinePlus } from "react-icons/ai";
 const COLUMNS = [
     {
         Header: "Title",
@@ -51,20 +52,20 @@ const Books = () => {
                             Books
                         </div>
                         <button
-                            className="text-sm font-bold text-green-500 dark:text-white"
+                            className={`flex items-center text-xl hover:cursor-pointer bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
                             onClick={handleOpenModal}
                         >
-                            Add
+                            <AiOutlinePlus />
                         </button>
                     </div>
-                    <div 
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-                        gap: "1rem",
-                        marginTop: "1rem",
-                        width: "100%",
-                    }}
+                    <div
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                            gap: "1rem",
+                            marginTop: "1rem",
+                            width: "100%",
+                        }}
                     >
                         {filteredData?.map((book) => (
                             <BookCard {...book} />

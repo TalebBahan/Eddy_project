@@ -59,7 +59,7 @@ export default function LinkedIn() {
         </div>
         <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6">
           {filteredData.map(item =>
-          <div><LinkedInCard image={item.postImage} tags={item.tags} id={item._id} text={item.title} link={item.link} key={item._id} /></div>
+        <LinkedInCard image={item.postImage} tags={item.tags} id={item._id} text={item.title} link={item.link} key={item._id} />
             
           )
           }

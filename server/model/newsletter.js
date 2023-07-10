@@ -29,11 +29,6 @@ const newsletterSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  coverImageUrl: {
-    type: String,
-    required: true,
-  },
-  articles: [articleSchema],
   body: {
     type: String,
     required: true,

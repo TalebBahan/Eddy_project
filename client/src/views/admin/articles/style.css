@@ -25,15 +25,8 @@
     overflow: hidden;
     z-index: 0;
   }
-  
-  .blog-card button {
-    color: inherit;
-  }
-  
-  .blog-card button:hover {
-    color: var(--color-prime);
-  }
-  
+
+
   
   .blog-card .meta {
     position: relative;

@@ -62,12 +62,12 @@ const ContactPopup = () => {
         <img className="group-inner" alt="" src="Images/polygon-4.svg" />
       </div>
       <img className="book-a-lecture-child" alt="" src="Images/group-2303.svg" />
-      <Close onClick={hideContact}>
+      <Close onClick={hideContact} type="button">
         <FaTimes />
       </Close>
       <Container>
         {sent !== null ? <Title>{sent}</Title> :
-          <form>
+          <form onSubmit={handleSubmit}>
             <Title>Contact</Title>
             <InputArea>
               <Label>Name</Label>
@@ -111,7 +111,11 @@ const ContactPopup = () => {
               />
             </InputArea>
             <ButtonWrapper>
-              <Button onClick={handleSubmit} disabled={!captchaValue} style={
+
+              <Button onClick={hideContact} outline type="button">
+                Close
+              </Button>
+              <Button type="submit" disabled={!captchaValue} style={
                 {
                   backgroundColor: !captchaValue ? '#ccc' : '',
                   color: !captchaValue ? '#000' : '#fff',
@@ -119,9 +123,6 @@ const ContactPopup = () => {
                 }
               } >
                 Submit
-              </Button>
-              <Button onClick={hideContact} outline>
-                Close
               </Button>
             </ButtonWrapper>
           </form>

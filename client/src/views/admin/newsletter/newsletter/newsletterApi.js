@@ -7,6 +7,17 @@ export const newsletterApi = apiSlice.injectEndpoints({
             query: () => '/api/newsletter',
             providesTags: ['newsletter']
         }),
+        getCheckBoxes: builder.query({
+            query: () => `/api/data/idTitle`,
+            providesTags: ['newsletter', 'articles', 'books']
+        }),
+        getArticlesMediasBooksByIds: builder.query({
+            query: (data) => ({
+                url: `/api/newsletter/getArticlesMediasBooksByIds`,
+                method: 'POST',
+                body: data,
+            }),       
+        }),
         createnewsletter: builder.mutation({
             query: (newsletter) => ({
                 url: '/api/newsletter',
@@ -17,7 +28,7 @@ export const newsletterApi = apiSlice.injectEndpoints({
         }),
         updatenewsletter: builder.mutation({
             query: (newsletter) => ({
-                url: `/api/newsletters/${newsletter.id}`,
+                url: `/api/newsletter/${newsletter.id}`,
                 method: 'PUT',
                 body: newsletter,
             }),
@@ -59,4 +70,6 @@ export const {
     useUpdatenewsletterMutation,
     useDeletenewsletterMutation,
     useDeleteArticleMutation,
+    useGetCheckBoxesQuery,
+    useGetArticlesMediasBooksByIdsQuery
 } = newsletterApi;

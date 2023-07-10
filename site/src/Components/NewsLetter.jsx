@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 // import './a.css'
 import SubscribePopup from "./SubscribePopup";
-const NewsLetter = () => {
+const NewsLetter = ({interestsData}) => {
   const showSubscribe = (e) => {
     e.preventDefault()
     let element = document.getElementById("subscribe-form");
@@ -79,7 +79,7 @@ const NewsLetter = () => {
       </section>
 
     </motion.div>
-    <SubscribePopup email={email} />
+    <SubscribePopup email={email} interestsData={interestsData} />
   </>
 }
 

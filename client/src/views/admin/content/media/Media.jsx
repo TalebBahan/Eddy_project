@@ -20,8 +20,8 @@ export default function Media({ data }) {
                     </h4>
                     <button
                         onClick={handleOpen}
-                        className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-none  text-brand-200 hover:cursor-pointer"
-                    >
+                        className={`flex items-center text-xl hover:cursor-pointer bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}>
+                    
                         <AiOutlinePlus />
                     </button>
 

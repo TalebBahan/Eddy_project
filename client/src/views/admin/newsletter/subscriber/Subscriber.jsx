@@ -46,9 +46,6 @@ export default function Subscriber() {
         return <Unauthorized />;
     }
 
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
 
     const filteredData = search(data, COLUMNS, searchTerm);
 

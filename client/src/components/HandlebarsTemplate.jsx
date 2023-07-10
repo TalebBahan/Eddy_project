@@ -3,7 +3,6 @@ import * as handlebars from 'handlebars/dist/handlebars'
 
 const HandlebarsTemplate = ({newsletter}) => {
   const templateRef = useRef(null);
-
   useEffect(() => {
     const loadTemplate = async () => {
       const response = await fetch("email.handlebars"); // Replace with the actual path to your template file
@@ -12,9 +11,10 @@ const HandlebarsTemplate = ({newsletter}) => {
       const context = {
         'title': newsletter.title,
         'body': newsletter.body,
-        'ar': newsletter.articles,
-        'cover': newsletter.coverImageUrl,
-        'BACKEND_URI': 'https://eddy-api.bles-software.com/images'
+        'book': newsletter.books,
+        'media': newsletter.medias,
+        'articleImage': newsletter.articlesWithImages,
+        'articleNoImage': newsletter.articlesWithoutImages,
       }
 
       if (templateRef.current) {

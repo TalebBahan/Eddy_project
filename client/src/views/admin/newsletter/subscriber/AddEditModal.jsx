@@ -12,6 +12,8 @@ import {
 } from "./subscriberApi";
 import { useGetInterestssQuery } from "../interests/api";
 import Loading from "components/Loading";
+import Success from "components/Success";
+import Error from "components/Error";
 
 export default function AddEditModal(props) {
     const [add] = useCreateSubscriberMutation();
@@ -25,6 +27,8 @@ export default function AddEditModal(props) {
         interests: props?.interests || [],
         location: props?.location || "",
     });
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     if (isLoading || isError) {
         return <Loading />;
@@ -43,89 +47,97 @@ export default function AddEditModal(props) {
     const handleInterestChange = (e) => {
         const { value, checked } = e.target;
         if (checked) {
-          setFormData((formData) => ({
-            ...formData,
-            interests: [...formData.interests, value],
-          }));
+            setFormData((formData) => ({
+                ...formData,
+                interests: [...formData.interests, value],
+            }));
         } else {
-          setFormData((formData) => ({
-            ...formData,
-            interests: formData.interests.filter((interest) => interest !== value),
-          }));
+            setFormData((formData) => ({
+                ...formData,
+                interests: formData.interests.filter((interest) => interest !== value),
+            }));
         }
-      };
+    };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (props.isEdit) {
-            edit(formData);
-        } else {
-            add(formData);
+        try {
+            if (props.isEdit) {
+                await edit(formData);
+                setSuccessMessage("Subscriber updated successfully.");
+            } else {
+                await add(formData);
+                setSuccessMessage("Subscriber added successfully.");
+            }
+            setFormData({
+                email: "",
+                firstName: "",
+                lastName: "",
+                age: "",
+                interests: [],
+                location: "",
+            });
+            props.handleOpen();
+        } catch (error) {
+            setErrorMessage("Error occurred. Please try again.");
         }
-        setFormData({
-            email: "",
-            firstName: "",
-            lastName: "",
-            age: "",
-            interests: [],
-            location: "",
-        });
-        props.handleOpen();
     };
 
     return (
-        <Dialog open={props.open} onClose={props.handleClose} size="xxl">
-            <DialogHeader>
-                {props.isEdit ? "Edit Subscriber" : "Add Subscriber"}
-            </DialogHeader>
-            <form onSubmit={handleSubmit}>
-                <DialogBody>
-                    <div className="mb-4">
-                        {[
-                            { label: "Email", name: "email", type: "email" },
-                            { label: "First Name", name: "firstName", type: "text" },
-                            { label: "Last Name", name: "lastName", type: "text" },
-                            { label: "Age", name: "age", type: "number" },
-                        ].map((field) => (
-                            <div key={field.name}>
-                                <label
-                                    className="block text-gray-700 font-bold mb-2"
-                                    htmlFor={field.name}
-                                >
-                                    {field.label}
-                                </label>
-                                <input
-                                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id={field.name}
-                                    type={field.type}
-                                    placeholder={field.label}
-                                    name={field.name}
-                                    value={formData[field.name]}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        ))}
-                        <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="interests">
-                            Interests
-                        </label>
-                        <div className="flex items-center">
-                            {interests.map((interest) => (
-                                <label className="mr-2 text-gray-700" htmlFor={interest} key={interest}>
+        <div>
+            <Dialog open={props.open} onClose={props.handleClose} size="xxl">
+                <DialogHeader>
+                    {props.isEdit ? "Edit Subscriber" : "Add Subscriber"}
+                </DialogHeader>
+                <form onSubmit={handleSubmit}>
+                    <DialogBody>
+                        <div className="mb-4">
+                            {[
+                                { label: "Email", name: "email", type: "email" },
+                                { label: "First Name", name: "firstName", type: "text" },
+                                { label: "Last Name", name: "lastName", type: "text" },
+                                { label: "Age", name: "age", type: "number" },
+                            ].map((field) => (
+                                <div key={field.name}>
+                                    <label
+                                        className="block text-gray-700 font-bold mb-2"
+                                        htmlFor={field.name}
+                                    >
+                                        {field.label}
+                                    </label>
                                     <input
-                                        className="mr-1"
-                                        type="checkbox"
-                                        id={interest}
-                                        name="interests"
-                                        value={interest}
-                                        checked={formData.interests.includes(interest)}
-                                        onChange={handleInterestChange}
+                                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id={field.name}
+                                        type={field.type}
+                                        placeholder={field.label}
+                                        name={field.name}
+                                        value={formData[field.name]}
+                                        onChange={handleChange}
+                                        required
                                     />
-                                    {interest}
-                                </label>
+                                </div>
                             ))}
+                            <label className="block text-gray-700 font-bold mt-4 mb-2" htmlFor="interests">
+                                Interests
+                            </label>
+                            <div className="flex items-center">
+                                {interests.map((interest) => (
+                                    <label className="mr-2 text-gray-700" htmlFor={interest} key={interest}>
+                                        <input
+                                            className="mr-1"
+                                            type="checkbox"
+                                            id={interest}
+                                            name="interests"
+                                            value={interest}
+                                            checked={formData.interests.includes(interest)}
+                                            onChange={handleInterestChange}
+                                        />
+                                        {interest}
+                                    </label>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    </DialogBody>
                     <DialogFooter>
                         <Button
                             variant="text"
@@ -139,8 +151,10 @@ export default function AddEditModal(props) {
                             <span>Confirm</span>
                         </Button>
                     </DialogFooter>
-                </DialogBody>
-            </form>
-        </Dialog>
+                </form>
+            </Dialog>
+            {successMessage && <Success message={successMessage} />}
+            {errorMessage && <Error message={errorMessage} />}
+        </div>
     );
 }

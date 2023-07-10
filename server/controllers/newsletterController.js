@@ -1,129 +1,81 @@
 const Newsletter = require('../model/newsletter'); 
-
-exports.createArticle = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const  { title, body, readMoreLink } = req.body;
-    const imageUrl = req.file.filename
-    const newsletter = await Newsletter.findById(id);
-    newsletter.articles.push({ title, body, imageUrl, readMoreLink });
-    await newsletter.save();
-    return res.status(200).json(newsletter);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server Error' });
-  }
-};
-
-exports.deleteArticle = async (req, res) => {
-
-  const { newsletterId, articleId } = req.body;
-  console.log('====================================');
-  console.log('hjk',{ newsletterId, articleId });
-  console.log('====================================');
-
-  try {
-    const newsletter = await Newsletter.findById(newsletterId);
-    if (!newsletter) {
-      console.log('====================================');
-      console.log('n');
-      console.log('====================================');
-      return res.status(404).json({ message: 'Newsletter not found' });
-    }
-    const articleIndex = newsletter.articles.findIndex(article => article.id === articleId);
-
-    if (articleIndex === -1) {
-      console.log('====================================');
-      console.log('a');
-      console.log('====================================');
-      return res.status(404).json({ message: 'Article not found' });
-    }
-
-    newsletter.articles.splice(articleIndex, 1);
-
-    await newsletter.save();
-
-    return res.json({ message: 'Article deleted successfully' });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'An error occurred while deleting the article' });
-  }
-}
+const Content = require('../model/content');
+const Article = require('../model/article');
+const Book = require('../model/book')
+// Create a newsletter
 exports.createNewsletter = async (req, res) => {
   try {
-    const newsletter = new Newsletter({
-      title: req.body.title,
-      subject: req.body.subject,
-      coverImageUrl: req.file.filename,
-      articles: req.body.articles,
-      body: req.body.body,
-    });
-    const savedNewsletter = await newsletter.save();
-    res.status(201).json(savedNewsletter);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    const { title, subject, body } = req.body;
+    const newsletter = await Newsletter.create({ title, subject, body });
+    res.status(201).json(newsletter);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create newsletter' });
   }
 };
-
-// Get all newsletters
-exports.getNewsletters = async (req, res) => {
+exports.getArticlesMediasBooksByIds = async (req, res) => {
   try {
-    const newsletters = await Newsletter.find().sort({ createdAt: -1 });
+    const { articlesIds, booksIds, mediasIds } = req.body;
+    const articles = await Article.find({ _id: { $in: articlesIds } });
+    const books = await Book.find({ _id: { $in: booksIds } });
+    const medias = await Content.find({ _id: { $in: mediasIds } });
+    res.status(200).json({ articles, books, medias });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve articles, books, and medias' });
+  }
+};
+// Get all newsletters
+exports.getAllNewsletters = async (req, res) => {
+  try {
+    const newsletters = await Newsletter.find();
     res.status(200).json(newsletters);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve newsletters' });
   }
 };
 
-
-// Get a newsletter by ID 
+// Get a single newsletter by ID
 exports.getNewsletterById = async (req, res) => {
   try {
-    const newsletter = await Newsletter.findById(req.params.id);
+    const { id } = req.params;
+    const newsletter = await Newsletter.findById(id);
     if (!newsletter) {
       return res.status(404).json({ error: 'Newsletter not found' });
     }
     res.status(200).json(newsletter);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve newsletter' });
   }
 };
 
 // Update a newsletter by ID
 exports.updateNewsletterById = async (req, res) => {
   try {
-    const newsletter = await Newsletter.findById(req.params.id);
+    const { id } = req.params;
+    const { title, subject, body } = req.body;
+    const newsletter = await Newsletter.findByIdAndUpdate(
+      id,
+      { title, subject, body },
+      { new: true }
+    );
     if (!newsletter) {
       return res.status(404).json({ error: 'Newsletter not found' });
     }
-    newsletter.title = req.body.title;
-    newsletter.coverImageUrl = req.body.coverImageUrl;
-    newsletter.articles = req.body.articles;
-    newsletter.layout = req.body.layout;
-    newsletter.scheduledTime = req.body.scheduledTime;
-    const savedNewsletter = await newsletter.save();
-    res.status(200).json(savedNewsletter);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    res.status(200).json(newsletter);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update newsletter' });
   }
 };
 
 // Delete a newsletter by ID
 exports.deleteNewsletterById = async (req, res) => {
   try {
-    const newsletter = await Newsletter.findById(req.params.id);
-
+    const { id } = req.params;
+    const newsletter = await Newsletter.findByIdAndRemove(id);
     if (!newsletter) {
       return res.status(404).json({ error: 'Newsletter not found' });
     }
-    await newsletter.remove();
-    res.status(204).send();
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    res.status(200).json({ message: 'Newsletter deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete newsletter' });
   }
 };

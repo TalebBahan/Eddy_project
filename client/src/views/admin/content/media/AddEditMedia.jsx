@@ -7,11 +7,14 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import Upload from "./Upload";
+import Success from "components/Success";
+import Error from "components/Error";
 import { useAddContentMutation, useEditContentMutation } from "../apiContent";
+
 export default function AddEditMedia(props) {
   console.log(props.date);
-  const [add] = useAddContentMutation()
-  const [edit] = useEditContentMutation()
+  const [add] = useAddContentMutation();
+  const [edit] = useEditContentMutation();
   const [formData, setFormData] = useState({
     h_text: props?.h_text,
     s_text: props?.s_text,
@@ -20,13 +23,18 @@ export default function AddEditMedia(props) {
     id: props?.id,
     date: props?.date
   });
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const handleImageChange = (file) => {
     setFormData({ ...formData, file: file });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -38,33 +46,43 @@ export default function AddEditMedia(props) {
     form.append("id", formData.id);
     form.append("date", formData.date);
     form.append("type", 'media');
+
     if (props.isAdd) {
       add(form)
-      setFormData({
-        h_text: '',
-        s_text: '',
-        link: '',
-        file: null,
-        date: ''
-      });
-    }
-    else {
-      if (window.confirm('are you sure you want to save the edit ?'))
+        .then(() => {
+          setSuccessMessage("Successfully added.");
+          setFormData({
+            h_text: '',
+            s_text: '',
+            link: '',
+            file: null,
+            date: ''
+          });
+        })
+        .catch(() => {
+          setErrorMessage("Error adding the item.");
+        });
+    } else {
+      if (window.confirm('Are you sure you want to save the edit?')) {
         edit(formData)
+          .then(() => {
+            setSuccessMessage("Successfully edited.");
+          })
+          .catch(() => {
+            setErrorMessage("Error editing the item.");
+          });
+      }
     }
-
-
-
 
     props.handleOpen();
   };
+
   return (
     <Fragment>
-
+      {successMessage && <Success message={successMessage} />}
+      {errorMessage && <Error message={errorMessage} />}
       <Dialog open={props.open} handler={props.handleOpen} size='xxl'>
-        {/* <form> */}
-
-        <DialogHeader>{props.isAdd ? 'Add New Media coverage or artical ' : 'Edit this'}</DialogHeader>
+        <DialogHeader>{props.isAdd ? 'Add New Media coverage or article' : 'Edit this'}</DialogHeader>
         <DialogBody divider>
           <div class="flex flex-col">
             <label

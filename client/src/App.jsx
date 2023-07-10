@@ -9,6 +9,7 @@ import Login from "features/auth/Login";
 // import RtlLayout from "layouts/rtl";
 import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
+import View from "views/admin/newsletter/newsletter/View";
 const App = () => {
   return (
     <Routes>
@@ -22,6 +23,8 @@ const App = () => {
 
         {/* protected routes */}
         <Route element={<RequireAuth />}>
+          <Route path="admin/newslleter" element={<View />} />
+
           <Route path="admin/*" element={<AdminLayout />} />
           <Route path="welcome" element={<Welcome />} />
         </Route>

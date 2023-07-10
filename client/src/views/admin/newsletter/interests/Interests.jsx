@@ -5,19 +5,32 @@ import {
     useDeleteInterestsMutation
 } from "./api";
 import Form from "./Form";
+import { AiOutlinePlus } from "react-icons/ai";
+import Success from "components/Success";
+import Error from "components/Error";
 
 const Interests = () => {
     const { data, isLoading } = useGetInterestssQuery();
-    console.log( useGetInterestssQuery());
     const [deleteInterest] = useDeleteInterestsMutation();
     const [showModal, setShowModal] = useState(false);
     const [selectedInterest, setSelectedInterest] = useState(null);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
+
     const handleDelete = (interest) => {
-        if (window.confirm('Are you sure you want to delete this interest?'))
-            deleteInterest(interest._id);
+        if (window.confirm('Are you sure you want to delete this interest?')) {
+            deleteInterest(interest._id)
+                .then(() => {
+                    setSuccessMessage("Interest successfully deleted.");
+                })
+                .catch(() => {
+                    setErrorMessage("Error deleting the interest.");
+                });
+        }
     };
 
     const handleEdit = (interest) => {
@@ -32,6 +45,8 @@ const Interests = () => {
     const handleCloseModal = () => {
         setSelectedInterest(null);
         setShowModal(false);
+        setSuccessMessage("");
+        setErrorMessage("");
     };
 
     return (
@@ -41,10 +56,10 @@ const Interests = () => {
                     Interests
                 </div>
                 <button
-                    className="text-sm font-bold text-green-500 dark:text-white"
+                    className={`flex items-center text-xl hover:cursor-pointer bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
                     onClick={handleOpenModal}
                 >
-                    Add
+                    <AiOutlinePlus />
                 </button>
             </div>
 
@@ -76,7 +91,7 @@ const Interests = () => {
                                     <td>
                                         <div className="flex items-center gap-2">
                                             <button
-                                                className="text-sm font-bold text-green-500 dark:text-white"
+                                                className="text-sm font-bold text-red-500 dark:text-white"
                                                 onClick={() => handleDelete(interest)}
                                             >
                                                 Delete
@@ -96,11 +111,16 @@ const Interests = () => {
                 </table>
             </div>
 
+            {successMessage && <Success message={successMessage} />}
+            {errorMessage && <Error message={errorMessage} />}
+
             <Form
                 open={showModal}
                 handleClose={handleCloseModal}
                 isEdit={!!selectedInterest}
                 interest={selectedInterest}
+                setSuccessMessage={setSuccessMessage}
+                setErrorMessage={setErrorMessage}
             />
         </Card>
     );

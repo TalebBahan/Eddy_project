@@ -36,13 +36,8 @@ export default function LinkedInCard({ text, tags, image, link, id }) {
 
         <div className="mb-3">
           <div>
-            <p className="text-lg font-bold text-navy-700 dark:text-white whitespace-pre-line truncate">{tags}</p>
-            <p className="mt-1 text-sm font-medium text-gray-600 truncate">{text}</p>
-            <div className="max-w-full">
-              <Link className="mt-1 text-sm font-medium text-gray-900 truncate" target="_blank" to={link}>
-                {link}
-              </Link>
-            </div>
+            <p className="text-md font-bold text-navy-700 dark:text-white whitespace-pre-line truncate">{tags}</p>
+            <a href={link}><p className="mt-1 text-sm font-medium text-brand-300 truncate">{text}</p></a>
           </div>
         </div>
 

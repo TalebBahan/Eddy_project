@@ -15,15 +15,16 @@ const Card = ({ title, author, body, imageUrl, link }) => {
     };
   }, []);
 
-  const truncatedBody = windowWidth < 800 ? `${body.substring(0, 100)}...` : body;
+  const truncatedBody = windowWidth < 800 ? `${body.substring(0, 800)}...` : body;
 
   return (
     <div className="searchresult">
-      <h2><a href={link} target='_blank'>{title}</a></h2>
+      
       <div className='bodyArticule'>
+      <h2><a href={link} target='_blank'>{title}</a></h2>
       <p>{truncatedBody}</p>
-      <img src={`${process.env.REACT_APP_API}/images/${imageUrl}`} alt="Result Image" />
       </div>
+      <img src={`${process.env.REACT_APP_API}/images/${imageUrl}`} alt="Result Image" />
     </div>
   );
 };

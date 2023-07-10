@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 2px 1px rgba(112, 112, 112, 0.2);
   border-radius: 10px;
-  padding-bottom: 4px;
+  ${'' /* padding-bottom: 4px; */}
   @media screen and (max-width: 750px) {
     width: 280px;
     margin: 10px;
@@ -75,7 +75,7 @@ export const Text = styled.p`
   color: #191919;
   line-height: 17px;
   margin-bottom: 5px;
-  height: 50px;
+  height: 25px;
 `;
 
 export const HashTag = styled.p`

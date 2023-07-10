@@ -13,7 +13,10 @@ export const Wrapper = styled.div`
   align-items: center;
   display: none;
   background: rgb(255 255 255 / 50%);
+  overflow-y: scroll;
+
   ${'' /* backdrop-filter: saturate(180%) blur(10px); */}
+  
 `;
 
 export const Close = styled.button`

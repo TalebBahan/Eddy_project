@@ -5,6 +5,7 @@ const HeroLinks = require('../model/heroLinks')
 const linkedin = require('../model/linkedin');
 const Article = require('../model/article');
 const Book = require('../model/book');
+const Interest = require('../model/interest');
 // Get all videos, content, and about images
 const getAllData = async (req, res) => {
   try {
@@ -15,9 +16,10 @@ const getAllData = async (req, res) => {
     const linkedinPosts = await linkedin.find().sort({ createdAt: -1 });
     const articles = await Article.find().sort({ createdAt: -1 });
     const books = await Book.find().sort({ createdAt: -1 });
+    const interests = await Interest.find().sort({ createdAt: -1 });
 
 
-    res.status(200).json({ youtube: videos, content, aboutImages,heroLinks,linkedin:linkedinPosts,articles,books });
+    res.status(200).json({ youtube: videos, content, aboutImages,heroLinks,linkedin:linkedinPosts,articles,books ,interests});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -29,7 +31,13 @@ const getIdTitle = async (req, res) => {
     const articles = await Article.find().sort({ createdAt: -1 });
     const books = await Book.find().sort({ createdAt: -1 });
     const linkedinPosts = await linkedin.find().sort({ createdAt: -1 });
-    const media = await Content.find().sort({ createdAt: -1 });
+    // get the content of type media
+    const media = await Content.find({ type: 'media' }).sort({ createdAt: -1 });
+
+    // get the id and the title of the media
+    const mediaIdTitle = media.map((item) => {
+      return { _id: item._id, title: item.h_text };
+    });
     const articlesIdTitle = articles.map((article) => {
       return { _id: article._id, title: article.title };
     });
@@ -39,7 +47,7 @@ const getIdTitle = async (req, res) => {
     const linkedinIdTitle = linkedinPosts.map((linkedin) => {
       return { _id: linkedin._id, title: linkedin.title };
     });
-    res.status(200).json({ articlesIdTitle, booksIdTitle, linkedinIdTitle });
+    res.status(200).json({ articlesIdTitle, booksIdTitle, linkedinIdTitle,mediaIdTitle });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
