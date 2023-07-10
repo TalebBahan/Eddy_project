@@ -103,7 +103,7 @@ const SubscribePopup = ({ email, setEmail, interestsData }) => {
             :
             <Container>
 
-              <Title>Just fiew Details :) </Title>
+              <Title>Just few Details :) </Title>
               <InputArea>
                 <Label for="name">Name</Label>
                 <Input

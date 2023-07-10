@@ -32,7 +32,7 @@ exports.sendMessage = (req, res) => {
         from: "talebbahan@gmail.com",
         subject: 'Message from the contact on the website',
         template: 'message',
-        to:'talebbahan@gmail.com',
+        to:'eddy@eddyabboud.com',
         context: {
             email,
             name,

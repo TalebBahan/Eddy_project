@@ -31,7 +31,7 @@ const COLUMNS = [
     //     Header: "Location",
     //     accessor: "location",
     // },
-]
+] 
 
 export default function Subscriber() {
     const { data, isLoading, isError } = useGetSubscribersQuery();
