@@ -80,7 +80,7 @@ async function googlecallbak(req, res) {
         token.googleAccessToken = data.tokens.access_token;
         token.json=JSON.stringify(data.tokens)
         token.save();
-        return res.redirect("http://localhost:3000/admin/youtube");
+        return res.redirect("http://dashboard.eddyabboud.com/#/admin/youtube");
       } else {
         
         res.status(400);
@@ -92,43 +92,6 @@ async function googlecallbak(req, res) {
     res.status(500).send("Failed to log in");
   }
 }
-const VIDEO_FILE_PATH="C:\Users\hp\Pictures\Camera Roll\20210825_170249.mp4";
-const uploadVideo = (req, res) => {
-  const service = google.youtube({
-    version: "v3",
-    auth: client,
-  });
-  service.videos.insert(
-    {
-      auth: client,
-      part: "snippet,contentDetails,status",
-      resource: {
-        // Video title and description
-        snippet: {
-          title: "My 2nd",
-          description: "My 2nd description",
-        },
-        // I set to private for tests
-        status: {
-          privacyStatus: "public",
-        },
-      },
-
-      // Create the readable stream to upload the video
-      media: {
-        body: fs.createReadStream(VIDEO_FILE_PATH), // Change here to your real video
-      },
-    },
-    (error, data) => {
-      if (error) {
-        console.log(error);
-        return res.status(error.status).send(error);
-      }
-     
-      return res.status(200).send(data);
-    }
-  );
-};
 
 const getvideos = async (req, res) => {
 
@@ -246,7 +209,6 @@ const deleteVideo = async (req, res) => {
 module.exports = {
   googlelogin,
   googlecallbak,
-  uploadVideo,
   getvideos,
   getonevideo,
   deleteVideo,

@@ -63,7 +63,7 @@ const VideoCard = ({ video,re }) => {
           </div>
         </div>
 
-        <div className=''>
+        {/* <div className=''>
           <button
             onClick={handleOpen}
             href=''
@@ -71,7 +71,7 @@ const VideoCard = ({ video,re }) => {
           >
             Edit
           </button>
-        </div>
+        </div> */}
       </div>
     </Card>
   );

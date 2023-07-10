@@ -2,7 +2,7 @@
 const path = require('path');
 const express = require('express');
 const router = express.Router();
-const {  uploadVideo, getvideos, getonevideo, deleteVideo, updateVideo } = require('../../controllers/googleController');
+const { getvideos, getonevideo, deleteVideo, updateVideo } = require('../../controllers/googleController');
 
 
 router.get('/', (req, res) => {
@@ -23,6 +23,6 @@ router.delete('/videos/:id', deleteVideo);
 router.put('/videos/:id', updateVideo);
 
 // Route for uploading a video
-router.post('/upload', uploadVideo);
+// router.post('/upload', uploadVideo);
 
 module.exports = router;
