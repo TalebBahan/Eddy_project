@@ -40,7 +40,7 @@ Book stuff
 
 .cover {
   border: 2px solid gray;
-  height: 77%;
+  height: 79%;
   overflow: hidden;
 }
 
@@ -68,7 +68,8 @@ Book stuff
   .book {
     display: block;
     margin: 0 auto;
-    margin-top: 50px;
+    height: 400px;
+    /* margin-top: 20px; */
   }
   .cover {
     

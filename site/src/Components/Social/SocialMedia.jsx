@@ -85,6 +85,24 @@ const SocialMedia = ({ youtube, linkedin }) => {
         'Having been described as a "raucous circus of hyper speed gypsy rock” embracing "just about every element of theatrical rock & roll in existence”, this psychedelic punk folk outfit has been bringing their vigorous foot stomping hectic good times tunage to Palm Creek for at least 15 years. The heat has caused their memories to be a little hazy.',
     },
   ];
+
+  const options = {
+    rewind: false,
+    arrows: true,
+    pagination: false,
+    perPage: 3,
+    perMove: 1,
+    gap: '1rem',
+    breakpoints: {
+      768: {
+        perPage: 1,
+      },
+      1000: {
+        perPage: 2,
+      }
+    },
+  }
+
   return (
     <>
       <motion.div
@@ -114,25 +132,7 @@ const SocialMedia = ({ youtube, linkedin }) => {
           <div className="social-slider-wrapper" style={{}}>
 
             <Splide
-              options={{
-                rewind: false,
-                arrows: true,
-                pagination: false,
-                perPage: 1,
-                perMove: 1,
-                gap: '1rem',
-                breakpoints: {
-                  768: {
-                    perPage: 1,
-                  },
-                  1000: {
-                    perPage: 2,
-                  },
-                  1600: {
-                    perPage: 3,
-                  },
-                },
-              }}
+              options={options}
             >
               {linkedin?.map((card, index) => (
                 <SplideSlide>
@@ -153,25 +153,7 @@ const SocialMedia = ({ youtube, linkedin }) => {
 
           <div className="social-slider-wrapper" style={{}}>
             <Splide
-              options={{
-                rewind: false,
-                arrows: true,
-                pagination: false,
-                perPage: 1,
-                perMove: 1,
-                gap: '1rem',
-                breakpoints: {
-                  768: {
-                    perPage: 1,
-                  },
-                  1000: {
-                    perPage: 2,
-                  },
-                  1600: {
-                    perPage: 3,
-                  },
-                },
-              }}
+              options={options}
             >
               {youtube?.map((card, index) => (
                 <SplideSlide>

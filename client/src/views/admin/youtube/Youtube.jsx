@@ -15,9 +15,6 @@ const COLUMNS = [{ Header: "Title", accessor: "title", }, { Header: "Description
 const VideoCard = ({ video,re }) => {
   const [deleteVideo] = useDeleteVideoMutation();
   const [remove] = useRemoveVideoMutation();
-  console.log('====================================');
-  console.log("data",re);
-  console.log('====================================');
   const [add] = useAddVideoMutation();
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this video?')) {
