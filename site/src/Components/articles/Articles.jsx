@@ -56,6 +56,7 @@ const Articles = ({ articles }) => {
                     className="latest-news-item"
                     alt=""
                     src="Images/LTnewsdesign3.svg"
+                    style={{ zIndex: -1 }}
                 />
                 <img
                     className="latest-news-inner"
