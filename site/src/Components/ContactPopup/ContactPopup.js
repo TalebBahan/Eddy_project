@@ -38,6 +38,9 @@ export const Container = styled.div`
   border-radius: 10px;
   max-width: 400px;
   box-shadow: 0px 0px 10px #eeeeee;
+  @media (max-width: 768px) {
+    z-index: 9999;
+  }
 `;
 
 export const Title = styled.div`

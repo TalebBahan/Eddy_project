@@ -39,6 +39,9 @@ export const Container = styled.div`
   max-width: 400px;
   box-shadow: 0px 0px 10px #eeeeee;
   overflow: auto;
+  @media (max-width: 768px) {
+    z-index: 9999;
+  }
 `;
 
 export const Title = styled.div`
