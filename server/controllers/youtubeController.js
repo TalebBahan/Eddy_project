@@ -16,6 +16,7 @@ const createVideo = async (req, res) => {
 const getAllVideos = async (req, res) => {
   try {
     const videos = await Youtube.find();
+    console.log(videos);
     res.status(200).json(videos);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -42,7 +43,14 @@ const updateVideo = async (req, res) => {
 const deleteVideo = async (req, res) => {
   try {
     const { id } = req.params;
-    await Youtube.findByIdAndDelete(id);
+    // find by videoId key and delete
+    await Youtube.find({ videoId: id }).deleteOne(
+      { videoId: id },
+      function (err) {
+        if (err) console.log(err);
+        console.log("Successful deletion");
+      }
+    );
     res.status(204).json();
   } catch (error) {
     res.status(500).json({ message: error.message });

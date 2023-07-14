@@ -22,7 +22,11 @@ const TokenSchema = new Schema({
     linkedinEmail: String,
     linkedinName: String,
     linkedinPicture: String,
-    json:String
+    json:String,
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
 });
 
 token = mongoose.model('Token', TokenSchema);
