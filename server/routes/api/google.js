@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 // Route for getting all videos by username
-router.route('/videos/:username')
+router.route('/videos')
   .get(getvideos);
 
 // Route for getting a specific video by ID

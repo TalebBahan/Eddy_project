@@ -16,8 +16,8 @@ export const googleApiSlice = apiSlice.injectEndpoints({
 
       }),
     }),
-    getVideos: builder.query({
-      query: (id) => `/api/google/videos/${id}`,
+    getVideosNotStored: builder.query({
+      query: () => `/api/google/videos`,
       method: "GET",
       providesTags: ['Youtube']
     }),
@@ -43,7 +43,7 @@ export const googleApiSlice = apiSlice.injectEndpoints({
 
 
 
-    getReVideos: builder.query({
+    getVideosStored: builder.query({
       query: () => '/api/youtube',
       providesTags: ['Youtube']   
     }),
@@ -69,12 +69,12 @@ export const {
   useGoogleLoginQuery,
   useGoogleCallbackQuery,
   useUploadVideoMutation,
-  useGetVideosQuery,
+  useGetVideosNotStoredQuery,
   useGetOneVideoQuery,
   useUpdateVideoMutation,
   useDeleteVideoMutation,
   useRemoveVideoMutation,
   useAddVideoMutation,
-  useGetReVideosQuery,
+  useGetVideosStoredQuery,
   
 } = googleApiSlice;

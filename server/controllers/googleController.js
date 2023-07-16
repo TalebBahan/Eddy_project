@@ -88,7 +88,7 @@ async function googlecallbak(req, res) {
       notStored.push(videoData);
     }
   });
-  return { stored, notStored };
+  return  notStored ;
 };
 const getvideos = async (req, res) => {
   // get the last token
@@ -96,7 +96,8 @@ const getvideos = async (req, res) => {
   const videos = await Youtube.find();
 
   if (!token || !token.googleAccessToken) {
-    res.status(403).send("Please log in to your Google account first",videos);
+    console.log("no token");
+    res.status(404).send("login to your google account first");
     return;
   }
 
@@ -116,8 +117,8 @@ const getvideos = async (req, res) => {
     })
     .then(response => response.json())
     .then(videoData => {
-      const { stored, notStored } = responseVideos(videoData.items,videos);
-      res.status(200).json({ stored, notStored});
+      const  notStored  = responseVideos(videoData.items,videos);
+      res.status(200).json(notStored);
     })
     .catch(error => {
       console.error("Error:", error);
