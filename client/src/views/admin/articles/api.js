@@ -19,7 +19,7 @@ export const Api = apiSlice.injectEndpoints({
             query: (article) => ({
                 url: `/api/articles/${article.id}`,
                 method: 'PUT',
-                body: article,
+                body: article.form,
             }),
             invalidatesTags: ['article']
 

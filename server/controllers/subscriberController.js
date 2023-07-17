@@ -65,6 +65,25 @@ exports.deleteSubscriber = async (req, res) => {
   }
 };
 
+exports.deleteMany = async (req, res) => {
+  try {
+   
+    const { ids } = req.body;
+    console.log(ids);
+
+    const result = await Subscriber.deleteMany({ _id: { $in: ids } });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Subscribers not found' });
+    }
+
+    res.json({ message: 'Subscribers deleted' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
 
 
 

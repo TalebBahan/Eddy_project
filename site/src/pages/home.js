@@ -13,11 +13,21 @@ import React from "react";
 import { useGetDataQuery } from "apiSlice";
 import SearchPopup from "Components/SearchPoppup";
 import Books from "Components/books/Books";
+import { useInView } from "react-intersection-observer";
+
 const Home = () => {
-  const { data, isLoading } = useGetDataQuery()
+  const [isIntersecting, setIsIntersecting] = React.useState(false);
+  const { data, isLoading } = useGetDataQuery();
+
   if (isLoading) {
     return <div></div>
   }
+  const handlleIntersect = (state) => {
+    setIsIntersecting(state)
+    console.log("intersecting", isIntersecting)
+  }
+
+
   const media = data?.content.filter((item) => item.type === "media")
   
   return (
@@ -25,14 +35,14 @@ const Home = () => {
       
       {data && (
         <>
-          <Navbar />
+          <Navbar isIntersecting={isIntersecting}/>
           <Hero data={data.heroLinks} />
-          <About visionData={data.content} images={data.aboutImages} />
-          <Achievements />
-          <Lectures />
-          <SocialMedia youtube={data.youtube} linkedin={data.linkedin} />
-          <News latestNewsObj={data.content} />
-          <Books books={data.books}/>
+          <About visionData={data.content} images={data.aboutImages} handlleIntersect={handlleIntersect} />
+          <Achievements  />
+          <Lectures  />
+          <SocialMedia youtube={data.youtube} linkedin={data.linkedin}  />
+          <News latestNewsObj={data.content}  />
+          <Books books={data.books}  active={false} />
           <Articles articles={data.articles} />
           <NewsLetter interestsData={data.interests}/>
           <Footer />

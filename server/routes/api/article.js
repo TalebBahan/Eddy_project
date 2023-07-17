@@ -25,7 +25,7 @@ router.get('/', articleController.getArticles);
 router.get('/:id', articleController.getArticle);
 
 // Update an article
-router.put('/:id', articleController.updateArticle);
+router.put('/:id',  upload.single('file') ,articleController.updateArticle);
 
 // Delete an article
 router.delete('/:id', articleController.deleteArticle);

@@ -108,3 +108,11 @@ a{
   text-decoration: none;
   
 }
+
+
+.splide__arrow--prev {
+  left: -1.3rem !important;
+}
+.splide__arrow--next {
+  right: -1.7rem !important;
+}

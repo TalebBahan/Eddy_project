@@ -9,20 +9,21 @@ import React from "react";
 import AddEditModal from "./AddEditModal";
 import { useMemo } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useDeleteSubscriberMutation } from "./subscriberApi";
-import Send from "./Send";
+import { useDeleteSubscriberMutation, useDeleteManyMutation } from "./subscriberApi";
+// import Send from "./Send";
 import Checkbox from "components/checkbox";
 const Table = (props) => {
     const { columnsData, tableData } = props;
     const columns = useMemo(() => columnsData, [columnsData]);
     const data = useMemo(() => tableData, [tableData]);
     const [deleteSubscriber] = useDeleteSubscriberMutation()
+    const [deletemany] = useDeleteManyMutation()
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => setOpen(!open);
     const [eopen, setEopen] = React.useState(false)
     const handleEopen = () => setEopen(!eopen);
     const [editData, setEditData] = React.useState('')
-    const [sendModel,setSendModel] = React.useState(false)
+    // const [sendModel,setSendModel] = React.useState(false)
     const [checkedIds, setCheckedIds] = React.useState([]);
 
     const handleChange = (event, id) => {
@@ -46,6 +47,10 @@ const Table = (props) => {
         useSortBy,
         usePagination
     );
+    const deleteMany = (ids)=>{
+        if(window.confirm('are you sure you want to delete all of those ? ')) deletemany(ids)
+        setCheckedIds([])
+    }
 
     const {
         getTableProps,
@@ -60,7 +65,7 @@ const Table = (props) => {
     return (
         <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
             <AddEditModal open={open} handleOpen={handleOpen} />
-            <Send open={sendModel} handleOpen={()=>setSendModel(!sendModel)} emails={checkedIds} />
+            {/* <Send open={sendModel} handleOpen={()=>setSendModel(!sendModel)} emails={checkedIds} /> */}
             <AddEditModal open={eopen} handleOpen={handleEopen} isEdit={true} {...editData} />
             <div class="relative flex items-center justify-between">
                 <div class="text-xl font-bold text-navy-700 dark:text-white">
@@ -68,11 +73,11 @@ const Table = (props) => {
                     All Subscribers
                 </div>
                 <button
-                    onClick={ checkedIds.length > 1 ? ()=>setSendModel(!sendModel) : ()=>handleOpen() }
+                    onClick={ checkedIds.length > 1 ? ()=>deleteMany(checkedIds) : ()=>handleOpen() }
                     className={`flex items-center text-xl hover:cursor-pointer 
-              bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
+              bg-lightPrimary p-2 text-red-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
                 >
-                    {checkedIds.length > 1 ? 'Send News' : <AiOutlinePlus className="h-6 w-6" />}
+                    {checkedIds.length > 1 ? 'Delete' : <AiOutlinePlus className="h-6 w-6" />}
                 </button>
 
             </div>
@@ -118,8 +123,8 @@ const Table = (props) => {
                                             if (cell.column.Header === "Email") {
                                                 data = (
                                                     <div className="flex items-center gap-2">
-                                                        <Checkbox checked={checkedIds.includes(row.original.email)}
-                                                            onChange={(event) => handleChange(event, row.original.email)} />
+                                                        <Checkbox checked={checkedIds.includes(row.original._id)}
+                                                            onChange={(event) => handleChange(event, row.original._id)} />
 
                                                         <p className="text-sm font-bold text-navy-700 dark:text-white">
                                                             {cell.value}

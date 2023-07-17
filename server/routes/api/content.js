@@ -24,7 +24,7 @@ router.delete('/imageAbout/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentA
 router.post('/imageAbout' ,[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor), upload.single("file")], contentController.createAboutImage);
 router.get('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor,ROLES_LIST.contentUser), contentController.getContentById );
 router.post('/',[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor), upload.single('file')], contentController.createContent );
-router.put('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor), contentController.updateContent );
+router.put('/:id',[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor), upload.single('file')], contentController.updateContent );
 router.delete('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin), contentController.deleteContent );
 
 

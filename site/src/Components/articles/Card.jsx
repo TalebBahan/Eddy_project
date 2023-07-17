@@ -15,7 +15,7 @@ const Card = ({ title, author, body, imageUrl, link }) => {
     };
   }, []);
 
-  const truncatedBody = windowWidth < 800 ? `${body.substring(0, 800)}...` : body;
+  const truncatedBody = windowWidth < 800 ? `${body.substring(0, 150)}...` : body;
 
   return (
     <div className="searchresult">

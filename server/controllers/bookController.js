@@ -40,6 +40,9 @@ const getBook = async (req, res) => {
 
 // Update an book
 const updateBook = async (req, res) => {
+  if (req.file) {
+    req.body.imageUrl = req.file.filename;
+  }
   try {
     const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!book) {

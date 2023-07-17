@@ -41,6 +41,9 @@ const getArticle = async (req, res) => {
 // Update an article
 const updateArticle = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.imageUrl = req.file.filename;
+    }
     const article = await Article.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!article) {
       return res.status(404).json({ error: 'Article not found' });

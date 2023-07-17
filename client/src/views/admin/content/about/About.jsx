@@ -25,7 +25,7 @@ export default function About({ data }) {
                     </button>
 
                 </div>
-                <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6">
+                <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2">
                     {data.map(item =>
                         <CardAbout h_text={item.h_text} s_text={item.s_text} link={item.link} id={item._id} key={item.link} date={item.date} />
                     )

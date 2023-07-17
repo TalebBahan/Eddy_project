@@ -8,6 +8,7 @@ const subscriberController = require('../../controllers/subscriberController');
 router.get('/', subscriberController.getSubscribers);
 router.get('/:id', subscriberController.getSubscriber);
 router.post('/', subscriberController.createSubscriber);
+router.post('/deleteMany', subscriberController.deleteMany)
 router.put('/:id', subscriberController.updateSubscriber);
 router.delete('/:id', subscriberController.deleteSubscriber);
 

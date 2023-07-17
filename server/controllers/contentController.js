@@ -96,33 +96,68 @@ const createAboutImage = async (req, res) => {
 
 // Update an existing content
 const updateContent = async (req, res) => {
-    console.log(req.body.date)
+    // console.log(req.body.date)
+    // try {
+    //     const content = await Content.findByIdAndUpdate(
+    //         req.params.id,
+    //         {
+    //             h_text: req.body.h_text,
+    //             s_text: req.body.s_text,
+    //             link: req.body.link,
+    //             date: req.body.date
+    //         },
+    //         { new: true }
+    //     );
+    //     if (!content) {
+    //         return res.status(404).json({ msg: 'Content not found' });
+    //     }
+    //     res.status(200).json(content);
+    // }
+    // catch (error) {
+    //     console.error(error.message);
+    //     res.status(500).send('Server Error');
+    // }
+    //manage if image is changed or not
     try {
-        const content = await Content.findByIdAndUpdate(
-            req.params.id,
-            {
-                h_text: req.body.h_text,
-                s_text: req.body.s_text,
-                link: req.body.link,
-                date: req.body.date
-            },
-            { new: true }
-        );
-        if (!content) {
-            return res.status(404).json({ msg: 'Content not found' });
+        const content = await Content.findById(req.params.id);
+        var file;
+        var filename;
+        if (req.body.type !== 'about') {
+            file = req.file
+            filename = file?.filename;
         }
-        res.status(200).json(content);
-    }
-    catch (error) {
+        if (content) {
+            if (content.image && filename) {
+                fs.unlinkSync(`public/images/${content.image}`)
+            }
+            content.h_text = req.body.h_text;
+            content.s_text = req.body.s_text;
+            content.link = req.body.link;
+            content.image = filename || content.image;
+            content.type = req.body.type;
+            content.date = req.body.date || content.date;
+            const updatedContent = await content.save();
+            res.status(200).json(updatedContent);
+        }
+        else {
+            res.status(404).json({ msg: 'Content not found' });
+        }
+    } catch (error) {
         console.error(error.message);
         res.status(500).send('Server Error');
     }
+
 }
 
 // Delete an existing content
 const deleteContent = async (req, res) => {
     try {
         const content = await Content.deleteOne({ '_id': { $eq: req.params.id } });
+        // delete image from folder
+        if (content.image) {
+            fs.unlinkSync(`public/images/${content.image}`)
+        }
+        
 
         if (!content) {
             return res.status(404).json({ msg: 'Content not found' });

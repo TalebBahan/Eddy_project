@@ -62,7 +62,7 @@
 .social-slider-wrapper {
   display: "block";
   max-width: 1000px;
-  height: 600px;
+  min-height: 600px;
   width: "95%";
 }
 @media screen and (max-width: 760px) {
@@ -90,7 +90,7 @@
 
   .social-slider-wrapper {
     width: 300px;
-    height: 450px;
+    /* height: 450px; */
   }
 
   .social-slider-wrapper .slick-slider .slick-dots {

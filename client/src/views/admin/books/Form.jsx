@@ -5,6 +5,7 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Textarea,
 } from "@material-tailwind/react";
 import { useCreateBookMutation, useUpdateBookMutation } from "./api";
 import Upload from "./Upload";
@@ -50,7 +51,7 @@ export default function BookForm(props) {
 
     try {
       if (!props.isAdd) {
-        await updateBook({ id: props._id, ...formData });
+        await updateBook({ id: props._id,form});
         setSuccessMessage("Book successfully updated.");
       } else {
         await createBook(form);
@@ -118,23 +119,24 @@ export default function BookForm(props) {
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
-                htmlFor="link"
+                htmlFor="text"
               >
-                Link
+                Text About The Book
               </label>
-              <input
+              <Textarea
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="link"
                 type="text"
-                placeholder="Link"
+                placeholder="Text"
                 name="link"
                 value={formData.link}
                 onChange={handleChange}
                 required
+              
               />
             </div>
             <div className="mb-4">
-              {props.isAdd && <Upload selectedFiles={formData.file} setselectedFiles={handleImageChange} />}
+               <Upload selectedFiles={formData.file} setselectedFiles={handleImageChange} image={props?.imageUrl} />
             </div>
           </DialogBody>
           <DialogFooter>

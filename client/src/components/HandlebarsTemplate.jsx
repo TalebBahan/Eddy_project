@@ -15,6 +15,8 @@ const HandlebarsTemplate = ({newsletter}) => {
         'media': newsletter.medias,
         'articleImage': newsletter.articlesWithImages,
         'articleNoImage': newsletter.articlesWithoutImages,
+        // date formAat dd/mm//yyy
+        'date': new Date().toLocaleDateString()
       }
 
       if (templateRef.current) {

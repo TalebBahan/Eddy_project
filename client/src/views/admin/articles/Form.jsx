@@ -50,7 +50,7 @@ export default function ArticleForm(props) {
 
     try {
       if (!props.isAdd) {
-        await updateArticle({ id: props._id, ...formData });
+        await updateArticle({ id: props._id, form });
         setSuccessMessage("Article successfully updated.");
       } else {
         await createArticle(form);
@@ -134,7 +134,7 @@ export default function ArticleForm(props) {
               />
             </div>
             <div className="mb-4">
-              {props.isAdd && <Upload selectedFiles={formData.file} setselectedFiles={handleImageChange} />}
+              <Upload selectedFiles={formData.file} setselectedFiles={handleImageChange} image={props?.imageUrl} />
             </div>
           </DialogBody>
           <DialogFooter>

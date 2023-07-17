@@ -6,7 +6,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
 const Articles = ({ articles }) => {
-    const chunkSize = 5; // Number of articles per slide
+    const chunkSize = 3; // Number of articles per slide
     const slideCount = Math.ceil(articles.length / chunkSize); // Calculate the number of slides
 
     // Create an array of arrays, where each subarray contains chunkSize number of articles

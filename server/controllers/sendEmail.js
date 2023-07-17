@@ -94,6 +94,7 @@ exports.sendNewsLetter = async (req, res) => {
         'media': newsletter.medias,
         'articleImage': newsletter.articlesWithImages,
         'articleNoImage': newsletter.articlesWithoutImages,
+        'date': new Date().toLocaleDateString(),
       }
     };
 

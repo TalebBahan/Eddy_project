@@ -15,11 +15,11 @@ export const subscriberApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['subscriber']
         }),
-        send: builder.mutation({
-            query: (body) => ({
-                url: '/api/newsletter/send',
+        deleteMany: builder.mutation({
+            query: (ids) => ({
+                url: '/api/subscribers/deleteMany',
                 method: 'POST',
-                body: body,
+                body: {ids},
             }),
             invalidatesTags: ['subscriber']
         }),
@@ -54,7 +54,7 @@ export const {
     useGetSubscribersQuery,
     useCreateSubscriberMutation,
     useUpdateSubscriberMutation,
-    useSendMutation,
+    useDeleteManyMutation,
     useSendIAMutation,
     useDeleteSubscriberMutation,
 } = subscriberApi;

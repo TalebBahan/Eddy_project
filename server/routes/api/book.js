@@ -25,7 +25,7 @@ router.get('/', bookController.getBooks);
 router.get('/:id', bookController.getBook);
 
 // Update an book
-router.put('/:id', bookController.updateBook);
+router.put('/:id',upload.single('file') , bookController.updateBook);
 
 // Delete an book
 router.delete('/:id', bookController.deleteBook);

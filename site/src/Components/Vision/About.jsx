@@ -6,8 +6,9 @@ import LeftCircle from "assets/vision/layout/left-circle.png";
 import LeftShadow from "assets/vision/layout/left-shadow.png";
 import RigthtShadow from "assets/vision/layout/right shadow.png";
 import RigthCircle from "assets/vision/layout/right-circle.png";
+import { useInView } from "react-intersection-observer";
 
-const About = ({visionData,images}) => {
+const About = ({visionData,images,handlleIntersect}) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -16,6 +17,18 @@ const About = ({visionData,images}) => {
     slidesToScroll: 1,
     autoplay: true,
   };
+  // call the function handlleIntersect when the element is hit by the the top of the viewport
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+      const top = parseInt(window.document.scrollingElement.scrollTop);
+      const component = document.getElementById("about");
+      if (top === component.offsetTop) {
+        handlleIntersect(true);
+      }
+    });
+  }, []);
+
+
 
   if (!visionData || !images) {
     return <div>Loading...</div>;
@@ -30,7 +43,7 @@ const About = ({visionData,images}) => {
         id="about"
         style={{ position: "relative" }}
       >
-        <section className="vision-statement2">
+        <section className="vision-statement2" >
           <div className="visiondiv">
             <div className="visition-mission-text-wrapper">
               {filterbytype().map(item =>

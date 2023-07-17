@@ -70,7 +70,7 @@ const ContactPopup = () => {
           <form onSubmit={handleSubmit}>
             <Title>Contact</Title>
             <InputArea>
-              <Label>Name</Label>
+              <Label>Name*</Label>
               <Input
                 type="text"
                 name="name"
@@ -79,7 +79,7 @@ const ContactPopup = () => {
               />
             </InputArea>
             <InputArea>
-              <Label>Email</Label>
+              <Label>Email*</Label>
               <Input
                 type="email"
                 name="email"
@@ -88,7 +88,7 @@ const ContactPopup = () => {
               />
             </InputArea>
             <InputArea>
-              <Label>Phone</Label>
+              <Label>Phone*</Label>
               <Input
                 type="tel"
                 name="phone"
@@ -97,7 +97,7 @@ const ContactPopup = () => {
               />
             </InputArea>
             <InputArea>
-              <Label>Message</Label>
+              <Label>Message*</Label>
               <TextArea
                 name="message"
                 value={formData.message}

@@ -7,7 +7,9 @@ var contentSchema = new Schema({
     s_text: { type: String, required: true },
     link: { type: String, required: true },
     image: { type: String, required:false },
-    date: { type: Date, default: Date.now },
+    // set date format dd/mm/yyyy 
+    date: { type: Date, required: false },
+
     type: { type: String, required: true }
 
 });

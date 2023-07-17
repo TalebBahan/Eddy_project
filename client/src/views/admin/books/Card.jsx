@@ -3,7 +3,7 @@ import Form from './Form';
 import { useDeleteBookMutation } from './api';
 import Success from 'components/Success';
 import Error from 'components/Error';
-
+import './style.css'
 const BookCard = ({ title, body, imageUrl, link, _id }) => {
     const [open, setOpen] = React.useState(false);
     const [deleteBook] = useDeleteBookMutation();
@@ -37,8 +37,9 @@ const BookCard = ({ title, body, imageUrl, link, _id }) => {
             </div>
             <div class="description">
                 <p class="title">{title}<br />
-                    <span class="author">{body}</span>
-                </p>
+                    <span class="author">{body}<br /></span><p class="expert">{
+                        link.length > 550 ? link.substring(0, 550) + '...' : link
+                    }</p></p>
                 <div className="buttons">
                     <button
                         onClick={() => {

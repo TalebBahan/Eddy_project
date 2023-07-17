@@ -20,7 +20,6 @@ Book stuff
 .book {
   display: inline-block;
   /* width: 230px; */
-  height: 450px;
   /* box-shadow: 0 0 20px #aaa; */
   margin: 25px;
   background-color: #fff;
@@ -40,7 +39,8 @@ Book stuff
 
 .cover {
   border: 2px solid gray;
-  height: 77%;
+  /* height: 77%; */
+  width: 230px;
   overflow: hidden;
 }
 

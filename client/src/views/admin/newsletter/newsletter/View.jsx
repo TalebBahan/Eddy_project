@@ -24,7 +24,7 @@ export default function View({ newsletter,handleBack }) {
   const { articles, books, medias } = data;
   // seperate the articles with images and without images
   const articlesWithImages = articles.filter((article) => article.imageUrl !== null);
-  const articlesWithoutImages = articles.filter((article) => !article.imageUrl !== null);
+  const articlesWithoutImages = articles.filter((article) => article.imageUrl === null);
   const newsletterData = {
     title,
     subject,

@@ -25,13 +25,13 @@ export default function CardMedia({ h_text, s_text, image, link, id, date }) {
         });
     }
   };
-
+  const date1 = new Date(date);
   return (
     <Card extra={`flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white`}>
       {successMessage && <Success message={successMessage} />}
       {errorMessage && <Error message={errorMessage} />}
 
-      <AddEditMedia open={open} handleOpen={handleOpen} h_text={h_text} s_text={s_text} link={link} id={id} date={date} />
+      <AddEditMedia open={open} handleOpen={handleOpen} h_text={h_text} s_text={s_text} link={link} id={id} date={date} image={image} />
       <div className="h-full w-full">
         <div className="relative w-full">
           <img
@@ -54,7 +54,13 @@ export default function CardMedia({ h_text, s_text, image, link, id, date }) {
               {h_text}{" "}
             </p>
             <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
-              {s_text}{" "}
+              {
+                s_text.length > 100 ? s_text.substring(0, 100) + '...' : s_text
+              
+              }{" "}
+            </p>
+            <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
+              {date1.toLocaleDateString()}{" "}
             </p>
             <a className="mt-1 text-sm font-medium text-gray-900 md:mt-2" target='_blank' href={link}>
               {"Learn more @ "}

@@ -14,32 +14,31 @@ import SignatureBlack from "../../assets/Nav/signature-black.svg";
 import { HashLink } from "react-router-hash-link";
 
 const WINDOW_HEIGHT = window.screen.height - 100;
-const Navbar = () => {
+const Navbar = ({isIntersecting}) => {
   const [active, setActive] = useState(false);
   const [show, setShow] = useState(false);
-
+  
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
 
-  const onScroll = () => {
     const searchBox = document.getElementById('searchBox');
     const s = document.getElementById('s');
     const str = document.getElementById('str');
-    if (window.scrollY > WINDOW_HEIGHT) {
+    document.addEventListener('scroll', onScroll);
+    if (isIntersecting) {
       searchBox.classList.add('redFill');
       s.classList.add('redFill');
       str.classList.add('t');
-      setActive(true);
-    } else {
+      return;
+    }
+    else{
       searchBox.classList.remove('redFill');
       s.classList.remove('redFill');
       str.classList.remove('t');
-      setActive(false);
     }
+  }, []);
+
+  const onScroll = () => {
+
   };
 
   const toggle = () => {
@@ -85,6 +84,7 @@ const Navbar = () => {
               to="/#about"
               smooth
               spy
+              color={isIntersecting ? "black" : "white"}
             >
               About
             </HashLink>

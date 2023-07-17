@@ -5,9 +5,39 @@ import "@splidejs/react-splide/css/skyblue";
 import Slider from "react-slick";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Card from "./Card";
-const Books = ({ books }) => {
+import { useEffect } from "react";
+const Books = ({ books,setActive,active }) => {
 
+  // const searchBox = window.document.getElementById('searchBox');
+  // const s = window.document.getElementById('s');
+  // const str = window.document.getElementById('str');
+  // if (window.scrollY > WINDOW_HEIGHT) {
 
+  //   setActive(true);
+  // } else {
+  //   searchBox.classList.remove('redFill');
+  //   s.classList.remove('redFill');
+  //   str.classList.remove('t');
+  //   setActive(false);
+  // }
+  // useEffect(() => {
+  //   window.addEventListener('scroll', () => {
+  //     const top =parseInt( window.document.scrollingElement.scrollTop);
+  //     const component = document.getElementById('books-to-read')
+  //     if (top >= component.offsetTop && top <= component.offsetTop + 10 ) {
+  //       setActive();
+  //     }
+  //   });
+  // }, [active]);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', () => {
+  //     const top =parseInt( window.document.scrollingElement.scrollTop);
+  //     const component = document.getElementById('books-to-read')
+  //     if (top >= component.offsetTop && top <= component.offsetTop + 10 ) {
+  //       setActive();
+  //     }
+  //   });
+  // }, [active]);
   return (
     <>
       <motion.div
@@ -30,7 +60,7 @@ const Books = ({ books }) => {
                 rewind: false,
                 arrows: true,
                 pagination: false,
-                perPage: 3,
+                perPage: 2,
                 perMove: 1,
                 gap: '1rem',
                 breakpoints: {
