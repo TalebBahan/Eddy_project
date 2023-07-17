@@ -8,7 +8,7 @@ import RigthtShadow from "assets/vision/layout/right shadow.png";
 import RigthCircle from "assets/vision/layout/right-circle.png";
 import { useInView } from "react-intersection-observer";
 
-const About = ({visionData,images,handlleIntersect}) => {
+const About = ({visionData,images}) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -18,15 +18,7 @@ const About = ({visionData,images,handlleIntersect}) => {
     autoplay: true,
   };
   // call the function handlleIntersect when the element is hit by the the top of the viewport
-  useEffect(() => {
-    document.addEventListener("scroll", () => {
-      const top = parseInt(window.document.scrollingElement.scrollTop);
-      const component = document.getElementById("about");
-      if (top === component.offsetTop) {
-        handlleIntersect(true);
-      }
-    });
-  }, []);
+
 
 
 

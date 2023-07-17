@@ -13,45 +13,57 @@ import React from "react";
 import { useGetDataQuery } from "apiSlice";
 import SearchPopup from "Components/SearchPoppup";
 import Books from "Components/books/Books";
-import { useInView } from "react-intersection-observer";
+
 
 const Home = () => {
-  const [isIntersecting, setIsIntersecting] = React.useState(false);
   const { data, isLoading } = useGetDataQuery();
 
   if (isLoading) {
     return <div></div>
   }
-  const handlleIntersect = (state) => {
-    setIsIntersecting(state)
-    console.log("intersecting", isIntersecting)
-  }
-
 
   const media = data?.content.filter((item) => item.type === "media")
-  
+
   return (
     <>
-      
+
       {data && (
         <>
-          <Navbar isIntersecting={isIntersecting}/>
-          <Hero data={data.heroLinks} />
-          <About visionData={data.content} images={data.aboutImages} handlleIntersect={handlleIntersect} />
-          <Achievements  />
-          <Lectures  />
-          <SocialMedia youtube={data.youtube} linkedin={data.linkedin}  />
-          <News latestNewsObj={data.content}  />
-          <Books books={data.books}  active={false} />
-          <Articles articles={data.articles} />
-          <NewsLetter interestsData={data.interests}/>
-          <Footer />
-          <ContactPopup />
-          <SearchPopup media={media} books={data.books} articles={data.articles} youtube={data.youtube}  linkedin={data.linkedin}/>
-        </>
+          <Navbar />
+          <section id="home">
+            <Hero data={data.heroLinks} />
+          </section>
+          <section id="about">
+            <About visionData={data.content} images={data.aboutImages} />
+          </section>
+          <section id="achievements">
+            <Achievements />
+          </section>
+          <section id="lectures">
+            <Lectures />
+          </section>
+          <section id="social">
+            <SocialMedia youtube={data.youtube} linkedin={data.linkedin} />
+          </section>
+          <section id="news">
+            <News latestNewsObj={data.content} />
+          </section>
+          <section id="books">
+            <Books books={data.books} active={false} />
+          </section>
+          <section id="articles">
+            <Articles articles={data.articles} />
+          </section>
+          <section id="newsletter">
+            <NewsLetter interestsData={data.interests} />
+          </section>
+            <Footer />
+            <ContactPopup />
+            <SearchPopup media={media} books={data.books} articles={data.articles} youtube={data.youtube} linkedin={data.linkedin} />
+          </>
       )}
-    </>
-  );
+        </>
+      );
 };
 
-export default Home;
+      export default Home;
