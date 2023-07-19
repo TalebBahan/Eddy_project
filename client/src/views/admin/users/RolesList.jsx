@@ -1,19 +1,12 @@
-import Card from "components/card";
-import CardMenu from "components/card/CardMenu";
-import Switch from "components/switch";
 import React, { useState } from "react";
-import { useGetUserByIdQuery, useUpdateUserRolesMutation } from "./apiUsers";
+import Card from "components/card";
+import Switch from "components/switch";
+import { useUpdateUserRolesMutation } from "./apiUsers";
 import { Fragment } from "react";
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-} from "@material-tailwind/react";
-export default function RolesList({ _id, username, roles: rolesL, open, handleOpen }) {
-  const [roles, setRoles] = useState({ ...rolesL });
-  console.log(_id);
+import { Button, Dialog, DialogFooter } from "@material-tailwind/react";
+
+export default function RolesList({ _id, username, roles: initialRoles, open, handleOpen }) {
+  const [roles, setRoles] = useState({ ...initialRoles });
   const [updateUserRoles] = useUpdateUserRolesMutation();
 
   const handleRoleChange = (roleName) => {
@@ -24,36 +17,40 @@ export default function RolesList({ _id, username, roles: rolesL, open, handleOp
   };
 
   const handleSave = () => {
-    const userRoles = Object.keys(roles).reduce((acc, role) => {
-      return { ...acc, [role]: roles[role] ? 1 : 0 };
-    }, {});
+    const userRoles = Object.keys(roles).reduce((acc, role) => ({
+      ...acc,
+      [role]: roles[role] ? 1 : 0,
+    }), {});
 
-    if (window.confirm('are you sure you want to submmit this ?')) updateUserRoles({ _id, roles: userRoles });
+    if (window.confirm('Are you sure you want to submit this?')) {
+      updateUserRoles({ _id, roles: userRoles });
+    }
     handleOpen();
   };
+
   const roleNames = [
     { key: "Admin", label: "Admin" },
-    { key: "Editor", label: "Editor" },
+    { key: "content", label: "content" },
+    { key: "articles", label: "articles" },
+    { key: "books", label: "books" },
+    { key: "newsletter", label: "newsletter" },
+    { key: "subscriber", label: "subscriber" },
+    { key: "youtube", label: "youtube" },
+    { key: "linkedin", label: "linkedin" },
     { key: "User", label: "User" },
-    { key: "postAdmin", label: "postAdmin" },
-    { key: "postEditor", label: "postEditor" },
-    { key: "postUser", label: "postUser" },
-    { key: "linkAdmin", label: "linkAdmin" },
-    { key: "linkEditor", label: "linkEditor" },
-    { key: "linkUser", label: "linkUser" },
-    { key: "contentAdmin", label: "contentAdmin" },
-    { key: "contentEditor", label: "contentEditor" },
-    { key: "contentUser", label: "contentUser" },
   ];
-
+  const handleclose = () => {
+    setRoles([]);
+    handleOpen();
+  };
 
   return (
     <Fragment>
       <Dialog open={open} handler={handleOpen} size="xxl">
-        <Card extra={"w-full h-full p-3"}>
+        <Card extra="w-full h-full p-3">
           <div className="relative mb-3 flex items-center justify-between pt-1">
             <h4 className="text-xl font-bold text-navy-700 dark:text-white">
-              {username} {' '}Permissions
+              {`${username} Permissions`}
             </h4>
           </div>
           <div className="flex flex-col">
@@ -75,12 +72,7 @@ export default function RolesList({ _id, username, roles: rolesL, open, handleOp
 
             {/* other switches here... */}
             <DialogFooter>
-              <Button
-                variant="text"
-                color="red"
-                onClick={handleOpen}
-                class="mr-1"
-              >
+              <Button variant="text" color="red" onClick={handleclose} class="mr-1">
                 <span>Cancel</span>
               </Button>
               <Button variant="text" color="green" onClick={handleSave}>
@@ -93,5 +85,3 @@ export default function RolesList({ _id, username, roles: rolesL, open, handleOp
     </Fragment>
   );
 }
-
-

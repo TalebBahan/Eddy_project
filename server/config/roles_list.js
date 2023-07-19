@@ -1,16 +1,13 @@
 const ROLES_LIST = {
     "Admin": 5150,
-    "Editor": 1984,
-    "User": 1,
-    "postAdmin": 1000,
-    "postEditor": 1001,
-    "postUser": 1002,
-    "linkAdmin": 2000,
-    "linkEditor": 2001,
-    "linkUser": 2002,
-    "contentAdmin": 3000,
-    "contentEditor": 3001,
-    "contentUser": 3002
+    "content": 1984,
+    "articles": 1894,
+    "books": 1000,
+    "newsletter": 1001,
+    "subscriber": 1002,
+    "youtube": 2000,
+    "linkedin": 2001,
+    "User": 3000,
 }
 
 module.exports = ROLES_LIST

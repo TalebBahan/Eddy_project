@@ -6,7 +6,7 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import { useAddContentMutation,useEditContentMutation } from "../apiContent";
+import { useAddContentMutation, useEditContentMutation } from "../apiContent";
 import Upload from "./Upload";
 import Success from "components/Success";
 import Error from "components/Error";
@@ -23,18 +23,40 @@ export default function AddEditAbout(props) {
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const validateForm = () => {
+    const errors = {};
+
+    if (!formData.h_text) {
+      errors.h_text = "Heading is required";
+    }
+
+    if (!formData.s_text) {
+      errors.s_text = "Sub Text is required";
+    }
+
+    setFormErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     // add or edit
     try {
       if (props.isAdd) await add(formData);
-      else await edit({...formData})
+      else await edit({ ...formData });
       setSuccessMessage("Successfully added/edited !");
       props.handleOpen();
     } catch (error) {
@@ -61,9 +83,15 @@ export default function AddEditAbout(props) {
               name="h_text"
               value={formData.h_text}
               onChange={handleChange}
-              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded ${
+                formErrors.h_text ? "border-red-500" : ""
+              }`}
               autoComplete="off"
+              required
             />
+            {formErrors.h_text && (
+              <p className="text-red-500 text-sm">{formErrors.h_text}</p>
+            )}
           </div>
           <div className="flex flex-col">
             <label htmlFor="s_text" className="self-start mb-2 font-medium text-gray-800">
@@ -76,9 +104,15 @@ export default function AddEditAbout(props) {
               name="s_text"
               value={formData.s_text}
               onChange={handleChange}
-              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded ${
+                formErrors.s_text ? "border-red-500" : ""
+              }`}
               autoComplete="off"
+              required
             />
+            {formErrors.s_text && (
+              <p className="text-red-500 text-sm">{formErrors.s_text}</p>
+            )}
           </div>
           {/* Uncomment this section if needed */}
           {/* <div className="flex flex-col">

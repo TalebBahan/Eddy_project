@@ -16,21 +16,22 @@ export default function AddEditMedia(props) {
   const [add] = useAddContentMutation();
   const [edit] = useEditContentMutation();
   const [formData, setFormData] = useState({
-    h_text: props?.h_text,
-    s_text: props?.s_text,
-    link: props?.link,
+    h_text: props?.h_text || "",
+    s_text: props?.s_text || "",
+    link: props?.link || "",
     file: null,
-    id: props?.id,
-    date: props?.date ? format(new Date(props.date), "dd/MM/yy") : "",
+    id: props?.id || "",
+    date: props?.date ? format(new Date(props.date), "yyyy-MM-dd") : "",
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "date") {
-      const formattedDate = format(new Date(value), "dd/MM/yy");
+      const formattedDate = format(new Date(value), "yyyy-MM-dd");
       setFormData({ ...formData, [name]: formattedDate });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -41,8 +42,37 @@ export default function AddEditMedia(props) {
     setFormData({ ...formData, file: file });
   };
 
+  const validateForm = () => {
+    const errors = {};
+
+    if (!formData.h_text) {
+      errors.h_text = "Heading is required";
+    }
+
+    if (!formData.s_text) {
+      errors.s_text = "Sub Text is required";
+    }
+
+    if (!formData.link) {
+      errors.link = "Link is required";
+    }
+
+    if (!formData.file){
+      errors.file = "Image is required";
+    }
+
+    setFormErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     const form = new FormData();
     form.append("file", formData.file);
     form.append("h_text", formData.h_text);
@@ -70,8 +100,7 @@ export default function AddEditMedia(props) {
     } else {
       if (window.confirm("Are you sure you want to save the edit?")) {
         form.append("image", props?.image);
-        console.log(form);
-        edit({form, id: props.id})
+        edit({ form, id: props.id })
           .then(() => {
             setSuccessMessage("Successfully edited.");
           })
@@ -107,10 +136,15 @@ export default function AddEditMedia(props) {
               name="h_text"
               value={formData.h_text}
               onChange={handleChange}
-              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded"
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded ${
+                formErrors.h_text ? "border-red-500" : ""
+              }`}
               autoComplete="off"
               required
             />
+            {formErrors.h_text && (
+              <p className="text-red-500 text-sm">{formErrors.h_text}</p>
+            )}
           </div>
           <div className="flex flex-col">
             <label
@@ -126,10 +160,15 @@ export default function AddEditMedia(props) {
               name="s_text"
               value={formData.s_text}
               onChange={handleChange}
-              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded ${
+                formErrors.s_text ? "border-red-500" : ""
+              }`}
               autoComplete="off"
               required
             />
+            {formErrors.s_text && (
+              <p className="text-red-500 text-sm">{formErrors.s_text}</p>
+            )}
           </div>
           <div className="flex flex-col">
             <label
@@ -145,9 +184,15 @@ export default function AddEditMedia(props) {
               name="link"
               value={formData.link}
               onChange={handleChange}
-              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded ${
+                formErrors.link ? "border-red-500" : ""
+              }`}
               autoComplete="off"
             />
+            {formErrors.link && (
+              <p className="text-red-500 text-sm">{formErrors.link}</p>
+            )}
+
           </div>
           <div className="flex flex-col">
             <label
@@ -163,18 +208,30 @@ export default function AddEditMedia(props) {
               name="date"
               defaultValue={formData.date}
               onChange={handleChange}
-              className="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded ${
+                formErrors.date ? "border-red-500" : ""
+              }`}
               autoComplete="off"
+              required
             />
+            {formErrors.date && (
+              <p className="text-red-500 text-sm">{formErrors.date}</p>
+            )}
           </div>
 
-          {/* {props.isAdd && ( */}
+          <div className="m-4">
             <Upload
               selectedFiles={formData.file}
               setselectedFiles={handleImageChange}
               image={props?.image}
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded ${
+                formErrors.file ? "border-red-500" : ""
+              }`}
             />
-          {/* )} */}
+            {formErrors.file && (
+              <p className="text-red-500 text-sm">{formErrors.file}</p>
+            )}
+          </div>
         </DialogBody>
         <DialogFooter>
           <Button

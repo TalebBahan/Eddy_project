@@ -4,11 +4,13 @@ import Navbar from "components/navbar";
 import Sidebar from "components/sidebar";
 import Footer from "components/footer/Footer";
 import routes from "routes.js";
-
+import { selectCurrentRoles } from "features/auth/authSlice";
+import { useSelector } from "react-redux";
 export default function Admin(props) {
   const { ...rest } = props;
   const [open, setOpen] = React.useState(true);
-
+  const roles = useSelector(selectCurrentRoles);
+  console.log("roles", roles);
   React.useEffect(() => {
     window.addEventListener("resize", () =>
       window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
@@ -57,7 +59,7 @@ export default function Admin(props) {
 
                 <Route
                   path="/"
-                  element={<Navigate to="/admin/default" replace />}
+                  element={<Navigate to="/admin/content" replace />}
                 />
               </Routes>
             </div>

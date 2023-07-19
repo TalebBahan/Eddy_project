@@ -8,9 +8,8 @@ export default function Error({ message }) {
         errorAlert.style.display = 'none';
       }
     }, 3000);
-
     return () => clearTimeout(timer);
-  }, []);
+  }, [message]);
 
   return (
     <div style={{ position: 'fixed', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex:'10000' }}>

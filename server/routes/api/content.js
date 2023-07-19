@@ -18,14 +18,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get('/',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor,ROLES_LIST.contentUser), contentController.getAllContent );
-router.get('/imageAbout', verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor,ROLES_LIST.contentUser),contentController.getAllAboutImages);
-router.delete('/imageAbout/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin), contentController.deleteAboutImage);
-router.post('/imageAbout' ,[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor), upload.single("file")], contentController.createAboutImage);
-router.get('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor,ROLES_LIST.contentUser), contentController.getContentById );
-router.post('/',[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor), upload.single('file')], contentController.createContent );
-router.put('/:id',[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin,ROLES_LIST.contentEditor), upload.single('file')], contentController.updateContent );
-router.delete('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.contentAdmin), contentController.deleteContent );
+router.get('/',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.content), contentController.getAllContent );
+router.get('/imageAbout', verifyRoles(ROLES_LIST.Admin,ROLES_LIST.content),contentController.getAllAboutImages);
+router.delete('/imageAbout/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.content), contentController.deleteAboutImage);
+router.post('/imageAbout' ,[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.content), upload.single("file")], contentController.createAboutImage);
+router.get('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.content), contentController.getContentById );
+router.post('/',[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.content), upload.single('file')], contentController.createContent );
+router.put('/:id',[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.content), upload.single('file')], contentController.updateContent );
+router.delete('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.content), contentController.deleteContent );
 
 
 

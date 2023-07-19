@@ -16,12 +16,13 @@ const handleLogin = async (req, res) => {
     // const match = await bcrypt.compare(pwd, foundUser.password);
     if (pwd === foundUser.password) {
         console.log("User found");
-        const roles = Object.values(foundUser.roles).filter(Boolean);
+        const roles = foundUser.roles
         // create JWTs
         const accessToken = jwt.sign(
             {
                 "UserInfo": {
                     "username": foundUser.username,
+                    // jsonify roles
                     "roles": roles,
                     "_id":foundUser._id,
                     "email":foundUser.email,

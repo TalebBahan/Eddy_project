@@ -19,6 +19,7 @@ export default function BookForm(props) {
   const [formData, setFormData] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
     setFormData({
@@ -41,8 +42,37 @@ export default function BookForm(props) {
     }));
   };
 
+  const validateForm = () => {
+    const errors = {};
+
+    if (!formData.title) {
+      errors.title = "Title is required";
+    }
+
+    if (!formData.body) {
+      errors.body = "Author is required";
+    }
+
+    if (!formData.link) {
+      errors.link = "Text about the book is required";
+    }
+
+    if (!formData.file) {
+      errors.file = "Image is required";
+    }
+
+    setFormErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     const form = new FormData();
     form.append("file", formData.file);
     form.append("title", formData.title);
@@ -51,7 +81,7 @@ export default function BookForm(props) {
 
     try {
       if (!props.isAdd) {
-        await updateBook({ id: props._id,form});
+        await updateBook({ id: props._id, form });
         setSuccessMessage("Book successfully updated.");
       } else {
         await createBook(form);
@@ -64,6 +94,7 @@ export default function BookForm(props) {
         file: null,
         link: "",
       });
+      setFormErrors({});
       props.handleClose();
     } catch (error) {
       setErrorMessage("Error submitting the form.");
@@ -80,7 +111,6 @@ export default function BookForm(props) {
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <DialogBody>
-
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
@@ -89,7 +119,8 @@ export default function BookForm(props) {
                 Title
               </label>
               <input
-                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.title ? "border-red-500" : ""
+                  }`}
                 id="title"
                 type="text"
                 placeholder="Title"
@@ -98,6 +129,9 @@ export default function BookForm(props) {
                 onChange={handleChange}
                 required
               />
+              {formErrors.title && (
+                <p className="text-red-500 text-sm">{formErrors.title}</p>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -107,7 +141,8 @@ export default function BookForm(props) {
                 Author
               </label>
               <input
-                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.body ? "border-red-500" : ""
+                  }`}
                 id="body"
                 placeholder="Author"
                 name="body"
@@ -115,6 +150,9 @@ export default function BookForm(props) {
                 onChange={handleChange}
                 required
               />
+              {formErrors.body && (
+                <p className="text-red-500 text-sm">{formErrors.body}</p>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -124,7 +162,8 @@ export default function BookForm(props) {
                 Text About The Book
               </label>
               <Textarea
-                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formErrors.link ? "border-red-500" : ""
+                  }`}
                 id="link"
                 type="text"
                 placeholder="Text"
@@ -132,15 +171,31 @@ export default function BookForm(props) {
                 value={formData.link}
                 onChange={handleChange}
                 required
-              
               />
+              {formErrors.link && (
+                <p className="text-red-500 text-sm">{formErrors.link}</p>
+              )}
             </div>
             <div className="mb-4">
-               <Upload selectedFiles={formData.file} setselectedFiles={handleImageChange} image={props?.imageUrl} />
+              <Upload
+                selectedFiles={formData.file}
+                setselectedFiles={handleImageChange}
+                image={props?.imageUrl}
+                className={` ${formErrors.file ? "border-red-500" : ""
+                  }`}
+              />
+              {formErrors.file && (
+                <p className="text-red-500 text-sm">{formErrors.file}</p>
+              )}
             </div>
           </DialogBody>
           <DialogFooter>
-            <Button variant="text" color="red" onClick={props.handleClose} class="mr-1">
+            <Button
+              variant="text"
+              color="red"
+              onClick={props.handleClose}
+              class="mr-1"
+            >
               <span>Cancel</span>
             </Button>
             <Button variant="text" color="green" onClick={handleSubmit}>

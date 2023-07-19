@@ -16,19 +16,16 @@ const userSchema = new Schema({
     roles: {
         User: {
             type: Number,
-            default: 0001
+            default: 3000
         },
-        Editor: Number,
+        content: Number,
+        articles: Number,
+        books: Number,
+        newsletter: Number,
+        subscriber: Number,
+        youtube: Number,
+        linkedin: Number,
         Admin: Number,
-        postUser: Number,
-        postEditor: Number,
-        postAdmin: Number,
-        linkUser: Number,
-        linkEditor: Number,
-        linkAdmin: Number,
-        contentUser: Number,
-        contentEditor: Number,
-        contentAdmin: Number,
     },
     team : {
         type: Schema.Types.ObjectId,

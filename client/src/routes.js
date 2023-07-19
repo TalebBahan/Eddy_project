@@ -15,8 +15,12 @@ import { BsPersonCheck } from "react-icons/bs";
 import { AiOutlineYoutube,AiOutlineLinkedin } from "react-icons/ai";
 import {SiBookstack} from "react-icons/si";
 import {MdOutlineArticle} from "react-icons/md";
-const routes = [
-  {
+import Cookies from "js-cookie";
+
+
+const routes =  [
+  
+ {
     name: "Content",
     layout: "/admin",
     path: "content",
@@ -75,4 +79,4 @@ const routes = [
 
 
 ];
-export default routes;
+export default routes ;

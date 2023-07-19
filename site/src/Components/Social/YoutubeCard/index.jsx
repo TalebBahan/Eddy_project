@@ -71,14 +71,16 @@ const YoutubeCard = ({ title, description, publishedAt, videoId }) => {
               frameBorder="0"
               allowFullScreen
             ></CardIframe>
-            <Content>
-              <h1>{title}</h1>
-            </Content>
+          
           </ResponsiveContainer>
         </CardImage>
         <CardContent>
-          <CardHeading>{title}</CardHeading>
-          <p>{description}</p>
+          <CardHeading>{
+            title.length > 50 ? title.slice(0, 50) + '...' : title
+          }</CardHeading>
+          <p>{
+            description.length > 400 > description ? description.slice(0, 400) + '...' : description
+            }</p>
         </CardContent>
       </CardWrapper>
     </CardContainer>

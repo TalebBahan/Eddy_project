@@ -10,7 +10,8 @@ import {
   Close,
   CheckGroub,
   CheckLabel,
-  CheckInput
+  CheckInput,
+  ErrorText,
 } from "./SubscribePopup";
 import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
@@ -18,26 +19,30 @@ import { useSubscribeMutation } from "apiSlice";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const SubscribePopup = ({ email, setEmail, interestsData }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   // const [email, setEmail] = useState('');
-  const [age, setAge] = useState('');
+  const [age, setAge] = useState("");
   const [sent, setSent] = useState(null);
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [captchaValue, setCaptchaValue] = useState(null);
-  const [subscribe, { isSuccess, isError }] = useSubscribeMutation()
+  const [subscribe, { isSuccess, isError }] = useSubscribeMutation();
   const interests = interestsData?.map((interest) => interest?.interest);
+  const [formErrors, setFormErrors] = useState({});
+
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
-    console.log('====================================');
-    console.log(value);
-    console.log('====================================');
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!captchaValue) {
-      alert('Please complete the CAPTCHA.');
+      alert("Please complete the CAPTCHA.");
       return;
     }
+    if (!validateForm()) {
+      return;
+    }
+
     let element = document.getElementById("subscribtion-subimt");
     if (element) {
       element.disabled = true;
@@ -47,20 +52,22 @@ const SubscribePopup = ({ email, setEmail, interestsData }) => {
       firstName: name,
       interests: selectedInterests,
       age: age,
-      location: '', // You didn't specify how to capture the location, so I left it empty
+      location: "", // You didn't specify how to capture the location, so I left it empty
     };
 
     try {
       await subscribe(subscriberData);
       if (!isError) {
-        setSent('You have subscribed successfully.');
+        setSent("You have subscribed successfully.");
+        setName("");
+        setAge("");
+        setSelectedInterests([]);
       } else {
-        setSent('You have already suscribed .');
+        setSent("You have already subscribed.");
       }
     } catch (error) {
-      setSent('An error occurred.');
+      setSent("An error occurred.");
     }
-
   };
 
   const handleInterestChange = (e) => {
@@ -69,19 +76,43 @@ const SubscribePopup = ({ email, setEmail, interestsData }) => {
     if (checked) {
       setSelectedInterests((prevInterests) => [...prevInterests, value]);
     } else {
-      setSelectedInterests((prevInterests) => prevInterests.filter((interest) => interest !== value));
+      setSelectedInterests((prevInterests) =>
+        prevInterests.filter((interest) => interest !== value)
+      );
     }
   };
+
   const hideContact = () => {
     let element = document.getElementById("subscribe-form");
     if (element) {
       element.style.display = "none";
     }
   };
+
+  const validateForm = () => {
+    const errors = {};
+
+    if (!name) {
+      errors.name = "Name is required";
+    }
+
+    if (!age) {
+      errors.age = "Age is required";
+    }
+
+    if (selectedInterests.length === 0) {
+      errors.interests = "Please select at least one interest";
+    }
+
+    setFormErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <Wrapper id="subscribe-form">
-        <img
+      <img
           className="latest-news-child"
           alt=""
           src="Images/LTnewsdesign1@2x.png"
@@ -97,71 +128,82 @@ const SubscribePopup = ({ email, setEmail, interestsData }) => {
         <Close onClick={hideContact} type='button'>
           <FaTimes />
         </Close>
-        {
-          sent !== null ?
-            <Container><Title>{sent}</Title></Container>
-            :
-            <Container>
-
-              <Title>Just few Details :) </Title>
-              <InputArea>
-                <Label for="name">Name*</Label>
-                <Input
-                  name="name" value={name} onChange={(e) => setName(e.target.value)}
-                />
-              </InputArea>
-              <InputArea>
-                <Label for="age">Age*</Label>
-                <Input
-                  type="number" name="age" value={age} onChange={(e) => setAge(e.target.value)}
-                />
-              </InputArea>
-              <InputArea>
-                <Label>Interests*</Label>
-                {/* <CheckGroub> */}
-                {interests.map((interest) => (
-                  <CheckGroub>
-                    <CheckLabel htmlFor={interest} className="light">
-                      {interest}
-                    </CheckLabel>
-                    <CheckInput
-                      key={interest}
-                      type="checkbox"
-                      id={interest}
-                      value={interest}
-                      name="user_interest"
-                      onChange={handleInterestChange}
-                      checked={selectedInterests.includes(interest)}
-                    />
-
-                  </CheckGroub>
-                ))}
-                {/* </CheckGroub> */}
-              </InputArea>
-              <InputArea>
+        {sent !== null ? (
+          <Container>
+            <Title>{sent}</Title>
+          </Container>
+        ) : (
+          <Container>
+            <Title>Just few Details :) </Title>
+            <InputArea>
+              <Label htmlFor="name">Name*</Label>
+              <Input
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={formErrors.name ? "border-red-500" : ""}
+              />
+              {formErrors.name && <ErrorText>{formErrors.name}</ErrorText>}
+            </InputArea>
+            <InputArea>
+              <Label htmlFor="age">Age*</Label>
+              <Input
+                type="number"
+                name="age"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                className={formErrors.age ? "border-red-500" : ""}
+              />
+              {formErrors.age && <ErrorText>{formErrors.age}</ErrorText>}
+            </InputArea>
+            <InputArea>
+              <Label>Interests*</Label>
+              {/* <CheckGroub> */}
+              {interests.map((interest) => (
+                <CheckGroub>
+                  <CheckLabel htmlFor={interest} className="light">
+                    {interest}
+                  </CheckLabel>
+                  <CheckInput
+                    key={interest}
+                    type="checkbox"
+                    id={interest}
+                    value={interest}
+                    name="user_interest"
+                    onChange={handleInterestChange}
+                    checked={selectedInterests.includes(interest)}
+                  />
+                </CheckGroub>
+              ))}
+              {/* </CheckGroub> */}
+              {formErrors.interests && (
+                <ErrorText>{formErrors.interests}</ErrorText>
+              )}
+            </InputArea>
+            <InputArea>
               <ReCAPTCHA
                 sitekey={process.env.REACT_APP_reCAPTCHA_SITE_KEY}
                 onChange={handleCaptchaChange}
               />
             </InputArea>
-              <ButtonWrapper>
-                <Button onClick={hideContact} type='button' outline>
-                  Close
-                </Button>
-
-                <Button type="submit" disabled={!captchaValue} style={
-                  {
-                    backgroundColor: !captchaValue ? '#ccc' : '',
-                    color: !captchaValue ? '#000' : '#fff',
-                    cursor: !captchaValue ? 'not-allowed' : 'pointer'
-                  }
-                } >
-                  Submit
-                </Button>
-              </ButtonWrapper>
-            </Container>
-        }
-
+            <ButtonWrapper>
+              <Button onClick={hideContact} type="button" outline>
+                Close
+              </Button>
+              <Button
+                type="submit"
+                disabled={!captchaValue}
+                style={{
+                  backgroundColor: !captchaValue ? "#ccc" : "",
+                  color: !captchaValue ? "#000" : "#fff",
+                  cursor: !captchaValue ? "not-allowed" : "pointer",
+                }}
+              >
+                Submit
+              </Button>
+            </ButtonWrapper>
+          </Container>
+        )}
         <img className="latest-news-item" alt="" src="Images/LTnewsdesign3.svg" />
         <img
           className="latest-news-inner"

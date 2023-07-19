@@ -27,7 +27,9 @@ const Dropdown = (props) => {
 
   return (
     <div ref={wrapperRef} className="relative flex">
-      <div className="flex" onMouseDown={() => setOpenWrapper(!openWrapper)}>
+      <div className="flex text-gray-900 " style={{
+        'cursor': 'pointer'
+      }} onMouseDown={() => setOpenWrapper(!openWrapper)}>
         {button}
       </div>
       <div

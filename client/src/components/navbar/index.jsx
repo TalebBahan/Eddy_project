@@ -7,8 +7,10 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "features/auth/authSlice";
 import routes from "routes.js";
-
+import { useDispatch } from "react-redux";
+import { logOut } from "features/auth/authSlice";
 const Navbar = (props) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const [darkmode, setDarkmode] = React.useState(false);
   const [currentRoute, setCurrentRoute] = React.useState("Main Dashboard");
@@ -94,32 +96,39 @@ const Navbar = (props) => {
           )}
         </div>
         <Dropdown
-          button={user}
+          // logout door img
+          button={'LogOut'}
           children={
             <div className="flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
               <div className="mt-3 ml-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, {user}
+                    👋 Hey, {user} Are you sure you want to log out ?
                   </p>{" "}
                 </div>
               </div>
               <div className="mt-3 h-px w-full bg-gray-200 dark:bg-white/20 " />
 
               <div className="mt-3 ml-4 flex flex-col">
-                <a
-                  href=" "
+                <button
+                  onClick={() => {
+                    dispatch(logOut());
+                    //window.haedreload
+                    window.location.reload();
+                  }
+                  }
+             
                   className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
                 >
                   Log Out
-                </a>
+                </button>
               </div>
             </div>
           }
           classNames={"py-2 top-8 -left-[180px] w-max"}
         />
       </div>
-    </nav>
+    </nav >
   );
 };
 

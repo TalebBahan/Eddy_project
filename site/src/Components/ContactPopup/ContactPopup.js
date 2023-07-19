@@ -98,3 +98,10 @@ export const Button = styled.button`
     opacity: 0.6;
   }
 `;
+
+export const ErrorText = styled.div`
+  color: red;
+  font-size: 14px;
+  font-family: "Gilroy";
+  padding-top: 5px;
+`;

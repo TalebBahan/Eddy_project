@@ -22,13 +22,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 // Get all posts
-router.get('/',  getAllPosts );
+router.get('/', verifyRoles(ROLES_LIST.Admin,ROLES_LIST.linkedin ),  getAllPosts );
 // Get single post by ID
-router.get('/:id', getPostById );
+router.get('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.linkedin ), getPostById );
 // Create a new post
-router.post('/',upload.single('file'), createPost );
+router.post('/',[verifyRoles(ROLES_LIST.Admin,ROLES_LIST.linkedin ),upload.single('file')], createPost );
 // Update an existing post
-router.put('/:id', updatePost );
+router.put('/:id', verifyRoles(ROLES_LIST.Admin,ROLES_LIST.linkedin ),updatePost );
 // Delete a post
-router.delete('/:id', deletePost );
+router.delete('/:id',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.linkedin ), deletePost );
 module.exports = router;
