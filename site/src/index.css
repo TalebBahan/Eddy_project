@@ -110,9 +110,23 @@ a{
 }
 
 
+/* .splide__arrow--prev {
+  left: -1.3rem !important;
+}
+.splide__arrow--next {
+  right: -1.3rem !important;
+} */
+
+.social-slider-wrapper svg {
+  fill:#ffff !important;
+}
+
 .splide__arrow--prev {
   left: -1.3rem !important;
 }
 .splide__arrow--next {
-  right: -1.7rem !important;
+  right: -2.3rem !important;
+}
+.ltnewsbody {
+  max-width: 1110px ;
 }
