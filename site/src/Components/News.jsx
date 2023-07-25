@@ -54,7 +54,7 @@ const News = ({ latestNewsObj }) => {
             </div>
             <div className="ltnewsheader-child"></div>
           </div>
-
+          <div className="ltnewsbody">
           <Splide
             options={{
               rewind: false,
@@ -100,6 +100,7 @@ const News = ({ latestNewsObj }) => {
               </SplideSlide>
             ))}
           </Splide>
+          </div>
 
           <div className="ltswipers">
             {/* <img

@@ -61,7 +61,8 @@ const Books = ({ books,setActive,active }) => {
                 arrows: true,
                 pagination: false,
                 perPage: 2,
-                perMove: 1,
+                // disable the the swipe functionality
+                drag: false,
                 gap: '1rem',
                 breakpoints: {
                   768: {

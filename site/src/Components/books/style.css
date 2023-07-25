@@ -1,6 +1,6 @@
 .container {
   margin: 0 auto;
-  max-width: 910px;
+  max-width: 1200px;
 }
 
 .choose {
@@ -20,16 +20,18 @@ Book stuff
 .book {
   display: inline-block;
   /* width: 230px; */
-  height: 280px;
+  height: 320px;
   /* box-shadow: 0 0 20px #aaa; */
-  margin: 25px;
-  background: rgba(255, 255, 255, 0.905);
-  backdrop-filter: saturate(180%) blur(20px);
+  margin: 12px;
+  margin-right: 5px;
+  background: #ffffff;
   padding: 10px 10px 0 10px;
   vertical-align: top;
   transition: height 1s;
   display: flex;
   gap: 5px;
+  border-radius: 4px;
+  cursor: text;
 }
 
 .description {
@@ -60,8 +62,12 @@ Book stuff
   color: black;
 }
 .book .expert {
+  font-family: Gilroy;
+  font-style: normal;
   font-size: 10px;
-  color: rgb(25, 24, 24);
+  line-height: 16px;
+  color: #707070;
+  margin-right: 5px;
 }
 @media (max-width: 941px) {
   .container {

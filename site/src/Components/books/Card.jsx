@@ -11,7 +11,7 @@ export default function Card({ title, body, link, imageUrl }) {
           <p class="title">{title}<br/>
             <span class="author">{body}<br/></span><p class="expert">
             {
-              windowWidth > 768 ? link.length > 650 ? link.substring(0, 650) + '...' : link : link.length > 300 ? link.substring(0, 300) + '...' : link
+              windowWidth > 768 ? link.length > 600 ? link.substring(0, 600) + '...' : link : link.length > 250 ? link.substring(0, 250) + '...' : link
             }</p></p>
           
         </div>
