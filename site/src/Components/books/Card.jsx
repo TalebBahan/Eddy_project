@@ -1,20 +1,25 @@
 import React from 'react'
 import './style.css'
-export default function Card({ title, body, link, imageUrl }) {
+export default function Card({ title, body: author, link: description, imageUrl }) {
   const windowWidth = window.innerWidth;
-    return (
-        <div class="book read">
-        <div class="cover">
-          <img  src={`${process.env.REACT_APP_API}/images/${imageUrl}`} />
-        </div>
-        <div class="description">
-          <p class="title">{title}<br/>
-            <span class="author">{body}<br/></span><p class="expert">
-            {
-              windowWidth > 768 ? link.length > 600 ? link.substring(0, 600) + '...' : link : link.length > 250 ? link.substring(0, 250) + '...' : link
-            }</p></p>
-          
-        </div>
+  return (
+    <div>
+    <div class="book">
+      {/* <div class="cover"> */}
+        <img src={`${process.env.REACT_APP_API}/images/${imageUrl}`} className='cover--img' />
+      {/* </div> */}
+      <p>
+        <p class="title-book">
+          {title}
+        </p>
+        <span class="author">{author}<br /></span>
+        <p class="description">
+          {
+           description
+          }
+        </p>
+      </p>
       </div>
-    )
+    </div>
+  )
 }

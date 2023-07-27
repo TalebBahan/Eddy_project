@@ -32,6 +32,7 @@ const getBook = async (req, res) => {
     if (!book) {
       return res.status(404).json({ error: 'Book not found' });
     }
+    console.log(book);
     res.json(book);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch the book' });

@@ -57,7 +57,7 @@ export default function AddEditMedia(props) {
       errors.link = "Link is required";
     }
 
-    if (!formData.file){
+    if (!formData.file && props.isAdd){
       errors.file = "Image is required";
     }
 

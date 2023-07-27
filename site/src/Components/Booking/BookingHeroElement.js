@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 
   @media screen and (min-width: 750px) and (min-height: 1020px) {
     height: max-content;
-    height: 45vh;
+    height: 70vh;
   }
   @media screen and (max-width: 1370px) and (min-height: 1020px) {
     height: 100%;

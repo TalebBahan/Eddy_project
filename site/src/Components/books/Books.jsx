@@ -6,38 +6,15 @@ import Slider from "react-slick";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Card from "./Card";
 import { useEffect } from "react";
-const Books = ({ books,setActive,active }) => {
+const Books = ({ books, setActive, active }) => {
+  const chunkSize = 2; // Number of articles per slide
+  const slideCount = Math.ceil(books.length / chunkSize); // Calculate the number of slides
 
-  // const searchBox = window.document.getElementById('searchBox');
-  // const s = window.document.getElementById('s');
-  // const str = window.document.getElementById('str');
-  // if (window.scrollY > WINDOW_HEIGHT) {
+  // Create an array of arrays, where each subarray contains chunkSize number of articles
+  const booksChunks = Array.from({ length: slideCount }, (_, index) =>
+    books.slice(index * chunkSize, (index + 1) * chunkSize)
+  );
 
-  //   setActive(true);
-  // } else {
-  //   searchBox.classList.remove('redFill');
-  //   s.classList.remove('redFill');
-  //   str.classList.remove('t');
-  //   setActive(false);
-  // }
-  // useEffect(() => {
-  //   window.addEventListener('scroll', () => {
-  //     const top =parseInt( window.document.scrollingElement.scrollTop);
-  //     const component = document.getElementById('books-to-read')
-  //     if (top >= component.offsetTop && top <= component.offsetTop + 10 ) {
-  //       setActive();
-  //     }
-  //   });
-  // }, [active]);
-  // useEffect(() => {
-  //   window.addEventListener('scroll', () => {
-  //     const top =parseInt( window.document.scrollingElement.scrollTop);
-  //     const component = document.getElementById('books-to-read')
-  //     if (top >= component.offsetTop && top <= component.offsetTop + 10 ) {
-  //       setActive();
-  //     }
-  //   });
-  // }, [active]);
   return (
     <>
       <motion.div
@@ -60,7 +37,7 @@ const Books = ({ books,setActive,active }) => {
                 rewind: false,
                 arrows: true,
                 pagination: false,
-                perPage: 2,
+                perPage: 1,
                 // disable the the swipe functionality
                 drag: false,
                 gap: '1rem',
@@ -69,17 +46,16 @@ const Books = ({ books,setActive,active }) => {
                     perPage: 1,
                   },
                   1000: {
-                    perPage: 2,
+                    perPage: 1,
                   }
                 },
               }}
             >
-              {books?.map((card, index) => (
-                <SplideSlide>
-                  <Card
-                    key={index}
-                    {...card}
-                  />
+              {booksChunks.map((articlesChunk, index) => (
+                <SplideSlide key={index}>
+                  {articlesChunk.map((article, articleIndex) => (
+                    <Card key={articleIndex} {...article} />
+                  ))}
                 </SplideSlide>
               ))}
             </Splide>

@@ -122,10 +122,10 @@ a{
 }
 
 .splide__arrow--prev {
-  left: -1.3rem !important;
+  left: -8% !important;
 }
 .splide__arrow--next {
-  right: -2.3rem !important;
+  right: -8% !important;
 }
 .ltnewsbody {
   max-width: 1110px ;

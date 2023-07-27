@@ -6,6 +6,12 @@ const CardContainer = styled.div`
 `;
 
 const CardWrapper = styled.div`
+  width: 300px;
+  min-height: 200px;
+  @media screen and (max-width: 750px) {
+    width: 280px;
+    margin: 10px;
+  }
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)!important;
   transition: 0.3s!important;
   border-radius: 5px !important;
@@ -79,7 +85,7 @@ const YoutubeCard = ({ title, description, publishedAt, videoId }) => {
             title.length > 50 ? title.slice(0, 50) + '...' : title
           }</CardHeading>
           <p>{
-            description.length > 400 > description ? description.slice(0, 400) + '...' : description
+            description.length > 500 > description ? description.slice(0, 500) + '...' : description
             }</p>
         </CardContent>
       </CardWrapper>

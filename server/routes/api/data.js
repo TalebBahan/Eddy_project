@@ -9,4 +9,5 @@ router.get('/', getAllData);
 router.post('/contact', sendMessage);
 router.get('/idTitle', getIdTitle);
 
+
 module.exports = router;

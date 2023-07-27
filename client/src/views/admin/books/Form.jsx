@@ -57,7 +57,7 @@ export default function BookForm(props) {
       errors.link = "Text about the book is required";
     }
 
-    if (!formData.file) {
+    if (!formData.file && props.isAdd) {
       errors.file = "Image is required";
     }
 

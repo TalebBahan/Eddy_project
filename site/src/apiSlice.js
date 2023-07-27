@@ -22,6 +22,12 @@ export const apiSlice = createApi({
                 body: Data
             }),
         }),
+        // /book-to-read/:id
+        getBook: builder.query({
+            query: (id) => `/data/book-to-read/${id}`,
+            transformResponse: res => res,
+        }),
+
     })
 })
 
@@ -29,4 +35,5 @@ export const {
     useGetDataQuery,
     useContactMutation,
     useSubscribeMutation,
+    useGetBookQuery
 } = apiSlice

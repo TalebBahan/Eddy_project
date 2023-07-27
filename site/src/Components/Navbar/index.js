@@ -23,6 +23,10 @@ const Navbar = () => {
       newsletter: document.getElementById("newsletter")
     };
     const handleScroll = () => {
+      if (!sections.home || !sections.about || !sections.lectures || !sections.news || !sections.articles || !sections.achievements || !sections.social || !sections.books || !sections.newsletter) {
+        navbar.classList.add("inverse");
+        return;
+      }
 
       const { bottom: homeBottom } = sections.home.getBoundingClientRect();
       const { bottom: aboutBottom } = sections.about.getBoundingClientRect();

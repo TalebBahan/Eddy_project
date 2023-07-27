@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "components/card";
 import Switch from "components/switch";
 import { useUpdateUserRolesMutation } from "./apiUsers";
@@ -6,7 +6,11 @@ import { Fragment } from "react";
 import { Button, Dialog, DialogFooter } from "@material-tailwind/react";
 
 export default function RolesList({ _id, username, roles: initialRoles, open, handleOpen }) {
-  const [roles, setRoles] = useState({ ...initialRoles });
+  
+  const [roles, setRoles] = useState({});
+  useEffect(() => {
+    setRoles({ ...initialRoles });
+  }, [initialRoles]);
   const [updateUserRoles] = useUpdateUserRolesMutation();
 
   const handleRoleChange = (roleName) => {
@@ -40,8 +44,7 @@ export default function RolesList({ _id, username, roles: initialRoles, open, ha
     { key: "User", label: "User" },
   ];
   const handleclose = () => {
-    setRoles([]);
-    handleOpen();
+      handleOpen();
   };
 
   return (
