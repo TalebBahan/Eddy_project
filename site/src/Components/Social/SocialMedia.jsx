@@ -130,7 +130,6 @@ const SocialMedia = ({ youtube, linkedin }) => {
             ))}
           </div>
           <div className="social-slider-wrapper" style={{}}>
-
             <Splide
               options={options}
             >
@@ -148,10 +147,10 @@ const SocialMedia = ({ youtube, linkedin }) => {
               ))}
             </Splide>
           </div>
+          <div className="social-slider-wrapper afds" style={{
+            maxWidth: '1090px !important',
 
-
-
-          <div className="social-slider-wrapper" style={{}}>
+          }}>
             <Splide
               options={options}
             >

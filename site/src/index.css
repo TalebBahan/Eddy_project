@@ -130,3 +130,10 @@ a{
 .ltnewsbody {
   max-width: 1110px ;
 }
+
+.art .splide__arrow--prev {
+  left: -0.3rem !important;
+}
+.art .splide__arrow--next {
+  right: -0.3rem !important;
+}

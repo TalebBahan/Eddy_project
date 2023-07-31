@@ -6,7 +6,7 @@ const CardContainer = styled.div`
 `;
 
 const CardWrapper = styled.div`
-  width: 300px;
+  width: 320px;
   min-height: 200px;
   @media screen and (max-width: 750px) {
     width: 280px;

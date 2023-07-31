@@ -7,7 +7,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Card from "./Card";
 import { useEffect } from "react";
 const Books = ({ books, setActive, active }) => {
-  const chunkSize = 2; // Number of articles per slide
+  const chunkSize = 1; // Number of articles per slide
   const slideCount = Math.ceil(books.length / chunkSize); // Calculate the number of slides
 
   // Create an array of arrays, where each subarray contains chunkSize number of articles

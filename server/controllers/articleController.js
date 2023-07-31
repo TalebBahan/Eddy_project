@@ -14,6 +14,19 @@ const createArticle = async (req, res) => {
   }
 };
 
+// create article without image
+const createArticleWithoutImage = async (req, res) => {
+  try {
+    const { title, body, link } = req.body;
+    const article = new Article({ title, body, link, imageUrl: null  });
+    await article.save();
+    res.status(201).json(article);
+  } catch (error) {
+    console.log(error); 
+    res.status(500).json({ error: 'Failed to create the article' });
+  }
+};
+
 // Get all articles
 const getArticles = async (req, res) => {
   try {
@@ -73,4 +86,5 @@ module.exports = {
   getArticle,
   updateArticle,
   deleteArticle,
+  createArticleWithoutImage
 };

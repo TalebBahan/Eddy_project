@@ -6,7 +6,7 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import { useCreateArticleMutation, useUpdateArticleMutation } from "./api";
+import { useCreateArticleMutation, useUpdateArticleMutation, useCreateArticleWithoutImageMutation } from "./api";
 import Upload from "./Upload";
 import Success from "components/Success";
 import Error from "components/Error";
@@ -14,6 +14,7 @@ import Error from "components/Error";
 export default function ArticleForm(props) {
   console.log(props);
   const [createArticle] = useCreateArticleMutation();
+  const [createArticleWithoutImage] = useCreateArticleWithoutImageMutation();
   const [updateArticle] = useUpdateArticleMutation();
   const [formData, setFormData] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -79,7 +80,11 @@ export default function ArticleForm(props) {
         await updateArticle({ id: props._id, form });
         setSuccessMessage("Article successfully updated.");
       } else {
-        await createArticle(form);
+        if (formData.file) {
+          await createArticle( form );
+        }else {
+        await createArticleWithoutImage( formData );
+        }
         setSuccessMessage("Article successfully created.");
       }
 

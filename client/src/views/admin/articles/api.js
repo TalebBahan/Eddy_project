@@ -15,6 +15,15 @@ export const Api = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['article']
         }),
+        //withoutimage
+        createArticleWithoutImage: builder.mutation({
+            query: (article) => ({
+                url: '/api/articles/withoutimage',
+                method: 'POST',
+                body: article,
+            }),
+            invalidatesTags: ['article']
+        }),
         updateArticle: builder.mutation({
             query: (article) => ({
                 url: `/api/articles/${article.id}`,
@@ -39,5 +48,6 @@ export const {
     useCreateArticleMutation,
     useUpdateArticleMutation,
     useDeleteArticleBMutation,
+    useCreateArticleWithoutImageMutation
 } = Api;
 

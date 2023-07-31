@@ -24,7 +24,7 @@ const Card = ({ title, author, body, imageUrl, link }) => {
       <h2><a href={link} target='_blank'>{title}</a></h2>
       <p>{truncatedBody}</p>
       </div>
-      <img src={`${process.env.REACT_APP_API}/images/${imageUrl}`} alt="Result Image" />
+      { imageUrl !== null && <img src={`${process.env.REACT_APP_API}/images/${imageUrl}`} alt="Result Image" />}
     </div>
   );
 };

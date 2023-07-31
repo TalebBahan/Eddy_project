@@ -19,6 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // Create a new article
 router.post('/', [verifyRoles(ROLES_LIST.Admin,ROLES_LIST.articles), upload.single('file')] ,articleController.createArticle);
+router.post('/withoutimage', [verifyRoles(ROLES_LIST.Admin,ROLES_LIST.articles)] ,articleController.createArticleWithoutImage);
 
 // Get all articles
 router.get('/',verifyRoles(ROLES_LIST.Admin,ROLES_LIST.articles), articleController.getArticles);

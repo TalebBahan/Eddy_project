@@ -21,7 +21,7 @@ const Articles = ({ articles }) => {
             transition={{ delay: 0.1, duration: 0.9 }}
             id="articles"
         >
-            <section className="latest-news">
+            <section className="latest-news art">
                 <img
                     className="latest-news-child"
                     alt=""

@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineAlignRight } from "react-icons/ai";
-import { CloseButton, Container, HamButton, Logo, Menu, NavBar, NavItem } from "./NavbarElement";
+import {
+  CloseButton,
+  Container,
+  HamButton,
+  Logo,
+  Menu,
+  NavBar,
+  NavItem,
+} from "./NavbarElement";
 import SignatureWhite from "../../assets/Nav/signature-white.svg";
 import SignatureBlack from "../../assets/Nav/signature-black.svg";
 import { HashLink } from "react-router-hash-link";
-
+import LinkedinImg from "assets/hero/linkedin.png";
+const WINDOW_HEIGHT = window.screen.height - 100;
 const Navbar = () => {
   const [active, setActive] = useState(false);
   const [show, setShow] = useState(false);
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isIntersecting,setIsIntersecting] = useState(false)
 
   useEffect(() => {
     const sections = {
@@ -24,7 +33,6 @@ const Navbar = () => {
     };
     const handleScroll = () => {
       if (!sections.home || !sections.about || !sections.lectures || !sections.news || !sections.articles || !sections.achievements || !sections.social || !sections.books || !sections.newsletter) {
-        navbar.classList.add("inverse");
         return;
       }
 
@@ -49,29 +57,18 @@ const Navbar = () => {
   
       if (shouldRemoveInverseNavbar) {
         setIsIntersecting(false);
-        navbar.classList.remove("inverse");
       }
     };
   
-    const navbar = document.getElementById("navbar");
     window.addEventListener("scroll", handleScroll);
   
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [isIntersecting]);
-  
 
-  const toggle = () => {
-    setActive((prev) => !prev);
-  };
 
-  const showContact = () => {
-    let element = document.getElementById("contact-form");
-    if (element) {
-      element.style.display = "flex";
-    }
-  };
+
 
   const showSearch = () => {
     let element = document.getElementById("search-form");
@@ -80,28 +77,55 @@ const Navbar = () => {
     }
   };
 
+  const toggle = () => {
+    setShow((prev) => !prev);
+  };
+
+  const showContact = () => {
+    let element = document.getElementById("contact-form");
+    if (element) {
+      element.style.display = "flex";
+    }
+  };
   return (
-    <NavBar active={active} id="navbar" className={isIntersecting ? "inverse" : ""}>
+    <NavBar active={active}>
       <Container>
-        <HashLink style={{ textDecoration: "none", color: "inherit" }} smooth spy to="/#home">
+        <HashLink
+          style={{ textDecoration: "none", color:isIntersecting ? 'black' : 'white' }}
+          activeClass="active"
+          smooth
+          spy
+          to="/#home"
+        >
           <Logo src={isIntersecting ? SignatureBlack : SignatureWhite} alt="logo" />
         </HashLink>
 
         <HamButton onClick={toggle} active={active}>
           <AiOutlineAlignRight />
         </HamButton>
-
         <Menu show={show}>
           <CloseButton onClick={toggle}>
             <AiOutlineClose fontSize={22} fontWeight={800} />
           </CloseButton>
           <NavItem active={active}>
-            <HashLink style={{ textDecoration: "none", color: isIntersecting ? 'black' : 'white' }} smooth spy to="/#about">
+            <HashLink
+              style={{ textDecoration: "none", color:isIntersecting ? 'black' : 'white' }}
+              activeClass="active"
+              to="/#about"
+              smooth
+              spy
+            >
               About
             </HashLink>
           </NavItem>
           <NavItem active={active}>
-            <HashLink style={{ textDecoration: "none", color:isIntersecting ? 'black' : 'white' }} smooth spy to="/#book">
+            <HashLink
+              style={{ textDecoration: "none", color:isIntersecting ? 'black' : 'white' }}
+              activeClass="active"
+              smooth
+              spy
+              to="/#book"
+            >
               Book
             </HashLink>
           </NavItem>

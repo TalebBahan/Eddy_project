@@ -10,8 +10,9 @@ export default function Card({ title, body: author, link: description, imageUrl 
       {/* </div> */}
       <p>
         <p class="title-book">
-          {title}<br ></br>By {author}<br></br>
+          {title}
         </p>
+        <p className='book--author'>By {author}</p>
 
         <p class="description">
           {
