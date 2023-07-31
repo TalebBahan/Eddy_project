@@ -15,7 +15,7 @@ const createVideo = async (req, res) => {
 // Get all Youtube videos
 const getAllVideos = async (req, res) => {
   try {
-    const videos = await Youtube.find();
+    const videos = await Youtube.find().sort({ _id: -1 });
     console.log(videos);
     res.status(200).json(videos);
   } catch (error) {

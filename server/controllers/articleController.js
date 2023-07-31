@@ -31,7 +31,7 @@ const createArticleWithoutImage = async (req, res) => {
 const getArticles = async (req, res) => {
   try {
     // latest first
-    const articles = await Article.find().sort({ createdAt: -1 });
+    const articles = await Article.find().sort({ _id: -1 });
     res.json(articles);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch the articles' });

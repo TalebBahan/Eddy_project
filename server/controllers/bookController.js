@@ -18,7 +18,7 @@ const createBook = async (req, res) => {
 const getBooks = async (req, res) => {
   try {
     // latest first
-    const books = await Book.find().sort({ createdAt: -1 });
+    const books = await Book.find().sort({ _id: -1 });
     res.json(books);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch the books' });

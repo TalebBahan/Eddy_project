@@ -28,11 +28,11 @@ const getAllData = async (req, res) => {
 
 const getIdTitle = async (req, res) => {
   try {
-    const articles = await Article.find().sort({ createdAt: -1 });
-    const books = await Book.find().sort({ createdAt: -1 });
-    const linkedinPosts = await linkedin.find().sort({ createdAt: -1 });
+    const articles = await Article.find().sort({ _id: -1 });
+    const books = await Book.find().sort({ _id: -1 });
+    const linkedinPosts = await linkedin.find().sort({ _id: -1 });
     // get the content of type media
-    const media = await Content.find({ type: 'media' }).sort({ createdAt: -1 });
+    const media = await Content.find({ type: 'media' }).sort({ _id: -1 });
 
     // get the id and the title of the media
     const mediaIdTitle = media.map((item) => {
