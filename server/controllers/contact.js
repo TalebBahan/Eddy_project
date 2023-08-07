@@ -29,10 +29,10 @@ exports.sendMessage = (req, res) => {
     const { email, name, phone, message } = req.body;
 
     const mailOptions = {
-        from: "talebbahan@gmail.com",
+        from: "eddy@eddyabboud.com",
         subject: 'Message from the contact on the website',
         template: 'message',
-        to:'talebbahan@gmail.com',
+        to:'eddy@eddyabboud.com',
         context: {
             email,
             name,

@@ -56,18 +56,18 @@ const SearchPopup = ( { media, youtube, linkedin, articles, books: booksData }) 
         item.body.toLowerCase().includes(searchInput.toLowerCase())
     );
 
-    const matchedBookSuggestions = books.filter(
-      (item) =>
-        item.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-        item.author.toLowerCase().includes(searchInput.toLowerCase())
-    );
+    // const matchedBookSuggestions = books.filter(
+    //   (item) =>
+    //     item.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+    //     item.author.toLowerCase().includes(searchInput.toLowerCase())
+    // );
 
     return [
       ...matchedContentSuggestions,
       ...matchedYouTubeSuggestions,
       ...matchedLinkedInSuggestions,
       ...matchedArticleSuggestions,
-      ...matchedBookSuggestions,
+      // ...matchedBookSuggestions,
     ];
   };
 
@@ -96,7 +96,7 @@ const SearchPopup = ( { media, youtube, linkedin, articles, books: booksData }) 
                 ownProperty === "author" ?
                   <HashLink to="/#books-to-read" onClick={hideSearch}>{item[titleKey]}</HashLink>
                   :
-                  <a href={item[linkKey]}>{item[titleKey]}</a>
+                  <a href={item[linkKey]} target="_blank" >{item[titleKey]}</a>
             }
           </Htext>
           <Stext>
@@ -144,11 +144,11 @@ const SearchPopup = ( { media, youtube, linkedin, articles, books: booksData }) 
           {filteredSuggestions.length > 0 &&
             renderSuggestions(filteredSuggestions, "body", "title", "body", "link")}
         </ul>
-        <Label>Books</Label>
+        {/* <Label>Books</Label>
         <ul>
           {filteredSuggestions.length > 0 &&
             renderSuggestions(filteredSuggestions, "author", "title", "author", "#books-to-read")}
-        </ul>
+        </ul> */}
         {/* <ButtonWrapper>
           <Button onClick={hideSearch} outline>
             Close

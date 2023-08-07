@@ -91,7 +91,7 @@ const News = ({data}) => {
                       </div>
                       <div className="read-more-wrapper">
                         <button className="read-more-button">
-                          <a className="read-more" href={item.link}>
+                          <a className="read-more" href={item.link} target="_blank" >
                             Read More
                           </a>
                          
