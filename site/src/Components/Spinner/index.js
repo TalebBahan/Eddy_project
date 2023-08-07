@@ -102,7 +102,7 @@ const Ripple = ({ color, size, sizeUnit }) => (
 
 Ripple.defaultProps = {
   size: 64,
-  color: '#00bfff',
+  color: '#2e208e',
   sizeUnit: 'px'
 }
 
