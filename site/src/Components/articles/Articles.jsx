@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
-const Articles = ({ articles }) => {
+const Articles = ({articles}) => {
+
+
     const chunkSize = 3; // Number of articles per slide
     const slideCount = Math.ceil(articles.length / chunkSize); // Calculate the number of slides
 
@@ -58,11 +60,11 @@ const Articles = ({ articles }) => {
                     src="Images/LTnewsdesign3.svg"
                     style={{ zIndex: -1 }}
                 />
-                <img
+                {/* <img
                     className="latest-news-inner"
                     alt=""
                     src="Images/LTnewsdesign2@2x.png"
-                />
+                /> */}
             </section>
         </motion.div>
     );

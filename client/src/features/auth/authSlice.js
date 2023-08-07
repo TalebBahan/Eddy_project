@@ -18,7 +18,6 @@ const authSlice = createSlice({
       state.user = user;
       state.token = accessToken;
       state.roles = roles;
-      console.log("roles", roles);
       Cookies.set(USER_COOKIE_NAME, user);
       Cookies.set(TOKEN_COOKIE_NAME, accessToken);
       Cookies.set(ROLES_COOKIE_NAME, JSON.stringify(roles));

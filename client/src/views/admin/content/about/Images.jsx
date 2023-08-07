@@ -1,5 +1,4 @@
 import React from 'react'
-import NFt3 from "assets/img/nfts/Nft3.png";
 import { AiFillDelete } from 'react-icons/ai';
 import { useGetAboutImagesQuery,useDeleteAboutImageMutation } from '../apiContent';
 export default function Images() {

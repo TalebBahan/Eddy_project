@@ -11,7 +11,7 @@ import {
 import Slide4Image from "../../../../assets/hero/slide4.png";
 import YellowButton from "../../../common/button/yellow-button";
 import Badge from "Components/common/Badge";
-const Slide4 = ({ link }) => {
+const Slide4 = ({ data }) => {
   return (
     <SlideWrapper>
       <Container>
@@ -19,19 +19,17 @@ const Slide4 = ({ link }) => {
 
         <RightArea>
           <Heading>
-            Leading with Authenticity: <br /> A Fresh and Fearless <br />{" "}
-            Approach to Modern <br /> Leadership
+            {data.h_text}
           </Heading>
           <SubHeading>
-            Unlock your full potential as a leader by embracing your authentic
-            self and inspiring others.
+            {data.s_text}
           </SubHeading>
           {/* <a target="_blank" href={link}> */}
           <YellowButton text="Learn More" />
           {/* </a> */}
         </RightArea>
         <BadgeWrapper>
-          <Badge />
+          <Badge text={data.reward} />
         </BadgeWrapper>
       </Container>
     </SlideWrapper>

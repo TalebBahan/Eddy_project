@@ -10,15 +10,54 @@ import { useSendIAMutation } from "../subscriber/subscriberApi";
 import { useGetInterestssQuery } from "../interests/api";
 import Success from "components/Success";
 import Error from "components/Error";
+function getAllInterests(obj) {
+  const allInterests = [];
+
+  // Iterate over each property of the object
+  for (const key in obj) {
+    console.log("key", key);
+    if (obj.hasOwnProperty(key)) {
+      // Extract the array of interests from the current property
+      const interestsArray = obj[key].flatMap(item => item.interests);
+
+      // Merge the interests from the current property into the allInterests array
+      allInterests.push(...interestsArray);
+    }
+  }
+
+  return allInterests;
+}
+
+
 
 export default function Send({ newsletter, ...props }) {
   const [send] = useSendIAMutation();
   const { data: interestsData, isLoading, isError } = useGetInterestssQuery();
-  const interests = interestsData?.map((interest) => interest?.interest);
   const [selectedInterests, setSelectedInterests] = useState([]);
+  console.log(selectedInterests);
   const [age, setAge] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    console.log(
+      "newsletter.articlesWithImages.interests",
+      newsletter.articlesWithImages
+    
+    )
+    
+    setSelectedInterests(getAllInterests({
+      articlesWithImages: newsletter.articlesWithImages,
+      articlesWithoutImages: newsletter.articlesWithoutImages,
+      books: newsletter.books,
+      medias: newsletter.medias,
+    }));
+  }, [newsletter]);
+  if(isLoading) return <div></div>
+
+
+
+  const interests = interestsData?.map((interest) => interest?.interest);
 
   const handleInterestChange = (event) => {
     const { value } = event.target;

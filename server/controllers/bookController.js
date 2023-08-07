@@ -6,6 +6,8 @@ const Book = require('../model/book');
 const createBook = async (req, res) => {
   try {
     req.body.imageUrl = req.file.filename;
+    req.body.interests = JSON.parse(req.body.interests);
+
     const book = new Book(req.body);
     await book.save();
     res.status(201).json(book);
@@ -44,6 +46,7 @@ const updateBook = async (req, res) => {
   if (req.file) {
     req.body.imageUrl = req.file.filename;
   }
+  req.body.interests = JSON.parse(req.body.interests);
   try {
     const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!book) {

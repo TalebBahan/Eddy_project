@@ -75,7 +75,7 @@ export const Text = styled.p`
   color: #191919;
   line-height: 17px;
   margin-bottom: 5px;
-  height: 25px;
+  height: 60px;
 `;
 
 export const HashTag = styled.p`
@@ -84,8 +84,8 @@ export const HashTag = styled.p`
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  color: #0966c2;
-  height: 50px;
+  color: #2e208e;
+  ${'' /* height: 70px; */}
 `;
 
 export const PostImg = styled.img`

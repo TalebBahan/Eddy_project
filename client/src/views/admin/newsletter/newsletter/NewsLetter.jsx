@@ -3,10 +3,10 @@ import Table from './Table';
 import { useGetnewslettersQuery } from './newsletterApi';
 import Loading from 'components/Loading';
 import Unauthorized from 'components/Unauthorized';
-import Interests from '../interests/Interests';
 import Card from 'components/card';
 import { useGetCheckBoxesQuery } from './newsletterApi';
 import View from './View';
+import Navbar from 'components/navbar';
 export default function NewsLetter() {
     const { data, isLoading, isError } = useGetnewslettersQuery();
     const {
@@ -80,6 +80,7 @@ export default function NewsLetter() {
     return (
         // <Router>
             <div className="mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid">
+                <Navbar />
                     
 
                 <Card extra="w-full h-full p-4 sm:overflow-x-auto">
@@ -148,7 +149,6 @@ export default function NewsLetter() {
                         </div>
                     )}
                 </Card>
-                <Interests />
             </div>
         // </Router>
     );

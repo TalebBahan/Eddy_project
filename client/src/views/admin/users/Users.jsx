@@ -37,7 +37,7 @@ export default function Users() {
     return (
         <div className='mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid '>
             <Navbar
-                searchTerm={searchTerm} handleSearch={handleSearch}
+                searchTerm={searchTerm} handleSearch={handleSearch} withSearch={true}
             />
             <Table
                 columnsData={COLUMNS}

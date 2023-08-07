@@ -113,7 +113,7 @@ const Login = () => {
                                 Password
                             </label>
                             <input
-                                type="text"
+                                type="password"
                                 id="username"
                                 value={pwd}
                                 onChange={handlePwdInput}

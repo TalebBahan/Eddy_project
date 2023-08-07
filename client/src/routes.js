@@ -12,20 +12,32 @@ import Books from "views/admin/books/Books";
 import { FiUsers } from "react-icons/fi";
 import { BiBookContent, BiNews } from "react-icons/bi";
 import { BsPersonCheck } from "react-icons/bs";
-import { AiOutlineYoutube,AiOutlineLinkedin } from "react-icons/ai";
+import { AiOutlineYoutube,AiOutlineLinkedin, AiFillFileUnknown } from "react-icons/ai";
 import {SiBookstack} from "react-icons/si";
 import {MdOutlineArticle} from "react-icons/md";
-import Cookies from "js-cookie";
+import {
+  DiHtml5Multimedia
+} from  "react-icons/di";
+
+import Media from "views/admin/media/Media";
+import Interests from "views/admin/newsletter/interests/Interests";
 
 
 const routes =  [
   
  {
-    name: "Content",
+    name: "Top Section",
     layout: "/admin",
     path: "content",
     icon: <BiBookContent className="h-6 w-6" />,
     component: <Content />,
+  },
+  {
+    name: "Media",
+    layout: "/admin",
+    path: "media",
+    icon: <DiHtml5Multimedia className="h-6 w-6" />,
+    component: <Media />,
   },
   {
     name: "Articles",
@@ -54,6 +66,13 @@ const routes =  [
     path: "subscriber",
     icon: <BsPersonCheck className="h-6 w-6" />,
     component: <Subscriber />,
+  },
+  {
+    name: "Interests",
+    layout: "/admin",
+    path: "interests",
+    icon: <AiFillFileUnknown className="h-6 w-6" />,
+    component: <Interests />,
   },
   {
     name: "Youtube",

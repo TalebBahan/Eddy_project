@@ -24,7 +24,8 @@ import LikeGroup from "assets/social/linkedin/Like group.png";
 import CommentGroup from "assets/social/linkedin/Comment group.png";
 import { Link } from "react-router-dom";
 const LinkedInCard = ({link,postImage,tags,title}) => {
-  console.log(link);
+
+  console.log(tags);
   return (
     <Link to={link} style={{
       textDecoration: 'none',
@@ -43,9 +44,9 @@ const LinkedInCard = ({link,postImage,tags,title}) => {
             </TimeWrapper>
           </AuthorArea>
         </TopLeftArea>
-        <TopRightArea>
+        {/* <TopRightArea>
           <MoreImg src={More} />
-        </TopRightArea>
+        </TopRightArea> */}
       </TopSection>
       <TextArea>
         <Text>

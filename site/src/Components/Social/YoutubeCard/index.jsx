@@ -41,27 +41,29 @@ const Content = styled.div`
   position: absolute;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5) !important;
-  color: #fff !important  ;
   width: 100%   !important  ;
   padding: 10px  !important  ;
 `;
 
 const CardContent = styled.div`
   padding: 20px;
-  font-family: Gilroy;
-  font-style: normal;
-  font-size: 10px;
-  line-height: 16px;
-  color: #707070;
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  letter-spacing: 0.09em !important;
+  font-size: 0.8rem;
+  color: rgb(34, 33, 33);
   background: #ffffff;
   height: 200px;
 `;
 
 const CardHeading = styled.span`
-  font-family: Gilroy;
-  font-size: 14px;
-  font-style: normal;
-  color: #191919;
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  letter-spacing: 0.01em !important;
+  font-size: 1.2rem !important;
+  color: #2e208e !important;
 `;
 
 const YoutubeCard = ({ title, description, publishedAt, videoId }) => {

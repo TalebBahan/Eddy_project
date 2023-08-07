@@ -10,60 +10,101 @@ import Footer from "../Components/Fotter/Fotter";
 import ContactPopup from "../Components/ContactPopup";
 import Articles from "Components/articles/Articles";
 import React from "react";
-import { useGetDataQuery } from "apiSlice";
 import SearchPopup from "Components/SearchPoppup";
 import Books from "Components/books/Books";
+import Ripple from "Components/Spinner";
+import {
+  useGetYouTubeQuery,
+  useGetContentQuery,
+  useGetAboutImagesQuery,
+  useGetLinkedinQuery,
+  useGetArticlesQuery,
+  useGetBooksQuery,
+  useGetInterestsQuery,
+  useGetMediaQuery,
+  useGetHeroQuery,
 
+
+} from 'apiSlice'
 
 const Home = () => {
-  const { data, isLoading } = useGetDataQuery();
 
-  if (isLoading) {
-    return <div></div>
-  }
+  const {data:hero , isLoading:isHeroLoadding} = useGetHeroQuery()
+  const {data:media , isLoading:isMediaLoadding} = useGetMediaQuery()
+  const {data:interests , isLoading:isInterestsLoadding} = useGetInterestsQuery()
+  const {data:books , isLoading:isBooksLoadding} = useGetBooksQuery()
+  const {data:articles , isLoading:isArticlesLoadding} = useGetArticlesQuery()
+  const {data:linkedin , isLoading:isLinkedinLoadding} = useGetLinkedinQuery()
+  const {data:content , isLoading:isContentLoadding} = useGetContentQuery()
+  const {data:youtube , isLoading:isYoutubeLoadding} = useGetYouTubeQuery()
+  const {data:aboutImages , isLoading:isAboutImagesLoadding} = useGetAboutImagesQuery()
 
-  const media = data?.content.filter((item) => item.type === "media")
+
 
   return (
     <>
-
-      {data && (
-        <>
           <Navbar />
           <section id="home">
-            <Hero data={data.heroLinks} />
+           {
+              !isHeroLoadding ? <Hero data={hero} />: <div style={{
+                height:"100vh",
+                width:"100vw",
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center"
+              }}>
+                <Ripple />
+              </div>
+           }
           </section>
           <section id="about">
-            <About visionData={data.content} images={data.aboutImages} />
+            {
+              (!isAboutImagesLoadding && !isContentLoadding)  && <About images={aboutImages} data={content} />
+            }
           </section>
           <section id="achievements">
-            <Achievements />
+            {
+              !isHeroLoadding && <Achievements />
+            }
           </section>
           <section id="lectures">
-            <Lectures />
+            {
+              
+             !isHeroLoadding && <Lectures />
+            }
           </section>
           <section id="social">
-            <SocialMedia youtube={data.youtube} linkedin={data.linkedin} />
+          {
+              !isLinkedinLoadding && !isYoutubeLoadding && <SocialMedia youtube={youtube} linkedin={linkedin}  />
+          }
           </section>
           <section id="news">
-            <News latestNewsObj={data.content} />
+          {
+            !isMediaLoadding && <News data={media} />
+          }
           </section>
           <section id="books">
-            <Books books={data.books} active={false} />
+            {
+              !isBooksLoadding && <Books books={books} />
+            }
           </section>
           <section id="articles">
-            <Articles articles={data.articles} />
+            {
+              !isArticlesLoadding && <Articles articles={articles} />
+            }
           </section>
           <section id="newsletter">
-            <NewsLetter interestsData={data.interests} />
+          {!isInterestsLoadding &&
+            <NewsLetter interestsData={interests} />}
           </section>
             <Footer />
             <ContactPopup />
-            <SearchPopup media={media} books={data.books} articles={data.articles} youtube={data.youtube} linkedin={data.linkedin} />
-          </>
-      )}
-        </>
-      );
+            {
+              !isMediaLoadding && !isBooksLoadding && !isArticlesLoadding && !isYoutubeLoadding && !isLinkedinLoadding && !isInterestsLoadding && !isContentLoadding && !isAboutImagesLoadding && !isHeroLoadding &&
+              <SearchPopup media={media} books={books} articles={articles} youtube={youtube} linkedin={linkedin} />}
+         
+      </>
+  );
 };
 
-      export default Home;
+export default Home;

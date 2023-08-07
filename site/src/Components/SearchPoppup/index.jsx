@@ -16,20 +16,17 @@ import {
   Label,
 } from "./SearchPopup";
 import { HashLink } from "react-router-hash-link";
+import { useGetAllQuery } from "apiSlice";
+const SearchPopup = ( { media, youtube, linkedin, articles, books: booksData }) => {
 
-const SearchPopup = ({
-  media,
-  youtube,
-  linkedin,
-  articles,
-  books: booksData,
-}) => {
+  const [searchInput, setSearchInput] = useState("");
+
+ 
   const books = booksData.map((item) => ({
     _id: item._id,
     title: item.title,
     author: item.body,
   }));
-  const [searchInput, setSearchInput] = useState("");
 
   const getFilteredSuggestions = () => {
     if (searchInput.length < 1) {

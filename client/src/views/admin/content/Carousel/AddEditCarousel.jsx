@@ -6,51 +6,26 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import Upload from "./Upload";
-import { useAddContentMutation,useEditContentMutation } from "../apiContent";
+import { useUpdateHeroMutation } from "./api";
+
 export default function AddEditCarousel(props) {
 
-  const [add] = useAddContentMutation()
-  const [edit] = useEditContentMutation()
+  const [edit] = useUpdateHeroMutation()
   const [formData, setFormData] = useState({
     h_text: props?.h_text,
     s_text: props?.s_text,
-    link: props?.link,
-    file: null,
-    id:props?.id
+    reward: props?.reward,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleImageChange = (file) => {
-    setFormData({ ...formData, file: file });
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    const form = new FormData();
-    form.append("file",formData.file);
-    form.append("h_text",formData.h_text);
-    form.append("s_text",formData.s_text);
-    form.append("link", formData.link);
-    form.append("type", 'carousel');
-    if(props.isAdd){
-      add(form)
-      setFormData({
-        h_text: '',
-        s_text: '',
-        link:'',
-        file: null,
-      });
-    }
-    else
-      {
-        if(window.confirm('are you sure you want to save the edit ?'))
-          edit(formData)
-      }
+    if(window.confirm('are you sure you want to save the edit ?'))
+      edit({formData, id: props.id})
 
-    
     props.handleOpen();
   };
   return (
@@ -59,7 +34,7 @@ export default function AddEditCarousel(props) {
       <Dialog open={props.open} handler={props.handleOpen} size='xxl'>
         {/* <form> */}
 
-          <DialogHeader>{props.isAdd ? 'Add New Carousel ' : 'Edit Carousel'}</DialogHeader>
+          <DialogHeader>{'Edit Hero section'}</DialogHeader>
           <DialogBody divider>
             <div class="flex flex-col">
               <label
@@ -97,20 +72,18 @@ export default function AddEditCarousel(props) {
               <label
                 for="pass"
                 class="self-start mb-2 font-medium text-gray-800"
-              >Read More Link</label>
+              >reward</label>
               <input
                 type="text"
                 placeholder="Sub text"
-                id="link"
-                name="link"
-                value={formData.link}
+                id="reward"
+                name="reward"
+                value={formData.reward}
                 onChange={handleChange}
                 class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
                 autocomplete="off"
               />
             </div>
-           { props.isAdd && <Upload selectedFiles={formData.file}
-            setselectedFiles={handleImageChange} />}
           </DialogBody>
           <DialogFooter>
             <Button
@@ -125,7 +98,6 @@ export default function AddEditCarousel(props) {
               <span>Confirm</span>
             </Button>
           </DialogFooter>
-        {/* </form> */}
       </Dialog>
 
     </Fragment >

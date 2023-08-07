@@ -1,13 +1,34 @@
 const express = require('express');
 const router = express.Router();
-const { getAllData } = require('../../controllers/data');
-const { getIdTitle } = require('../../controllers/data');
+const { 
+    getIdTitle,
+    getYoutube,
+    getContent,
+    getAboutImages,
+    getLinkedin,
+    getArticles,
+    getBooks,  
+    getInterests,
+    getMedia,
+    getHero,
+    getAll
+ } = require('../../controllers/data');
 const { sendMessage } = require('../../controllers/contact');
-
-// Get all videos, content, and about images
-router.get('/', getAllData);
+const { createSubscriber } = require('../../controllers/subscriberController');
+router.get('/', getAll);
 router.post('/contact', sendMessage);
 router.get('/idTitle', getIdTitle);
+router.get('/youtube', getYoutube);
+router.get('/content', getContent);
+router.get('/aboutImages', getAboutImages);
+router.get('/linkedin', getLinkedin);
+router.get('/articles', getArticles);
+router.get('/books', getBooks);
+router.get('/interests', getInterests);
+router.get('/media', getMedia);
+router.get('/hero', getHero);
+router.post('/subscribers', createSubscriber);
+
 
 
 module.exports = router;

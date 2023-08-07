@@ -8,6 +8,7 @@ import Loading from 'components/Loading';
 import Unauthorized from 'components/Unauthorized';
 import Navbar from "components/navbar";
 import search from 'features/serch'
+
 const COLUMNS = [
   {
     Header: "Text",
@@ -39,7 +40,7 @@ export default function LinkedIn() {
     <div>
       <br></br>
       <Navbar
-        searchTerm={searchTerm} handleSearch={handleSearch}
+        searchTerm={searchTerm} handleSearch={handleSearch} withSearch={true}
       />
       {/* <Upload /> */}
       {/* <Upload /> */}

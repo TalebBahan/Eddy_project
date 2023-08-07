@@ -8,22 +8,21 @@ import {
 } from "./Slide2Elements";
 import Badge from "Components/common/Badge";
 import YellowButton from "../../../common/button/yellow-button";
-const Slide2 = ({link}) => {
+const Slide2 = ({data}) => {
   
   return (
     <SlideWrapper>
       <Container>
-        <Heading>Driving Results Through Leadership</Heading>
+        <Heading>{data.h_text}</Heading>
         <SubHeading>
-          Combining innovation with bold leadership to achieve tangible results
-          and drive sustainable growth.
+          {data.s_text}
         </SubHeading>
         {/* <a target="_blank" href={link}> */}
         <YellowButton text="Learn More"/>
         {/* </a> */}
         <ImageBox></ImageBox>
         <BadgeArea>
-          <Badge />
+          <Badge text={data.reward} />
         </BadgeArea>
       </Container>
     </SlideWrapper>

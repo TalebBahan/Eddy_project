@@ -11,7 +11,9 @@ import "./Social.css";
 import LinkedInCard from "./LinkedInCard";
 import Slider from "react-slick";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-const SocialMedia = ({ youtube, linkedin }) => {
+const SocialMedia = ({youtube,linkedin}) => {
+
+
 
 
   const socialLink = [
@@ -58,33 +60,6 @@ const SocialMedia = ({ youtube, linkedin }) => {
       },
     ],
   };
-
-  const cardsData = [
-    {
-      title: 'The Timbers',
-      videoId: 'DQ6Cjq6diLk',
-      description:
-        'THE TIMBERS’ thumping rhythms and big misty mountain melodies will cast you away to a sweaty, smoky, melting-pot of folk, roots and Celtic bushman brassy punk. They rollick and hammer their way through live gigs with abundant energy and have become festival favourites throughout Australia.',
-    },
-    {
-      title: 'Z-STAR Trinity',
-      videoId: 'LR6xXs4lDsA',
-      description:
-        'Shaking up the Australian blues scene, award-winning international artist Zee Gachette will be setting the stage alight with her high octane energy modern blues, psyche rock, folk n’ funk. Zee’s inimitable talent for improvising onstage is simply exhilarating to watch, inspiring standing ovations from music legends like Jimmy Page (Led Zeppelin), Roger Daltrey (The Who) and Amy Winehouse. A show not to be missed!',
-    },
-    {
-      title: 'Dubarray',
-      videoId: 'JAdVqLMdDhY',
-      description:
-        'Uplifting, Soulful & Euphoric, Dubarray combine a fresh fusion of boundary bending world music that infuses such styles as trip-hop, funk, reggae, dancehall, drum & bass, house and tribal grooves layered on a bed electronic ambience and organic undertones.',
-    },
-    {
-      title: 'The Sexicclesiastes',
-      videoId: 'HUC7nfQxVDI',
-      description:
-        'Having been described as a "raucous circus of hyper speed gypsy rock” embracing "just about every element of theatrical rock & roll in existence”, this psychedelic punk folk outfit has been bringing their vigorous foot stomping hectic good times tunage to Palm Creek for at least 15 years. The heat has caused their memories to be a little hazy.',
-    },
-  ];
 
   const options = {
     rewind: false,
@@ -142,6 +117,7 @@ const SocialMedia = ({ youtube, linkedin }) => {
                     publishedAt={card.publishedAt}
                     link={card.link}
                     postImage={card.postImage}
+                    tags={card.tags}
                   />
                 </SplideSlide>
               ))}

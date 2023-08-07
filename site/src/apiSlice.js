@@ -2,15 +2,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_API}/api` }),
+    baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_API}/api/data` }),
     endpoints: (builder) => ({
-        getData: builder.query({
-            query: () => '/data',
-            transformResponse: res => res,
-        }),
         contact: builder.mutation({
             query: (Data) => ({
-                url: '/data/contact',
+                url: '/contact',
                 method: 'POST',
                 body: Data
             }),
@@ -22,11 +18,50 @@ export const apiSlice = createApi({
                 body: Data
             }),
         }),
-        // /book-to-read/:id
-        getBook: builder.query({
-            query: (id) => `/data/book-to-read/${id}`,
+
+
+        getAll: builder.query({
+            query: () => '/',
             transformResponse: res => res,
         }),
+
+        getYouTube: builder.query({
+            query: () => '/youtube',
+            transformResponse: res => res,
+        }),
+        getContent: builder.query({
+            query: () => '/content',
+            transformResponse: res => res,
+        }),
+        getAboutImages: builder.query({
+            query: () => '/aboutImages',
+            transformResponse: res => res,
+        }),
+        getLinkedin: builder.query({
+            query: () => '/linkedin',
+            transformResponse: res => res,
+        }),
+        getArticles: builder.query({
+            query: () => '/articles',
+            transformResponse: res => res,
+        }),
+        getBooks: builder.query({
+            query: () => '/books',
+            transformResponse: res => res,
+        }),
+        getInterests: builder.query({
+            query: () => '/interests',
+            transformResponse: res => res,
+        }),
+        getMedia: builder.query({
+            query: () => '/media',
+            transformResponse: res => res,
+        }),
+        getHero: builder.query({
+            query: () => '/hero',
+            transformResponse: res => res,
+        }),
+
 
     })
 })
@@ -35,5 +70,16 @@ export const {
     useGetDataQuery,
     useContactMutation,
     useSubscribeMutation,
-    useGetBookQuery
+    useGetYouTubeQuery,
+    useGetContentQuery,
+    useGetAboutImagesQuery,
+    useGetLinkedinQuery,
+    useGetArticlesQuery,
+    useGetBooksQuery,
+    useGetInterestsQuery,
+    useGetMediaQuery,
+    useGetHeroQuery,
+    useGetAllQuery
+
+
 } = apiSlice

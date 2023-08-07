@@ -1,14 +1,13 @@
 import React from 'react'
 import Carousel from './Carousel/Carousel'
-import Media from './media/Media'
 import About from './about/About'
-import { useGetContentQuery,useGetHeroLinksQuery } from './apiContent'
+import { useGetContentQuery } from './apiContent'
 import search from 'features/serch'
 import Navbar from "components/navbar";
 import { useState } from 'react';
 import Loading from 'components/Loading';
 import Unauthorized from 'components/Unauthorized'
-import HeroLinks from './HeroLinks'
+
 
 const COLUMNS = [
     {
@@ -49,8 +48,8 @@ export default function Content() {
             <Navbar
                 searchTerm={searchTerm} handleSearch={handleSearch}
             />
+            <Carousel />
             {filterbytype('about').length>0 && <About data={filterbytype('about')} />}
-            {filterbytype('media').length>0 && <Media data={filterbytype('media')} />}
         </div>
     )
 }

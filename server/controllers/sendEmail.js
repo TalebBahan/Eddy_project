@@ -27,59 +27,56 @@ const handlebarOptions = {
 
 transporter.use('compile', hbs(handlebarOptions));
 
-
-exports.sendNewsletter = (req, res) => {
-  const { emailList, newsletterId } = req.body;
-  Newsletter.findById(newsletterId)
-    .then(newsletter => {
-      if (!newsletter) {
-        throw new Error('Newsletter not found');
-      }
-
-      let a = newsletter.articles.map((item) => {
-        return {
-          'title': item.title,
-          'body': item.body,
-          'imageUrl': item.imageUrl,
-          'readMoreLink': item.readMoreLink,
-        }
-      })
-      const mailOptions = {
-        from: 'talebahan@gmail.com',
-        subject: newsletter.subject,
-        template: 'email',
-        context: {
-          'title': newsletter.title,
-          'body': newsletter.body,
-          'ar': a,
-          'cover': newsletter.coverImageUrl,
-          'BACKEND_URI': 'https://eddy-api.bles-software.com/images'
-        }
-
-      };
-
-      if (emailList && emailList.length > 0) {
-        mailOptions.to = emailList
-        return transporter.sendMail(mailOptions);
-      } else {
-        return Subscriber.find({ interests: newsletter.interests })
-          .then(subscribers => {
-            const emailList = subscribers.map(subscriber => subscriber.email);
-            console.log(emailList.join(', '));
-            mailOptions.to = emailList;
-            return transporter.sendMail(mailOptions);
-          });
-      }
-    })
-    .then(info => {
-      console.log('Email sent: ' + info.response);
-      res.send('Email sent successfully!');
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).send('Error sending email!');
-    });
+const sendEmail = async (mailOptions) => {
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent: ' + info.response);
+    return true;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error sending email!');
+  }
 };
+
+exports.sendNewsletter = async (req, res) => {
+  const { emailList, newsletterId } = req.body;
+  try {
+    const newsletter = await Newsletter.findById(newsletterId);
+    if (!newsletter) {
+      throw new Error('Newsletter not found');
+    }
+
+    const a = newsletter.articles.map((item) => ({
+      'title': item.title,
+      'body': item.body,
+      'imageUrl': item.imageUrl,
+      'readMoreLink': item.readMoreLink,
+    }));
+
+    const mailOptions = {
+      from: 'talebahan@gmail.com',
+      subject: newsletter.subject,
+      template: 'email',
+      context: {
+        'title': newsletter.title,
+        'body': newsletter.body,
+        'ar': a,
+        'cover': newsletter.coverImageUrl,
+        'BACKEND_URI': 'https://eddy-api.bles-software.com/images'
+      },
+      // Add Bcc field to hide the list of subscribers from each recipient
+      bcc: emailList
+    };
+
+    await sendEmail(mailOptions);
+
+    res.send('Email sent successfully!');
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error sending email!');
+  }
+};
+
 exports.sendNewsLetter = async (req, res) => {
   const { interests, age, newsletter } = req.body;
   try {
@@ -95,7 +92,9 @@ exports.sendNewsLetter = async (req, res) => {
         'articleImage': newsletter.articlesWithImages,
         'articleNoImage': newsletter.articlesWithoutImages,
         'date': new Date().toLocaleDateString(),
-      }
+      },
+      // Add Bcc field to hide the list of subscribers from each recipient
+      bcc: []
     };
 
     const subscribers = await Subscriber.find({
@@ -106,17 +105,13 @@ exports.sendNewsLetter = async (req, res) => {
     }).select('email');
 
     const emailList = subscribers.map(subscriber => subscriber.email);
-    console.log('====================================');
-    console.log('emails', emailList);
-    console.log('====================================');
-    console.log(emailList.join(', '));
+    mailOptions.bcc = emailList;
 
-    mailOptions.to = emailList;
-    await transporter.sendMail(mailOptions);
+    await sendEmail(mailOptions);
 
-    return res.sendStatus(200);
+    res.sendStatus(200);
   } catch (error) {
     console.log(error);
-    return res.status(500).send('Error sending email!');
+    res.status(500).send('Error sending email!');
   }
 };

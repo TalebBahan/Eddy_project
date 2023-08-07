@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 // import './a.css'
 import SubscribePopup from "./SubscribePopup";
 const NewsLetter = ({interestsData}) => {
+  const [email, setEmail] = useState(null)
+
   const showSubscribe = (e) => {
     e.preventDefault()
     let element = document.getElementById("subscribe-form");
@@ -12,7 +14,6 @@ const NewsLetter = ({interestsData}) => {
       element.style.display = "flex";
     }
   };
-  const [email, setEmail] = useState(null)
   return <>
     <motion.div
       initial={{ opacity: 0 }}

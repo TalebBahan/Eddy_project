@@ -4,7 +4,7 @@ import { useDeleteBookMutation } from './api';
 import Success from 'components/Success';
 import Error from 'components/Error';
 import './style.css'
-const BookCard = ({ title, body, imageUrl, link, _id }) => {
+const BookCard = ({ title, body, imageUrl, link, interests, _id }) => {
     const [open, setOpen] = React.useState(false);
     const [deleteBook] = useDeleteBookMutation();
     const [successMessage, setSuccessMessage] = React.useState('');
@@ -43,7 +43,7 @@ const BookCard = ({ title, body, imageUrl, link, _id }) => {
                 <div className="buttons">
                     <button
                         onClick={() => {
-                            setEditData({ title, body, imageUrl, link, _id });
+                            setEditData({ title, body, imageUrl, link, _id, interests });
                             handleOpen();
                         }}
                         className="linear rounded-[20px] bg-brand-900 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90"

@@ -15,17 +15,16 @@ import Image3 from "../../../../assets/hero/slide3/3.jpg";
 import Image4 from "../../../../assets/hero/slide3/4.jpg";
 import Badge from "Components/common/Badge";
 
-const Slide3 = ({ link }) => {
+const Slide3 = ({ data }) => {
   return (
     <SlideWrapper>
       <Container>
-        <Heading>Your Partner In Driving Meaningful Change</Heading>
+        <Heading>{data.h_text}</Heading>
         <SubHeading>
-          Together, we can make a positive impact on your business, your
-          community, and the world.
+          {data.s_text}
         </SubHeading>
         <BadgeWrapper>
-          <Badge />
+          <Badge text={data.text} />
         </BadgeWrapper>
         {/* <a target="_blank" href={link}> */}
         <YellowButton text="Learn More" />

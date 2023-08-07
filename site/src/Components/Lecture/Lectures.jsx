@@ -28,7 +28,8 @@ const Button = styled.button`
 `;
 
 const YellowButton = ({ text }) => <Button>{text}</Button>;
-const Lectures = () => {
+const Lectures = ({isHeroLoadding}) => {
+  if(isHeroLoadding) return null;
   return (
     <>
       <motion.div

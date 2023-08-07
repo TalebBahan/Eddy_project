@@ -1,7 +1,8 @@
 const Newsletter = require('../model/newsletter'); 
 const Content = require('../model/content');
 const Article = require('../model/article');
-const Book = require('../model/book')
+const Book = require('../model/book');
+const Media = require('../model/media');
 // Create a newsletter
 exports.createNewsletter = async (req, res) => {
   try {
@@ -17,7 +18,7 @@ exports.getArticlesMediasBooksByIds = async (req, res) => {
     const { articlesIds, booksIds, mediasIds } = req.body;
     const articles = await Article.find({ _id: { $in: articlesIds } });
     const books = await Book.find({ _id: { $in: booksIds } });
-    const medias = await Content.find({ _id: { $in: mediasIds } });
+    const medias = await Media.find({ _id: { $in: mediasIds } });
     res.status(200).json({ articles, books, medias });
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve articles, books, and medias' });

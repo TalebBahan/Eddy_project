@@ -5,11 +5,10 @@ import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/skyblue";
 
 
-
-const News = ({ latestNewsObj }) => {
+const News = ({data}) => {
   const splideRef = useRef(null);
 
-  const filterByType = () => latestNewsObj.filter(item => item.type === 'media');
+  
 
   const handleSwipeLeft = () => {
     if (splideRef.current) {
@@ -50,7 +49,7 @@ const News = ({ latestNewsObj }) => {
           />
           <div className="ltnewsheader">
             <div className="booking-meeting-text">
-              Media Coverage and Articles
+              Media Coverage
             </div>
             <div className="ltnewsheader-child"></div>
           </div>
@@ -68,19 +67,27 @@ const News = ({ latestNewsObj }) => {
             aria-label="My Favorite Images"
             ref={splideRef}
           >
-            {filterByType().map((item, index) => (
+            {data.map((item, index) => (
               <SplideSlide key={index}>
                 <div className="ltnewscontainer">
                   <div className="ltnews1">
                     <img
                       className="ltnews1-child"
                       alt=""
+                      style={{
+                        width: "700px",
+                        maxHeight: "400px",
+                      }}
                       src={`${process.env.REACT_APP_API}/images/${item.image}`}
                     />
                     <div className="frame-group">
                       <div className="title-parent">
-                        <b className="title">{item.h_text}</b>
-                        <div className="text3">{item.s_text}</div>
+                        <b className="title">{
+                          item.h_text.length > 64 ? item.h_text.substring(0, 64) + "..." : item.h_text
+                          }</b>
+                        <div className="text3">{
+                          item.s_text.length > 300 ? item.s_text.substring(0, 300) + "..." : item.s_text
+                          }</div>
                       </div>
                       <div className="read-more-wrapper">
                         <button className="read-more-button">

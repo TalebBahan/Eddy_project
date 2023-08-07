@@ -6,6 +6,7 @@ const Article = require('../model/article');
 const createArticle = async (req, res) => {
   try {
     req.body.imageUrl = req.file.filename;
+    req.body.interests = JSON.parse(req.body.interests);
     const article = new Article(req.body);
     await article.save();
     res.status(201).json(article);
@@ -17,8 +18,8 @@ const createArticle = async (req, res) => {
 // create article without image
 const createArticleWithoutImage = async (req, res) => {
   try {
-    const { title, body, link } = req.body;
-    const article = new Article({ title, body, link, imageUrl: null  });
+    const { title, body, link, interests } = req.body;
+    const article = new Article({ title, body, link, imageUrl: null, interests: JSON.parse(interests)  });
     await article.save();
     res.status(201).json(article);
   } catch (error) {
@@ -57,6 +58,7 @@ const updateArticle = async (req, res) => {
     if (req.file) {
       req.body.imageUrl = req.file.filename;
     }
+    req.body.interests = JSON.parse(req.body.interests);
     const article = await Article.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!article) {
       return res.status(404).json({ error: 'Article not found' });

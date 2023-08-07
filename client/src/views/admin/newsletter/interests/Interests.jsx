@@ -8,7 +8,7 @@ import Form from "./Form";
 import { AiOutlinePlus } from "react-icons/ai";
 import Success from "components/Success";
 import Error from "components/Error";
-
+import Navbar from "components/navbar";
 const Interests = () => {
     const { data, isLoading } = useGetInterestssQuery();
     const [deleteInterest] = useDeleteInterestsMutation();
@@ -50,6 +50,9 @@ const Interests = () => {
     };
 
     return (
+        <div className='mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid '>
+            <Navbar />
+
         <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
             <div className="relative flex items-center justify-between">
                 <div className="text-xl font-bold text-navy-700 dark:text-white">
@@ -123,6 +126,8 @@ const Interests = () => {
                 setErrorMessage={setErrorMessage}
             />
         </Card>
+        </div>
+
     );
 };
 

@@ -11,25 +11,45 @@ import { useCreateBookMutation, useUpdateBookMutation } from "./api";
 import Upload from "./Upload";
 import Success from "components/Success";
 import Error from "components/Error";
+import { useGetInterestssQuery } from "../newsletter/interests/api";
 
 export default function BookForm(props) {
   console.log(props);
   const [createBook] = useCreateBookMutation();
   const [updateBook] = useUpdateBookMutation();
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ interests: props?.interests || [], });
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [formErrors, setFormErrors] = useState({});
-
+  const { data: interestsData, isLoading, isError } = useGetInterestssQuery();
   useEffect(() => {
     setFormData({
       title: props.title || "",
       body: props.body || "",
       file: null,
       link: props.link || "",
+      interests: props?.interests || [],
     });
   }, [props]);
-
+  if (isLoading || isError) {
+    return <div>Loading...</div>;
+  }
+  const interests = interestsData?.map((interest) => interest?.interest);
+  const handleInterestChange = (e) => {
+    const { value, checked } = e.target;
+    console.log(value, checked);
+    if (checked) {
+      setFormData((formData) => ({
+        ...formData,
+        interests: [...formData.interests, value],
+      }));
+    } else {
+      setFormData((formData) => ({
+        ...formData,
+        interests: formData.interests.filter((interest) => interest !== value),
+      }));
+    }
+  };
   const handleImageChange = (file) => {
     setFormData({ ...formData, file: file });
   };
@@ -78,6 +98,7 @@ export default function BookForm(props) {
     form.append("title", formData.title);
     form.append("body", formData.body);
     form.append("link", formData.link);
+    form.append("interests", JSON.stringify(formData.interests));
 
     try {
       if (!props.isAdd) {
@@ -93,6 +114,7 @@ export default function BookForm(props) {
         body: "",
         file: null,
         link: "",
+        interests: [],
       });
       setFormErrors({});
       props.handleClose();
@@ -154,6 +176,28 @@ export default function BookForm(props) {
                 <p className="text-red-500 text-sm">{formErrors.body}</p>
               )}
             </div>
+            <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="body"
+              >
+                Interests
+              </label>
+            <div className="flex items-center">
+              {interests.map((interest) => (
+                <label className="mr-2 self-start mb-2 font-medium text-gray-700" htmlFor={interest} key={interest}>
+                  <input
+                    className="mr-1"
+                    type="checkbox"
+                    id={interest}
+                    name="interests"
+                    value={interest}
+                    checked={formData.interests.includes(interest)}
+                    onChange={handleInterestChange}
+                  />
+                  {interest}
+                </label>
+              ))}
+            </div>
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"
@@ -171,11 +215,17 @@ export default function BookForm(props) {
                 value={formData.link}
                 onChange={handleChange}
                 required
-              />
+              >
+              </Textarea>
               {formErrors.link && (
                 <p className="text-red-500 text-sm">{formErrors.link}</p>
               )}
             </div>
+            <br />
+
+
+
+            
             <div className="mb-4">
               <Upload
                 selectedFiles={formData.file}

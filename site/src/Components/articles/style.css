@@ -5,7 +5,12 @@
   margin: 10px auto;
   margin: 1rem auto;
 }
-
+/* font-family: "Roboto Condensed", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  font-size: 1.8rem !important;
+} */
 
 .bodyArticule h2 {
   font-size: 1.78rem;
@@ -13,6 +18,7 @@
   font-weight: normal;
   color: rgb(29, 1, 189);
   margin-bottom: 1rem;
+  font-family: "Roboto Condensed", sans-serif !important;
   
 }
 .bodyArticule h2 a {
@@ -25,6 +31,7 @@
   font-weight: normal;
   color: rgb(34, 33, 33);
   margin-bottom: 0;
+  font-family: "Roboto Condensed", sans-serif !important;
 }
 
 .searchresult img {

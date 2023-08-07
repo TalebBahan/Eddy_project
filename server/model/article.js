@@ -7,6 +7,8 @@ const articleSchema = new mongoose.Schema({
   body: { type: String, required: true },
   imageUrl: { type: String, required: false },
   link: { type: String, required: true },
+  interests: { type: [String], required: false },
+
 });
 
 const Article = mongoose.model('Article', articleSchema);

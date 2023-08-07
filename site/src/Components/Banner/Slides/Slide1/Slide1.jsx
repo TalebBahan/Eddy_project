@@ -19,17 +19,16 @@ import { Link } from "react-router-dom";
 import { FaLinkedin, FaLinkedinIn } from "react-icons/fa";
 import YellowButton from "Components/common/button/yellow-button";
 
-const Slide1 = ({ link }) => (
+const Slide1 = ({ data }) => (
   <SlideWrapper>
     <Container>
       <LeftArea>
         <Title>
-          Transformative Knowledge, Innovation, Leadership, and Career Support
+         { data.h_text}
         </Title>
         <Line />
         <SubTitle>
-          Empowering you with the knowledge, skills, and support to achieve
-          career success.
+          {data.s_text}
         </SubTitle>
         <ButtonArea>
           {/* <a target="_blank" href={link}> */}
@@ -51,7 +50,7 @@ const Slide1 = ({ link }) => (
             /> */}
             <BadgeArea >
               <Badge 
-                text={'Award-winning Disruptive CEO & Technology Person of the Year (2019& 2021)'} 
+                text={data.reward}
                />
             </BadgeArea>
           {/* </div>

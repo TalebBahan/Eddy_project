@@ -10,6 +10,7 @@ import Navbar from 'components/navbar';
 import Loading from 'components/Loading';
 import GoogleButton from './GoogleButton';
 import VideoCard from './Card';
+
 const COLUMNS = [{ Header: "Title", accessor: "title", }, { Header: "Description", accessor: "description", }, { Header: "Published At", accessor: "publishedAt", }, { Header: "Video ID", accessor: "videoId", },];
 
 
@@ -32,6 +33,7 @@ const Youtube = () => {
   // }
   return (
     <div className="mt-3 grid h-full grid-cols-1 gap-10 divide-y divide-solid ">
+      <Navbar />
       <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
         <div className="relative flex items-center justify-between">
           <div className="text-xl font-bold text-navy-700 dark:text-white">

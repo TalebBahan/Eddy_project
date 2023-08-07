@@ -6,6 +6,7 @@ import Slide3 from "./Slides/Slide3/Slide3";
 import Slide4 from "./Slides/Slide4/Slide4";
 
 const Hero = ({data}) => {
+  console.log(data);
   const settings = {
     dots: true,
     infinite: true,
@@ -17,10 +18,10 @@ const Hero = ({data}) => {
   return (
     <Wrapper id="home" className="hero-section">
       <Slider {...settings}>
-        <Slide1 link={data[0].link}/>
-        <Slide2 link={data[1].link}/>
-        <Slide3 link={data[2].link}/>
-        <Slide4 link={data[3].link}/>
+        <Slide1 data={data[0]}/>
+        <Slide2 data={data[1]}/>
+        <Slide3 data={data[2]}/>
+        <Slide4 data={data[3]}/>
       </Slider>
     </Wrapper>
   );

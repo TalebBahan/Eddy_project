@@ -43,7 +43,7 @@ const Books = () => {
             <div>
                 <br></br>
                 <Navbar
-                    searchTerm={searchTerm} handleSearch={handleSearch}
+                    searchTerm={searchTerm} handleSearch={handleSearch} withSearch={true}
                 />
                 <Card extra={"w-full h-full p-4 sm:overflow-x-auto"}>
                     <Form open={open} handleClose={handleOpenModal} isAdd={true} />
