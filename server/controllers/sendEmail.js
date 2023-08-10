@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: '21014@supnum.mr',
-    pass: 'uoesabbvnepdxmjg'
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
   }
 });
 
@@ -54,7 +54,7 @@ exports.sendNewsletter = async (req, res) => {
     }));
 
     const mailOptions = {
-      from: 'talebahan@gmail.com',
+      from: process.env.EMAIL,
       subject: newsletter.subject,
       template: 'email',
       context: {
