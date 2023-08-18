@@ -25,7 +25,8 @@ const SubscribePopup = ({ email, setEmail, interestsData }) => {
   const [sent, setSent] = useState(null);
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [captchaValue, setCaptchaValue] = useState(null);
-  const [subscribe, { isSuccess, isError }] = useSubscribeMutation();
+  // get the res 
+  const [subscribe] = useSubscribeMutation();
   const interests = interestsData?.map((interest) => interest?.interest);
   const [formErrors, setFormErrors] = useState({});
 
@@ -47,25 +48,36 @@ const SubscribePopup = ({ email, setEmail, interestsData }) => {
     if (element) {
       element.disabled = true;
     }
+
     const subscriberData = {
       email,
       firstName: name,
       interests: selectedInterests,
       age: age,
-      location: "", // You didn't specify how to capture the location, so I left it empty
+      location: "",
     };
 
     try {
-      await subscribe(subscriberData);
-      if (!isError) {
-        setSent("You have subscribed successfully.");
-        setName("");
-        setAge("");
-        setSelectedInterests([]);
-      } else {
-        setSent("You have already subscribed.");
+      const response = await subscribe(subscriberData);
+
+      if (response?.error) {
+        setSent(response?.error?.data?.message);
+        setTimeout(() => {
+          setSent(null);
+          hideContact();
+        }
+          , 3000);
+        return;
       }
+      setSent("Thank you for subscribing!");
+      setName("");
+      setAge("");
+      setSelectedInterests([]);
+      setCaptchaValue(null);
+      setFormErrors({});
+
     } catch (error) {
+      console.log(error);
       setSent("An error occurred.");
     }
   };
@@ -112,7 +124,7 @@ const SubscribePopup = ({ email, setEmail, interestsData }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Wrapper id="subscribe-form">
-      <img
+        <img
           className="latest-news-child"
           alt=""
           src="Images/LTnewsdesign1@2x.png"

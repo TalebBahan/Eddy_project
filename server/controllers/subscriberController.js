@@ -27,9 +27,20 @@ exports.getSubscriber = async (req, res) => {
 
 exports.createSubscriber = async (req, res) => {
   try {
+    const { email } = req.body;
+
+    // Check if the subscriber already exists with the given email
+    const existingSubscriber = await Subscriber.findOne({ email });
+
+    if (existingSubscriber) {
+      return res.status(400).json({ message: 'Subscriber with this email already exists.' });
+    }
+
+    // If subscriber doesn't exist, create a new one
     const subscriber = new Subscriber(req.body);
     await subscriber.save();
-    res.status(201).json(subscriber);
+
+    res.status(201).json({ message: 'You have Subscribed ' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server Error' });
@@ -67,7 +78,7 @@ exports.deleteSubscriber = async (req, res) => {
 
 exports.deleteMany = async (req, res) => {
   try {
-   
+
     const { ids } = req.body;
     console.log(ids);
 
@@ -93,7 +104,7 @@ exports.deleteMany = async (req, res) => {
 
 
 exports.createInterest = async (req, res) => {
- 
+
   try {
     const { interest } = req.body;
     const newInterest = await Interest.create({ interest });
