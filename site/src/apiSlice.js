@@ -61,6 +61,10 @@ export const apiSlice = createApi({
             query: () => '/hero',
             transformResponse: res => res,
         }),
+        getAchievements: builder.query({
+            query: () => '/achievements',
+            transformResponse: res => res,
+        }),
 
 
     })
@@ -79,7 +83,7 @@ export const {
     useGetInterestsQuery,
     useGetMediaQuery,
     useGetHeroQuery,
-    useGetAllQuery
-
+    useGetAllQuery,
+    useGetAchievementsQuery
 
 } = apiSlice

@@ -95,7 +95,6 @@ export default function AddEditMedia(props) {
     if (!validateForm()) {
       return;
     }
-    console.log(formData);
 
     const form = new FormData();
     form.append("file", formData.file);
@@ -239,7 +238,7 @@ export default function AddEditMedia(props) {
               <p className="text-red-500 text-sm">{formErrors.date}</p>
             )}
           </div>
-          
+
           <div className="flex items-center">
             {interests.map((interest) => (
               <label className="mr-2 self-start mb-2 font-medium text-gray-800" htmlFor={interest} key={interest}>

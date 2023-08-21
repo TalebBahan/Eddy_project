@@ -10,7 +10,7 @@ import { selectCurrentUser } from "features/auth/authSlice";
 import routes from "routes.js";
 import { useDispatch } from "react-redux";
 import { logOut } from "features/auth/authSlice";
-
+import { IoSettingsOutline } from "react-icons/io5";
 const Navbar = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -68,41 +68,40 @@ const Navbar = (props) => {
       </div>
 
       <div className="relative mt-[3px] flex h-[61px] w-[355px] flex-grow items-center justify-around gap-2 rounded-full bg-white px-2 py-2 shadow-xl shadow-shadow-500 dark:!bg-navy-800 dark:shadow-none md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
-      {props?.withSearch === true &&<div className="flex h-full items-center rounded-full bg-lightPrimary text-navy-700 dark:bg-navy-900 dark:text-white xl:w-[225px]">
+        {props?.withSearch === true && <div className="flex h-full items-center rounded-full bg-lightPrimary text-navy-700 dark:bg-navy-900 dark:text-white xl:w-[225px]">
           <p className="pl-3 pr-2 text-xl">
             <FiSearch className="h-4 w-4 text-gray-400 dark:text-white" />
           </p>
-           <input
+          <input
             value={props.searchTerm} onChange={props.handleSearch}
             type="text"
             placeholder="Search..."
             class="block h-full w-full rounded-full bg-lightPrimary text-sm font-medium text-navy-700 outline-none placeholder:!text-gray-400 dark:bg-navy-900 dark:text-white dark:placeholder:!text-white sm:w-fit"
           />
         </div>}
-        
+
         <Dropdown
           // logout door img
-          button={<BiLogOut className="h-6 w-6 text-gray-600 dark:text-white" />}
+          button={<IoSettingsOutline className="h-6 w-6 text-gray-600 dark:text-white" />}
           children={
             <div className="flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:text-white dark:shadow-none">
               <div className="mt-3 ml-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, {user} Are you sure you want to log out ?
+                    👋 Hey, {user}
                   </p>{" "}
                 </div>
               </div>
               <div className="mt-3 h-px w-full bg-gray-200 dark:bg-white/20 " />
 
-              <div className="mt-3 ml-4 flex flex-col">
+              <div className="mt-3 flex flex-col">
                 <button
                   onClick={() => {
                     dispatch(logOut());
-                    //window.haedreload
                     window.location.reload();
                   }
                   }
-             
+
                   className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
                 >
                   Log Out
@@ -112,6 +111,7 @@ const Navbar = (props) => {
           }
           classNames={"py-2 top-8 -left-[180px] w-max"}
         />
+
       </div>
     </nav >
   );

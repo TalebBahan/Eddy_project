@@ -9,7 +9,6 @@ import { Provider } from 'react-redux'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log(process.env)
 root.render(
   <React.StrictMode>
     <Provider store={store}>

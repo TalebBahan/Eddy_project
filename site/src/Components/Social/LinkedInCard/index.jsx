@@ -23,43 +23,42 @@ import More from "assets/social/linkedin/More.png";
 import LikeGroup from "assets/social/linkedin/Like group.png";
 import CommentGroup from "assets/social/linkedin/Comment group.png";
 import { Link } from "react-router-dom";
-const LinkedInCard = ({link,postImage,tags,title}) => {
+const LinkedInCard = ({ link, postImage, tags, title }) => {
 
-  console.log(tags);
   return (
     <Link to={link} style={{
       textDecoration: 'none',
     }}
-    target="_blank"
+      target="_blank"
     >
-    <Wrapper>
-      <TopSection>
-        <TopLeftArea>
-          <Profile src={ProfileImg} />
-          <AuthorArea>
-            <Name>Eddy Abboud</Name>
-            <TimeWrapper>
-              {/* <Time>20h</Time> */}
-              <Earth src={EarthImg} />
-            </TimeWrapper>
-          </AuthorArea>
-        </TopLeftArea>
-        {/* <TopRightArea>
+      <Wrapper>
+        <TopSection>
+          <TopLeftArea>
+            <Profile src={ProfileImg} />
+            <AuthorArea>
+              <Name>Eddy Abboud</Name>
+              <TimeWrapper>
+                {/* <Time>20h</Time> */}
+                <Earth src={EarthImg} />
+              </TimeWrapper>
+            </AuthorArea>
+          </TopLeftArea>
+          {/* <TopRightArea>
           <MoreImg src={More} />
         </TopRightArea> */}
-      </TopSection>
-      <TextArea>
-        <Text>
-          {title?.length > 130 ? title?.substring(0, 130) + "..." : title}
-        </Text>
-        <HashTag>{tags?.length > 100 ? tags?.substring(0, 100) + "..." : tags}</HashTag>
-      </TextArea>
-      <PostImg style={{
+        </TopSection>
+        <TextArea>
+          <Text>
+            {title?.length > 130 ? title?.substring(0, 130) + "..." : title}
+          </Text>
+          <HashTag>{tags?.length > 100 ? tags?.substring(0, 100) + "..." : tags}</HashTag>
+        </TextArea>
+        <PostImg style={{
 
-      
-      }} src={`${process.env.REACT_APP_API}/images/${postImage}`}/>
-      
-    </Wrapper>
+
+        }} src={`${process.env.REACT_APP_API}/images/${postImage}`} />
+
+      </Wrapper>
     </Link>
   );
 };

@@ -15,7 +15,6 @@ function getAllInterests(obj) {
 
   // Iterate over each property of the object
   for (const key in obj) {
-    console.log("key", key);
     if (obj.hasOwnProperty(key)) {
       // Extract the array of interests from the current property
       const interestsArray = obj[key].flatMap(item => item.interests);
@@ -34,18 +33,12 @@ export default function Send({ newsletter, ...props }) {
   const [send] = useSendIAMutation();
   const { data: interestsData, isLoading, isError } = useGetInterestssQuery();
   const [selectedInterests, setSelectedInterests] = useState([]);
-  console.log(selectedInterests);
   const [age, setAge] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    console.log(
-      "newsletter.articlesWithImages.interests",
-      newsletter.articlesWithImages
-    
-    )
-    
+
     setSelectedInterests(getAllInterests({
       articlesWithImages: newsletter.articlesWithImages,
       articlesWithoutImages: newsletter.articlesWithoutImages,
@@ -53,7 +46,7 @@ export default function Send({ newsletter, ...props }) {
       medias: newsletter.medias,
     }));
   }, [newsletter]);
-  if(isLoading) return <div></div>
+  if (isLoading) return <div></div>
 
 
 

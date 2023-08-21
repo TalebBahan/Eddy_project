@@ -77,7 +77,6 @@ const SubscribePopup = ({ email, setEmail, interestsData }) => {
       setFormErrors({});
 
     } catch (error) {
-      console.log(error);
       setSent("An error occurred.");
     }
   };

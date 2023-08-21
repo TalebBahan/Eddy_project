@@ -6,8 +6,8 @@ const Article = require('../model/article');
 const Book = require('../model/book');
 const Interest = require('../model/interest');
 const Media = require('../model/media');
-const Hero  = require('../model/hero');
-
+const Hero = require('../model/hero');
+const Achievement = require('../model/achievement');
 // get youtube
 
 const getAll = async (req, res) => {
@@ -23,12 +23,21 @@ const getAll = async (req, res) => {
     const interestsM = media.map((media) => media.interests);
     // const linkedin = await linkedin.find().sort({ _id: -1 });
 
-    res.status(200).json({ youtube, linkedin, articles, books, media,interests:[...interestsB,...interestsA,...interestsM] });
+    res.status(200).json({ youtube, linkedin, articles, books, media, interests: [...interestsB, ...interestsA, ...interestsM] });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
+
+const getAllAchievements = async (req, res) => {
+  try {
+    const achievements = await Achievement.find().sort({ _id: 1 });
+    res.status(200).json(achievements);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 const getYoutube = async (req, res) => {
   try {
@@ -155,7 +164,7 @@ const getIdTitle = async (req, res) => {
     const linkedinIdTitle = linkedinPosts.map((linkedin) => {
       return { _id: linkedin._id, title: linkedin.title };
     });
-    res.status(200).json({ articlesIdTitle, booksIdTitle, linkedinIdTitle,mediaIdTitle });
+    res.status(200).json({ articlesIdTitle, booksIdTitle, linkedinIdTitle, mediaIdTitle });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -168,11 +177,12 @@ module.exports = {
   getAboutImages,
   getLinkedin,
   getArticles,
-  getBooks,  
+  getBooks,
   getInterests,
   getMedia,
   getHero,
-  getAll
+  getAll,
+  getAllAchievements
 
 
 };

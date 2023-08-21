@@ -7,7 +7,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import Upload from "./Upload";
-import { useCreatePostMutation,useUpdatePostMutation } from "./linkdubApi";
+import { useCreatePostMutation, useUpdatePostMutation } from "./linkdubApi";
 export default function AddEditMedia(props) {
 
   const [add] = useCreatePostMutation()
@@ -28,7 +28,6 @@ export default function AddEditMedia(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     const form = new FormData();
     form.append("file", formData.file);
     form.append("tags", formData.tags);
@@ -46,10 +45,7 @@ export default function AddEditMedia(props) {
     }
     else {
       if (window.confirm('are you sure you want to save the edit ?'))
-      console.log('====================================');
-      console.log(formData);
-      console.log('====================================');
-        edit({body:{...formData}, id: props.id})
+        edit({ body: { ...formData }, id: props.id })
     }
 
 

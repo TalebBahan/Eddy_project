@@ -14,7 +14,6 @@ import Error from "components/Error";
 import { useGetInterestssQuery } from "../newsletter/interests/api";
 
 export default function BookForm(props) {
-  console.log(props);
   const [createBook] = useCreateBookMutation();
   const [updateBook] = useUpdateBookMutation();
   const [formData, setFormData] = useState({ interests: props?.interests || [], });
@@ -37,7 +36,6 @@ export default function BookForm(props) {
   const interests = interestsData?.map((interest) => interest?.interest);
   const handleInterestChange = (e) => {
     const { value, checked } = e.target;
-    console.log(value, checked);
     if (checked) {
       setFormData((formData) => ({
         ...formData,
@@ -177,11 +175,11 @@ export default function BookForm(props) {
               )}
             </div>
             <label
-                className="block text-gray-700 font-bold mb-2"
-                htmlFor="body"
-              >
-                Interests
-              </label>
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="body"
+            >
+              Interests
+            </label>
             <div className="flex items-center">
               {interests.map((interest) => (
                 <label className="mr-2 self-start mb-2 font-medium text-gray-700" htmlFor={interest} key={interest}>
@@ -225,7 +223,7 @@ export default function BookForm(props) {
 
 
 
-            
+
             <div className="mb-4">
               <Upload
                 selectedFiles={formData.file}

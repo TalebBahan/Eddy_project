@@ -18,7 +18,7 @@ export default function AddEditModal(props) {
         username: props.username,
         password: '',
         email: props.email,
-        id:props._id
+        id: props._id
       }),
     [props]
   );
@@ -92,6 +92,25 @@ export default function AddEditModal(props) {
               id="email"
               name="email"
               value={formData.email}
+              onChange={handleChange}
+              class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
+              autocomplete="off"
+            />
+
+          </div>
+          <div class="flex flex-col">
+            <label
+              for="password"
+              class="self-start mb-2 font-medium text-gray-800"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              name="password"
+              value={formData.password}
               onChange={handleChange}
               class="outline-none px-2 py-2 border shadow-sm placeholder-gray-500 opacity-50 rounded"
               autocomplete="off"

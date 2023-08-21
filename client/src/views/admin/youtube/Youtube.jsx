@@ -25,7 +25,6 @@ const Youtube = () => {
   if (isLoading || storedLoading) {
     return <Loading />
   }
-  console.log(notStored);
 
   // const filteredData = search(extractVideoData(data), COLUMNS, searchTerm);
   // function handleSearch(event) {

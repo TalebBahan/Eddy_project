@@ -5,7 +5,7 @@ import Loading from "components/Loading";
 import Unauthorized from "components/Unauthorized";
 import React from "react";
 import Send from "./Send";
-export default function View({ newsletter,handleBack }) {
+export default function View({ newsletter, handleBack }) {
   const { title, subject, body, articlesIds, booksIds, mediasIds } = newsletter;
   const { data, isLoading, isError } = useGetArticlesMediasBooksByIdsQuery({
     articlesIds,
@@ -20,7 +20,6 @@ export default function View({ newsletter,handleBack }) {
   if (isError) {
     return <Unauthorized />;
   }
-  console.log(data);
   const { articles, books, medias } = data;
   // seperate the articles with images and without images
   const articlesWithImages = articles.filter((article) => article.imageUrl !== null);

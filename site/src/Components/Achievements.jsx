@@ -8,29 +8,29 @@ import Icon4 from "../assets/achivement/4.svg";
 import Icon5 from "../assets/achivement/5.svg";
 import Icon6 from "../assets/achivement/6.svg";
 import Icon7 from "../assets/achivement/7.svg";
-const Achievements = () => {
+const Achievements = ({ data }) => {
   const credentialsObj1 = [
     {
       img: Icon1,
-      value: 6,
+      value: data[0].rest[0].count,
       text: "Recognitions",
       subText: "Personal Awards ",
     },
     {
       img: Icon2,
-      value: 21,
+      value: data[1].rest[0].count,
       text: "Featured Media and Press",
       subText: "(Video, Audio, Magazines and PR)",
     },
     {
       img: Icon3,
-      value: 2,
+      value: data[2].rest[0].count,
       text: "Advisory Board Membership",
       subText: null,
     },
     {
       img: Icon4,
-      value: 11,
+      value: data[3].rest[0].count,
       text: "Global Reach",
       subText: "Companies",
     },
@@ -42,11 +42,11 @@ const Achievements = () => {
       info: [
         {
           subText: "Industries",
-          value: 4,
+          value: data[4].rest[0].count,
         },
         {
           subText: "Executives",
-          value: 58,
+          value: data[4].rest[1].count,
         },
       ],
     },
@@ -56,11 +56,11 @@ const Achievements = () => {
       info: [
         {
           subText: "Industries",
-          value: 4,
+          value: data[5].rest[0].count,
         },
         {
           subText: "Executives",
-          value: 58,
+          value: data[5].rest[1].count,
         },
       ],
     },
@@ -70,7 +70,7 @@ const Achievements = () => {
       info: [
         {
           subText: "Mentoring",
-          value: 24,
+          value: data[6].rest[0].count,
         },
       ],
     },

@@ -25,11 +25,9 @@ const Articles = () => {
     const [open, setOpen] = React.useState(false)
     const [searchTerm, setSearchTerm] = React.useState('');
     const handleOpenModal = () => setOpen(!open);
-    console.log(useGetArticlesQuery())
     if (isLoading) {
         return <Loading />;
     }
-    console.log(data)
     if (isError) {
         return <Unauthorized />;
     }
@@ -52,7 +50,7 @@ const Articles = () => {
                             Articles
                         </div>
                         <button
-                        className={`flex items-center text-xl hover:cursor-pointer bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
+                            className={`flex items-center text-xl hover:cursor-pointer bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10`}
                             onClick={handleOpenModal}
                         >
                             <AiOutlinePlus />

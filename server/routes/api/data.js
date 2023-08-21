@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { 
+const {
     getIdTitle,
     getYoutube,
     getContent,
     getAboutImages,
     getLinkedin,
     getArticles,
-    getBooks,  
+    getBooks,
     getInterests,
     getMedia,
     getHero,
-    getAll
- } = require('../../controllers/data');
+    getAll,
+    getAllAchievements
+} = require('../../controllers/data');
 const { sendMessage } = require('../../controllers/contact');
 const { createSubscriber } = require('../../controllers/subscriberController');
 router.get('/', getAll);
@@ -28,6 +29,8 @@ router.get('/interests', getInterests);
 router.get('/media', getMedia);
 router.get('/hero', getHero);
 router.post('/subscribers', createSubscriber);
+router.get('/achievements', getAllAchievements);
+
 
 
 

@@ -19,13 +19,12 @@
   color: rgb(29, 1, 189);
   margin-bottom: 1rem;
   font-family: "Roboto Condensed", sans-serif !important;
-  
 }
 .bodyArticule h2 a {
   text-decoration: underline;
+  line-height: normal;
 }
 .bodyArticule p {
-
   font-size: 1.2rem;
   line-height: 20px;
   font-weight: normal;
@@ -40,7 +39,6 @@
   max-height: 202px;
   margin-left: 10px;
 }
-
 
 /* Responsive styles */
 @media (max-width: 768px) {

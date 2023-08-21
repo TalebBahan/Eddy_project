@@ -9,16 +9,14 @@ import routes from "routes.js";
 import { selectCurrentRoles } from "features/auth/authSlice";
 import { useSelector } from "react-redux";
 const Sidebar = ({ open, onClose }) => {
-    const roles = useSelector(selectCurrentRoles);
-    if(!roles || roles.length === 0){
-      return;
-    }
-    console.log(roles)
+  const roles = useSelector(selectCurrentRoles);
+  if (!roles || roles.length === 0) {
+    return;
+  }
   return (
     <div
-      className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:!bg-navy-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${
-        open ? "translate-x-0" : "-translate-x-96"
-      }`}
+      className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:!bg-navy-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${open ? "translate-x-0" : "-translate-x-96"
+        }`}
     >
       <span
         className="absolute top-4 right-4 block cursor-pointer xl:hidden"
@@ -39,8 +37,8 @@ const Sidebar = ({ open, onClose }) => {
 
         <Links routes={
           // return the allowed routes
-          routes.filter((route) => 
-            roles[route.path] >= 100 || roles.Admin >= 100  
+          routes.filter((route) =>
+            roles[route.path] >= 100 || roles.Admin >= 100
           )
         } />
       </ul>

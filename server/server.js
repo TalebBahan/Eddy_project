@@ -67,6 +67,7 @@ app.use('/api/books', require('./routes/api/book'));
 app.use('/api/hero', require('./routes/api/hero'));
 app.use('/api/media', require('./routes/api/media'));
 app.use('/api/subscribers', require('./routes/api/subscriber'));
+app.use('/api/achievements', require('./routes/api/achievement'));
 
 
 

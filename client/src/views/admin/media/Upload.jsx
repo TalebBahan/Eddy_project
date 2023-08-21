@@ -6,7 +6,6 @@ const Upload = (props) => {
   const handleChange = (e) => {
     props.setselectedFiles(e.target.files[0]);
   };
-  console.log(props.image);
   return (
     <Card>
       <div className="col-span-5 h-full w-full rounded-xl bg-lightPrimary dark:!bg-navy-700 2xl:col-span-6">
@@ -14,7 +13,7 @@ const Upload = (props) => {
           <input class="text-sm cursor-pointer w-36 hidden" type="file" onChange={handleChange} multiple name="file" />
           {props.selectedFiles || props.image ? (
             <div className="flex h-full w-full flex-col items-center justify-center rounded-xl border-[2px] border-dashed border-gray-200 py-3 dark:!border-navy-700 lg:pb-0">
-              <img src={props.selectedFiles === null ? `${process.env.REACT_APP_API}/images/${props.image}` : URL.createObjectURL(props.selectedFiles) } alt="Selected File" className="h-32 w-32 object-contain" />
+              <img src={props.selectedFiles === null ? `${process.env.REACT_APP_API}/images/${props.image}` : URL.createObjectURL(props.selectedFiles)} alt="Selected File" className="h-32 w-32 object-contain" />
               <p className="mt-2 text-sm font-medium text-gray-600"></p>
             </div>
           ) : (
@@ -32,7 +31,7 @@ const Upload = (props) => {
       </div>
     </Card>
   );
-  
+
 };
 
 export default Upload;

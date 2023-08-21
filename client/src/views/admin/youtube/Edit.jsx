@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { useUpdateVideoMutation } from "./youtubeApi";
 export default function Edit(props) {
-  
+
   const [update] = useUpdateVideoMutation()
   const [formData, setFormData] = useState({
     title: props?.title,
@@ -21,7 +21,6 @@ export default function Edit(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     update(formData)
     setFormData({
       title: '',

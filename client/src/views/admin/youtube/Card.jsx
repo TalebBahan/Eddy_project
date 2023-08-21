@@ -14,10 +14,9 @@ const VideoCard = ({ video, stored }) => {
         await removeVideo(videoId);
     };
 
-    console.log(video);
     const { title, description, publishedAt, videoId, _id } = video;
 
-    
+
 
     return (
         <Card extra='flex flex-col w-full h-full !p-4 3xl:p-![18px] bg-white'>

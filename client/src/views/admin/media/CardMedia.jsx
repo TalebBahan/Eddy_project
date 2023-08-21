@@ -6,7 +6,7 @@ import Success from 'components/Success';
 import Error from 'components/Error';
 import { useDeleteMediaMutation } from './api';
 
-export default function CardMedia({interests, h_text, s_text, image, link, id, date }) {
+export default function CardMedia({ interests, h_text, s_text, image, link, id, date }) {
   const [deleteM] = useDeleteMediaMutation();
   const [open, setOpen] = React.useState(false);
   const [successMessage, setSuccessMessage] = React.useState('');
@@ -56,7 +56,7 @@ export default function CardMedia({interests, h_text, s_text, image, link, id, d
             <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
               {
                 s_text.length > 100 ? s_text.substring(0, 100) + '...' : s_text
-              
+
               }{" "}
             </p>
             <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
@@ -73,7 +73,7 @@ export default function CardMedia({interests, h_text, s_text, image, link, id, d
           <button
             onClick={handleOpen}
             href=""
-            className="linear rounded-[20px] bg-brand-900 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90"
+            className="flex flex-row items-center justify-center w-24 h-8 mt-4 text-sm font-bold text-white bg-navy-700 rounded-md"
           >
             Edit
           </button>

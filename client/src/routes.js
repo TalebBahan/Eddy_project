@@ -12,25 +12,33 @@ import Books from "views/admin/books/Books";
 import { FiUsers } from "react-icons/fi";
 import { BiBookContent, BiNews } from "react-icons/bi";
 import { BsPersonCheck } from "react-icons/bs";
-import { AiOutlineYoutube,AiOutlineLinkedin, AiFillFileUnknown } from "react-icons/ai";
-import {SiBookstack} from "react-icons/si";
-import {MdOutlineArticle} from "react-icons/md";
+import { AiOutlineYoutube, AiOutlineLinkedin, AiFillFileUnknown } from "react-icons/ai";
+import { SiBookstack } from "react-icons/si";
+import { MdOutlineArticle } from "react-icons/md";
 import {
   DiHtml5Multimedia
-} from  "react-icons/di";
+} from "react-icons/di";
 
 import Media from "views/admin/media/Media";
 import Interests from "views/admin/newsletter/interests/Interests";
+import Acheivements from "views/admin/achievements/Achievements";
 
 
-const routes =  [
-  
- {
+const routes = [
+
+  {
     name: "Top Section",
     layout: "/admin",
     path: "content",
     icon: <BiBookContent className="h-6 w-6" />,
     component: <Content />,
+  },
+  {
+    name: "Acheivements",
+    layout: "/admin",
+    path: "acheivements",
+    icon: <BiBookContent className="h-6 w-6" />,
+    component: <Acheivements />,
   },
   {
     name: "Media",
@@ -97,5 +105,6 @@ const routes =  [
   },
 
 
+
 ];
-export default routes ;
+export default routes;

@@ -10,7 +10,6 @@ export default function Admin(props) {
   const { ...rest } = props;
   const [open, setOpen] = React.useState(true);
   const roles = useSelector(selectCurrentRoles);
-  console.log("roles", roles);
   React.useEffect(() => {
     window.addEventListener("resize", () =>
       window.innerWidth < 1200 ? setOpen(false) : setOpen(true)

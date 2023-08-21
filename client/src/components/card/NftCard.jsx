@@ -67,7 +67,7 @@ const NftCard = ({ title, author, price, image, bidders, extra }) => {
           </div>
           <button
             href=""
-            className="linear rounded-[20px] bg-brand-900 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:opacity-90"
+            className="flex flex-row items-center justify-center w-24 h-8 mt-4 text-sm font-bold text-white bg-navy-700 rounded-md"
           >
             Place Bid
           </button>

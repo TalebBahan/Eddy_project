@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import { Button, Dialog, DialogFooter } from "@material-tailwind/react";
 
 export default function RolesList({ _id, username, roles: initialRoles, open, handleOpen }) {
-  
+
   const [roles, setRoles] = useState({});
   useEffect(() => {
     setRoles({ ...initialRoles });
@@ -33,7 +33,6 @@ export default function RolesList({ _id, username, roles: initialRoles, open, ha
   };
 
   const roleNames = [
-    { key: "Admin", label: "Admin" },
     { key: "content", label: "content" },
     { key: "articles", label: "articles" },
     { key: "books", label: "books" },
@@ -44,7 +43,7 @@ export default function RolesList({ _id, username, roles: initialRoles, open, ha
     { key: "User", label: "User" },
   ];
   const handleclose = () => {
-      handleOpen();
+    handleOpen();
   };
 
   return (
