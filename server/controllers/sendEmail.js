@@ -80,22 +80,7 @@ exports.sendNewsletter = async (req, res) => {
 exports.sendNewsLetter = async (req, res) => {
   const { interests, age, newsletter } = req.body;
   try {
-    const mailOptions = {
-      from: 'eddy@eddyabboud.com',
-      subject: newsletter.subject,
-      template: 'email',
-      context: {
-        'title': newsletter.title,
-        'body': newsletter.body,
-        'book': newsletter.books,
-        'media': newsletter.medias,
-        'articleImage': newsletter.articlesWithImages,
-        'articleNoImage': newsletter.articlesWithoutImages,
-        'date': new Date().toLocaleDateString(),
-      },
-      // Add Bcc field to hide the list of subscribers from each recipient
-      bcc: []
-    };
+    const mailOptionsArray = []; // Create an array to store multiple mail options
 
     const subscribers = await Subscriber.find({
       $or: [
@@ -105,9 +90,32 @@ exports.sendNewsLetter = async (req, res) => {
     }).select('email');
 
     const emailList = subscribers.map(subscriber => subscriber.email);
-    mailOptions.bcc = emailList;
 
-    await sendEmail(mailOptions);
+    for (const recipientEmail of emailList) {
+      const mailOptions = {
+        from: 'eddy@eddyabboud.com',
+        subject: newsletter.subject,
+        template: 'email',
+        context: {
+          'title': newsletter.title,
+          'body': newsletter.body,
+          'book': newsletter.books,
+          'media': newsletter.medias,
+          'articleImage': newsletter.articlesWithImages,
+          'articleNoImage': newsletter.articlesWithoutImages,
+          'date': new Date().toLocaleDateString(),
+          'email': recipientEmail // Set the email address for the current recipient
+        },
+        bcc: [recipientEmail] // Send Bcc copies to each recipient
+      };
+
+      mailOptionsArray.push(mailOptions);
+    }
+
+    // Now send emails using the mailOptionsArray
+    for (const mailOptions of mailOptionsArray) {
+      await sendEmail(mailOptions);
+    }
 
     res.sendStatus(200);
   } catch (error) {
@@ -115,3 +123,42 @@ exports.sendNewsLetter = async (req, res) => {
     res.status(500).send('Error sending email!');
   }
 };
+
+// exports.sendNewsLetter = async (req, res) => {
+//   const { interests, age, newsletter } = req.body;
+//   try {
+//     const mailOptions = {
+//       from: 'eddy@eddyabboud.com',
+//       subject: newsletter.subject,
+//       template: 'email',
+//       context: {
+//         'title': newsletter.title,
+//         'body': newsletter.body,
+//         'book': newsletter.books,
+//         'media': newsletter.medias,
+//         'articleImage': newsletter.articlesWithImages,
+//         'articleNoImage': newsletter.articlesWithoutImages,
+//         'date': new Date().toLocaleDateString(),
+//       },
+//       // Add Bcc field to hide the list of subscribers from each recipient
+//       bcc: []
+//     };
+
+//     const subscribers = await Subscriber.find({
+//       $or: [
+//         { interests: { $in: interests } },
+//         { age: { $gt: age } }
+//       ]
+//     }).select('email');
+
+//     const emailList = subscribers.map(subscriber => subscriber.email);
+//     mailOptions.bcc = emailList;
+
+//     await sendEmail(mailOptions);
+
+//     res.sendStatus(200);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send('Error sending email!');
+//   }
+// };

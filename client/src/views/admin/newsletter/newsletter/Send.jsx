@@ -36,6 +36,9 @@ export default function Send({ newsletter, ...props }) {
   const [age, setAge] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectAllInterests, setSelectAllInterests] = useState(false);
+
+
 
   useEffect(() => {
 
@@ -54,6 +57,8 @@ export default function Send({ newsletter, ...props }) {
 
   const handleInterestChange = (event) => {
     const { value } = event.target;
+  
+    // Toggle individual interest selection
     setSelectedInterests((prevInterests) => {
       if (prevInterests.includes(value)) {
         return prevInterests.filter((interest) => interest !== value);
@@ -61,7 +66,21 @@ export default function Send({ newsletter, ...props }) {
         return [...prevInterests, value];
       }
     });
+  
+    // Check if all interests are now selected or not
+    setSelectAllInterests(selectedInterests.length === interests.length - 1);
   };
+
+  const handleSelectAllInterests = () => {
+    if (selectAllInterests) {
+      setSelectedInterests([]);
+    } else {
+      setSelectedInterests([...interests]);
+    }
+    setSelectAllInterests(!selectAllInterests);
+  };
+  
+  
 
   const handleAgeChange = (event) => {
     setAge(event.target.value);
@@ -90,11 +109,16 @@ export default function Send({ newsletter, ...props }) {
               {/* Interests */}
               <div>
                 <label className="block font-medium">Interests In</label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={selectAllInterests}
+                    onChange={handleSelectAllInterests}
+                  />
+                  <span>Select All</span>
+                </label>
                 {interests.map((interest) => (
-                  <label
-                    key={interest}
-                    className="flex items-center space-x-2"
-                  >
+                  <label key={interest} className="flex items-center space-x-2">
                     <input
                       type="checkbox"
                       value={interest}

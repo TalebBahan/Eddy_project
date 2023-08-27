@@ -20,7 +20,10 @@ app.use(logger);
 
 // Handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
+
 app.use(credentials);
+
+
 
 // Cross Origin Resource Sharing
 app.use(cors(corsOptions));
@@ -46,6 +49,8 @@ app.use('/logout', require('./routes/logout'));
 app.use('/google', require('./routes/api/googlelogin'))
 // app.use('/api/linkedin', require('./routes/api/linkedin'));
 app.use('/api/data', require('./routes/api/data'));
+// unsubscribe should be public route
+app.use('/unsubscribe', require('./routes/unsubscribe'));
 
 app.use('/api/linkedin', require('./routes/api/linkedin'));
 

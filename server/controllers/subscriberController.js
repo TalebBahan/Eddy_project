@@ -12,6 +12,20 @@ exports.getSubscribers = async (req, res) => {
   }
 };
 
+exports.unsubscribe = async (req, res) => {
+  try {
+    const { email } = req.query;
+    const subscriber = await Subscriber.findOneAndDelete({ email });
+    if (!subscriber) {
+      return res.status(404).json({ message: 'Subscriber not found' });
+    }
+    res.json({ message: 'You have unsubscribed' });
+  } catch (error) {
+    console.error(error);
+  }
+};
+    
+
 exports.getSubscriber = async (req, res) => {
   try {
     const subscriber = await Subscriber.findById(req.params.id);
