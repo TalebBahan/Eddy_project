@@ -56,9 +56,11 @@ export default function AddEditAbout(props) {
     // add or edit
     try {
       if (props.isAdd) await add(formData);
-      else await edit({ ...formData });
+      else await edit({ id: formData.id, form: formData });
       setSuccessMessage("Successfully added/edited !");
       props.handleOpen();
+
+      console.log(formData);
     } catch (error) {
       setErrorMessage("Error occurred while adding/editing content.");
       console.error(error);
@@ -83,9 +85,8 @@ export default function AddEditAbout(props) {
               name="h_text"
               value={formData.h_text}
               onChange={handleChange}
-              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded ${
-                formErrors.h_text ? "border-red-500" : ""
-              }`}
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded ${formErrors.h_text ? "border-red-500" : ""
+                }`}
               autoComplete="off"
               required
             />
@@ -104,9 +105,8 @@ export default function AddEditAbout(props) {
               name="s_text"
               value={formData.s_text}
               onChange={handleChange}
-              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded ${
-                formErrors.s_text ? "border-red-500" : ""
-              }`}
+              className={`outline-none px-2 py-2 border shadow-sm placeholder-gray-500 rounded ${formErrors.s_text ? "border-red-500" : ""
+                }`}
               autoComplete="off"
               required
             />
