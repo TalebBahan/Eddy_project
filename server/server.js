@@ -87,7 +87,6 @@ mongoose.connection.once('open', () => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
-mongoose.set('strictQuery', true);
 //app-client-build
 const appClient = express();
 appClient.use('/', express.static(path.join(__dirname, '../client/build')));
